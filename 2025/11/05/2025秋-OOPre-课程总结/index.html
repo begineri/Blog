@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="迭代作业简单描述：作业任务框架 冒险者 (Adventurer) 物品 (Bottle, Equipment) 法术 (Spell) 背包系统 (Bag) 对于物品（药水和法术）的使用 (UseItem) 战斗系统与冒险者属性 (Fight) 金钱系统 (Money) 雇佣关系与援助 (Employer, Employee)   需要实现的操作 add adventurer： 加入一个需要管理的冒">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2025秋 OOPre 课程总结">
+<meta property="og:url" content="https://begineri.github.io/Blog/2025/11/05/2025%E7%A7%8B-OOPre-%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="My Blog">
+<meta property="og:description" content="迭代作业简单描述：作业任务框架 冒险者 (Adventurer) 物品 (Bottle, Equipment) 法术 (Spell) 背包系统 (Bag) 对于物品（药水和法术）的使用 (UseItem) 战斗系统与冒险者属性 (Fight) 金钱系统 (Money) 雇佣关系与援助 (Employer, Employee)   需要实现的操作 add adventurer： 加入一个需要管理的冒">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/Diagram.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/CommandUtil.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/Item.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/Adventurer.png">
+<meta property="article:published_time" content="2025-11-05T11:25:29.000Z">
+<meta property="article:modified_time" content="2025-11-05T12:18:54.754Z">
+<meta property="article:author" content="Wang">
+<meta property="article:tag" content="OOP">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://begineri.github.io/Blog/images/Diagram.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/Blog/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/Blog/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/Blog/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>2025秋 OOPre 课程总结</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/Blog/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/Blog/">Home</a></li><!--
+     --><!--
+       --><li><a href="/Blog/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/Blog/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/Blog/2025/11/05/hello-world/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://begineri.github.io/Blog/2025/11/05/2025%E7%A7%8B-OOPre-%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://begineri.github.io/Blog/2025/11/05/2025%E7%A7%8B-OOPre-%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/&text=2025秋 OOPre 课程总结"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://begineri.github.io/Blog/2025/11/05/2025%E7%A7%8B-OOPre-%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/&title=2025秋 OOPre 课程总结"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://begineri.github.io/Blog/2025/11/05/2025%E7%A7%8B-OOPre-%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/&is_video=false&description=2025秋 OOPre 课程总结"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=2025秋 OOPre 课程总结&body=Check out this article: https://begineri.github.io/Blog/2025/11/05/2025%E7%A7%8B-OOPre-%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://begineri.github.io/Blog/2025/11/05/2025%E7%A7%8B-OOPre-%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/&title=2025秋 OOPre 课程总结"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://begineri.github.io/Blog/2025/11/05/2025%E7%A7%8B-OOPre-%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/&title=2025秋 OOPre 课程总结"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://begineri.github.io/Blog/2025/11/05/2025%E7%A7%8B-OOPre-%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/&title=2025秋 OOPre 课程总结"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://begineri.github.io/Blog/2025/11/05/2025%E7%A7%8B-OOPre-%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/&title=2025秋 OOPre 课程总结"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://begineri.github.io/Blog/2025/11/05/2025%E7%A7%8B-OOPre-%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/&name=2025秋 OOPre 课程总结&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://begineri.github.io/Blog/2025/11/05/2025%E7%A7%8B-OOPre-%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/&t=2025秋 OOPre 课程总结"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%AD%E4%BB%A3%E4%BD%9C%E4%B8%9A%E7%AE%80%E5%8D%95%E6%8F%8F%E8%BF%B0%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">迭代作业简单描述：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%9C%E4%B8%9A%E4%BB%BB%E5%8A%A1%E6%A1%86%E6%9E%B6"><span class="toc-number">1.1.</span> <span class="toc-text">作业任务框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9C%80%E8%A6%81%E5%AE%9E%E7%8E%B0%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="toc-number">1.2.</span> <span class="toc-text">需要实现的操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E7%BB%88%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E3%80%81%E8%B0%83%E6%95%B4%E4%BB%A5%E5%8F%8A%E8%80%83%E8%99%91-%F0%9F%A4%94%F0%9F%A4%A4%F0%9F%98%86"><span class="toc-number">1.3.</span> <span class="toc-text">最终的架构设计、调整以及考虑 🤔🤤😆</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-CommandUtil-%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.3.1.</span> <span class="toc-text">1. CommandUtil 接口的实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Item-%E6%8A%BD%E8%B1%A1%E7%B1%BB%E7%9A%84%E7%BB%A7%E6%89%BF"><span class="toc-number">1.3.2.</span> <span class="toc-text">2. Item 抽象类的继承</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Adventurer-%E7%B1%BB%E4%B8%8E%E5%8A%9F%E8%83%BD%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.3.3.</span> <span class="toc-text">3. Adventurer 类与功能具体实现</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86-State-Management"><span class="toc-number">1.3.3.1.</span> <span class="toc-text">状态管理 (State Management)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%89%A9%E5%93%81%E4%B8%8E%E5%BA%93%E5%AD%98%E7%AE%A1%E7%90%86-Inventory-Management"><span class="toc-number">1.3.3.2.</span> <span class="toc-text">物品与库存管理 (Inventory Management)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8A%A8%E4%BD%9C%E6%89%A7%E8%A1%8C%E4%B8%8E%E5%A4%9A%E6%80%81-Action-Execution-Polymorphism"><span class="toc-number">1.3.3.3.</span> <span class="toc-text">动作执行与多态 (Action Execution &amp; Polymorphism)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%9B%87%E4%BD%A3%E5%85%B3%E7%B3%BB%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.3.3.4.</span> <span class="toc-text">雇佣关系的实现</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8F%B4%E5%8A%A9%E7%B3%BB%E7%BB%9F-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.3.3.5.</span> <span class="toc-text">援助系统 (观察者模式)</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8JUnit%E7%9A%84%E5%BF%83%E5%BE%97%E4%BD%93%E4%BC%9A-%F0%9F%98%AE%F0%9F%AB%A0%F0%9F%98%B8"><span class="toc-number">2.</span> <span class="toc-text">使用JUnit的心得体会 😮🫠😸</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OOPre%E5%AD%A6%E4%B9%A0%E4%BD%93%E9%AA%8C"><span class="toc-number">3.</span> <span class="toc-text">OOPre学习体验</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%BE%E7%A8%8B%E5%BB%BA%E8%AE%AE"><span class="toc-number">4.</span> <span class="toc-text">课程建议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E8%AF%BE%E4%B8%8A%E8%AE%B2%E8%A7%A3%E8%BF%87%E4%BA%8E%E7%AE%80%E7%95%A5"><span class="toc-number">4.1.</span> <span class="toc-text">1. 课上讲解过于简略</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%B7%A5%E7%A8%8B%E6%9E%B6%E6%9E%84%E7%9A%84%E6%80%9D%E6%83%B3%E7%9A%84%E9%80%90%E6%B8%90%E5%BC%95%E5%85%A5"><span class="toc-number">4.2.</span> <span class="toc-text">2. 工程架构的思想的逐渐引入</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%9E%EF%B9%8F%EF%BC%9C"><span class="toc-number">5.</span> <span class="toc-text">＞﹏＜</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        2025秋 OOPre 课程总结
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Wang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-11-05T11:25:29.000Z" class="dt-published" itemprop="datePublished">2025-11-05</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/Blog/tags/OOP/" rel="tag">OOP</a>, <a class="p-category" href="/Blog/tags/java/" rel="tag">java</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="迭代作业简单描述："><a href="#迭代作业简单描述：" class="headerlink" title="迭代作业简单描述："></a>迭代作业简单描述：</h2><h3 id="作业任务框架"><a href="#作业任务框架" class="headerlink" title="作业任务框架"></a>作业任务框架</h3><ul>
+<li>冒险者 (Adventurer)</li>
+<li>物品 (Bottle, Equipment)</li>
+<li>法术 (Spell)</li>
+<li>背包系统 (Bag)</li>
+<li>对于物品（药水和法术）的使用 (UseItem)</li>
+<li>战斗系统与冒险者属性 (Fight)</li>
+<li>金钱系统 (Money)</li>
+<li>雇佣关系与援助 (Employer, Employee)</li>
+</ul>
+<hr>
+<h3 id="需要实现的操作"><a href="#需要实现的操作" class="headerlink" title="需要实现的操作"></a>需要实现的操作</h3><ol>
+<li><code>add adventurer</code>： 加入一个需要管理的冒险者（新加入的冒险者不携带任何药水瓶和装备，并且初始体力为 500，初始攻击力为 1，初始防御力为 0，初始魔力值为 10，初始金币数量为 50）</li>
+<li><code>add bottle</code>： 给某个冒险者增加一个药水瓶</li>
+<li><code>add equipment</code>： 给某个冒险者增加一个装备</li>
+<li><code>learn spell</code>： 给某个冒险者学习一个法术</li>
+<li><code>remove item</code>： 删除某个冒险者的某个物品</li>
+<li><code>take item</code>： 冒险者尝试携带他拥有的某个物品</li>
+<li><code>use</code>： 冒险者对一个目标使用某个可用物品</li>
+<li><code>buy item</code>： 冒险者去商店进行一次购买操作</li>
+<li><code>fight</code>： 冒险者进行一次战斗</li>
+<li><code>add relation</code>： 增加一条雇佣关系</li>
+<li><code>remove relation</code>： 删除一条雇佣关系</li>
+<li><code>load relation</code>： 导入一组雇佣关系</li>
+</ol>
+<hr>
+<h3 id="最终的架构设计、调整以及考虑-🤔🤤😆"><a href="#最终的架构设计、调整以及考虑-🤔🤤😆" class="headerlink" title="最终的架构设计、调整以及考虑 🤔🤤😆"></a>最终的架构设计、调整以及考虑 🤔🤤😆</h3><p><img src="/Blog/images/Diagram.png" alt="总体" title="总体的设计架构如图"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">\SRC</span><br><span class="line">├─commands</span><br><span class="line">│      AddAdventurer.java</span><br><span class="line">│      AddBottle.java</span><br><span class="line">│      AddEquipment.java</span><br><span class="line">│      AddRelation.java</span><br><span class="line">│      BuyItem.java</span><br><span class="line">│      CommandUtil.java</span><br><span class="line">│      Fight.java</span><br><span class="line">│      LearnSpell.java</span><br><span class="line">│      LoadRelationship.java</span><br><span class="line">│      RemoveItem.java</span><br><span class="line">│      RemoveRelation.java</span><br><span class="line">│      TakeItem.java</span><br><span class="line">│      Use.java</span><br><span class="line">├─game</span><br><span class="line">│  │  Adventurer.java</span><br><span class="line">│  │  CommandFactory.java</span><br><span class="line">│  │  Factory.java</span><br><span class="line">│  │  Main.java</span><br><span class="line">│  └─interfaces</span><br><span class="line">│          Employee.java</span><br><span class="line">│          Employer.java</span><br><span class="line">├─items</span><br><span class="line">│  │  Bottle.java</span><br><span class="line">│  │  Equipment.java</span><br><span class="line">│  │  Item.java</span><br><span class="line">│  │  Spell.java</span><br><span class="line">│  ├─bottles</span><br><span class="line">│  │      AtkBottle.java</span><br><span class="line">│  │      DefBottle.java</span><br><span class="line">│  │      HpBottle.java</span><br><span class="line">│  │      ManaBottle.java</span><br><span class="line">│  ├─equipments</span><br><span class="line">│  │      Armour.java</span><br><span class="line">│  │      Magicbook.java</span><br><span class="line">│  │      Sword.java</span><br><span class="line">│  │      Weapon.java</span><br><span class="line">│  └─spells</span><br><span class="line">│          AttackSpell.java</span><br><span class="line">│          HealSpell.java</span><br><span class="line">└─parser</span><br><span class="line">        AdventureHireManager.java</span><br><span class="line">        Lexer.java</span><br><span class="line">        Parser.java</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="1-CommandUtil-接口的实现"><a href="#1-CommandUtil-接口的实现" class="headerlink" title="1. CommandUtil 接口的实现"></a>1. <code>CommandUtil</code> 接口的实现</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">CommandUtil</span> &#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">execute</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/Blog/images/CommandUtil.png" alt="CommandUtil"><br>采用<strong>命令模式</strong>，通过为每一个指令实现 <code>(Implementation)</code> CommandUtil 接口 ，将每一个“操作”封装成一个独立的对象，实现<strong>解耦 (Decoupling)</strong> 和 <strong>封装 (Encapsulation)</strong>，易于扩展。</p>
+<p>配合<code>CommandFactory</code>类，可以直接在<code>Main</code>内调用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">CommandUtil</span> <span class="variable">command</span> <span class="operator">=</span> CommandFactory.createCommand(input, adventureList);</span><br><span class="line"><span class="keyword">if</span> (command != <span class="literal">null</span>) &#123;</span><br><span class="line">    command.execute();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>具体接口实现的代码示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> game.Adventurer;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LearnSpell</span> <span class="keyword">implements</span> <span class="title class_">CommandUtil</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Adventurer adventure;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String speId;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String type;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">int</span> manaCost;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">int</span> power;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">LearnSpell</span><span class="params">(Adventurer adventure, String speId, String type, <span class="type">int</span> manaCost, <span class="type">int</span> power)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.adventure = adventure;</span><br><span class="line">        <span class="built_in">this</span>.speId = speId;</span><br><span class="line">        <span class="built_in">this</span>.type = type;</span><br><span class="line">        <span class="built_in">this</span>.manaCost = manaCost;</span><br><span class="line">        <span class="built_in">this</span>.power = power;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">execute</span><span class="params">()</span> &#123;</span><br><span class="line">        adventure.learnSpell(speId, type, manaCost, power);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="2-Item-抽象类的继承"><a href="#2-Item-抽象类的继承" class="headerlink" title="2. Item 抽象类的继承"></a>2. <code>Item</code> 抽象类的继承</h4><p><img src="/Blog/images/Item.png" alt="Item"></p>
+<p>经过分析，发现冒险者所拥有的物品（装备、药水、法术）可以抽象为统一的类 <code>Item</code>，便于进行统一的管理，于是可以设计如下<strong>继承层次结构</strong>：</p>
+<ul>
+<li><p><strong>顶层抽象 (Root): <code>Item</code></strong></p>
+<ul>
+<li>定义所有“物品”的<strong>共同特征</strong>。如， <code>id</code> 和 <code>use</code> 方法。</li>
+</ul>
+</li>
+<li><p><strong>第一层分类 (Branches): <code>Equipment</code>, <code>Spell</code>, <code>Bottle</code></strong></p>
+<ul>
+<li>这三个类继承 (extends) 了 <code>Item</code>。</li>
+<li>它们自身也是<strong>抽象类</strong>，用来定义各自类别的共同特征。</li>
+</ul>
+</li>
+<li><p><strong>具体实现 (Leaves): <code>HpBottle</code>, <code>Sword</code>, <code>AttackSpell</code> 等</strong></p>
+<ul>
+<li>继承了各自的“父类”，是可以实际创建（<code>new</code>）的<strong>具体类</strong>。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="3-Adventurer-类与功能具体实现"><a href="#3-Adventurer-类与功能具体实现" class="headerlink" title="3. Adventurer 类与功能具体实现"></a>3. <code>Adventurer</code> 类与功能具体实现</h4><h5 id="状态管理-State-Management"><a href="#状态管理-State-Management" class="headerlink" title="状态管理 (State Management)"></a>状态管理 (State Management)</h5><ul>
+<li><strong>存储核心属性：</strong> 持有冒险者的所有基础属性，如 <code>id</code>, <code>hitPoint</code>, <code>atk</code>, <code>def</code>, <code>mana</code> 和 <code>money</code>。</li>
+<li><strong>管理死亡：</strong> 包含 <code>isDead()</code> 检查。<code>deductHitPoint()</code> 方法在HP归零时，自动调用处理死亡后关系的方法。</li>
+<li><strong>计算总价值：</strong> <code>calculateAllMoney()</code> 方法用于计算冒险者死亡时掉落的“总价值”（金币 + 物品价值）。</li>
+</ul>
+<h5 id="物品与库存管理-Inventory-Management"><a href="#物品与库存管理-Inventory-Management" class="headerlink" title="物品与库存管理 (Inventory Management)"></a>物品与库存管理 (Inventory Management)</h5><ul>
+<li><strong>区分所有权、携带和装备：</strong><ul>
+<li><code>items</code> (HashMap): 冒险者<strong>拥有</strong>的所有物品。</li>
+<li><code>usables</code> (HashMap) &#x2F; <code>usablesQueue</code> (Queue): 冒险者<strong>携带</strong>的药水物品，队列用于实现“最多10瓶”的替换逻辑。</li>
+<li><code>armour</code> &#x2F; <code>weapon</code> (Equipment): 冒险者<strong>当前装备</strong>的护甲和武器。</li>
+</ul>
+</li>
+<li><strong>管理法术：</strong> <code>spells</code> (HashMap) 存储所有已学会的法术。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 拥有的物品（包括瓶子和武器）</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> HashMap&lt;String, Item&gt; items = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 包里的物品（瓶子）</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> HashMap&lt;String, Item&gt; usables = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 学会的 Spell</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> HashMap&lt;String, Spell&gt; spells = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 携带的瓶子列表</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> Queue&lt;String&gt; usablesQueue = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>与工厂解耦：</strong> <code>addBottle</code>, <code>addEquipment</code>, <code>learnSpell</code>, <code>buyItem</code> 等方法不直接创建对象，而是调用 <code>Factory</code> 来创建，实现了创建与管理的分离。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 简单工厂模式</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> Equipment <span class="title function_">createEquipment</span><span class="params">(String type, String equId, <span class="type">int</span> ce)</span> &#123;</span><br><span class="line">    Equipment newEquipment;</span><br><span class="line">    <span class="keyword">switch</span> (type) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;Armour&quot;</span>:</span><br><span class="line">            newEquipment = <span class="keyword">new</span> <span class="title class_">Armour</span>(equId, ce);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;Sword&quot;</span>:</span><br><span class="line">            newEquipment = <span class="keyword">new</span> <span class="title class_">Sword</span>(equId, ce);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;Magicbook&quot;</span>:</span><br><span class="line">            newEquipment = <span class="keyword">new</span> <span class="title class_">Magicbook</span>(equId, ce);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            newEquipment = <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> newEquipment;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="动作执行与多态-Action-Execution-Polymorphism"><a href="#动作执行与多态-Action-Execution-Polymorphism" class="headerlink" title="动作执行与多态 (Action Execution &amp; Polymorphism)"></a>动作执行与多态 (Action Execution &amp; Polymorphism)</h5><ul>
+<li><strong><code>fight(targets)</code>：</strong> 封装了战斗逻辑。</li>
+<li><strong><code>useItem(target)</code>：</strong> 封装了使用物品&#x2F;法术的逻辑。它委托给 <code>Item</code> 对象自身的 <code>checkUse()</code> 和 <code>useSuccessfully()</code> 方法来执行，实现了多态。</li>
+<li><strong><code>takeItem(itemId)</code> &#x2F; <code>removeItem(itemId)</code>：</strong> 同样委托给 <code>Item</code> 对象的 <code>equip()</code> 和 <code>unequip()</code> 方法，<code>Adventurer</code> 类不关心具体装备的逻辑，只负责调用。</li>
+</ul>
+<h5 id="雇佣关系的实现"><a href="#雇佣关系的实现" class="headerlink" title="雇佣关系的实现"></a>雇佣关系的实现</h5><ul>
+<li>同时实现 <strong>Employee 和 Employer 接口</strong>：<ul>
+<li>作为 <code>Employer</code>：它有 <code>hire()</code> 和 <code>fire()</code> 方法，并维护一个<strong>下级列表</strong>。</li>
+<li>作为 <code>Employee</code>：它有其<strong>直接上级</strong>。</li>
+</ul>
+</li>
+<li><strong>关系图遍历：</strong> 提供 <code>getAllEmployers()</code>  和 <code>getAllEmployees()</code>  方法。</li>
+<li><strong>盟友定义：</strong> <code>getAllAllies()</code> 遍历。</li>
+<li><strong>规则检查：</strong> <code>checkContainsEmployer()</code> 和 <code>checkIsNotAlly()</code> 方法。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Adventurer</span> <span class="keyword">implements</span> <span class="title class_">Employee</span>, Employer &#123;</span><br><span class="line">    <span class="comment">// 直接的上级</span></span><br><span class="line">    <span class="keyword">private</span> Employer employer;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 直接雇佣的冒险者列表</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> HashMap&lt;String, Employee&gt; hired = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="援助系统-观察者模式"><a href="#援助系统-观察者模式" class="headerlink" title="援助系统 (观察者模式)"></a>援助系统 (观察者模式)</h5><ul>
+<li><strong>被观察者 (Subject)：</strong><ol>
+<li>当 <code>Adventurer</code> <code>takeDamage()</code> 被调用且减少的HP满足发出救援的前提时</li>
+<li>调用 <code>notifyEmployees()</code> 来“发出通知”。</li>
+</ol>
+</li>
+<li><strong>观察者 (Observer)：</strong><ol>
+<li>在 <code>notifyEmployees()</code> 中，遍历所有下级（观察者）并调用他们的 <code>aidEmployer()</code> 方法。</li>
+<li><strong>观察者</strong>检查援助逻辑，对上级 (Employer) 尝试援助。</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="comment">// 通知雇佣者</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">notifyEmployees</span><span class="params">()</span> &#123;</span><br><span class="line">    ArrayList&lt;Employee&gt; allEmployees = getAllEmployees();</span><br><span class="line">    </span><br><span class="line">    <span class="type">int</span> <span class="variable">sucAdiAdvNum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (Employee employee : allEmployees) &#123;</span><br><span class="line">        <span class="keyword">if</span> (employee.aidEmployer(<span class="built_in">this</span>)) &#123;</span><br><span class="line">            sucAdiAdvNum++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/Blog/images/Adventurer.png" alt="Adventurer"></p>
+<hr>
+<h2 id="使用JUnit的心得体会-😮🫠😸"><a href="#使用JUnit的心得体会-😮🫠😸" class="headerlink" title="使用JUnit的心得体会 😮🫠😸"></a>使用JUnit的心得体会 😮🫠😸</h2><p> <code>import org.junit.Test;</code></p>
+<p><code>import static org.junit.Assert.*;</code></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>assertEquals(expected, actual)</code></td>
+<td>检查两个值是否相等</td>
+</tr>
+<tr>
+<td><code>assertTrue(condition)</code></td>
+<td>检查条件是否为真</td>
+</tr>
+<tr>
+<td><code>assertFalse(condition)</code></td>
+<td>检查条件是否为假</td>
+</tr>
+<tr>
+<td><code>assertNotNull(object)</code></td>
+<td>检查是否不为空</td>
+</tr>
+<tr>
+<td><code>assertNull(object)</code></td>
+<td>检查是否为空</td>
+</tr>
+<tr>
+<td><code>assertNotSame(expected, actual)</code></td>
+<td>检查两个相关对象是否不指向同一个对象</td>
+</tr>
+<tr>
+<td><code>assertSame(expected, actual)</code></td>
+<td>检查两个相关对象是否指向同一个对象</td>
+</tr>
+<tr>
+<td><code>assertArrayEquals(expectedArray, resultArray)</code></td>
+<td>检查两个数组是否相等</td>
+</tr>
+</tbody></table>
+<p>根据我在OOPro课程中使用JUnit的经验，我发现：</p>
+<ul>
+<li><strong>JUnit可以做到的</strong>：检查方法内由于欠缺考虑出现的逻辑问题。通过保证覆盖率 <code>Run with Coverage</code> 可以测试到几乎所有你编写出的代码，因此在构造与测试样例的时候，可以很方便发现代码中细小的错误。</li>
+<li><strong>JUnit不可以做到的</strong>：发现某些欠缺的逻辑。鉴于现阶段的JUnit测试都是由我自己编写的，如果某种情况我在写代码的时候就没有考虑到，编写JUnit测试时自然也不会构造这样的例子，也就无法测试出程序的错误，这也导致了后面几次作业在强侧出现新的没有发现的Bug，为了找出这个Bug需要重新审视程序的逻辑。</li>
+</ul>
+<hr>
+<h2 id="OOPre学习体验"><a href="#OOPre学习体验" class="headerlink" title="OOPre学习体验"></a>OOPre学习体验</h2><blockquote>
+<p>从 <strong>面向过程编程 POP <em>(Procedure Oriented Programming)</em></strong> 到 <strong>面向对象编程 OOP <em>(Object Oriented Programming)</em></strong> 的转变。</p>
+</blockquote>
+<ul>
+<li><strong>POP</strong>：以<strong>过程</strong>或<strong>函数</strong>为中心，强调程序的执行流程和步骤。</li>
+<li><strong>OOP</strong>：将事物分解成为一个个<strong>对象</strong>，然后由对象之间分工与合作的编程范式。<ul>
+<li><p><strong>封装 <code>Encapsulation</code></strong>：隐藏内部实现细节，仅暴露必要接口。</p>
+</li>
+<li><p><strong>继承 <code>Inheritance</code></strong>：子类继承父类的属性和方法，实现代码复用。</p>
+</li>
+<li><p><strong>多态 <code>Polymorphism</code></strong>：同一接口可由不同对象实现不同行为。</p>
+</li>
+<li><p><strong>抽象 <code>Abstraction</code></strong>：提取共性，定义抽象类或接口。</p>
+</li>
+<li><p>通过这些机制，使得OOP语言在处理一类相似的问题时有高度的灵活性、可维护性和扩展性，为我们解决问题提供了新的思路。</p>
+</li>
+</ul>
+</li>
+<li>经过OOPre课程的学习，我们初步了解了这些在面向对象语言中最为关键的思想，为后面的正课做了准备。</li>
+<li>同时<code>CheckStyle</code> 的引入，可以从一开始就培养同学们编写代码的规范性。</li>
+</ul>
+<hr>
+<h2 id="课程建议"><a href="#课程建议" class="headerlink" title="课程建议"></a>课程建议</h2><h4 id="1-课上讲解过于简略"><a href="#1-课上讲解过于简略" class="headerlink" title="1. 课上讲解过于简略"></a>1. 课上讲解过于简略</h4><ul>
+<li>课上讲解的内容，只包含完成作业与设计程序 40% 的知识，为了完成作业且设计出较为理想的程序结构，学生需要课下学习大量额外的补充内容。这些内容有些是课上ppt的衍生（很多时候，ppt和课堂上对于一个概念只是列出概念并浅尝辄止，这不足以让学生写出作业代码），还有些是ppt没有提到的内容。</li>
+<li>如果课上讲解时间有限，建议课程组为课下的作业准备更多可选的参考学习资料。比如对于命令模式，可以给出它在工程时的具体实现（给出设计思路或代码示例），以便同学对它有一个具体的认识，而不只是ppt上的几行文字。</li>
+</ul>
+<h4 id="2-工程架构的思想的逐渐引入"><a href="#2-工程架构的思想的逐渐引入" class="headerlink" title="2. 工程架构的思想的逐渐引入"></a>2. 工程架构的思想的逐渐引入</h4><ul>
+<li><p>建议将工程架构的思想在每一次作业中融入一点，而不是在最后简单一提，以便同学们及时调整改进自己的框架，而不是越堆越乱，严重影响可读性和后续增加功能的难度。</p>
+</li>
+<li><p>同时可以介绍引入包管理的思想，便于对项目多个类进行管理。</p>
+</li>
+<li><p>建议课程组给一些IDEA功能的介绍（比如快捷键、快捷方法等）</p>
+</li>
+</ul>
+<h1 id="＞﹏＜"><a href="#＞﹏＜" class="headerlink" title="＞﹏＜"></a>＞﹏＜</h1>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/Blog/">Home</a></li>
+        
+          <li><a href="/Blog/about/">About</a></li>
+        
+          <li><a href="/Blog/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%AD%E4%BB%A3%E4%BD%9C%E4%B8%9A%E7%AE%80%E5%8D%95%E6%8F%8F%E8%BF%B0%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">迭代作业简单描述：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%9C%E4%B8%9A%E4%BB%BB%E5%8A%A1%E6%A1%86%E6%9E%B6"><span class="toc-number">1.1.</span> <span class="toc-text">作业任务框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9C%80%E8%A6%81%E5%AE%9E%E7%8E%B0%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="toc-number">1.2.</span> <span class="toc-text">需要实现的操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E7%BB%88%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E3%80%81%E8%B0%83%E6%95%B4%E4%BB%A5%E5%8F%8A%E8%80%83%E8%99%91-%F0%9F%A4%94%F0%9F%A4%A4%F0%9F%98%86"><span class="toc-number">1.3.</span> <span class="toc-text">最终的架构设计、调整以及考虑 🤔🤤😆</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-CommandUtil-%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.3.1.</span> <span class="toc-text">1. CommandUtil 接口的实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Item-%E6%8A%BD%E8%B1%A1%E7%B1%BB%E7%9A%84%E7%BB%A7%E6%89%BF"><span class="toc-number">1.3.2.</span> <span class="toc-text">2. Item 抽象类的继承</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Adventurer-%E7%B1%BB%E4%B8%8E%E5%8A%9F%E8%83%BD%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.3.3.</span> <span class="toc-text">3. Adventurer 类与功能具体实现</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86-State-Management"><span class="toc-number">1.3.3.1.</span> <span class="toc-text">状态管理 (State Management)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%89%A9%E5%93%81%E4%B8%8E%E5%BA%93%E5%AD%98%E7%AE%A1%E7%90%86-Inventory-Management"><span class="toc-number">1.3.3.2.</span> <span class="toc-text">物品与库存管理 (Inventory Management)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8A%A8%E4%BD%9C%E6%89%A7%E8%A1%8C%E4%B8%8E%E5%A4%9A%E6%80%81-Action-Execution-Polymorphism"><span class="toc-number">1.3.3.3.</span> <span class="toc-text">动作执行与多态 (Action Execution &amp; Polymorphism)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%9B%87%E4%BD%A3%E5%85%B3%E7%B3%BB%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.3.3.4.</span> <span class="toc-text">雇佣关系的实现</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8F%B4%E5%8A%A9%E7%B3%BB%E7%BB%9F-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.3.3.5.</span> <span class="toc-text">援助系统 (观察者模式)</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8JUnit%E7%9A%84%E5%BF%83%E5%BE%97%E4%BD%93%E4%BC%9A-%F0%9F%98%AE%F0%9F%AB%A0%F0%9F%98%B8"><span class="toc-number">2.</span> <span class="toc-text">使用JUnit的心得体会 😮🫠😸</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OOPre%E5%AD%A6%E4%B9%A0%E4%BD%93%E9%AA%8C"><span class="toc-number">3.</span> <span class="toc-text">OOPre学习体验</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%BE%E7%A8%8B%E5%BB%BA%E8%AE%AE"><span class="toc-number">4.</span> <span class="toc-text">课程建议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E8%AF%BE%E4%B8%8A%E8%AE%B2%E8%A7%A3%E8%BF%87%E4%BA%8E%E7%AE%80%E7%95%A5"><span class="toc-number">4.1.</span> <span class="toc-text">1. 课上讲解过于简略</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%B7%A5%E7%A8%8B%E6%9E%B6%E6%9E%84%E7%9A%84%E6%80%9D%E6%83%B3%E7%9A%84%E9%80%90%E6%B8%90%E5%BC%95%E5%85%A5"><span class="toc-number">4.2.</span> <span class="toc-text">2. 工程架构的思想的逐渐引入</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%9E%EF%B9%8F%EF%BC%9C"><span class="toc-number">5.</span> <span class="toc-text">＞﹏＜</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://begineri.github.io/Blog/2025/11/05/2025%E7%A7%8B-OOPre-%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://begineri.github.io/Blog/2025/11/05/2025%E7%A7%8B-OOPre-%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/&text=2025秋 OOPre 课程总结"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://begineri.github.io/Blog/2025/11/05/2025%E7%A7%8B-OOPre-%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/&title=2025秋 OOPre 课程总结"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://begineri.github.io/Blog/2025/11/05/2025%E7%A7%8B-OOPre-%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/&is_video=false&description=2025秋 OOPre 课程总结"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=2025秋 OOPre 课程总结&body=Check out this article: https://begineri.github.io/Blog/2025/11/05/2025%E7%A7%8B-OOPre-%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://begineri.github.io/Blog/2025/11/05/2025%E7%A7%8B-OOPre-%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/&title=2025秋 OOPre 课程总结"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://begineri.github.io/Blog/2025/11/05/2025%E7%A7%8B-OOPre-%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/&title=2025秋 OOPre 课程总结"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://begineri.github.io/Blog/2025/11/05/2025%E7%A7%8B-OOPre-%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/&title=2025秋 OOPre 课程总结"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://begineri.github.io/Blog/2025/11/05/2025%E7%A7%8B-OOPre-%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/&title=2025秋 OOPre 课程总结"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://begineri.github.io/Blog/2025/11/05/2025%E7%A7%8B-OOPre-%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/&name=2025秋 OOPre 课程总结&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://begineri.github.io/Blog/2025/11/05/2025%E7%A7%8B-OOPre-%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/&t=2025秋 OOPre 课程总结"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    Wang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/Blog/">Home</a></li><!--
+     --><!--
+       --><li><a href="/Blog/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/Blog/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/Blog/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

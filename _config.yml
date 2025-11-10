@@ -111,3 +111,13 @@ deploy:
 
 
 #https://github.com/begineri/Blog.git
+
+# -----------------------------------------------------------------
+# hexo-blog-encrypt 插件配置
+# -----------------------------------------------------------------
+encrypt:
+  enable: true
+  abstract: "This article is for myself."
+  message: "You can guess the password."
+  wrong_pass_message: "Wrong, the password in fact is my birthday."
+  wrong_hash_message: "Failed to verify the hash value."

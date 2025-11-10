@@ -1,0 +1,1545 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="MIPS单周期处理器设计 本文内容为原创，内容仅供参考，请勿照搬  1. 单周期数据通路设计参考图 最终设计 顶层输出端口  1.1 组合部件1.1.1 ALU (算术逻辑运算单元) in: SrcA, SrcB ALUCtrl [3:0] Shift 移位数 5 FlowJudge 是否进行溢出判断   out: Equal(zero) Result Overflow     端口定义">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CO-P3-设计文档-Logisim">
+<meta property="og:url" content="https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/index.html">
+<meta property="og:site_name" content="My Blog">
+<meta property="og:description" content="MIPS单周期处理器设计 本文内容为原创，内容仅供参考，请勿照搬  1. 单周期数据通路设计参考图 最终设计 顶层输出端口  1.1 组合部件1.1.1 ALU (算术逻辑运算单元) in: SrcA, SrcB ALUCtrl [3:0] Shift 移位数 5 FlowJudge 是否进行溢出判断   out: Equal(zero) Result Overflow     端口定义">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/%E8%AE%BE%E8%AE%A1%E9%80%9A%E8%B7%AF.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/all.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/output.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/ALU.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/%E5%AF%84%E5%AD%98%E5%99%A8%E5%A0%86%E5%86%85%E9%83%A8%E7%BB%93%E6%9E%84.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/GRF.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/DM.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/nPC.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/IMm.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/IFU.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/EXT.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/SPLI.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/R%E5%9E%8B%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/LW&SW%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/%E5%88%86%E6%94%AF%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/%E8%B7%B3%E8%BD%AC%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/%E5%8D%95%E5%91%A8%E6%9C%9F%E6%8E%A7%E5%88%B6%E5%99%A8%E8%AE%BE%E8%AE%A1.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/controler.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/%E4%B8%BB%E6%8E%A7%E5%8D%95%E5%85%83%E9%80%BB%E8%BE%91%E5%AE%9E%E7%8E%B0.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/MCU.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/ACU.png">
+<meta property="article:published_time" content="2025-11-10T14:02:51.000Z">
+<meta property="article:modified_time" content="2025-11-10T14:22:47.029Z">
+<meta property="article:author" content="Wang">
+<meta property="article:tag" content="CO">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://begineri.github.io/Blog/images/%E8%AE%BE%E8%AE%A1%E9%80%9A%E8%B7%AF.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/Blog/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/Blog/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/Blog/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>CO-P3-设计文档-Logisim</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/Blog/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/Blog/">Home</a></li><!--
+     --><!--
+       --><li><a href="/Blog/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/Blog/tags/">Tags</a></li><!--
+     --><!--
+       --><li><a href="/Blog/">Projects</a></li><!--
+     --><!--
+       --><li><a href="/Blog/changelog/">Logs</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/Blog/2025/11/06/%E4%B8%BA%E4%BB%80%E4%B9%88%E5%88%9B%E5%BB%BA%E8%BF%99%E4%B8%AA%E5%8D%9A%E5%AE%A2/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&text=CO-P3-设计文档-Logisim"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&title=CO-P3-设计文档-Logisim"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&is_video=false&description=CO-P3-设计文档-Logisim"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CO-P3-设计文档-Logisim&body=Check out this article: https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&title=CO-P3-设计文档-Logisim"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&title=CO-P3-设计文档-Logisim"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&title=CO-P3-设计文档-Logisim"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&title=CO-P3-设计文档-Logisim"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&name=CO-P3-设计文档-Logisim&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&t=CO-P3-设计文档-Logisim"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#MIPS%E5%8D%95%E5%91%A8%E6%9C%9F%E5%A4%84%E7%90%86%E5%99%A8%E8%AE%BE%E8%AE%A1"><span class="toc-number">1.</span> <span class="toc-text">MIPS单周期处理器设计</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%8D%95%E5%91%A8%E6%9C%9F%E6%95%B0%E6%8D%AE%E9%80%9A%E8%B7%AF%E8%AE%BE%E8%AE%A1"><span class="toc-number">1.1.</span> <span class="toc-text">1. 单周期数据通路设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E5%9B%BE"><span class="toc-number">1.1.1.</span> <span class="toc-text">参考图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E7%BB%88%E8%AE%BE%E8%AE%A1"><span class="toc-number">1.1.2.</span> <span class="toc-text">最终设计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B6%E5%B1%82%E8%BE%93%E5%87%BA%E7%AB%AF%E5%8F%A3"><span class="toc-number">1.1.3.</span> <span class="toc-text">顶层输出端口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E7%BB%84%E5%90%88%E9%83%A8%E4%BB%B6"><span class="toc-number">1.1.4.</span> <span class="toc-text">1.1 组合部件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-1-ALU-%E7%AE%97%E6%9C%AF%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E5%8D%95%E5%85%83"><span class="toc-number">1.1.4.1.</span> <span class="toc-text">1.1.1 ALU (算术逻辑运算单元)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-2-GRF-%E9%80%9A%E7%94%A8%E5%AF%84%E5%AD%98%E5%99%A8%E7%BB%84%EF%BC%8C%E4%B9%9F%E7%A7%B0%E4%B8%BA%E5%AF%84%E5%AD%98%E5%99%A8%E6%96%87%E4%BB%B6%E3%80%81%E5%AF%84%E5%AD%98%E5%99%A8%E5%A0%86"><span class="toc-number">1.1.4.2.</span> <span class="toc-text">1.1.2 GRF(通用寄存器组，也称为寄存器文件、寄存器堆)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-3-DM-%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E5%99%A8"><span class="toc-number">1.1.4.3.</span> <span class="toc-text">1.1.3 DM (数据存储器)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-4-nPC-%E2%80%93-%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA%EF%BC%9A"><span class="toc-number">1.1.4.4.</span> <span class="toc-text">1.1.4 nPC – 有限状态机：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-5-IFU%EF%BC%88%E5%8F%96%E6%8C%87%E4%BB%A4%E5%8D%95%E5%85%83%EF%BC%89"><span class="toc-number">1.1.4.5.</span> <span class="toc-text">1.1.5 IFU（取指令单元）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#IM-%E6%8C%87%E4%BB%A4%E5%AD%98%E5%82%A8%E5%99%A8"><span class="toc-number">1.1.4.5.1.</span> <span class="toc-text">IM (指令存储器)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#IFU-%E5%8F%96%E6%8C%87%E4%BB%A4%E5%8D%95%E5%85%83"><span class="toc-number">1.1.4.5.2.</span> <span class="toc-text">IFU (取指令单元)</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-6-EXT-%E6%8B%93%E5%B1%95%E5%8D%95%E5%85%83"><span class="toc-number">1.1.4.6.</span> <span class="toc-text">1.1.6 EXT (拓展单元)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-7-SPLI-%E6%8C%87%E4%BB%A4%E5%88%86%E7%A6%BB%E5%99%A8%E6%A8%A1%E5%9D%97"><span class="toc-number">1.1.4.7.</span> <span class="toc-text">1.1.7 SPLI(指令分离器模块)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.1.5.</span> <span class="toc-text">指令格式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#R%E5%9E%8B%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.1.5.1.</span> <span class="toc-text">R型指令格式</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#add-sub-and-or-rd-rs-rt"><span class="toc-number">1.1.5.1.1.</span> <span class="toc-text">add,sub,and,or rd, rs, rt</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LW-SW%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.1.5.2.</span> <span class="toc-text">LW&amp;SW指令格式</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#lw-sw-rt-rs-imm16"><span class="toc-number">1.1.5.2.1.</span> <span class="toc-text">lw,sw rt, rs, imm16</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E6%94%AF%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.1.5.3.</span> <span class="toc-text">分支指令格式</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#beq-rs-rt-imm16"><span class="toc-number">1.1.5.3.1.</span> <span class="toc-text">beq rs,  rt,  imm16</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B7%B3%E8%BD%AC%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.1.5.4.</span> <span class="toc-text">跳转指令格式</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#j-add26"><span class="toc-number">1.1.5.4.1.</span> <span class="toc-text">j add26 </span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%8D%95%E5%91%A8%E6%9C%9F%E6%8E%A7%E5%88%B6%E5%99%A8%E8%AE%BE%E8%AE%A1"><span class="toc-number">1.2.</span> <span class="toc-text">2. 单周期控制器设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%8D%95%E5%91%A8%E6%9C%9F%E9%80%9A%E8%B7%AF%E6%89%80%E9%9C%80%E6%8E%A7%E5%88%B6%E4%BF%A1%E5%8F%B7"><span class="toc-number">1.2.1.</span> <span class="toc-text">2.1 单周期通路所需控制信号</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-1-ALU%E6%8E%A7%E5%88%B6%EF%BC%88ALUCtrl%EF%BC%89%EF%BC%9A4%E4%BD%8D"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">2.1.1 ALU控制（ALUCtrl）：4位</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-2-8%E4%B8%AA%E6%8E%A7%E5%88%B6%E4%BF%A1%E5%8F%B7%EF%BC%9A"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">2.1.2 8个控制信号：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E6%8E%A7%E5%88%B6%E5%99%A8%E8%AE%BE%E8%AE%A1"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.2 控制器设计</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-1-Main-Control-Unit"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">2.2.1 Main Control Unit</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1-%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF"><span class="toc-number">1.2.2.1.1.</span> <span class="toc-text">2.1 设计思路</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-%E7%AB%AF%E5%8F%A3%E5%AE%9A%E4%B9%89"><span class="toc-number">1.2.2.1.2.</span> <span class="toc-text">2.2 端口定义</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3-%E7%9C%9F%E5%80%BC%E8%A1%A8"><span class="toc-number">1.2.2.1.3.</span> <span class="toc-text">2.3 真值表</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A1%B6%E5%B1%82%E9%80%BB%E8%BE%91%E8%A1%A5%E5%85%85"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">顶层逻辑补充</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-2-ALU-Control-Unit"><span class="toc-number">1.2.2.3.</span> <span class="toc-text">2.2.2 ALU Control Unit</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-2-%E7%AB%AF%E5%8F%A3%E5%AE%9A%E4%B9%89"><span class="toc-number">1.2.2.3.1.</span> <span class="toc-text">1.2 端口定义</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-3-%E7%9C%9F%E5%80%BC%E8%A1%A8"><span class="toc-number">1.2.2.3.2.</span> <span class="toc-text">1.3 真值表</span></a></li></ol></li></ol></li></ol></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        CO-P3-设计文档-Logisim
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Wang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-11-10T14:02:51.000Z" class="dt-published" itemprop="datePublished">2025-11-10</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/Blog/tags/CO/" rel="tag">CO</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="MIPS单周期处理器设计"><a href="#MIPS单周期处理器设计" class="headerlink" title="MIPS单周期处理器设计"></a>MIPS单周期处理器设计</h1><blockquote>
+<p>本文内容为原创，内容仅供参考，请勿照搬</p>
+</blockquote>
+<h2 id="1-单周期数据通路设计"><a href="#1-单周期数据通路设计" class="headerlink" title="1. 单周期数据通路设计"></a>1. 单周期数据通路设计</h2><h3 id="参考图"><a href="#参考图" class="headerlink" title="参考图"></a>参考图</h3><p><img src="/Blog/images/%E8%AE%BE%E8%AE%A1%E9%80%9A%E8%B7%AF.png" alt="设计通路" title="参考图"></p>
+<h3 id="最终设计"><a href="#最终设计" class="headerlink" title="最终设计"></a>最终设计</h3><p><img src="/Blog/images/all.png" alt="最终设计" title="all"></p>
+<h3 id="顶层输出端口"><a href="#顶层输出端口" class="headerlink" title="顶层输出端口"></a>顶层输出端口</h3><p><img src="/Blog/images/output.png" alt="最终设计" title="output"></p>
+<hr>
+<h3 id="1-1-组合部件"><a href="#1-1-组合部件" class="headerlink" title="1.1 组合部件"></a>1.1 组合部件</h3><h4 id="1-1-1-ALU-算术逻辑运算单元"><a href="#1-1-1-ALU-算术逻辑运算单元" class="headerlink" title="1.1.1 ALU (算术逻辑运算单元)"></a>1.1.1 ALU (算术逻辑运算单元)</h4><ul>
+<li>in:<ul>
+<li>SrcA, SrcB</li>
+<li>ALUCtrl [3:0]</li>
+<li>Shift 移位数 5</li>
+<li>FlowJudge 是否进行溢出判断</li>
+</ul>
+</li>
+<li>out:<ul>
+<li>Equal(zero)</li>
+<li>Result</li>
+<li>Overflow</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>端口定义</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">信号名</th>
+<th align="center">方向</th>
+<th align="center">位宽</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>SrcA</code></td>
+<td align="center">I</td>
+<td align="center">32</td>
+<td align="left">32 位操作数 A</td>
+</tr>
+<tr>
+<td align="left"><code>SrcB</code></td>
+<td align="center">I</td>
+<td align="center">32</td>
+<td align="left">32 位操作数 B</td>
+</tr>
+<tr>
+<td align="left"><code>ALUCtrl</code></td>
+<td align="center">I</td>
+<td align="center">4</td>
+<td align="left">4 位运算控制信号</td>
+</tr>
+<tr>
+<td align="left"><code>Shift</code></td>
+<td align="center">I</td>
+<td align="center">5</td>
+<td align="left">5 位移位量 (<code>shamt</code>)</td>
+</tr>
+<tr>
+<td align="left"><code>Result</code></td>
+<td align="center">O</td>
+<td align="center">32</td>
+<td align="left">计算结果</td>
+</tr>
+<tr>
+<td align="left"><code>Zero</code></td>
+<td align="center">O</td>
+<td align="center">1</td>
+<td align="left">1 位零标志位 <code>Equal(zero)</code></td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>功能定义</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">序号</th>
+<th align="left">功能名称</th>
+<th align="left">功能描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="left">运算选择</td>
+<td align="left">根据 4 位 <code>ALUCtrl</code> 信号，选择要执行的运算 (见下表)。</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="left">算术逻辑运算</td>
+<td align="left">对 <code>SrcA</code>, <code>SrcB</code> 和 <code>Shift</code> 执行选定的 32 位运算，并将结果输出到 <code>Result</code> 端口。</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="left">零标志位</td>
+<td align="left">比较 <code>Result</code> 端口的 32 位输出是否<strong>等于</strong> <code>0x00000000</code>。如果是，<code>Zero</code> 端口输出 1，否则输出 0。</td>
+</tr>
+</tbody></table>
+<p><strong><code>ALUCtrl</code> (功能 1) 的详细逻辑：</strong></p>
+<ul>
+<li><code>0000</code>: <code>Result = SrcA + SrcB</code> (加法)</li>
+<li><code>0001</code>: <code>Result = SrcA - SrcB</code> (减法)</li>
+<li><code>0010</code>: <code>Result = SrcA &amp; SrcB</code> (按位与)</li>
+<li><code>0011</code>: <code>Result = SrcA | SrcB</code> (按位或)</li>
+<li><code>0100</code>: <code>Result = (SrcA &lt; SrcB) ? 1 : 0</code> (有符号 <code>slt</code>)</li>
+<li><code>0101</code>: <code>Result = SrcB &lt;&lt; Shift</code> (逻辑左移)</li>
+</ul>
+<p><img src="/Blog/images/ALU.png" alt="ALU"></p>
+<hr>
+<h4 id="1-1-2-GRF-通用寄存器组，也称为寄存器文件、寄存器堆"><a href="#1-1-2-GRF-通用寄存器组，也称为寄存器文件、寄存器堆" class="headerlink" title="1.1.2 GRF(通用寄存器组，也称为寄存器文件、寄存器堆)"></a>1.1.2 GRF(通用寄存器组，也称为寄存器文件、寄存器堆)</h4><ul>
+<li>读<br>  in: RA1 RA2<br>  out: RD1&#x3D;RF[RA1] ,   RD2&#x3D;RF[RA2]</li>
+<li>写<br>  in: WA, WD, clk<table>
+<thead>
+<tr>
+<th align="center">RegWrite</th>
+<th align="center">out</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">RF[WA] -&gt; WD</td>
+</tr>
+<tr>
+<td align="center">0</td>
+<td align="center">无</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<ul>
+<li><strong>端口定义</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">信号名</th>
+<th align="center">方向</th>
+<th align="center">位宽</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>ReadAddr1</code></td>
+<td align="center">I</td>
+<td align="center">5</td>
+<td align="left">读端口 1 地址  <code>RA1</code></td>
+</tr>
+<tr>
+<td align="left"><code>ReadAddr2</code></td>
+<td align="center">I</td>
+<td align="center">5</td>
+<td align="left">读端口 2 地址  <code>RA2</code></td>
+</tr>
+<tr>
+<td align="left"><code>WriteAddr</code></td>
+<td align="center">I</td>
+<td align="center">5</td>
+<td align="left">写端口地址  <code>WA</code></td>
+</tr>
+<tr>
+<td align="left"><code>WriteData</code></td>
+<td align="center">I</td>
+<td align="center">32</td>
+<td align="left">32 位待写入数据  <code>WD</code></td>
+</tr>
+<tr>
+<td align="left"><code>RegWrite</code></td>
+<td align="center">I</td>
+<td align="center">1</td>
+<td align="left">写使能信号</td>
+</tr>
+<tr>
+<td align="left"><code>clk</code></td>
+<td align="center">I</td>
+<td align="center">1</td>
+<td align="left">时钟信号</td>
+</tr>
+<tr>
+<td align="left"><code>reset</code></td>
+<td align="center">I</td>
+<td align="center">1</td>
+<td align="left">异步复位信号</td>
+</tr>
+<tr>
+<td align="left"><code>ReadData1</code></td>
+<td align="center">O</td>
+<td align="center">32</td>
+<td align="left"><code>RF[RA1]</code></td>
+</tr>
+<tr>
+<td align="left"><code>ReadData2</code></td>
+<td align="center">O</td>
+<td align="center">32</td>
+<td align="left"><code>RF[RA2]</code></td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>功能定义</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">序号</th>
+<th align="left">功能名称</th>
+<th align="left">功能描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="left">并发异步读<br>(Concurrent Read)</td>
+<td align="left">异步地（即立即）从 <code>ReadAddr1</code> 和 <code>ReadAddr2</code> 指定的地址读取 32 位数据，并分别从 <code>ReadData1</code> 和 <code>ReadData2</code> 端口输出。 (即 <code>RD1=RF[RA1]</code>, <code>RD2=RF[RA2]</code>)</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="left">同步写<br>(Synchronous Write)</td>
+<td align="left">当 <code>RegWrite = 1</code> 时，在 <code>clk</code> 信号的上升沿，将 <code>WriteData</code> 端口的 32 位数据写入到 <code>WriteAddr</code> 指定的寄存器。 (即 <code>RF[WA] = WD</code>)</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="left"><code>$zero</code> 寄存器逻辑</td>
+<td align="left">对应的 <code>ReadData</code> 端口<strong>必须</strong>输出 <code>0x00000000</code>。<br> <code>Reg0</code> 永远不能被修改。</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="left">异步复位</td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<p><img src="/Blog/images/%E5%AF%84%E5%AD%98%E5%99%A8%E5%A0%86%E5%86%85%E9%83%A8%E7%BB%93%E6%9E%84.png" alt="寄存器堆内部结构"></p>
+<p><img src="/Blog/images/GRF.png" alt="GRF"></p>
+<hr>
+<h4 id="1-1-3-DM-数据存储器"><a href="#1-1-3-DM-数据存储器" class="headerlink" title="1.1.3 DM (数据存储器)"></a>1.1.3 DM (数据存储器)</h4><ul>
+<li>MemRead RE<ul>
+<li>读<br>in: A<br>out: RD &#x3D; DM[A]</li>
+</ul>
+</li>
+<li>MemWrite WE<ul>
+<li>写</li>
+<li>clk<br>in: A, WD<br>out: DM[A] &#x3D; WD</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>端口定义</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">信号名</th>
+<th align="center">方向</th>
+<th align="center">位宽</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>Address</code></td>
+<td align="center">I</td>
+<td align="center">32</td>
+<td align="left">32 位<strong>字节地址</strong> (来自 <code>ALUResult</code>)</td>
+</tr>
+<tr>
+<td align="left"><code>WriteData</code></td>
+<td align="center">I</td>
+<td align="center">32</td>
+<td align="left">32 位待写入数据 (<code>WA</code>)</td>
+</tr>
+<tr>
+<td align="left"><code>MemRead</code></td>
+<td align="center">I</td>
+<td align="center">1</td>
+<td align="left">读使能信号 (<code>RE</code>)</td>
+</tr>
+<tr>
+<td align="left"><code>MemWrite</code></td>
+<td align="center">I</td>
+<td align="center">1</td>
+<td align="left">写使能信号 ( <code>WE</code>)</td>
+</tr>
+<tr>
+<td align="left"><code>clk</code></td>
+<td align="center">I</td>
+<td align="center">1</td>
+<td align="left">时钟信号 (用于同步写入)</td>
+</tr>
+<tr>
+<td align="left"><code>reset</code></td>
+<td align="center">I</td>
+<td align="center">1</td>
+<td align="left">异步复位信号 (用于清空 RAM)</td>
+</tr>
+<tr>
+<td align="left"><code>ReadData</code></td>
+<td align="center">O</td>
+<td align="center">32</td>
+<td align="left">32 位读出数据 (送往 <code>MemtoReg MUX</code>)</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>功能定义</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">序号</th>
+<th align="left">功能名称</th>
+<th align="left">功能描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="left">地址映射<br>(Address Mapping)</td>
+<td align="left">将输入的 32 位字节地址 <code>Address</code>，通过提取 <code>[13:2]</code> 位，转换为内部 <code>RAM</code> 所需的 12 位<strong>字地址</strong>。</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="left">存储器读<br>(Memory Read)</td>
+<td align="left">当 <code>MemRead = 1</code> 时，异步地从转换后的字地址中读取 32 位数据，并将其从 <code>ReadData</code> 端口输出。 (即 <code>RD = DM[A]</code>)</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="left">存储器写<br>(Memory Write)</td>
+<td align="left">当 <code>MemWrite = 1</code> 时，在 <code>clk</code> 信号的上升沿，将 <code>WriteData</code> 端口的32位数据写入到转换后的字地址。 (即 <code>DM[A] = WD</code>)</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="left">异步复位</td>
+<td align="left">当 <code>reset = 1</code> 时，异步地将内部 <code>RAM</code> 的所有单元清零。</td>
+</tr>
+</tbody></table>
+<p><img src="/Blog/images/DM.png" alt="DM"></p>
+<hr>
+<h4 id="1-1-4-nPC-–-有限状态机："><a href="#1-1-4-nPC-–-有限状态机：" class="headerlink" title="1.1.4 nPC – 有限状态机："></a>1.1.4 nPC – 有限状态机：</h4><ul>
+<li>PC (程序计数器) —状态转移—&gt; nPC<ul>
+<li><p>PC 寄存器 – 状态存储模块</p>
+<ul>
+<li>en, reset, clk</li>
+</ul>
+</li>
+<li><p>NPC 模块 – 状态转移电路</p>
+</li>
+<li><p>Pc +&#x3D; 4</p>
+</li>
+<li><p>in: </p>
+<ul>
+<li>pc</li>
+<li>IsB –&gt; Offset(32) &lt;&lt; 2 + pc</li>
+<li>JUMP –&gt; In_26(26) &lt;&lt; 2 + pc[31:28]</li>
+<li>JR –&gt; Ra</li>
+</ul>
+</li>
+<li><p>out: </p>
+<ul>
+<li>Next_PC</li>
+<li>PC+4</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>端口定义</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">信号名</th>
+<th align="center">方向</th>
+<th align="center">位宽</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>PC_in</code></td>
+<td align="center">I</td>
+<td align="center">32</td>
+<td align="left"><code>PC</code> 的值 (来自 <code>IFU</code> 模块)</td>
+</tr>
+<tr>
+<td align="left"><code>Offset_Ext</code></td>
+<td align="center">I</td>
+<td align="center">32</td>
+<td align="left">32 位<strong>符号扩展</strong>的立即数 (来自 <code>EXT</code> 模块)</td>
+</tr>
+<tr>
+<td align="left"><code>imm26</code></td>
+<td align="center">I</td>
+<td align="center">26</td>
+<td align="left">26 位跳转立即数 (来自 <code>Splitter_Unit</code> 模块)</td>
+</tr>
+<tr>
+<td align="left"><code>Ra</code></td>
+<td align="center">I</td>
+<td align="center">32</td>
+<td align="left"><code>rs</code> 寄存器的值 (来自 <code>GRF</code> 的 <code>ReadData1</code>)</td>
+</tr>
+<tr>
+<td align="left"><code>IsB</code></td>
+<td align="center">I</td>
+<td align="center">1</td>
+<td align="left"><strong>分支使能</strong>信号。(<code>Main_Control[Branch]</code> <strong>AND</strong> <code>ALU[Zero]</code>)</td>
+</tr>
+<tr>
+<td align="left"><code>JUMP</code></td>
+<td align="center">I</td>
+<td align="center">1</td>
+<td align="left"><strong><code>j</code> 跳转使能</strong>信号 (来自 <code>Main_Control_Unit</code>)</td>
+</tr>
+<tr>
+<td align="left"><code>JR</code></td>
+<td align="center">I</td>
+<td align="center">1</td>
+<td align="left"><strong><code>jr</code> 跳转使能</strong>信号 (来自 <code>ALU_Control_Unit</code>)</td>
+</tr>
+<tr>
+<td align="left"><code>Next_PC</code></td>
+<td align="center">O</td>
+<td align="center">32</td>
+<td align="left">计算得出的<strong>下一条指令地址</strong> (送往 <code>IFU</code> 的 <code>Next_PC</code> 端口)</td>
+</tr>
+<tr>
+<td align="left"><code>PC_plus_4</code></td>
+<td align="center">O</td>
+<td align="center">32</td>
+<td align="left"><code>PC + 4</code> 的值 (来自 <code>IFU</code> 模块)</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>功能定义</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">序号</th>
+<th align="left">功能名称</th>
+<th align="left">功能描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="left">分支地址计算<br>(Branch Target Calculation)</td>
+<td align="left">计算 <code>beq</code> 指令的目标地址：<br><code>Branch_Target = PC_plus_4 + (Offset_Ext &lt;&lt; 2)</code>。</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="left">跳转地址计算<br>(Jump Target Calculation)</td>
+<td align="left">计算 <code>j</code> 指令的目标地址：<br><code>Jump_Target = { PC_plus_4[31:28] , (imm26 &lt;&lt; 2) }</code>。</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="left">PC 优先级选择<br>(Next PC Selection)</td>
+<td align="left">使用一个 4-to-1 MUX (多路选择器)，根据 <code>JR</code>, <code>JUMP</code>, <code>IsB</code> 信号的优先级，在四个可能的下一地址中选择一个作为 <code>Next_PC</code> 输出。</td>
+</tr>
+</tbody></table>
+<p><strong>PC 优先级选择 (功能 3) 的详细逻辑：</strong></p>
+<ul>
+<li><strong><code>JR</code> &#x3D; 1:</strong> <code>Next_PC = Ra</code> (最高优先级)</li>
+<li><strong><code>JR</code> &#x3D; 0, <code>JUMP</code> &#x3D; 1:</strong> <code>Next_PC = Jump_Target</code></li>
+<li><strong><code>JR</code> &#x3D; 0, <code>JUMP</code> &#x3D; 0, <code>IsB</code> &#x3D; 1:</strong> <code>Next_PC = Branch_Target</code></li>
+<li><strong><code>JR</code> &#x3D; 0, <code>JUMP</code> &#x3D; 0, <code>IsB</code> &#x3D; 0:</strong> <code>Next_PC = PC_plus_4</code> (默认顺序执行)</li>
+</ul>
+<p><img src="/Blog/images/nPC.png" alt="nPC"></p>
+<hr>
+<h4 id="1-1-5-IFU（取指令单元）"><a href="#1-1-5-IFU（取指令单元）" class="headerlink" title="1.1.5 IFU（取指令单元）"></a>1.1.5 IFU（取指令单元）</h4><h5 id="IM-指令存储器"><a href="#IM-指令存储器" class="headerlink" title="IM (指令存储器)"></a>IM (指令存储器)</h5><ul>
+<li><strong>端口定义</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">信号名</th>
+<th align="center">方向</th>
+<th align="center">位宽</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>A</code></td>
+<td align="center">I</td>
+<td align="center">32</td>
+<td align="left">32 位<strong>字节地址</strong> (来自 <code>IFU</code> 模块的 <code>PC</code>)</td>
+</tr>
+<tr>
+<td align="left"><code>RD</code></td>
+<td align="center">O</td>
+<td align="center">32</td>
+<td align="left">从存储器中读取的 32 位<strong>指令码</strong></td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>功能定义</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">序号</th>
+<th align="left">功能名称</th>
+<th align="left">功能描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="left">地址映射<br>(Address Mapping)</td>
+<td align="left">将输入的 32 位字节地址 <code>A</code>，通过减去起始地址偏移量 <code>0x3000</code> 并右移两位（即提取 <code>[13:2]</code> 位），转换为 12 位的<strong>字地址</strong>。</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="left">指令读取<br>(Instruction Read)</td>
+<td align="left">使用转换后的 12 位字地址，从内部 <code>ROM</code> (只读存储器) 中异步读取一条 32 位的指令，并将其从 <code>RD</code> 端口输出。</td>
+</tr>
+</tbody></table>
+<p><img src="/Blog/images/IMm.png" alt="IMm"></p>
+<h5 id="IFU-取指令单元"><a href="#IFU-取指令单元" class="headerlink" title="IFU (取指令单元)"></a>IFU (取指令单元)</h5><ul>
+<li><strong>端口定义</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">信号名</th>
+<th align="center">方向</th>
+<th align="center">位宽</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>Next_PC</code></td>
+<td align="center">I</td>
+<td align="center">32</td>
+<td align="left">下一个时钟周期将要载入的 PC 值 (来自 <code>NPC</code> 模块)</td>
+</tr>
+<tr>
+<td align="left"><code>clk</code></td>
+<td align="center">I</td>
+<td align="center">1</td>
+<td align="left">系统时钟信号</td>
+</tr>
+<tr>
+<td align="left"><code>reset</code></td>
+<td align="center">I</td>
+<td align="center">1</td>
+<td align="left">系统异步复位信号</td>
+</tr>
+<tr>
+<td align="left"><code>stop</code></td>
+<td align="center">I</td>
+<td align="center">1</td>
+<td align="left">时钟使能 (Clock Enable) 信号 (低电平有效，用于暂停 PC)</td>
+</tr>
+<tr>
+<td align="left"><code>PC</code></td>
+<td align="center">O</td>
+<td align="center">32</td>
+<td align="left"><strong>当前</strong> PC 寄存器中存储的地址值 (送往 <code>IM</code> 和 <code>NPC</code>)</td>
+</tr>
+<tr>
+<td align="left"><code>Instr</code></td>
+<td align="center">O</td>
+<td align="center">32</td>
+<td align="left"><code>PC</code> 对应的<strong>当前指令码</strong> (来自 <code>IM</code> 模块)</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>功能定义</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">序号</th>
+<th align="left">功能名称</th>
+<th align="left">功能描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="left">PC 更新<br>(PC Update)</td>
+<td align="left">在 <code>clk</code> 上升沿，且 <code>stop</code> 信号为 0 (无效) 时，将 <code>Next_PC</code> 的值载入 PC 寄存器。</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="left">PC 复位<br>(PC Reset)</td>
+<td align="left">当 <code>reset</code> 信号为 1 时，异步地将 PC 寄存器的值强制设为起始地址 <code>0x00003000</code>。</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="left">指令获取<br>(Instruction Fetch)</td>
+<td align="left">将 <code>PC</code> 寄存器的当前值输出到 <code>PC</code> 端口，并将其送至内部的 <code>IM</code> 模块，以获取对应的 32 位指令，并从 <code>Instr</code> 端口输出。</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="left">PC+4 计算<br>(PC+4 Calculation)</td>
+<td align="left">并行地计算 <code>PC</code> 寄存器当前值加 4 的结果，并从 <code>PC_plus_4</code> 端口输出。</td>
+</tr>
+</tbody></table>
+<p><img src="/Blog/images/IFU.png" alt="IFU"></p>
+<hr>
+<h4 id="1-1-6-EXT-拓展单元"><a href="#1-1-6-EXT-拓展单元" class="headerlink" title="1.1.6 EXT (拓展单元)"></a>1.1.6 EXT (拓展单元)</h4><p>将16位立即数符号拓展为32位。这里为了提高可拓展性，添加了 <code>OPExt</code> 接口</p>
+<ul>
+<li><strong>端口定义</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">信号名</th>
+<th align="left">方向</th>
+<th align="left">位宽</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Imm_16</td>
+<td align="left">I</td>
+<td align="left">16</td>
+<td align="left">16位立即数输入信号</td>
+</tr>
+<tr>
+<td align="left">OPExt</td>
+<td align="left">I</td>
+<td align="left">1</td>
+<td align="left">符号拓展信号 <br> 0：无符号拓展（0拓展） <br> 1：符号拓展</td>
+</tr>
+<tr>
+<td align="left">Imm_32</td>
+<td align="left">O</td>
+<td align="left">32</td>
+<td align="left">32位立即数输出信号</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>功能定义</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">序号</th>
+<th align="left">功能名称</th>
+<th align="left">功能描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left">符号拓展</td>
+<td align="left">将16位立即数进行符号拓展</td>
+</tr>
+</tbody></table>
+<p><img src="/Blog/images/EXT.png" alt="EXT"></p>
+<hr>
+<h4 id="1-1-7-SPLI-指令分离器模块"><a href="#1-1-7-SPLI-指令分离器模块" class="headerlink" title="1.1.7 SPLI(指令分离器模块)"></a>1.1.7 SPLI(指令分离器模块)</h4><ul>
+<li><strong>端口定义</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">信号名</th>
+<th align="center">方向</th>
+<th align="center">位宽</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>Instr</code></td>
+<td align="center">I</td>
+<td align="center">32</td>
+<td align="left">来自 IFU (指令存储器) 的 32 位完整指令码</td>
+</tr>
+<tr>
+<td align="left"><code>Opcode</code></td>
+<td align="center">O</td>
+<td align="center">6</td>
+<td align="left">操作码 (<code>[31:26]</code>)，送往 <code>Main Control Unit</code></td>
+</tr>
+<tr>
+<td align="left"><code>rs</code></td>
+<td align="center">O</td>
+<td align="center">5</td>
+<td align="left">源寄存器 1 (<code>[25:21]</code>)，送往 <code>GRF[RA1]</code> 和 <code>NPC[Ra]</code></td>
+</tr>
+<tr>
+<td align="left"><code>rt</code></td>
+<td align="center">O</td>
+<td align="center">5</td>
+<td align="left">源寄存器 2 &#x2F; 目标 (<code>[20:16]</code>)，送往 <code>GRF[RA2]</code> 和 <code>RegDst MUX</code></td>
+</tr>
+<tr>
+<td align="left"><code>rd</code></td>
+<td align="center">O</td>
+<td align="center">5</td>
+<td align="left">目标寄存器 (<code>[15:11]</code>)，送往 <code>RegDst MUX</code></td>
+</tr>
+<tr>
+<td align="left"><code>shamt</code></td>
+<td align="center">O</td>
+<td align="center">5</td>
+<td align="left">移位量 (<code>[10:6]</code>)，送往 <code>ALU[Shamt]</code></td>
+</tr>
+<tr>
+<td align="left"><code>funct</code></td>
+<td align="center">O</td>
+<td align="center">6</td>
+<td align="left">功能码 (<code>[5:0]</code>)，送往 <code>ALU Control Unit</code></td>
+</tr>
+<tr>
+<td align="left"><code>imm16</code></td>
+<td align="center">O</td>
+<td align="center">16</td>
+<td align="left">16 位立即数 (<code>[15:0]</code>)，送往 <code>EXT</code> 和 <code>LUI Shifter</code></td>
+</tr>
+<tr>
+<td align="left"><code>imm26</code></td>
+<td align="center">O</td>
+<td align="center">26</td>
+<td align="left">26 位跳转地址 (<code>[25:0]</code>)，送往 <code>NPC</code></td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>功能定义</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">序号</th>
+<th align="left">功能名称</th>
+<th align="left">功能描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="left">指令字段分离<br>(Instruction Field Separation)</td>
+<td align="left">将 32 位的 <code>Instruction</code> 输入，根据 MIPS 指令格式，并行地分离为 <code>Op</code>, <code>rs</code>, <code>rt</code>, <code>rd</code>, <code>shamt</code>, <code>funct</code>, <code>imm16</code> 和 <code>imm26</code> 共 8 个字段，并从对应端口输出。</td>
+</tr>
+</tbody></table>
+<p><img src="/Blog/images/SPLI.png" alt="SPLI"></p>
+<hr>
+<h3 id="指令格式"><a href="#指令格式" class="headerlink" title="指令格式"></a>指令格式</h3><h4 id="R型指令格式"><a href="#R型指令格式" class="headerlink" title="R型指令格式"></a>R型指令格式</h4><p><img src="/Blog/images/R%E5%9E%8B%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F.png" alt="R型指令格式"></p>
+<h5 id="add-sub-and-or-rd-rs-rt"><a href="#add-sub-and-or-rd-rs-rt" class="headerlink" title="add,sub,and,or rd, rs, rt"></a><code>add,sub,and,or rd, rs, rt</code></h5><table>
+<thead>
+<tr>
+<th align="center">操作</th>
+<th align="center">Op</th>
+<th align="center">Rs</th>
+<th align="center">Rt</th>
+<th align="center">Rd</th>
+<th align="center">Shamt</th>
+<th align="center">Func</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">位宽</td>
+<td align="center">6</td>
+<td align="center">5</td>
+<td align="center">5</td>
+<td align="center">5</td>
+<td align="center">5</td>
+<td align="center">6</td>
+</tr>
+</tbody></table>
+<h4 id="LW-SW指令格式"><a href="#LW-SW指令格式" class="headerlink" title="LW&amp;SW指令格式"></a>LW&amp;SW指令格式</h4><p><img src="/Blog/images/LW&SW%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F.png" alt="LW&amp;SW指令格式"></p>
+<h5 id="lw-sw-rt-rs-imm16"><a href="#lw-sw-rt-rs-imm16" class="headerlink" title="lw,sw rt, rs, imm16"></a><code>lw,sw rt, rs, imm16</code></h5><table>
+<thead>
+<tr>
+<th align="center">操作</th>
+<th align="center">Op</th>
+<th align="center">Rs</th>
+<th align="center">Rt</th>
+<th align="center">imm</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">位宽</td>
+<td align="center">6</td>
+<td align="center">5</td>
+<td align="center">5</td>
+<td align="center">16</td>
+</tr>
+</tbody></table>
+<h4 id="分支指令格式"><a href="#分支指令格式" class="headerlink" title="分支指令格式"></a>分支指令格式</h4><p><img src="/Blog/images/%E5%88%86%E6%94%AF%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F.png" alt="分支指令格式"></p>
+<h5 id="beq-rs-rt-imm16"><a href="#beq-rs-rt-imm16" class="headerlink" title="beq rs,  rt,  imm16"></a><code>beq rs,  rt,  imm16</code></h5><table>
+<thead>
+<tr>
+<th align="center">操作</th>
+<th align="center">Op</th>
+<th align="center">Rs</th>
+<th align="center">Rt</th>
+<th align="center">imm</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">位宽</td>
+<td align="center">6</td>
+<td align="center">5</td>
+<td align="center">5</td>
+<td align="center">16</td>
+</tr>
+</tbody></table>
+<h4 id="跳转指令格式"><a href="#跳转指令格式" class="headerlink" title="跳转指令格式"></a>跳转指令格式</h4><p><img src="/Blog/images/%E8%B7%B3%E8%BD%AC%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F.png" alt="跳转指令格式"></p>
+<h5 id="j-add26"><a href="#j-add26" class="headerlink" title="j add26 "></a><code>j add26 </code></h5><table>
+<thead>
+<tr>
+<th align="center">操作</th>
+<th align="center">Op</th>
+<th align="center">JAdd</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">位宽</td>
+<td align="center">6</td>
+<td align="center">26</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="2-单周期控制器设计"><a href="#2-单周期控制器设计" class="headerlink" title="2. 单周期控制器设计"></a>2. 单周期控制器设计</h2><p><img src="/Blog/images/%E5%8D%95%E5%91%A8%E6%9C%9F%E6%8E%A7%E5%88%B6%E5%99%A8%E8%AE%BE%E8%AE%A1.png" alt="单周期控制器设计"></p>
+<h3 id="2-1-单周期通路所需控制信号"><a href="#2-1-单周期通路所需控制信号" class="headerlink" title="2.1 单周期通路所需控制信号"></a>2.1 单周期通路所需控制信号</h3><h4 id="2-1-1-ALU控制（ALUCtrl）：4位"><a href="#2-1-1-ALU控制（ALUCtrl）：4位" class="headerlink" title="2.1.1 ALU控制（ALUCtrl）：4位"></a>2.1.1 ALU控制（ALUCtrl）：4位</h4><table>
+<thead>
+<tr>
+<th align="left">输入</th>
+<th align="center">ALUCtrl</th>
+<th align="center">运算</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">A, B</td>
+<td align="center">0000</td>
+<td align="center"><code>A &amp; B</code></td>
+</tr>
+<tr>
+<td align="left">A, B</td>
+<td align="center">0001</td>
+<td align="center"><code>A | B</code></td>
+</tr>
+<tr>
+<td align="left">A, B</td>
+<td align="center">0010</td>
+<td align="center"><code>A + B</code></td>
+</tr>
+<tr>
+<td align="left">A, B</td>
+<td align="center">0110</td>
+<td align="center"><code>A - B</code></td>
+</tr>
+</tbody></table>
+<h4 id="2-1-2-8个控制信号："><a href="#2-1-2-8个控制信号：" class="headerlink" title="2.1.2 8个控制信号："></a>2.1.2 8个控制信号：</h4><table>
+<thead>
+<tr>
+<th align="center">控制信号</th>
+<th align="center">0</th>
+<th align="center">1</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">RegDst</td>
+<td align="center">Reg堆写入端地址：Rt</td>
+<td align="center">Reg堆写入端地址：Rd</td>
+</tr>
+<tr>
+<td align="center">RegWrite</td>
+<td align="center">无</td>
+<td align="center">Reg写入：<strong><code>Reg[WA] = WD</code></strong></td>
+</tr>
+<tr>
+<td align="center">ALUSrc</td>
+<td align="center">ALU-B：RD2</td>
+<td align="center">ALU-B：imm Signext</td>
+</tr>
+<tr>
+<td align="center">PCSrc</td>
+<td align="center">PC &#x3D; (PC+4)</td>
+<td align="center">PC &#x3D; NAdd (beq目的地址)</td>
+</tr>
+<tr>
+<td align="center">PCJump</td>
+<td align="center">PC &#x3D; MUX的输出</td>
+<td align="center">PC &#x3D; J指令目的地址</td>
+</tr>
+<tr>
+<td align="center">MemRead</td>
+<td align="center">无</td>
+<td align="center">DM读（输出）</td>
+</tr>
+<tr>
+<td align="center">MemWrite</td>
+<td align="center">无</td>
+<td align="center">DM写（输入）</td>
+</tr>
+<tr>
+<td align="center">MemtoReg</td>
+<td align="center">Reg写入 &lt;– ALU</td>
+<td align="center">Reg写入 &lt;– DM</td>
+</tr>
+<tr>
+<td align="center">Branch</td>
+<td align="center">无</td>
+<td align="center">为Beq指令</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="2-2-控制器设计"><a href="#2-2-控制器设计" class="headerlink" title="2.2 控制器设计"></a>2.2 控制器设计</h3><p><img src="/Blog/images/controler.png" alt="controler"></p>
+<h4 id="2-2-1-Main-Control-Unit"><a href="#2-2-1-Main-Control-Unit" class="headerlink" title="2.2.1 Main Control Unit"></a>2.2.1 Main Control Unit</h4><h5 id="2-1-设计思路"><a href="#2-1-设计思路" class="headerlink" title="2.1 设计思路"></a>2.1 设计思路</h5><ol>
+<li><strong><code>MemtoReg</code> (2 位):</strong> <ul>
+<li><code>00</code>: <code>ALUResult</code> (用于 R-type, <code>ori</code>)</li>
+<li><code>01</code>: <code>DM[ReadData]</code> (用于 <code>lw</code>)</li>
+<li><code>10</code>: <code>LUI_Value</code> (用于 <code>lui</code>)</li>
+</ul>
+</li>
+<li><strong><code>ExtOp</code> (1 位):</strong>  用于控制扩展单元。<ul>
+<li><code>0</code>: 零扩展 (for <code>ori</code>)</li>
+<li><code>1</code>: 符号扩展 (for <code>lw</code>, <code>sw</code>, <code>beq</code>)</li>
+</ul>
+</li>
+<li><strong><code>Jump</code> (1 位):</strong> (图中的 <code>PCJump</code>) 用于 <code>j</code> 指令。</li>
+<li><strong><code>JR</code> 信号：</strong> 已移至 <code>ALU Control Unit</code>。</li>
+</ol>
+<h5 id="2-2-端口定义"><a href="#2-2-端口定义" class="headerlink" title="2.2 端口定义"></a>2.2 端口定义</h5><ul>
+<li><strong>输入 (Inputs):</strong><ul>
+<li><code>Opcode[5:0]</code>: 来自指令码的 <code>[31:26]</code> 位 (操作码)。</li>
+</ul>
+</li>
+<li><strong>输出 (Outputs):</strong><ul>
+<li><code>RegDst[0]</code>: (1: R-type 写 <code>rd</code>, 0: I-type 写 <code>rt</code>)</li>
+<li><code>ALUSrc[0]</code>: (1: 立即数, 0: <code>GRF[ReadData2]</code>)</li>
+<li><code>MemtoReg[1:0]</code>: (2 位) (写回 GRF 的数据源选择)</li>
+<li><code>RegWrite[0]</code>: (1: 允许写入 GRF)</li>
+<li><code>MemRead[0]</code>: (1: 允许读取 DM)</li>
+<li><code>MemWrite[0]</code>: (1: 允许写入 DM)</li>
+<li><code>Branch[0]</code>: (1: <code>beq</code> 指令)</li>
+<li><code>Jump[0]</code>: (1: <code>j</code> 指令)</li>
+<li><code>ExtOp[0]</code>: (1: 符号扩展, 0: 零扩展)</li>
+<li><code>ALUOp[2:0]</code>: (3 位) (送往 <code>ALU Control Unit</code>)</li>
+</ul>
+</li>
+</ul>
+<h5 id="2-3-真值表"><a href="#2-3-真值表" class="headerlink" title="2.3 真值表"></a>2.3 真值表</h5><table>
+<thead>
+<tr>
+<th align="center">指令</th>
+<th align="center"><code>Opcode</code></th>
+<th align="center"><code>RegDst</code></th>
+<th align="center"><code>ALUSrc</code></th>
+<th align="center"><code>MemtoReg</code></th>
+<th align="center"><code>RegWrite</code></th>
+<th align="center"><code>MemRead</code></th>
+<th align="center"><code>MemWrite</code></th>
+<th align="center"><code>Branch</code></th>
+<th align="center"><code>Jump</code></th>
+<th align="center"><code>ExtOp</code></th>
+<th align="center"><strong><code>ALUOp[2:0]</code></strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong><code>R-type</code></strong></td>
+<td align="center"><code>000000</code></td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center"><code>00</code></td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">X</td>
+<td align="center"><strong><code>100</code></strong></td>
+</tr>
+<tr>
+<td align="center"><strong><code>lw</code></strong></td>
+<td align="center"><code>100011</code></td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center"><code>01</code></td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center"><strong><code>000</code></strong></td>
+</tr>
+<tr>
+<td align="center"><strong><code>sw</code></strong></td>
+<td align="center"><code>101011</code></td>
+<td align="center">X</td>
+<td align="center">1</td>
+<td align="center"><code>XX</code></td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center"><strong><code>000</code></strong></td>
+</tr>
+<tr>
+<td align="center"><strong><code>beq</code></strong></td>
+<td align="center"><code>000100</code></td>
+<td align="center">X</td>
+<td align="center">0</td>
+<td align="center"><code>XX</code></td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center"><strong><code>001</code></strong></td>
+</tr>
+<tr>
+<td align="center"><strong><code>ori</code></strong></td>
+<td align="center"><code>001101</code></td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center"><code>00</code></td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center"><strong><code>010</code></strong></td>
+</tr>
+<tr>
+<td align="center"><strong><code>lui</code></strong></td>
+<td align="center"><code>001111</code></td>
+<td align="center">0</td>
+<td align="center">X</td>
+<td align="center"><code>10</code></td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">X</td>
+<td align="center"><code>XXX</code></td>
+</tr>
+<tr>
+<td align="center"><strong><code>addi</code></strong></td>
+<td align="center"><code>001000</code></td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center"><code>00</code></td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center"><strong><code>000</code></strong></td>
+</tr>
+<tr>
+<td align="center"><strong><code>j</code></strong></td>
+<td align="center"><code>000010</code></td>
+<td align="center">X</td>
+<td align="center">X</td>
+<td align="center"><code>XX</code></td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">X</td>
+<td align="center"><code>XXX</code></td>
+</tr>
+</tbody></table>
+<p><strong>3 位 <code>ALUOp</code> 编码：</strong></p>
+<ul>
+<li><code>000</code>: <code>lw</code>&#x2F;<code>sw</code> (主控制器要求 <strong>ADD</strong>)</li>
+<li><code>001</code>: <code>beq</code> (主控制器要求 <strong>SUB</strong>)</li>
+<li><code>010</code>: <code>ori</code> (主控制器要求 <strong>OR</strong>)</li>
+<li><code>011</code>: (预留, e.g., for <code>andi</code>)</li>
+<li><code>100</code>: <strong>R-type</strong> (主控制器说：“我不知道，请查看 <code>funct</code> 码”)</li>
+<li><code>101</code>: (预留, e.g., for <code>xori</code>)</li>
+<li><code>110</code>: (预留, e.g., for <code>addi</code>)</li>
+<li><code>111</code>: (预留)</li>
+</ul>
+<p><strong>关于 <code>nop</code> (0x00000000) 的说明：</strong><br><code>nop</code> 指令的 <code>Opcode</code> 是 <code>000000</code>，<code>Funct</code> 是 <code>000000</code>。</p>
+<ol>
+<li><code>Main Control</code> 会将其视为 <strong>R-type</strong>。</li>
+<li><code>ALU Control</code> 会将其视为 <strong><code>sll</code></strong>。</li>
+<li>它最终执行 <code>sll $zero, $zero, 0</code>。</li>
+<li>控制器会尝试将结果 <code>0</code> 写入 <code>$zero</code> 寄存器。</li>
+</ol>
+<hr>
+<h4 id="顶层逻辑补充"><a href="#顶层逻辑补充" class="headerlink" title="顶层逻辑补充"></a>顶层逻辑补充</h4><ul>
+<li><strong>最终的 <code>RegWrite</code> 信号：</strong> <code>jr</code> 指令不应该写寄存器。因此，连接到 GRF 的最终 <code>RegWrite_Enable</code> 信号应该是：<ul>
+<li><code>RegWrite_Enable</code> &#x3D; <code>Main_Control[RegWrite]</code> <strong>AND</strong> ( <strong>NOT</strong> <code>ALU_Control[JR]</code> )</li>
+</ul>
+</li>
+</ul>
+<p><img src="/Blog/images/%E4%B8%BB%E6%8E%A7%E5%8D%95%E5%85%83%E9%80%BB%E8%BE%91%E5%AE%9E%E7%8E%B0.png" alt="主控单元逻辑实现"></p>
+<p><img src="/Blog/images/MCU.png" alt="MCU"></p>
+<hr>
+<h4 id="2-2-2-ALU-Control-Unit"><a href="#2-2-2-ALU-Control-Unit" class="headerlink" title="2.2.2 ALU Control Unit"></a>2.2.2 ALU Control Unit</h4><h5 id="1-2-端口定义"><a href="#1-2-端口定义" class="headerlink" title="1.2 端口定义"></a>1.2 端口定义</h5><ul>
+<li><strong>输入 (Inputs):</strong><ul>
+<li><code>ALUOp[2:0]</code>: 来自 Main Control Unit (主控制器) 的 3 位操作码。</li>
+<li><code>Func[5:0]</code>: 来自指令码的 <code>[5:0]</code> 位 (功能码)。</li>
+</ul>
+</li>
+<li><strong>输出 (Outputs):</strong><ul>
+<li><code>ALUCtrl[3:0]</code>: 送往 ALU 的 4 位最终运算码 (我们之前已约定 <code>0000</code>&#x3D;ADD, <code>0001</code>&#x3D;SUB, <code>0010</code>&#x3D;AND, <code>0011</code>&#x3D;OR, <code>0100</code>&#x3D;SLT, <code>0101</code>&#x3D;SLL)。</li>
+<li><code>JR[0]</code>: <strong>(新增输出)</strong> 用于 <code>jr</code> 指令。当 <code>ALUOp=100</code> 且 <code>Func=001000</code> 时，此信号为 1。</li>
+</ul>
+</li>
+</ul>
+<h5 id="1-3-真值表"><a href="#1-3-真值表" class="headerlink" title="1.3 真值表"></a>1.3 真值表</h5><table>
+<thead>
+<tr>
+<th align="center"><code>ALUOp[2:0]</code> (输入)</th>
+<th align="center"><code>Func[5:0]</code> (输入)</th>
+<th align="center">备注 (指令)</th>
+<th align="center"><strong><code>ALUCtrl[3:0]</code> (输出)</strong></th>
+<th align="center"><strong><code>JR[0]</code> (输出)</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>000</code></td>
+<td align="center">X (任意)</td>
+<td align="center"><code>lw</code> &#x2F; <code>sw</code></td>
+<td align="center"><strong><code>0000</code></strong> (ADD)</td>
+<td align="center"><strong>0</strong></td>
+</tr>
+<tr>
+<td align="center"><code>001</code></td>
+<td align="center">X (任意)</td>
+<td align="center"><code>beq</code></td>
+<td align="center"><strong><code>0001</code></strong> (SUB)</td>
+<td align="center"><strong>0</strong></td>
+</tr>
+<tr>
+<td align="center"><code>010</code></td>
+<td align="center">X (任意)</td>
+<td align="center"><code>ori</code></td>
+<td align="center"><strong><code>0011</code></strong> (OR)</td>
+<td align="center"><strong>0</strong></td>
+</tr>
+<tr>
+<td align="center"><code>011</code></td>
+<td align="center">X (任意)</td>
+<td align="center">(预留)</td>
+<td align="center">X (e.g., <code>0000</code>)</td>
+<td align="center"><strong>0</strong></td>
+</tr>
+<tr>
+<td align="center"><strong><code>100</code></strong></td>
+<td align="center"><code>100000</code></td>
+<td align="center"><code>add</code></td>
+<td align="center"><strong><code>0000</code></strong> (ADD)</td>
+<td align="center"><strong>0</strong></td>
+</tr>
+<tr>
+<td align="center"><strong><code>100</code></strong></td>
+<td align="center"><code>100010</code></td>
+<td align="center"><code>sub</code></td>
+<td align="center"><strong><code>0001</code></strong> (SUB)</td>
+<td align="center"><strong>0</strong></td>
+</tr>
+<tr>
+<td align="center"><strong><code>100</code></strong></td>
+<td align="center"><code>100100</code></td>
+<td align="center"><code>and</code></td>
+<td align="center"><strong><code>0010</code></strong> (AND)</td>
+<td align="center"><strong>0</strong></td>
+</tr>
+<tr>
+<td align="center"><strong><code>100</code></strong></td>
+<td align="center"><code>101010</code></td>
+<td align="center"><code>slt</code></td>
+<td align="center"><strong><code>0100</code></strong> (SLT)</td>
+<td align="center"><strong>0</strong></td>
+</tr>
+<tr>
+<td align="center"><strong><code>100</code></strong></td>
+<td align="center"><code>000000</code></td>
+<td align="center"><code>sll</code> (或 <code>nop</code>)</td>
+<td align="center"><strong><code>0101</code></strong> (SLL)</td>
+<td align="center"><strong>0</strong></td>
+</tr>
+<tr>
+<td align="center"><strong><code>100</code></strong></td>
+<td align="center"><code>001000</code></td>
+<td align="center"><strong><code>jr</code></strong></td>
+<td align="center">X (e.g., <code>0000</code>)</td>
+<td align="center"><strong>1</strong></td>
+</tr>
+<tr>
+<td align="center">(other)</td>
+<td align="center">(other)</td>
+<td align="center">(Undefined)</td>
+<td align="center">X (e.g., <code>0000</code>)</td>
+<td align="center"><strong>0</strong></td>
+</tr>
+</tbody></table>
+<p><img src="/Blog/images/ACU.png" alt="ACU"></p>
+<hr>
+<!-- ---
+思考题
+1. 现在我们的模块中 IM 使用 ROM， DM 使用 RAM， GRF 使用 Register，这种做法合理吗？ 请给出分析，若有改进意见也请一并给出。
+A：合理。ROM是只读存储器，因此可以用来储存指令；RAM既可以读也可以写，因此满足DM对读写的要求；GRF是寄存器堆，需要较高的读写速度，因此适合用寄存器实现。
+1. 事实上，实现 nop 空指令，我们并不需要将它加入控制信号真值表，为什么？请给出你的理由。
+A：nop指令码为0x00000000，相当于sll $0, $0, 0, 相当于把$0寄存器中的值左移0位并写入$0寄存器，因为$0的值始终为0，不会被修改，因此该指令执行后没有任何影响。即使cpu没有设置sll指令，nop指令也不会对电路中任何元件进行操作，对电路没有任何影响。
+1. 上文提到，MARS 不能导出 PC 与 DM 起始地址均为 0 的机器码。实际上，可以通过为 DM 增添片选信号，来避免手工修改的麻烦，请查阅相关资料进行了解，并阐释为了解决这个问题，你最终采用的方法。
+A：我们在导入时将MARS导出模式设置TestAtZero，此时text的首地址为0，data在0x3000。我们可以设置一个片选信号，检测输入的地址的高4位，如果是0b0011，则说明是data中的数据，然后再导入到DM中。
+1. 除了编写程序进行测试外，还有一种验证 CPU 设计正确性的办法——形式验证。 形式验证的含义是根据某个或某些形式规范或属性，使用数学的方法证明其正确性或非正确性。请搜索“形式验证（Formal Verification)”了解相关内容后，简要阐述相比于测试，形式验证的优劣之处。
+A：相比于传统测试，形式验证是采用数学方法将待验证电路和功能描述或参考实际直接进行比较，可以实现对所有情况进行验证，而且验证时间短，不仅能够缩短设计周期，而且能够达到完全的功能覆盖率。不像传统测试那样费时费力，而且正确率无法保证。然而，形式验证目前不能有效的验证电路的性能，如电路的时间延迟和功耗。 -->
+
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/Blog/">Home</a></li>
+        
+          <li><a href="/Blog/archives/">Writing</a></li>
+        
+          <li><a href="/Blog/tags/">Tags</a></li>
+        
+          <li><a href="/Blog/">Projects</a></li>
+        
+          <li><a href="/Blog/changelog/">Logs</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#MIPS%E5%8D%95%E5%91%A8%E6%9C%9F%E5%A4%84%E7%90%86%E5%99%A8%E8%AE%BE%E8%AE%A1"><span class="toc-number">1.</span> <span class="toc-text">MIPS单周期处理器设计</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%8D%95%E5%91%A8%E6%9C%9F%E6%95%B0%E6%8D%AE%E9%80%9A%E8%B7%AF%E8%AE%BE%E8%AE%A1"><span class="toc-number">1.1.</span> <span class="toc-text">1. 单周期数据通路设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E5%9B%BE"><span class="toc-number">1.1.1.</span> <span class="toc-text">参考图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E7%BB%88%E8%AE%BE%E8%AE%A1"><span class="toc-number">1.1.2.</span> <span class="toc-text">最终设计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B6%E5%B1%82%E8%BE%93%E5%87%BA%E7%AB%AF%E5%8F%A3"><span class="toc-number">1.1.3.</span> <span class="toc-text">顶层输出端口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E7%BB%84%E5%90%88%E9%83%A8%E4%BB%B6"><span class="toc-number">1.1.4.</span> <span class="toc-text">1.1 组合部件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-1-ALU-%E7%AE%97%E6%9C%AF%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E5%8D%95%E5%85%83"><span class="toc-number">1.1.4.1.</span> <span class="toc-text">1.1.1 ALU (算术逻辑运算单元)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-2-GRF-%E9%80%9A%E7%94%A8%E5%AF%84%E5%AD%98%E5%99%A8%E7%BB%84%EF%BC%8C%E4%B9%9F%E7%A7%B0%E4%B8%BA%E5%AF%84%E5%AD%98%E5%99%A8%E6%96%87%E4%BB%B6%E3%80%81%E5%AF%84%E5%AD%98%E5%99%A8%E5%A0%86"><span class="toc-number">1.1.4.2.</span> <span class="toc-text">1.1.2 GRF(通用寄存器组，也称为寄存器文件、寄存器堆)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-3-DM-%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E5%99%A8"><span class="toc-number">1.1.4.3.</span> <span class="toc-text">1.1.3 DM (数据存储器)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-4-nPC-%E2%80%93-%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA%EF%BC%9A"><span class="toc-number">1.1.4.4.</span> <span class="toc-text">1.1.4 nPC – 有限状态机：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-5-IFU%EF%BC%88%E5%8F%96%E6%8C%87%E4%BB%A4%E5%8D%95%E5%85%83%EF%BC%89"><span class="toc-number">1.1.4.5.</span> <span class="toc-text">1.1.5 IFU（取指令单元）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#IM-%E6%8C%87%E4%BB%A4%E5%AD%98%E5%82%A8%E5%99%A8"><span class="toc-number">1.1.4.5.1.</span> <span class="toc-text">IM (指令存储器)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#IFU-%E5%8F%96%E6%8C%87%E4%BB%A4%E5%8D%95%E5%85%83"><span class="toc-number">1.1.4.5.2.</span> <span class="toc-text">IFU (取指令单元)</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-6-EXT-%E6%8B%93%E5%B1%95%E5%8D%95%E5%85%83"><span class="toc-number">1.1.4.6.</span> <span class="toc-text">1.1.6 EXT (拓展单元)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-7-SPLI-%E6%8C%87%E4%BB%A4%E5%88%86%E7%A6%BB%E5%99%A8%E6%A8%A1%E5%9D%97"><span class="toc-number">1.1.4.7.</span> <span class="toc-text">1.1.7 SPLI(指令分离器模块)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.1.5.</span> <span class="toc-text">指令格式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#R%E5%9E%8B%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.1.5.1.</span> <span class="toc-text">R型指令格式</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#add-sub-and-or-rd-rs-rt"><span class="toc-number">1.1.5.1.1.</span> <span class="toc-text">add,sub,and,or rd, rs, rt</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LW-SW%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.1.5.2.</span> <span class="toc-text">LW&amp;SW指令格式</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#lw-sw-rt-rs-imm16"><span class="toc-number">1.1.5.2.1.</span> <span class="toc-text">lw,sw rt, rs, imm16</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E6%94%AF%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.1.5.3.</span> <span class="toc-text">分支指令格式</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#beq-rs-rt-imm16"><span class="toc-number">1.1.5.3.1.</span> <span class="toc-text">beq rs,  rt,  imm16</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B7%B3%E8%BD%AC%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.1.5.4.</span> <span class="toc-text">跳转指令格式</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#j-add26"><span class="toc-number">1.1.5.4.1.</span> <span class="toc-text">j add26 </span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%8D%95%E5%91%A8%E6%9C%9F%E6%8E%A7%E5%88%B6%E5%99%A8%E8%AE%BE%E8%AE%A1"><span class="toc-number">1.2.</span> <span class="toc-text">2. 单周期控制器设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%8D%95%E5%91%A8%E6%9C%9F%E9%80%9A%E8%B7%AF%E6%89%80%E9%9C%80%E6%8E%A7%E5%88%B6%E4%BF%A1%E5%8F%B7"><span class="toc-number">1.2.1.</span> <span class="toc-text">2.1 单周期通路所需控制信号</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-1-ALU%E6%8E%A7%E5%88%B6%EF%BC%88ALUCtrl%EF%BC%89%EF%BC%9A4%E4%BD%8D"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">2.1.1 ALU控制（ALUCtrl）：4位</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-2-8%E4%B8%AA%E6%8E%A7%E5%88%B6%E4%BF%A1%E5%8F%B7%EF%BC%9A"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">2.1.2 8个控制信号：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E6%8E%A7%E5%88%B6%E5%99%A8%E8%AE%BE%E8%AE%A1"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.2 控制器设计</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-1-Main-Control-Unit"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">2.2.1 Main Control Unit</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1-%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF"><span class="toc-number">1.2.2.1.1.</span> <span class="toc-text">2.1 设计思路</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-%E7%AB%AF%E5%8F%A3%E5%AE%9A%E4%B9%89"><span class="toc-number">1.2.2.1.2.</span> <span class="toc-text">2.2 端口定义</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3-%E7%9C%9F%E5%80%BC%E8%A1%A8"><span class="toc-number">1.2.2.1.3.</span> <span class="toc-text">2.3 真值表</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A1%B6%E5%B1%82%E9%80%BB%E8%BE%91%E8%A1%A5%E5%85%85"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">顶层逻辑补充</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-2-ALU-Control-Unit"><span class="toc-number">1.2.2.3.</span> <span class="toc-text">2.2.2 ALU Control Unit</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-2-%E7%AB%AF%E5%8F%A3%E5%AE%9A%E4%B9%89"><span class="toc-number">1.2.2.3.1.</span> <span class="toc-text">1.2 端口定义</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-3-%E7%9C%9F%E5%80%BC%E8%A1%A8"><span class="toc-number">1.2.2.3.2.</span> <span class="toc-text">1.3 真值表</span></a></li></ol></li></ol></li></ol></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&text=CO-P3-设计文档-Logisim"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&title=CO-P3-设计文档-Logisim"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&is_video=false&description=CO-P3-设计文档-Logisim"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CO-P3-设计文档-Logisim&body=Check out this article: https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&title=CO-P3-设计文档-Logisim"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&title=CO-P3-设计文档-Logisim"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&title=CO-P3-设计文档-Logisim"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&title=CO-P3-设计文档-Logisim"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&name=CO-P3-设计文档-Logisim&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&t=CO-P3-设计文档-Logisim"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025
+    Wang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/Blog/">Home</a></li><!--
+     --><!--
+       --><li><a href="/Blog/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/Blog/tags/">Tags</a></li><!--
+     --><!--
+       --><li><a href="/Blog/">Projects</a></li><!--
+     --><!--
+       --><li><a href="/Blog/changelog/">Logs</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/Blog/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'who-5';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+<!-- utterances Comments -->
+
+</body>
+</html>

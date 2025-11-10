@@ -6,6 +6,7 @@ date: 2025-11-06 21:04:09
 * P3 结束，上传文章：`CO-P3-设计文档-Logisim`
 * 尝试添加一篇需要输入密码解锁的文章
 * 删除 `Disqus` 评论功能，改为 `Utterances`, 登录到GitHub账号即可发表评论。
+* 添加了 `Cloudflare Analytics`
 
 ### 2025-11-06
 * 尝试添加 `Disqus` 评论功能，但效果不太好。

@@ -69,39 +69,76 @@
       <div id="header-post">
   <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
   <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top"
+    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i
+      class="fa-solid fa-chevron-up fa-lg"></i></a>
   <span id="menu">
     <span id="nav">
       <ul>
         <!--
-       --><li><a href="/Blog/">Home</a></li><!--
-     --><!--
-       --><li><a href="/Blog/archives/">Writing</a></li><!--
-     --><!--
-       --><li><a href="/Blog/tags/">Tags</a></li><!--
-     --><!--
-       --><li><a href="/Blog/">Projects</a></li><!--
-     --><!--
-       --><li><a href="/Blog/changelog/">Logs</a></li><!--
+       -->
+          <li><a href="/Blog/">
+              Home
+            </a></li><!--
      -->
+          <!--
+       -->
+          <li><a href="/Blog/archives/">
+              Writing
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/tags/">
+              Tags
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/">
+              Projects
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/changelog/">
+              Logs
+            </a></li><!--
+     -->
+          
       </ul>
     </span>
-    <br/>
+    <br />
     <span id="actions">
       <ul>
         
-        <li><a class="icon" aria-label="Previous post" href="/Blog/2025/11/06/%E4%B8%BA%E4%BB%80%E4%B9%88%E5%88%9B%E5%BB%BA%E8%BF%99%E4%B8%AA%E5%8D%9A%E5%AE%A2/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
-        
-        
-        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
-        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+          <li><a class="icon" aria-label="Previous post" href="/Blog/2025/11/06/%E4%B8%BA%E4%BB%80%E4%B9%88%E5%88%9B%E5%BB%BA%E8%BF%99%E4%B8%AA%E5%8D%9A%E5%AE%A2/"><i
+                class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();"
+                onmouseout="$('#i-prev').toggle();"></i></a></li>
+          
+            
+                <li><a class="icon" aria-label="Back to top" href="#"
+                    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up"
+                      aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a>
+                </li>
+                <li><a class="icon" aria-label="Share post" href="#"><i
+                      class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();"
+                      onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
       </ul>
-      <span id="i-prev" class="info" style="display:none;">Previous post</span>
-      <span id="i-next" class="info" style="display:none;">Next post</span>
-      <span id="i-top" class="info" style="display:none;">Back to top</span>
-      <span id="i-share" class="info" style="display:none;">Share post</span>
+      <span id="i-prev" class="info" style="display:none;">
+        Previous post
+      </span>
+      <span id="i-next" class="info" style="display:none;">
+        Next post
+      </span>
+      <span id="i-top" class="info" style="display:none;">
+        Back to top
+      </span>
+      <span id="i-share" class="info" style="display:none;">
+        Share post
+      </span>
     </span>
-    <br/>
+    <br />
     <div id="share" style="display: none">
       <ul>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://begineri.github.io/Blog/2025/11/05/2025%E7%A7%8B-OOPre-%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
@@ -118,15 +155,19 @@
 </ul>
 
     </div>
-    
+    <!-- 
     
       <div id="toc">
         <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%AD%E4%BB%A3%E4%BD%9C%E4%B8%9A%E7%AE%80%E5%8D%95%E6%8F%8F%E8%BF%B0%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">迭代作业简单描述：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%9C%E4%B8%9A%E4%BB%BB%E5%8A%A1%E6%A1%86%E6%9E%B6"><span class="toc-number">1.1.</span> <span class="toc-text">作业任务框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9C%80%E8%A6%81%E5%AE%9E%E7%8E%B0%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="toc-number">1.2.</span> <span class="toc-text">需要实现的操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E7%BB%88%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E3%80%81%E8%B0%83%E6%95%B4%E4%BB%A5%E5%8F%8A%E8%80%83%E8%99%91-%F0%9F%98%B8"><span class="toc-number">1.3.</span> <span class="toc-text">最终的架构设计、调整以及考虑 😸</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-CommandUtil-%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.3.1.</span> <span class="toc-text">1. CommandUtil 接口的实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Item-%E6%8A%BD%E8%B1%A1%E7%B1%BB%E7%9A%84%E7%BB%A7%E6%89%BF"><span class="toc-number">1.3.2.</span> <span class="toc-text">2. Item 抽象类的继承</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Adventurer-%E7%B1%BB%E4%B8%8E%E5%8A%9F%E8%83%BD%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.3.3.</span> <span class="toc-text">3. Adventurer 类与功能具体实现</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86-State-Management"><span class="toc-number">1.3.3.1.</span> <span class="toc-text">状态管理 (State Management)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%89%A9%E5%93%81%E4%B8%8E%E5%BA%93%E5%AD%98%E7%AE%A1%E7%90%86-Inventory-Management"><span class="toc-number">1.3.3.2.</span> <span class="toc-text">物品与库存管理 (Inventory Management)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8A%A8%E4%BD%9C%E6%89%A7%E8%A1%8C%E4%B8%8E%E5%A4%9A%E6%80%81-Action-Execution-Polymorphism"><span class="toc-number">1.3.3.3.</span> <span class="toc-text">动作执行与多态 (Action Execution &amp; Polymorphism)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%9B%87%E4%BD%A3%E5%85%B3%E7%B3%BB%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.3.3.4.</span> <span class="toc-text">雇佣关系的实现</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8F%B4%E5%8A%A9%E7%B3%BB%E7%BB%9F-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.3.3.5.</span> <span class="toc-text">援助系统 (观察者模式)</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8JUnit%E7%9A%84%E5%BF%83%E5%BE%97%E4%BD%93%E4%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">使用JUnit的心得体会</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OOPre%E5%AD%A6%E4%B9%A0%E4%BD%93%E9%AA%8C"><span class="toc-number">3.</span> <span class="toc-text">OOPre学习体验</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%BE%E7%A8%8B%E5%BB%BA%E8%AE%AE"><span class="toc-number">4.</span> <span class="toc-text">课程建议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E8%AF%BE%E4%B8%8A%E8%AE%B2%E8%A7%A3%E8%BF%87%E4%BA%8E%E7%AE%80%E7%95%A5"><span class="toc-number">4.1.</span> <span class="toc-text">1. 课上讲解过于简略</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%B7%A5%E7%A8%8B%E6%9E%B6%E6%9E%84%E7%9A%84%E6%80%9D%E6%83%B3%E7%9A%84%E9%80%90%E6%B8%90%E5%BC%95%E5%85%A5"><span class="toc-number">4.2.</span> <span class="toc-text">2. 工程架构的思想的逐渐引入</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%9E%EF%B9%8F%EF%BC%9C"><span class="toc-number">5.</span> <span class="toc-text">＞﹏＜</span></a></li></ol>
       </div>
+     -->
     
+        <div id="toc">
+          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%AD%E4%BB%A3%E4%BD%9C%E4%B8%9A%E7%AE%80%E5%8D%95%E6%8F%8F%E8%BF%B0%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">迭代作业简单描述：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%9C%E4%B8%9A%E4%BB%BB%E5%8A%A1%E6%A1%86%E6%9E%B6"><span class="toc-number">1.1.</span> <span class="toc-text">作业任务框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9C%80%E8%A6%81%E5%AE%9E%E7%8E%B0%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="toc-number">1.2.</span> <span class="toc-text">需要实现的操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E7%BB%88%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E3%80%81%E8%B0%83%E6%95%B4%E4%BB%A5%E5%8F%8A%E8%80%83%E8%99%91-%F0%9F%98%B8"><span class="toc-number">1.3.</span> <span class="toc-text">最终的架构设计、调整以及考虑 😸</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-CommandUtil-%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.3.1.</span> <span class="toc-text">1. CommandUtil 接口的实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Item-%E6%8A%BD%E8%B1%A1%E7%B1%BB%E7%9A%84%E7%BB%A7%E6%89%BF"><span class="toc-number">1.3.2.</span> <span class="toc-text">2. Item 抽象类的继承</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Adventurer-%E7%B1%BB%E4%B8%8E%E5%8A%9F%E8%83%BD%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.3.3.</span> <span class="toc-text">3. Adventurer 类与功能具体实现</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86-State-Management"><span class="toc-number">1.3.3.1.</span> <span class="toc-text">状态管理 (State Management)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%89%A9%E5%93%81%E4%B8%8E%E5%BA%93%E5%AD%98%E7%AE%A1%E7%90%86-Inventory-Management"><span class="toc-number">1.3.3.2.</span> <span class="toc-text">物品与库存管理 (Inventory Management)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8A%A8%E4%BD%9C%E6%89%A7%E8%A1%8C%E4%B8%8E%E5%A4%9A%E6%80%81-Action-Execution-Polymorphism"><span class="toc-number">1.3.3.3.</span> <span class="toc-text">动作执行与多态 (Action Execution &amp; Polymorphism)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%9B%87%E4%BD%A3%E5%85%B3%E7%B3%BB%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.3.3.4.</span> <span class="toc-text">雇佣关系的实现</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8F%B4%E5%8A%A9%E7%B3%BB%E7%BB%9F-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.3.3.5.</span> <span class="toc-text">援助系统 (观察者模式)</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8JUnit%E7%9A%84%E5%BF%83%E5%BE%97%E4%BD%93%E4%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">使用JUnit的心得体会</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OOPre%E5%AD%A6%E4%B9%A0%E4%BD%93%E9%AA%8C"><span class="toc-number">3.</span> <span class="toc-text">OOPre学习体验</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%BE%E7%A8%8B%E5%BB%BA%E8%AE%AE"><span class="toc-number">4.</span> <span class="toc-text">课程建议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E8%AF%BE%E4%B8%8A%E8%AE%B2%E8%A7%A3%E8%BF%87%E4%BA%8E%E7%AE%80%E7%95%A5"><span class="toc-number">4.1.</span> <span class="toc-text">1. 课上讲解过于简略</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%B7%A5%E7%A8%8B%E6%9E%B6%E6%9E%84%E7%9A%84%E6%80%9D%E6%83%B3%E7%9A%84%E9%80%90%E6%B8%90%E5%BC%95%E5%85%A5"><span class="toc-number">4.2.</span> <span class="toc-text">2. 工程架构的思想的逐渐引入</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%9E%EF%B9%8F%EF%BC%9C"><span class="toc-number">5.</span> <span class="toc-text">＞﹏＜</span></a></li></ol>
+        </div>
+        
   </span>
 </div>
-
     
     <div class="content index py4 ">
         

@@ -1,0 +1,57 @@
+/* 订阅表单容器 - 匹配截图中的红灰风格 */
+.footer-subscribe-container {
+  margin: 40px auto 20px;
+  padding-top: 20px;
+  border-top: 1px solid #e0e0e0; /* 使用浅灰色实线，匹配分隔线风格 */
+  max-width: 400px;
+}
+
+.subscribe-title {
+  font-size: 14px;
+  margin-bottom: 15px !important;
+  color: #666; /* 匹配文字灰色 */
+  font-family: "Meslo LG", monospace;
+}
+
+.subscribe-box {
+  display: flex;
+  justify-content: center;
+}
+
+/* 输入框 - 简洁灰色调 */
+.subscribe-box input[type="email"] {
+  flex: 1;
+  background: #ffffff !important;
+  border: 1px solid #ccc !important; /* 浅灰色边框 */
+  border-right: none !important;
+  color: #333 !important;
+  padding: 8px 12px !important;
+  font-size: 13px !important;
+  outline: none !important;
+  border-radius: 2px 0 0 2px !important;
+}
+
+/* 按钮 - 匹配截图中的红色链接颜色 */
+.subscribe-box button {
+  background: #c11f3d !important; /* 这里使用了你截图中链接的标志性红色 */
+  color: #fff !important;
+  border: 1px solid #c11f3d !important;
+  padding: 8px 15px !important;
+  font-size: 13px !important;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 0 2px 2px 0 !important;
+  transition: opacity 0.2s;
+}
+
+.subscribe-box button:hover {
+  opacity: 0.8;
+  background: #a01a32 !important; /* 悬停时稍微深一点的红色 */
+}
+
+/* 彻底隐藏 Follow.it 原有的标志和阴影 */
+.powered-by-line, 
+.followit--follow-form-container .form-preview {
+  box-shadow: none !important;
+  background-color: transparent !important;
+}

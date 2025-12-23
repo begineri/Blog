@@ -1077,6 +1077,5 @@ llm如何定义“本质”
 > 所以，这不是一个“所有LLM都必须遵守”的绝对规则，而是所有经过类似RLHF训练的现代LLM，为了实现“有帮助”这个共同目标，而**趋同进化**（Convergent Evolution）出的一个**概率最优策略**。
 
 
-![wule](images\end.png)
-
+![wule](/images/end.png)
 ...

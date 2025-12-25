@@ -5,3 +5,5 @@
 此博客更多是生活記錄，還有學習上一些思考與作業記錄。
 
 希望你看得開心 XD
+
+一鍵直達： [Blog](https://begineri.github.io/Blog/)

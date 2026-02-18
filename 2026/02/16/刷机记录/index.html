@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="刷机真理：  夜晚不刷机 刷机先备份    FLASH AT YOUR OWN RISKPLEASE READ ALL OF THIS BEFORE FLASHING  背景 设备： 一加 13  （oneplus 13） 经验： 0 工具： 电脑、网络、论坛  动机旧手机陪伴了我三年的高中 + 大半年大学，在三年的（较）高强度使用后变得空间不足、电池续航较差，终于到了换的时候。 旧手机是荣耀，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="刷机与救砖记录">
+<meta property="og:url" content="https://begineri.github.io/Blog/2026/02/16/%E5%88%B7%E6%9C%BA%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:site_name" content="My Blog">
+<meta property="og:description" content="刷机真理：  夜晚不刷机 刷机先备份    FLASH AT YOUR OWN RISKPLEASE READ ALL OF THIS BEFORE FLASHING  背景 设备： 一加 13  （oneplus 13） 经验： 0 工具： 电脑、网络、论坛  动机旧手机陪伴了我三年的高中 + 大半年大学，在三年的（较）高强度使用后变得空间不足、电池续航较差，终于到了换的时候。 旧手机是荣耀，">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://begineri.github.io/Blog/%5Cimages%5C%E5%88%B7%E6%9C%BA%5Cimage-1.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/%5Cimages%5C%E5%88%B7%E6%9C%BA%5Cimage-2.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/%5Cimages%5C%E5%88%B7%E6%9C%BA%5Cimage-1.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/%5Cimages%5C%E5%88%B7%E6%9C%BA%5Cimage-4.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/%5Cimages%5C%E5%88%B7%E6%9C%BA%5Cimage-5.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/%5Cimages%5C%E5%88%B7%E6%9C%BA%5Cimage.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/%5Cimages%5C%E5%88%B7%E6%9C%BA%5Cimage-6.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/%5Cimages%5C%E5%88%B7%E6%9C%BA%5C1.png">
+<meta property="article:published_time" content="2026-02-16T08:03:52.000Z">
+<meta property="article:modified_time" content="2026-02-18T15:02:07.822Z">
+<meta property="article:author" content="Wang">
+<meta property="article:tag" content="刷机">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://begineri.github.io/Blog/%5Cimages%5C%E5%88%B7%E6%9C%BA%5Cimage-1.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/Blog/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/Blog/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/Blog/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>刷机与救砖记录</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/Blog/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 8.1.1"><link rel="alternate" href="/Blog/atom.xml" title="My Blog" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top"
+    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i
+      class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       -->
+          <li><a href="/Blog/">
+              Home
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/about/">
+              About
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/archives/">
+              Writing
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/tags/">
+              Tags
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/changelog/">
+              Logs
+            </a></li><!--
+     -->
+          
+      </ul>
+    </span>
+    <br />
+    <span id="actions">
+      <ul>
+        
+            
+              <li><a class="icon" aria-label="Next post" href="/Blog/2025/12/25/%E8%AE%A1%E7%BB%84%E5%85%A8%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/"><i
+                    class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();"
+                    onmouseout="$('#i-next').toggle();"></i></a></li>
+              
+                <li><a class="icon" aria-label="Back to top" href="#"
+                    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up"
+                      aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a>
+                </li>
+                <li><a class="icon" aria-label="Share post" href="#"><i
+                      class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();"
+                      onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">
+        Previous post
+      </span>
+      <span id="i-next" class="info" style="display:none;">
+        Next post
+      </span>
+      <span id="i-top" class="info" style="display:none;">
+        Back to top
+      </span>
+      <span id="i-share" class="info" style="display:none;">
+        Share post
+      </span>
+    </span>
+    <br />
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://begineri.github.io/Blog/2026/02/16/%E5%88%B7%E6%9C%BA%E8%AE%B0%E5%BD%95/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://begineri.github.io/Blog/2026/02/16/%E5%88%B7%E6%9C%BA%E8%AE%B0%E5%BD%95/&text=刷机与救砖记录"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://begineri.github.io/Blog/2026/02/16/%E5%88%B7%E6%9C%BA%E8%AE%B0%E5%BD%95/&title=刷机与救砖记录"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://begineri.github.io/Blog/2026/02/16/%E5%88%B7%E6%9C%BA%E8%AE%B0%E5%BD%95/&is_video=false&description=刷机与救砖记录"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=刷机与救砖记录&body=Check out this article: https://begineri.github.io/Blog/2026/02/16/%E5%88%B7%E6%9C%BA%E8%AE%B0%E5%BD%95/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://begineri.github.io/Blog/2026/02/16/%E5%88%B7%E6%9C%BA%E8%AE%B0%E5%BD%95/&title=刷机与救砖记录"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://begineri.github.io/Blog/2026/02/16/%E5%88%B7%E6%9C%BA%E8%AE%B0%E5%BD%95/&title=刷机与救砖记录"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://begineri.github.io/Blog/2026/02/16/%E5%88%B7%E6%9C%BA%E8%AE%B0%E5%BD%95/&title=刷机与救砖记录"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://begineri.github.io/Blog/2026/02/16/%E5%88%B7%E6%9C%BA%E8%AE%B0%E5%BD%95/&title=刷机与救砖记录"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://begineri.github.io/Blog/2026/02/16/%E5%88%B7%E6%9C%BA%E8%AE%B0%E5%BD%95/&name=刷机与救砖记录&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://begineri.github.io/Blog/2026/02/16/%E5%88%B7%E6%9C%BA%E8%AE%B0%E5%BD%95/&t=刷机与救砖记录"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <!-- 
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8A%A8%E6%9C%BA"><span class="toc-number">2.</span> <span class="toc-text">动机</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A1%8C%E5%8A%A8"><span class="toc-number">3.</span> <span class="toc-text">行动</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E7%BB%88%E7%9B%AE%E7%9A%84"><span class="toc-number">3.1.</span> <span class="toc-text">最终目的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4"><span class="toc-number">3.2.</span> <span class="toc-text">步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E7%9A%84%E6%A8%A1%E5%9D%97"><span class="toc-number">3.3.</span> <span class="toc-text">安装的模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E7%BB%88%E6%88%90%E6%9E%9C"><span class="toc-number">3.4.</span> <span class="toc-text">最终成果</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%91%E7%A0%96"><span class="toc-number">4.</span> <span class="toc-text">救砖</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%B1%E8%A3%85%E6%A8%A1%E5%9D%97%E7%9A%84%E5%90%8E%E6%9E%9C"><span class="toc-number">4.1.</span> <span class="toc-text">乱装模块的后果</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B5%B7%E5%9B%A0"><span class="toc-number">4.1.1.</span> <span class="toc-text">起因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%91%E7%A0%96%E8%BF%87%E7%A8%8B"><span class="toc-number">4.1.2.</span> <span class="toc-text">救砖过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%87%E4%BA%8E%E8%87%AA%E4%BF%A1%E5%9B%A0%E6%AD%A4%E6%B2%A1%E5%A4%87%E4%BB%BD"><span class="toc-number">4.2.</span> <span class="toc-text">过于自信因此没备份</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%83%8C%E6%99%AF-1"><span class="toc-number">4.2.1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%91%E7%A0%96-1"><span class="toc-number">4.2.2.</span> <span class="toc-text">救砖</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%B7%E6%9C%BA%E5%90%8E%E8%AE%B0"><span class="toc-number">5.</span> <span class="toc-text">刷机后记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%A2%E5%AF%B9%E5%8F%AF%E8%83%BD%E6%B0%B8%E8%BF%9C%E6%B6%88%E5%A4%B1%E7%9A%84%E6%95%B0%E6%8D%AE%E7%9A%84%E7%BB%9D%E6%9C%9B%E4%B8%8E%E6%97%A0%E5%8A%9B"><span class="toc-number">5.1.</span> <span class="toc-text">面对可能永远消失的数据的绝望与无力</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%80%81%E7%94%9F%E5%B8%B8%E8%B0%88%E7%9A%84AI%E9%97%AE%E9%A2%98"><span class="toc-number">5.2.</span> <span class="toc-text">老生常谈的AI问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E7%9A%84%E4%B8%BA%E5%AF%BC%E5%90%91%E7%9A%84%E5%AD%A6%E4%B9%A0"><span class="toc-number">5.3.</span> <span class="toc-text">目的为导向的学习</span></a></li></ol></li></ol>
+      </div>
+     -->
+    
+        <div id="toc">
+          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8A%A8%E6%9C%BA"><span class="toc-number">2.</span> <span class="toc-text">动机</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A1%8C%E5%8A%A8"><span class="toc-number">3.</span> <span class="toc-text">行动</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E7%BB%88%E7%9B%AE%E7%9A%84"><span class="toc-number">3.1.</span> <span class="toc-text">最终目的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4"><span class="toc-number">3.2.</span> <span class="toc-text">步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E7%9A%84%E6%A8%A1%E5%9D%97"><span class="toc-number">3.3.</span> <span class="toc-text">安装的模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E7%BB%88%E6%88%90%E6%9E%9C"><span class="toc-number">3.4.</span> <span class="toc-text">最终成果</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%91%E7%A0%96"><span class="toc-number">4.</span> <span class="toc-text">救砖</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%B1%E8%A3%85%E6%A8%A1%E5%9D%97%E7%9A%84%E5%90%8E%E6%9E%9C"><span class="toc-number">4.1.</span> <span class="toc-text">乱装模块的后果</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B5%B7%E5%9B%A0"><span class="toc-number">4.1.1.</span> <span class="toc-text">起因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%91%E7%A0%96%E8%BF%87%E7%A8%8B"><span class="toc-number">4.1.2.</span> <span class="toc-text">救砖过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%87%E4%BA%8E%E8%87%AA%E4%BF%A1%E5%9B%A0%E6%AD%A4%E6%B2%A1%E5%A4%87%E4%BB%BD"><span class="toc-number">4.2.</span> <span class="toc-text">过于自信因此没备份</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%83%8C%E6%99%AF-1"><span class="toc-number">4.2.1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%91%E7%A0%96-1"><span class="toc-number">4.2.2.</span> <span class="toc-text">救砖</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%B7%E6%9C%BA%E5%90%8E%E8%AE%B0"><span class="toc-number">5.</span> <span class="toc-text">刷机后记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%A2%E5%AF%B9%E5%8F%AF%E8%83%BD%E6%B0%B8%E8%BF%9C%E6%B6%88%E5%A4%B1%E7%9A%84%E6%95%B0%E6%8D%AE%E7%9A%84%E7%BB%9D%E6%9C%9B%E4%B8%8E%E6%97%A0%E5%8A%9B"><span class="toc-number">5.1.</span> <span class="toc-text">面对可能永远消失的数据的绝望与无力</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%80%81%E7%94%9F%E5%B8%B8%E8%B0%88%E7%9A%84AI%E9%97%AE%E9%A2%98"><span class="toc-number">5.2.</span> <span class="toc-text">老生常谈的AI问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E7%9A%84%E4%B8%BA%E5%AF%BC%E5%90%91%E7%9A%84%E5%AD%A6%E4%B9%A0"><span class="toc-number">5.3.</span> <span class="toc-text">目的为导向的学习</span></a></li></ol></li></ol>
+        </div>
+        
+  </span>
+</div>
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        刷机与救砖记录
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Wang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2026-02-16T08:03:52.000Z" class="dt-published" itemprop="datePublished">2026-02-16</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/Blog/tags/%E5%88%B7%E6%9C%BA/" rel="tag">刷机</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <blockquote>
+<p>刷机真理：</p>
+<ul>
+<li>夜晚不刷机</li>
+<li>刷机先备份</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><strong><strong>FLASH AT YOUR OWN RISK</strong></strong><br><strong><strong>PLEASE READ ALL OF THIS BEFORE FLASHING</strong></strong></p>
+</blockquote>
+<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><ul>
+<li>设备： 一加 13  （<strong>oneplus 13</strong>）</li>
+<li>经验： 0</li>
+<li>工具： 电脑、网络、论坛</li>
+</ul>
+<h1 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h1><p>旧手机陪伴了我三年的高中 + 大半年大学，在三年的（较）高强度使用后变得空间不足、电池续航较差，终于到了换的时候。</p>
+<p>旧手机是荣耀，无法安装谷歌框架，更无法刷机。年少不懂的我只能忍受着各种无法删去的广告、极低的隐私、极差的广告。</p>
+<p>终于我看到一位我很喜欢的up推荐了一加 13，并<em>第一次</em>了解到刷机这个概念，仿佛打开了新世界的大门。</p>
+<p>略过从对刷机、bl、root、ROM这些词语一无所知，到购入手机，到各种找教程的过程，我终于在25年的暑假的返校最后一周决定开始刷机。</p>
+<h1 id="行动"><a href="#行动" class="headerlink" title="行动"></a>行动</h1><p>一加作为如今刷机的主流选择，有着非常丰富的教程与活跃的论坛。我最终选择跟着 XDA 上的一份教程进行刷机:</p>
+<p><a target="_blank" rel="noopener" href="https://xdaforums.com/t/pjz110-21-jan-coloros-to-oxygenos-glo-in-eu-16-0-3-501-na-16-0-1-304.4707431/">[PJZ110][21 Jan] ColorOS to OxygenOS</a></p>
+<h2 id="最终目的"><a href="#最终目的" class="headerlink" title="最终目的"></a>最终目的</h2><p>为了使用完整的谷歌服务，与最大限度地去掉手机内置广告，我选择刷入一加 <strong>全球版</strong>的系统，即这里标题提到的：<code>from ColorOS to OxygenOS</code>。</p>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><ul>
+<li>备份系统文件</li>
+<li>解锁 BL 锁 (Unlock Bootloader)<br><img src="/Blog/%5Cimages%5C%E5%88%B7%E6%9C%BA%5Cimage-1.png" alt="alt text"></li>
+<li>刷入全球版系统 (Flash)<br><img src="/Blog/%5Cimages%5C%E5%88%B7%E6%9C%BA%5Cimage-2.png" alt="alt text"></li>
+<li>获取 Root 权限<br><img src="/Blog/%5Cimages%5C%E5%88%B7%E6%9C%BA%5Cimage-1.png" alt="alt text"></li>
+<li>安装模块，隐藏环境等<br><img src="/Blog/%5Cimages%5C%E5%88%B7%E6%9C%BA%5Cimage-4.png" alt="alt text"></li>
+</ul>
+<h2 id="安装的模块"><a href="#安装的模块" class="headerlink" title="安装的模块"></a>安装的模块</h2><ul>
+<li>Fix Signal OnePlus 13 ：专门修复信号问题</li>
+<li>Zygisk Next </li>
+<li>Play Integrity Fix (Tricky Store) ：过谷歌安全验证</li>
+<li>Wi-Fi 7 Enabler ：解锁 Wi-Fi 7 (6 Ghz)波段</li>
+<li>LSPosed :主要为了使用专为一加手机提供优化的 LuckyTool</li>
+<li>Zygisk Assistant</li>
+</ul>
+<h2 id="最终成果"><a href="#最终成果" class="headerlink" title="最终成果"></a>最终成果</h2><p>经过一天的折腾，成功刷入全球版系统，开始愉快使用。<br>虽然存在一些硬件不适配的问题，诸如NFC有些场景无法使用、天气定位乱飘，但我愿意用这些不变换取一个相对纯净的系统。<br><img src="/Blog/%5Cimages%5C%E5%88%B7%E6%9C%BA%5Cimage-5.png" alt="alt text"></p>
+<h1 id="救砖"><a href="#救砖" class="headerlink" title="救砖"></a>救砖</h1><p>当然，第一次刷机，不出意外还是会出意外的。以下是迄今为止两次翻车及神奇救砖经历。</p>
+<blockquote>
+<p>再次牢记刷机真理：</p>
+<ul>
+<li>夜晚不刷机</li>
+<li>刷机先备份</li>
+</ul>
+</blockquote>
+<h2 id="乱装模块的后果"><a href="#乱装模块的后果" class="headerlink" title="乱装模块的后果"></a>乱装模块的后果</h2><h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>第一次刷机并获取Root权限后，面对如此丰富多样可供选择的模块，我依次下载了每个看着有趣的模块。尽管是一个一个安装，但问题依旧出现了，这时我就犯了第一个错：不要在晚上刷机。</p>
+<p>临近睡觉，我急匆匆地装上了几个模块，并简单点开调了调，变安心放下手机睡觉了。一觉起来，我发现我的手机没电关机（前一天晚上还有四十多），并在充上电以后陷入了重启循环。<br>后来回顾，主要原因应该是晚上装的一个<strong>充电模块</strong>（所以说和电池有关的模块也要慎重），同时不知道还有什么其他影响，总之现在无法开机了。</p>
+<h3 id="救砖过程"><a href="#救砖过程" class="headerlink" title="救砖过程"></a>救砖过程</h3><p>一下是尝试过程：</p>
+<ul>
+<li>既然是模块的问题，我尝试在开机时通过案件，关闭KernelSU的所有模块：结果失败，无法关闭</li>
+<li>直接取消Root，模块自然失效：具体操作是重新刷回原版的init_boot分区，最终确实成功开机了。</li>
+</ul>
+<p>看着简单，但那确实是经过一番搜索与摸索的结果。现在看来很自然也很好理解，但当时全网搜索了好久，才确认这个方法。当时甚至一度跑去售后，最终当我想给售后“复现”一下我的重启循环时，我的手机“神奇”在这一刻重新开机了（此前一直无法成功，尽管我刷入了init_boot，但当我重新获取root权限时，又陷入了无法开机的情况）。如果在这里没成功，我就要喜提清空数据了，但不知道此时达成了什么前置条件，一切恢复正常了，这次危机也就此结束。</p>
+<h2 id="过于自信因此没备份"><a href="#过于自信因此没备份" class="headerlink" title="过于自信因此没备份"></a>过于自信因此没备份</h2><h3 id="背景-1"><a href="#背景-1" class="headerlink" title="背景"></a>背景</h3><p>自上次刷到全球版过了半年多，版本也该更新了，于是我准备从原本的15.831 更新 到15.864。<br>到864的原因是，这是OOS15最新的一个版本了，如果再新就要到OOS16，刚出没多久，而且跨大版本，因此舍弃。</p>
+<p>更新前，我看这个OTA Updates的教程如此简单，我有急着更新，因此完全没备份数据，也没有关闭本地模块，直接开始操作，在执行完：</p>
+<ol>
+<li>打开本地安装</li>
+<li>电脑上下载安装包 REPO </li>
+<li>手机安装</li>
+<li>KSU Install to inactive slot (After OTA)</li>
+<li>在软件更新处选择重启</li>
+</ol>
+<p>完全参考一下教程：<br><img src="/Blog/%5Cimages%5C%E5%88%B7%E6%9C%BA%5Cimage.png" alt="参考"></p>
+<p>一系列后，再次无法开机了</p>
+<h3 id="救砖-1"><a href="#救砖-1" class="headerlink" title="救砖"></a>救砖</h3><p>现状：一加此型号手机采用a&#x2F;b分区设计，无缝更新，此时新版本在b分区，旧版本在a分区，data数据分区共享。</p>
+<p>这次对比之前，有了更多的经验，也有了Gemini的全程辅助（捣乱），依次尝试一下操作：</p>
+<ul>
+<li>尝试切回分区 a 开机：失败</li>
+<li>在a&#x2F;b分区都刷回原版init_boot：失败</li>
+<li>取消更新合并 <code>snapshot-update cancel</code>：失败</li>
+<li>刷回原版vbmeta、boot等分区：情况更坏了</li>
+</ul>
+<p>到此时已经深夜十二点过了（是的，又是晚上刷机带来的问题），面对无限重启的手机和我可能再也再也见不到的手机中的数据，我选择去睡觉，明天早上清醒再解决… （以下感受见下一部分详述）<br>早上起来又做了以下尝试：</p>
+<ul>
+<li>开始搜寻各大论坛（酷安、XDA…），没找到什么信息</li>
+<li>绝望，试图找专业人士去救砖：论坛里、QQ群里、闲鱼上的各种我能找到的人都问了个遍，只有两个人在听了我的描述后表示有小概率<em>数据还能保住</em>，剩下都表示只能清空线刷</li>
+<li>为了<em>没备份的数据苦苦挣扎</em>，谨慎地尝试AI给的方法</li>
+<li>关键与转折：利用之前的全量包，重新把新系统完整刷了一遍</li>
+<li>关闭 vbmeta校验，如下：<br><img src="/Blog/%5Cimages%5C%E5%88%B7%E6%9C%BA%5Cimage-6.png" alt="alt text"></li>
+</ul>
+<p>至此，成功开机了！<br>虽然root掉了，但数据依旧完整，更新也成功了！</p>
+<hr>
+<h1 id="刷机后记"><a href="#刷机后记" class="headerlink" title="刷机后记"></a>刷机后记</h1><h2 id="面对可能永远消失的数据的绝望与无力"><a href="#面对可能永远消失的数据的绝望与无力" class="headerlink" title="面对可能永远消失的数据的绝望与无力"></a>面对可能永远消失的数据的绝望与无力</h2><p>数据的世界，不同于现实世界，是没有实体而无法触及的。因此可能上一秒你的照片，你的数据还完好无损，下一秒你就再也无法访问它们。好一点来说，如果没有进行彻底格式化，它们依旧躺在那些01的海洋中，甚至可以说躺在那些晶体管中，而我只是无法解读它们。</p>
+<p>在那个手机无法开机，可能面对丧失手机内所有数据的夜晚，我想了很多。<br>我先设想最坏情况：我的手机里有什么是独一份而格式化后就会永远失去的东西？</p>
+<ul>
+<li>照片：相册里有这半年多的照片，其中包括和朋友同学出游的照片，最宝贵的还是上个月去斯里兰卡旅游照的大量照片。这些我都没有备份，斯里兰卡的照片我也只随便发了几张给朋友，除此之外照片只在手机中。<br>如果这些照片找不回来，我已经做好安慰自己过去美好回忆记在脑中就足够了的准备了…</li>
+<li>微信聊天记录：尽管大多数时候电脑和手机的记录是同步的，但也存在少量情况下电脑端的消息不全。不过这点还算可以接受。</li>
+<li>备忘录：里面有一些记录</li>
+<li>其他系统桌面设置等…</li>
+</ul>
+<p>总之，我在试图思考最坏的情况，并做好充足的心理准备。尽管如此，那天晚上，我躺在床上还是辗转反侧，心中一片乱麻。我想和我的数据一起死去。</p>
+<p>面对那些宝贵而又脆弱的数据，在这种情况，我们是无助的。<br>最终救回那些数据，是我垂死挣扎的结果。</p>
+<p>说实话，这两次都是稀里糊涂的救回来了，为什么这么做不行？为什么那样做就可以了？<br>我到现在都没搞懂具体是什么出了问题（欢迎在评论区讨论），但是就是尝试看起来很有希望的这个，在尝试看起来很可靠的那个，然后在一个步骤后，神奇的开机了，数据再次回来了，我迈入死亡的一只脚也回来了。</p>
+<h2 id="老生常谈的AI问题"><a href="#老生常谈的AI问题" class="headerlink" title="老生常谈的AI问题"></a>老生常谈的AI问题</h2><p>AI在面对自己没有把握或根本不知道的事情时，在99%情况里它会胡诌一个答案出来，此时如果我们不加判断或轻率地复制粘贴那些指令，很可能让本就糟糕的事情进一步陷入无法解决的境地。我们一次又一次地踩这个坑，掉到坑里我们才又提醒自己下次更加谨慎。</p>
+<p>（绝望截图）及时止损<br><img src="/Blog/%5Cimages%5C%E5%88%B7%E6%9C%BA%5C1.png" alt="alt text"></p>
+<p>不可否认，最终成功保住数据，还是AI+我一起找出尝试出的办法，所以AI不是不能给出正确答案，而是需要人类来进行最为关键的<strong>选择与判断</strong>。</p>
+<h2 id="目的为导向的学习"><a href="#目的为导向的学习" class="headerlink" title="目的为导向的学习"></a>目的为导向的学习</h2><p>我去刷机，不是因为我对刷机很感兴趣，想去研究这个原理（当然现在逐渐深入渐渐发现了其中的有趣之处），而是纯粹的目的驱动：我想新手机拥有谷歌框架、纯净的外版系统、以及刷机后一系列的自定义自由。</p>
+<p>有了这个目的，我开始从零开始研究如何达到我的目的。正如前面所说，最开始，我下载酷安，根本搞不懂那些名词是什么意思，只能收藏+关闭一条龙，企图找到个靠谱的步骤直接照搬。同时也看看一些科普与视频，补补理论知识。最终我也是找到XDA上这个量身定制的教程，一切都只差行动。</p>
+<p>当然，付诸行动需要<strong>决心</strong>，还有不到一周开学与即将失去家里的便利条件就是一个很好的推动剂。</p>
+<p>而且，现实与教程的文字往往是有区别而不能一比一复刻的，我在按教程走的时候遇到了无数的问题，翻论坛、查谷歌、问AI，用尽一切方法。在这个过程中，我才真正理解了我每一步是在干什么，渐渐了解背后的原理，这比过看一万篇教程。</p>
+
+  </div>
+</article>
+
+
+    <div class="blog-post-comments">
+        <div id="utterances_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/Blog/">Home</a></li>
+        
+          <li><a href="/Blog/about/">About</a></li>
+        
+          <li><a href="/Blog/archives/">Writing</a></li>
+        
+          <li><a href="/Blog/tags/">Tags</a></li>
+        
+          <li><a href="/Blog/changelog/">Logs</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8A%A8%E6%9C%BA"><span class="toc-number">2.</span> <span class="toc-text">动机</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A1%8C%E5%8A%A8"><span class="toc-number">3.</span> <span class="toc-text">行动</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E7%BB%88%E7%9B%AE%E7%9A%84"><span class="toc-number">3.1.</span> <span class="toc-text">最终目的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4"><span class="toc-number">3.2.</span> <span class="toc-text">步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E7%9A%84%E6%A8%A1%E5%9D%97"><span class="toc-number">3.3.</span> <span class="toc-text">安装的模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E7%BB%88%E6%88%90%E6%9E%9C"><span class="toc-number">3.4.</span> <span class="toc-text">最终成果</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%91%E7%A0%96"><span class="toc-number">4.</span> <span class="toc-text">救砖</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%B1%E8%A3%85%E6%A8%A1%E5%9D%97%E7%9A%84%E5%90%8E%E6%9E%9C"><span class="toc-number">4.1.</span> <span class="toc-text">乱装模块的后果</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B5%B7%E5%9B%A0"><span class="toc-number">4.1.1.</span> <span class="toc-text">起因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%91%E7%A0%96%E8%BF%87%E7%A8%8B"><span class="toc-number">4.1.2.</span> <span class="toc-text">救砖过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%87%E4%BA%8E%E8%87%AA%E4%BF%A1%E5%9B%A0%E6%AD%A4%E6%B2%A1%E5%A4%87%E4%BB%BD"><span class="toc-number">4.2.</span> <span class="toc-text">过于自信因此没备份</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%83%8C%E6%99%AF-1"><span class="toc-number">4.2.1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%91%E7%A0%96-1"><span class="toc-number">4.2.2.</span> <span class="toc-text">救砖</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%B7%E6%9C%BA%E5%90%8E%E8%AE%B0"><span class="toc-number">5.</span> <span class="toc-text">刷机后记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%A2%E5%AF%B9%E5%8F%AF%E8%83%BD%E6%B0%B8%E8%BF%9C%E6%B6%88%E5%A4%B1%E7%9A%84%E6%95%B0%E6%8D%AE%E7%9A%84%E7%BB%9D%E6%9C%9B%E4%B8%8E%E6%97%A0%E5%8A%9B"><span class="toc-number">5.1.</span> <span class="toc-text">面对可能永远消失的数据的绝望与无力</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%80%81%E7%94%9F%E5%B8%B8%E8%B0%88%E7%9A%84AI%E9%97%AE%E9%A2%98"><span class="toc-number">5.2.</span> <span class="toc-text">老生常谈的AI问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E7%9A%84%E4%B8%BA%E5%AF%BC%E5%90%91%E7%9A%84%E5%AD%A6%E4%B9%A0"><span class="toc-number">5.3.</span> <span class="toc-text">目的为导向的学习</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://begineri.github.io/Blog/2026/02/16/%E5%88%B7%E6%9C%BA%E8%AE%B0%E5%BD%95/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://begineri.github.io/Blog/2026/02/16/%E5%88%B7%E6%9C%BA%E8%AE%B0%E5%BD%95/&text=刷机与救砖记录"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://begineri.github.io/Blog/2026/02/16/%E5%88%B7%E6%9C%BA%E8%AE%B0%E5%BD%95/&title=刷机与救砖记录"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://begineri.github.io/Blog/2026/02/16/%E5%88%B7%E6%9C%BA%E8%AE%B0%E5%BD%95/&is_video=false&description=刷机与救砖记录"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=刷机与救砖记录&body=Check out this article: https://begineri.github.io/Blog/2026/02/16/%E5%88%B7%E6%9C%BA%E8%AE%B0%E5%BD%95/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://begineri.github.io/Blog/2026/02/16/%E5%88%B7%E6%9C%BA%E8%AE%B0%E5%BD%95/&title=刷机与救砖记录"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://begineri.github.io/Blog/2026/02/16/%E5%88%B7%E6%9C%BA%E8%AE%B0%E5%BD%95/&title=刷机与救砖记录"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://begineri.github.io/Blog/2026/02/16/%E5%88%B7%E6%9C%BA%E8%AE%B0%E5%BD%95/&title=刷机与救砖记录"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://begineri.github.io/Blog/2026/02/16/%E5%88%B7%E6%9C%BA%E8%AE%B0%E5%BD%95/&title=刷机与救砖记录"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://begineri.github.io/Blog/2026/02/16/%E5%88%B7%E6%9C%BA%E8%AE%B0%E5%BD%95/&name=刷机与救砖记录&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://begineri.github.io/Blog/2026/02/16/%E5%88%B7%E6%9C%BA%E8%AE%B0%E5%BD%95/&t=刷机与救砖记录"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025-2026
+    Wang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/Blog/">Home</a></li><!--
+     --><!--
+       --><li><a href="/Blog/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/Blog/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/Blog/tags/">Tags</a></li><!--
+     --><!--
+       --><li><a href="/Blog/changelog/">Logs</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/Blog/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "57783916a7b349829732031e51219ad6"}'></script>
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+    <script type="text/javascript">
+      var utterances_repo = 'begineri/Blog';
+      var utterances_issue_term = 'pathname';
+      var utterances_label = 'Comment';
+      var utterances_theme = 'github-dark';
+
+      (function(){
+          var script = document.createElement('script');
+
+          script.src = 'https://utteranc.es/client.js';
+          script.setAttribute('repo', utterances_repo);
+          script.setAttribute('issue-term', 'pathname');
+          script.setAttribute('label', utterances_label);
+          script.setAttribute('theme', utterances_theme);
+          script.setAttribute('crossorigin', 'anonymous');
+          script.async = true;
+          (document.getElementById('utterances_thread')).appendChild(script);
+      }());
+  </script>
+
+</body>
+</html>

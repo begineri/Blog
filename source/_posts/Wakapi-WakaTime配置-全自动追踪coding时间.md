@@ -1,5 +1,5 @@
 ---
-title: Wakapi & WakaTime配置：记录coding 时间
+title: Wakapi & WakaTime配置：记录coding时间
 subtitle: 全自动记录 coding 时间
 date: 2026-04-10 12:27:15
 tags:   

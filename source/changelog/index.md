@@ -2,6 +2,10 @@
 title: Changelog
 date: 2025-11-06 21:04:09
 ---
+### 2026-4-10
+* 上传文章：`Wakapi & WakaTime配置`
+* 修复`layout/index.ejs`文件
+
 ### 2026-2-18
 * 上传文章：`刷机与救砖记录`
 

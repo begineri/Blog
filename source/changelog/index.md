@@ -2,6 +2,10 @@
 title: Changelog
 date: 2025-11-06 21:04:09
 ---
+### 2026-4-16
+* 上传文章：`buaa OS lab2 总结`
+* 上传文章：`buaa OS lab1 总结`
+
 ### 2026-4-10
 * 上传文章：`Wakapi & WakaTime配置`
 * 修复`layout/index.ejs`文件

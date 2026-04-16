@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="lab2 重点其实lab2就分了三个部分 1. 物理内存只需理解以下几点：  操作系统启动时：会探明物理内存有多大，然后建一个超级大数组（pages），把物理内存按 4KB 切成一块块，每一块分配一个 struct Page 物理内存分页：4kb每页 空闲内存池：构建一个 free list pool，核心时不用每次申请内存都到大费周章去从内存中malloc一个，而是直接从我们构建好的空闲链表头取">
+<meta property="og:type" content="article">
+<meta property="og:title" content="buaa OS lab2 总结">
+<meta property="og:url" content="https://begineri.github.io/Blog/2026/04/16/buaa-os-lab1-lab2-%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="My Blog">
+<meta property="og:description" content="lab2 重点其实lab2就分了三个部分 1. 物理内存只需理解以下几点：  操作系统启动时：会探明物理内存有多大，然后建一个超级大数组（pages），把物理内存按 4KB 切成一块块，每一块分配一个 struct Page 物理内存分页：4kb每页 空闲内存池：构建一个 free list pool，核心时不用每次申请内存都到大费周章去从内存中malloc一个，而是直接从我们构建好的空闲链表头取">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/lab2/%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/lab2/image-1.png">
+<meta property="article:published_time" content="2026-04-16T14:21:04.000Z">
+<meta property="article:modified_time" content="2026-04-16T14:51:07.330Z">
+<meta property="article:author" content="Wang">
+<meta property="article:tag" content="OS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://begineri.github.io/Blog/images/lab2/%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/Blog/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/Blog/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/Blog/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>buaa OS lab2 总结</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/Blog/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 8.1.1"><link rel="alternate" href="/Blog/atom.xml" title="My Blog" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top"
+    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i
+      class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       -->
+          <li><a href="/Blog/">
+              Home
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/about/">
+              About
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/archives/">
+              Writing
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/tags/">
+              Tags
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/changelog/">
+              Logs
+            </a></li><!--
+     -->
+          
+      </ul>
+    </span>
+    <br />
+    <span id="actions">
+      <ul>
+        
+            
+              <li><a class="icon" aria-label="Next post" href="/Blog/2026/04/10/Wakapi-WakaTime%E9%85%8D%E7%BD%AE-%E5%85%A8%E8%87%AA%E5%8A%A8%E8%BF%BD%E8%B8%AAcoding%E6%97%B6%E9%97%B4/"><i
+                    class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();"
+                    onmouseout="$('#i-next').toggle();"></i></a></li>
+              
+                <li><a class="icon" aria-label="Back to top" href="#"
+                    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up"
+                      aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a>
+                </li>
+                <li><a class="icon" aria-label="Share post" href="#"><i
+                      class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();"
+                      onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">
+        Previous post
+      </span>
+      <span id="i-next" class="info" style="display:none;">
+        Next post
+      </span>
+      <span id="i-top" class="info" style="display:none;">
+        Back to top
+      </span>
+      <span id="i-share" class="info" style="display:none;">
+        Share post
+      </span>
+    </span>
+    <br />
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://begineri.github.io/Blog/2026/04/16/buaa-os-lab1-lab2-%E6%80%BB%E7%BB%93/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://begineri.github.io/Blog/2026/04/16/buaa-os-lab1-lab2-%E6%80%BB%E7%BB%93/&text=buaa OS lab2 总结"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://begineri.github.io/Blog/2026/04/16/buaa-os-lab1-lab2-%E6%80%BB%E7%BB%93/&title=buaa OS lab2 总结"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://begineri.github.io/Blog/2026/04/16/buaa-os-lab1-lab2-%E6%80%BB%E7%BB%93/&is_video=false&description=buaa OS lab2 总结"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=buaa OS lab2 总结&body=Check out this article: https://begineri.github.io/Blog/2026/04/16/buaa-os-lab1-lab2-%E6%80%BB%E7%BB%93/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://begineri.github.io/Blog/2026/04/16/buaa-os-lab1-lab2-%E6%80%BB%E7%BB%93/&title=buaa OS lab2 总结"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://begineri.github.io/Blog/2026/04/16/buaa-os-lab1-lab2-%E6%80%BB%E7%BB%93/&title=buaa OS lab2 总结"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://begineri.github.io/Blog/2026/04/16/buaa-os-lab1-lab2-%E6%80%BB%E7%BB%93/&title=buaa OS lab2 总结"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://begineri.github.io/Blog/2026/04/16/buaa-os-lab1-lab2-%E6%80%BB%E7%BB%93/&title=buaa OS lab2 总结"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://begineri.github.io/Blog/2026/04/16/buaa-os-lab1-lab2-%E6%80%BB%E7%BB%93/&name=buaa OS lab2 总结&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://begineri.github.io/Blog/2026/04/16/buaa-os-lab1-lab2-%E6%80%BB%E7%BB%93/&t=buaa OS lab2 总结"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <!-- 
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#lab2-%E9%87%8D%E7%82%B9"><span class="toc-number">1.</span> <span class="toc-text">lab2 重点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E7%89%A9%E7%90%86%E5%86%85%E5%AD%98"><span class="toc-number">1.1.</span> <span class="toc-text">1. 物理内存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="toc-number">1.2.</span> <span class="toc-text">2. 虚拟内存管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-TLB-%E6%B8%85%E9%99%A4%E4%B8%8E%E9%87%8D%E5%A1%AB"><span class="toc-number">1.3.</span> <span class="toc-text">3. TLB 清除与重填</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9A%BE%E7%82%B9%E5%88%86%E6%9E%90%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">难点分析：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E4%BD%93%E4%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">实验体会</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8E%9F%E5%88%9B%E8%AF%B4%E6%98%8E"><span class="toc-number">4.</span> <span class="toc-text">原创说明</span></a></li></ol>
+      </div>
+     -->
+    
+        <div id="toc">
+          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#lab2-%E9%87%8D%E7%82%B9"><span class="toc-number">1.</span> <span class="toc-text">lab2 重点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E7%89%A9%E7%90%86%E5%86%85%E5%AD%98"><span class="toc-number">1.1.</span> <span class="toc-text">1. 物理内存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="toc-number">1.2.</span> <span class="toc-text">2. 虚拟内存管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-TLB-%E6%B8%85%E9%99%A4%E4%B8%8E%E9%87%8D%E5%A1%AB"><span class="toc-number">1.3.</span> <span class="toc-text">3. TLB 清除与重填</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9A%BE%E7%82%B9%E5%88%86%E6%9E%90%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">难点分析：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E4%BD%93%E4%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">实验体会</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8E%9F%E5%88%9B%E8%AF%B4%E6%98%8E"><span class="toc-number">4.</span> <span class="toc-text">原创说明</span></a></li></ol>
+        </div>
+        
+  </span>
+</div>
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        buaa OS lab2 总结
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Wang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2026-04-16T14:21:04.000Z" class="dt-published" itemprop="datePublished">2026-04-16</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/Blog/tags/OS/" rel="tag">OS</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="lab2-重点"><a href="#lab2-重点" class="headerlink" title="lab2 重点"></a>lab2 重点</h2><p>其实lab2就分了三个部分</p>
+<h3 id="1-物理内存"><a href="#1-物理内存" class="headerlink" title="1. 物理内存"></a>1. 物理内存</h3><p>只需理解以下几点：</p>
+<ol>
+<li>操作系统启动时：会探明物理内存有多大，然后建一个超级大数组（pages），把物理内存按 4KB 切成一块块，每一块分配一个 struct Page</li>
+<li>物理内存分页：4kb每页</li>
+<li>空闲内存池：构建一个 free list pool，核心时不用每次申请内存都到大费周章去从内存中malloc一个，而是直接从我们构建好的空闲链表头取出一个空间即可，归还时同样直接把这个块插回到链表头</li>
+<li>双向链表：实现了O(1)的增删改查复杂度，方便快捷。理解重点是那个二级指针：始终指向的是指向你的那个箭头（还是便于直接修改前一个节点指向的内容）。</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Page</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">Page</span> *<span class="title">le_next</span>;</span>  </span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">Page</span> **<span class="title">le_prev</span>;</span>  </span><br><span class="line">    &#125; pp_link; </span><br><span class="line"></span><br><span class="line">    u_short pp_ref;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-虚拟内存管理"><a href="#2-虚拟内存管理" class="headerlink" title="2. 虚拟内存管理"></a>2. 虚拟内存管理</h3><ol>
+<li>虚拟地址：PDX (高10位) + PTX (中10位) + Offset (低12位)。</li>
+<li>虚拟地址 &lt;–&gt; 物理地址 ：通过CPU漫长的访存，或TLB，这张图很好地展现了这几个地址间的转换关系：<br><img src="/Blog/images/lab2/%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2.png" alt="alt text"></li>
+<li>pgdir_walk &#x2F; page_insert &#x2F; 自映射：详情见下方难点分析</li>
+</ol>
+<h3 id="3-TLB-清除与重填"><a href="#3-TLB-清除与重填" class="headerlink" title="3. TLB 清除与重填"></a>3. TLB 清除与重填</h3><ol>
+<li>TLB目的：加速CPU的访存</li>
+<li>TLB 重填 (Refill)：<code>do_tlb_refill</code>，写tlb</li>
+<li>TLB 清除 (Invalidate)：当页表项修改，<code>tlb_invalidate → tlb_out</code></li>
+<li>始终保证 CPU 缓存（即tlb）与内存的绝对一致性</li>
+</ol>
+<hr>
+<h2 id="难点分析："><a href="#难点分析：" class="headerlink" title="难点分析："></a>难点分析：</h2><p>上面的内容听起来很简单，但实际上只靠阅读ppt + 指导书 + 看网课 + 甚至问AI，我在学校过程中仍然遇到了很大的理解困难。归根到底，我觉得晦涩难懂的翻译和ppt或指导书上完全让人无法理解的遣词造句，是主要原因：毫不直观，没有“为什么需要这个”，没有“为什么是这样构造的”，只会一上来给你全部的概念，让人自己尝试练习阅读理解。</p>
+<p>看个指导书上的例子，上来就是一个长难句起手：</p>
+<blockquote>
+<p>“ int pgdir_walk(Pde *pgdir, u_long va, int create, Pte **ppte)，该函数将一级页表基地址 pgdir 对应的两级页表结构中 va 虚拟地址所在的二级页表项的指针存储在 ppte 指向的空间上。 ”</p>
+</blockquote>
+<p>一句话里涉及到了无数个概念：</p>
+<ol>
+<li>一级页表：Page Directory（页目录，不如直接叫页表-表），指存储所有页表的那张表</li>
+<li>一级页表基地址：：即参数 pgdir，page dir这张大表的首地址</li>
+<li>两级页表结构：指的是一级页表+二级页表的这个结构（废话）</li>
+<li>虚拟地址 va：重点，我们传入的数据，通过它来进行查找</li>
+<li>二级页表：Page Table，页表，真正存所有页表项的地方</li>
+<li>二级页表项的指针：指向页表的一个指针</li>
+<li>ppte 指向的空间上：ppte是什么？是一个指针，指向上面说的那个找到的二级页表，返回它作为结果</li>
+</ol>
+<p>翻译一下这句话，就是：pgdir_walk 这个函数的功能是，给定一个虚拟地址 va，cpu 顺着 pgdir 往下找，找到记录 va 对应的物理页的那张页表，然后返回页表的指针，便于我们对其进行修改。</p>
+<hr>
+<p>同样的，对于page_insert：</p>
+<blockquote>
+<p>“int page_insert(Pde *pgdir, u_int asid, struct Page *pp, u_long va, u_int perm)，作用是将一级页表基地址 pgdir 对应的两级页表结构中虚拟地址 va 映射到页控制块 pp 对应的物理页面，并将页表项权限为设置为 perm。”</p>
+</blockquote>
+<p>关键概念：</p>
+<ol>
+<li>页控制块 pp： 一个结构体指针 struct Page *，直接对应着一个物理页</li>
+<li>页表项权限：规定pp对应这块内存是“只读”、“可读写”还是“仅内核可见”。</li>
+<li>这里用到page2pa：把 Page 指针转成物理地址</li>
+</ol>
+<p>翻译过来就是：给定va，page table，找到对应那个页表，然后填写页表项（使用va、pp、perm）。</p>
+<hr>
+<p>对于 page_lookup:</p>
+<blockquote>
+<p>“struct Page * page_lookup(Pde *pgdir, u_long va, Pte **ppte)，作用是返回一级页表基地址 pgdir 对应的两级页表结构中虚拟地址 va 映射的物理页面的页控制块，同时将 ppte 指向的空间设为对应的二级页表项地址。”</p>
+</blockquote>
+<p>拆解：</p>
+<ol>
+<li>两级页表结构中虚拟地址 va 映射的物理页面的页控制块：va -&gt; struct Page*，作为返回值，返回va对应的物理块</li>
+<li>将 ppte 指向的空间设为对应的二级页表项地址: *ppte &#x3D; pgdir_walk(va) 找到的那个页表项地址</li>
+</ol>
+<p>总结这个函数的功能，就是通过va，返回目前所有页表项里查找到其对应的物理块，同时把记录这个数据的页表项返回，便于修改。</p>
+<hr>
+<p>就像数学，很多人觉得那些概念看上去很难，实际上只是他们对这个数学概念中所蕴涵的组成概念陌生，因而导致了对整体概念的无法理解。因此正如上面的过程，把一个长长的概念拆开，会发现里面包含了无数细小的概念，必须理解那些概念以后，才能对整体有了理解。</p>
+<p>在这次lab接触<strong>自映射</strong>这个概念时，我对着ppt苦思冥想，一头雾水，甚至ai都没给我说明白，一会是物理地址，一会又要转虚拟地址，为什么？是什么？完全没有解答，只有ppt上密密麻麻的字和不知所云的图片。在我拼命尝试理解的那个下午，我以为这是神秘而高深的概念。</p>
+<p>当我终于阅读了C语言的代码，我发现这不过是几个指针访问与赋值的技巧：<br>改一下指导书里出现的这张图：<br><img src="/Blog/images/lab2/image-1.png" alt="alt text"></p>
+<p>四个32位的格式不同的表头指来指去，我最初看到的时候还以为这里访问了多次地址，其实，这里就是一个获取指针（地址）与指针解引用（数据）的过程，而这张图完全没有区分出来。</p>
+<p>总之过程如下（va -&gt; 页表项，即pgdir_walk的过程）：</p>
+<ol>
+<li>(pgdir | va[31:22] | 00) -&gt; PDX* 类型，假设命名为a</li>
+<li>对a解引用 (*a) -&gt; 得到PTB的基地址（这是物理地址，为了cpu能访问到，需要转为虚拟地址）</li>
+<li>PTBbase | va[21:12] | 00 -&gt; PTB* 类型，假设命名为b</li>
+<li>b 就是我们最终要找的这个页表项，返回它，可以用于后续对页表项的添加或修改。</li>
+</ol>
+<p>这是这张图所表达的，而所谓“自映射”，就是为CPU提供一个便利：CPU只会使用这套流程去找数据，但这样只能找到页表项。CPU为了直接能修改页表甚至页表表（页目录），设置了一个巧妙的方式：即把页目录本身就插入为众多页表中，这样访问的时候，就可以使用：pgdir[a] -&gt; pgdir, padir[b] -&gt; 某个页表（而不是页表项）</p>
+<p>通过同样的流程，CPU可以获得并修改整个页表。</p>
+<p>这里的为什么，怎么做，指导书以及ppt均没有点明，只能靠读者去猜了。</p>
+<hr>
+<h2 id="实验体会"><a href="#实验体会" class="headerlink" title="实验体会"></a>实验体会</h2><p>以后的实验中要注意以下几点：</p>
+<ol>
+<li>提前开始学习，不要拖到离上机还有两天才开始学；</li>
+<li>更重要的时，掌握好理论知识，指上课ppt的内容；</li>
+<li>更更重要的时，当理论怎么都看不明白的时候，去看看代码，反而更好理解。</li>
+</ol>
+<h1 id="原创说明"><a href="#原创说明" class="headerlink" title="原创说明"></a>原创说明</h1><p>本文内容均为原创。</p>
+
+  </div>
+</article>
+
+
+    <div class="blog-post-comments">
+        <div id="utterances_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/Blog/">Home</a></li>
+        
+          <li><a href="/Blog/about/">About</a></li>
+        
+          <li><a href="/Blog/archives/">Writing</a></li>
+        
+          <li><a href="/Blog/tags/">Tags</a></li>
+        
+          <li><a href="/Blog/changelog/">Logs</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#lab2-%E9%87%8D%E7%82%B9"><span class="toc-number">1.</span> <span class="toc-text">lab2 重点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E7%89%A9%E7%90%86%E5%86%85%E5%AD%98"><span class="toc-number">1.1.</span> <span class="toc-text">1. 物理内存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="toc-number">1.2.</span> <span class="toc-text">2. 虚拟内存管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-TLB-%E6%B8%85%E9%99%A4%E4%B8%8E%E9%87%8D%E5%A1%AB"><span class="toc-number">1.3.</span> <span class="toc-text">3. TLB 清除与重填</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9A%BE%E7%82%B9%E5%88%86%E6%9E%90%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">难点分析：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E4%BD%93%E4%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">实验体会</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8E%9F%E5%88%9B%E8%AF%B4%E6%98%8E"><span class="toc-number">4.</span> <span class="toc-text">原创说明</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://begineri.github.io/Blog/2026/04/16/buaa-os-lab1-lab2-%E6%80%BB%E7%BB%93/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://begineri.github.io/Blog/2026/04/16/buaa-os-lab1-lab2-%E6%80%BB%E7%BB%93/&text=buaa OS lab2 总结"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://begineri.github.io/Blog/2026/04/16/buaa-os-lab1-lab2-%E6%80%BB%E7%BB%93/&title=buaa OS lab2 总结"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://begineri.github.io/Blog/2026/04/16/buaa-os-lab1-lab2-%E6%80%BB%E7%BB%93/&is_video=false&description=buaa OS lab2 总结"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=buaa OS lab2 总结&body=Check out this article: https://begineri.github.io/Blog/2026/04/16/buaa-os-lab1-lab2-%E6%80%BB%E7%BB%93/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://begineri.github.io/Blog/2026/04/16/buaa-os-lab1-lab2-%E6%80%BB%E7%BB%93/&title=buaa OS lab2 总结"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://begineri.github.io/Blog/2026/04/16/buaa-os-lab1-lab2-%E6%80%BB%E7%BB%93/&title=buaa OS lab2 总结"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://begineri.github.io/Blog/2026/04/16/buaa-os-lab1-lab2-%E6%80%BB%E7%BB%93/&title=buaa OS lab2 总结"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://begineri.github.io/Blog/2026/04/16/buaa-os-lab1-lab2-%E6%80%BB%E7%BB%93/&title=buaa OS lab2 总结"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://begineri.github.io/Blog/2026/04/16/buaa-os-lab1-lab2-%E6%80%BB%E7%BB%93/&name=buaa OS lab2 总结&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://begineri.github.io/Blog/2026/04/16/buaa-os-lab1-lab2-%E6%80%BB%E7%BB%93/&t=buaa OS lab2 总结"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025-2026
+    Wang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/Blog/">Home</a></li><!--
+     --><!--
+       --><li><a href="/Blog/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/Blog/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/Blog/tags/">Tags</a></li><!--
+     --><!--
+       --><li><a href="/Blog/changelog/">Logs</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/Blog/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "57783916a7b349829732031e51219ad6"}'></script>
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+    <script type="text/javascript">
+      var utterances_repo = 'begineri/Blog';
+      var utterances_issue_term = 'pathname';
+      var utterances_label = 'Comment';
+      var utterances_theme = 'github-dark';
+
+      (function(){
+          var script = document.createElement('script');
+
+          script.src = 'https://utteranc.es/client.js';
+          script.setAttribute('repo', utterances_repo);
+          script.setAttribute('issue-term', 'pathname');
+          script.setAttribute('label', utterances_label);
+          script.setAttribute('theme', utterances_theme);
+          script.setAttribute('crossorigin', 'anonymous');
+          script.async = true;
+          (document.getElementById('utterances_thread')).appendChild(script);
+      }());
+  </script>
+
+</body>
+</html>

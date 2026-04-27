@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="2026面向对象第二单元博客作业 —— 多线程电梯系统总结一、总结分析三次作业中同步块的设置和锁的选择1. 三次迭代中的锁机制演变 第五次作业（基础电梯）： 锁的选择： 主要依靠 synchronized 关键字控制对共享对象 GlobalQueue（全局队列）和 receiveBuffer（各电梯局部分配队列）的并发访问。 同步块设置： 在 offer（投入请求）、pop（取出请求）、setEn">
+<meta property="og:type" content="article">
+<meta property="og:title" content="buaa26-OO-u1">
+<meta property="og:url" content="https://begineri.github.io/Blog/2026/04/27/2026-OO-u2-Blog/index.html">
+<meta property="og:site_name" content="My Blog">
+<meta property="og:description" content="2026面向对象第二单元博客作业 —— 多线程电梯系统总结一、总结分析三次作业中同步块的设置和锁的选择1. 三次迭代中的锁机制演变 第五次作业（基础电梯）： 锁的选择： 主要依靠 synchronized 关键字控制对共享对象 GlobalQueue（全局队列）和 receiveBuffer（各电梯局部分配队列）的并发访问。 同步块设置： 在 offer（投入请求）、pop（取出请求）、setEn">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/oou2/1.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/oou2/2.png">
+<meta property="article:published_time" content="2026-04-27T09:21:26.000Z">
+<meta property="article:modified_time" content="2026-04-27T09:29:30.141Z">
+<meta property="article:author" content="Wang">
+<meta property="article:tag" content="OOP">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://begineri.github.io/Blog/images/oou2/1.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/Blog/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/Blog/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/Blog/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>buaa26-OO-u1</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/Blog/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 8.1.1"><link rel="alternate" href="/Blog/atom.xml" title="My Blog" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top"
+    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i
+      class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       -->
+          <li><a href="/Blog/">
+              Home
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/about/">
+              About
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/archives/">
+              Writing
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/tags/">
+              Tags
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/changelog/">
+              Logs
+            </a></li><!--
+     -->
+          
+      </ul>
+    </span>
+    <br />
+    <span id="actions">
+      <ul>
+        
+            
+              <li><a class="icon" aria-label="Next post" href="/Blog/2026/04/16/buaa-OS-lab2-%E6%80%BB%E7%BB%93/"><i
+                    class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();"
+                    onmouseout="$('#i-next').toggle();"></i></a></li>
+              
+                <li><a class="icon" aria-label="Back to top" href="#"
+                    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up"
+                      aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a>
+                </li>
+                <li><a class="icon" aria-label="Share post" href="#"><i
+                      class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();"
+                      onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">
+        Previous post
+      </span>
+      <span id="i-next" class="info" style="display:none;">
+        Next post
+      </span>
+      <span id="i-top" class="info" style="display:none;">
+        Back to top
+      </span>
+      <span id="i-share" class="info" style="display:none;">
+        Share post
+      </span>
+    </span>
+    <br />
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://begineri.github.io/Blog/2026/04/27/2026-OO-u2-Blog/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://begineri.github.io/Blog/2026/04/27/2026-OO-u2-Blog/&text=buaa26-OO-u1"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://begineri.github.io/Blog/2026/04/27/2026-OO-u2-Blog/&title=buaa26-OO-u1"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://begineri.github.io/Blog/2026/04/27/2026-OO-u2-Blog/&is_video=false&description=buaa26-OO-u1"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=buaa26-OO-u1&body=Check out this article: https://begineri.github.io/Blog/2026/04/27/2026-OO-u2-Blog/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://begineri.github.io/Blog/2026/04/27/2026-OO-u2-Blog/&title=buaa26-OO-u1"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://begineri.github.io/Blog/2026/04/27/2026-OO-u2-Blog/&title=buaa26-OO-u1"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://begineri.github.io/Blog/2026/04/27/2026-OO-u2-Blog/&title=buaa26-OO-u1"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://begineri.github.io/Blog/2026/04/27/2026-OO-u2-Blog/&title=buaa26-OO-u1"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://begineri.github.io/Blog/2026/04/27/2026-OO-u2-Blog/&name=buaa26-OO-u1&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://begineri.github.io/Blog/2026/04/27/2026-OO-u2-Blog/&t=buaa26-OO-u1"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <!-- 
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#2026%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%AC%E4%BA%8C%E5%8D%95%E5%85%83%E5%8D%9A%E5%AE%A2%E4%BD%9C%E4%B8%9A-%E2%80%94%E2%80%94-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%94%B5%E6%A2%AF%E7%B3%BB%E7%BB%9F%E6%80%BB%E7%BB%93"><span class="toc-number">1.</span> <span class="toc-text">2026面向对象第二单元博客作业 —— 多线程电梯系统总结</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%80%BB%E7%BB%93%E5%88%86%E6%9E%90%E4%B8%89%E6%AC%A1%E4%BD%9C%E4%B8%9A%E4%B8%AD%E5%90%8C%E6%AD%A5%E5%9D%97%E7%9A%84%E8%AE%BE%E7%BD%AE%E5%92%8C%E9%94%81%E7%9A%84%E9%80%89%E6%8B%A9"><span class="toc-number">1.1.</span> <span class="toc-text">一、总结分析三次作业中同步块的设置和锁的选择</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%B8%89%E6%AC%A1%E8%BF%AD%E4%BB%A3%E4%B8%AD%E7%9A%84%E9%94%81%E6%9C%BA%E5%88%B6%E6%BC%94%E5%8F%98"><span class="toc-number">1.1.1.</span> <span class="toc-text">1. 三次迭代中的锁机制演变</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E9%94%81%E4%B8%8E%E5%90%8C%E6%AD%A5%E5%9D%97%E4%B8%AD%E5%A4%84%E7%90%86%E8%AF%AD%E5%8F%A5%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">1.1.2.</span> <span class="toc-text">2. 锁与同步块中处理语句的关系</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%B9%B6%E5%8F%91%E6%9E%B6%E6%9E%84%E6%BC%94%E8%BF%9B%E4%B8%8E%E8%B0%83%E5%BA%A6%E5%99%A8%E8%AE%BE%E8%AE%A1"><span class="toc-number">1.2.</span> <span class="toc-text">二、并发架构演进与调度器设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%95%B4%E4%BD%93%E5%B9%B6%E5%8F%91%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%EF%BC%9A%E4%BB%8E%E8%87%AA%E7%94%B1%E7%AB%9E%E4%BA%89%E5%88%B0%E9%9B%86%E4%B8%AD%E8%B0%83%E5%BA%A6"><span class="toc-number">1.2.1.</span> <span class="toc-text">1. 整体并发架构设计：从自由竞争到集中调度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%B0%83%E5%BA%A6%E7%AD%96%E7%95%A5%E5%AE%9E%E7%8E%B0%E4%B8%8E%E4%BC%98%E5%8C%96"><span class="toc-number">1.2.2.</span> <span class="toc-text">2. 调度策略实现与优化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%8A%9F%E8%83%BD%E8%AE%BE%E8%AE%A1%E4%B8%8E%E6%80%A7%E8%83%BD%E8%AE%BE%E8%AE%A1%E7%9A%84%E5%B9%B3%E8%A1%A1%E5%8F%8A%E5%8F%AF%E6%89%A9%E5%B1%95%E6%80%A7"><span class="toc-number">1.3.</span> <span class="toc-text">三、功能设计与性能设计的平衡及可扩展性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%9E%B6%E6%9E%84%E5%8F%AF%E6%89%A9%E5%B1%95%E6%80%A7%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%8D%95%E4%B8%80%E8%81%8C%E8%B4%A3%E5%8E%9F%E5%88%99%EF%BC%88SRP%EF%BC%89"><span class="toc-number">1.3.1.</span> <span class="toc-text">1. 架构可扩展性设计与单一职责原则（SRP）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-UML-%E7%B1%BB%E5%9B%BE%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1"><span class="toc-number">1.3.2.</span> <span class="toc-text">2. UML 类图架构设计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-UML-%E5%8D%8F%E4%BD%9C%E5%9B%BE-Sequence-Diagram"><span class="toc-number">1.3.3.</span> <span class="toc-text">3. UML 协作图 (Sequence Diagram)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E8%87%AA%E6%B5%8B%E4%B8%8E%E4%BA%92%E6%B5%8B%E4%B8%AD%E7%9A%84Bug%E5%88%86%E6%9E%90%E5%8F%8A%E5%A4%9A%E7%BA%BF%E7%A8%8BDebug%E6%96%B9%E6%B3%95"><span class="toc-number">1.4.</span> <span class="toc-text">四、自测与互测中的Bug分析及多线程Debug方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E8%87%AA%E6%B5%8B%E4%B8%8E%E4%BA%92%E6%B5%8B%E4%B8%AD%E5%87%BA%E7%8E%B0%E8%BF%87%E7%9A%84Bug%E5%88%86%E6%9E%90"><span class="toc-number">1.4.1.</span> <span class="toc-text">1. 自测与互测中出现过的Bug分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%A4%9A%E7%BA%BF%E7%A8%8BDebug%E6%96%B9%E6%B3%95"><span class="toc-number">1.4.2.</span> <span class="toc-text">2. 多线程Debug方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E5%AF%B9%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E5%92%8C%E5%B1%82%E6%AC%A1%E5%8C%96%E8%AE%BE%E8%AE%A1%E7%9A%84%E7%90%86%E8%A7%A3%E4%B8%8E%E6%80%BB%E7%BB%93"><span class="toc-number">1.5.</span> <span class="toc-text">五、对线程安全和层次化设计的理解与总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E5%85%B7%E4%BD%93%E8%B0%88%E8%B0%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E4%BD%BF%E7%94%A8%E5%BF%83%E5%BE%97"><span class="toc-number">1.6.</span> <span class="toc-text">六、具体谈谈大模型的使用心得</span></a></li></ol></li></ol>
+      </div>
+     -->
+    
+        <div id="toc">
+          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#2026%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%AC%E4%BA%8C%E5%8D%95%E5%85%83%E5%8D%9A%E5%AE%A2%E4%BD%9C%E4%B8%9A-%E2%80%94%E2%80%94-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%94%B5%E6%A2%AF%E7%B3%BB%E7%BB%9F%E6%80%BB%E7%BB%93"><span class="toc-number">1.</span> <span class="toc-text">2026面向对象第二单元博客作业 —— 多线程电梯系统总结</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%80%BB%E7%BB%93%E5%88%86%E6%9E%90%E4%B8%89%E6%AC%A1%E4%BD%9C%E4%B8%9A%E4%B8%AD%E5%90%8C%E6%AD%A5%E5%9D%97%E7%9A%84%E8%AE%BE%E7%BD%AE%E5%92%8C%E9%94%81%E7%9A%84%E9%80%89%E6%8B%A9"><span class="toc-number">1.1.</span> <span class="toc-text">一、总结分析三次作业中同步块的设置和锁的选择</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%B8%89%E6%AC%A1%E8%BF%AD%E4%BB%A3%E4%B8%AD%E7%9A%84%E9%94%81%E6%9C%BA%E5%88%B6%E6%BC%94%E5%8F%98"><span class="toc-number">1.1.1.</span> <span class="toc-text">1. 三次迭代中的锁机制演变</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E9%94%81%E4%B8%8E%E5%90%8C%E6%AD%A5%E5%9D%97%E4%B8%AD%E5%A4%84%E7%90%86%E8%AF%AD%E5%8F%A5%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">1.1.2.</span> <span class="toc-text">2. 锁与同步块中处理语句的关系</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%B9%B6%E5%8F%91%E6%9E%B6%E6%9E%84%E6%BC%94%E8%BF%9B%E4%B8%8E%E8%B0%83%E5%BA%A6%E5%99%A8%E8%AE%BE%E8%AE%A1"><span class="toc-number">1.2.</span> <span class="toc-text">二、并发架构演进与调度器设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%95%B4%E4%BD%93%E5%B9%B6%E5%8F%91%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%EF%BC%9A%E4%BB%8E%E8%87%AA%E7%94%B1%E7%AB%9E%E4%BA%89%E5%88%B0%E9%9B%86%E4%B8%AD%E8%B0%83%E5%BA%A6"><span class="toc-number">1.2.1.</span> <span class="toc-text">1. 整体并发架构设计：从自由竞争到集中调度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%B0%83%E5%BA%A6%E7%AD%96%E7%95%A5%E5%AE%9E%E7%8E%B0%E4%B8%8E%E4%BC%98%E5%8C%96"><span class="toc-number">1.2.2.</span> <span class="toc-text">2. 调度策略实现与优化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%8A%9F%E8%83%BD%E8%AE%BE%E8%AE%A1%E4%B8%8E%E6%80%A7%E8%83%BD%E8%AE%BE%E8%AE%A1%E7%9A%84%E5%B9%B3%E8%A1%A1%E5%8F%8A%E5%8F%AF%E6%89%A9%E5%B1%95%E6%80%A7"><span class="toc-number">1.3.</span> <span class="toc-text">三、功能设计与性能设计的平衡及可扩展性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%9E%B6%E6%9E%84%E5%8F%AF%E6%89%A9%E5%B1%95%E6%80%A7%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%8D%95%E4%B8%80%E8%81%8C%E8%B4%A3%E5%8E%9F%E5%88%99%EF%BC%88SRP%EF%BC%89"><span class="toc-number">1.3.1.</span> <span class="toc-text">1. 架构可扩展性设计与单一职责原则（SRP）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-UML-%E7%B1%BB%E5%9B%BE%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1"><span class="toc-number">1.3.2.</span> <span class="toc-text">2. UML 类图架构设计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-UML-%E5%8D%8F%E4%BD%9C%E5%9B%BE-Sequence-Diagram"><span class="toc-number">1.3.3.</span> <span class="toc-text">3. UML 协作图 (Sequence Diagram)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E8%87%AA%E6%B5%8B%E4%B8%8E%E4%BA%92%E6%B5%8B%E4%B8%AD%E7%9A%84Bug%E5%88%86%E6%9E%90%E5%8F%8A%E5%A4%9A%E7%BA%BF%E7%A8%8BDebug%E6%96%B9%E6%B3%95"><span class="toc-number">1.4.</span> <span class="toc-text">四、自测与互测中的Bug分析及多线程Debug方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E8%87%AA%E6%B5%8B%E4%B8%8E%E4%BA%92%E6%B5%8B%E4%B8%AD%E5%87%BA%E7%8E%B0%E8%BF%87%E7%9A%84Bug%E5%88%86%E6%9E%90"><span class="toc-number">1.4.1.</span> <span class="toc-text">1. 自测与互测中出现过的Bug分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%A4%9A%E7%BA%BF%E7%A8%8BDebug%E6%96%B9%E6%B3%95"><span class="toc-number">1.4.2.</span> <span class="toc-text">2. 多线程Debug方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E5%AF%B9%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E5%92%8C%E5%B1%82%E6%AC%A1%E5%8C%96%E8%AE%BE%E8%AE%A1%E7%9A%84%E7%90%86%E8%A7%A3%E4%B8%8E%E6%80%BB%E7%BB%93"><span class="toc-number">1.5.</span> <span class="toc-text">五、对线程安全和层次化设计的理解与总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E5%85%B7%E4%BD%93%E8%B0%88%E8%B0%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E4%BD%BF%E7%94%A8%E5%BF%83%E5%BE%97"><span class="toc-number">1.6.</span> <span class="toc-text">六、具体谈谈大模型的使用心得</span></a></li></ol></li></ol>
+        </div>
+        
+  </span>
+</div>
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        buaa26-OO-u1
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Wang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2026-04-27T09:21:26.000Z" class="dt-published" itemprop="datePublished">2026-04-27</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/Blog/tags/OOP/" rel="tag">OOP</a>, <a class="p-category" href="/Blog/tags/java/" rel="tag">java</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="2026面向对象第二单元博客作业-——-多线程电梯系统总结"><a href="#2026面向对象第二单元博客作业-——-多线程电梯系统总结" class="headerlink" title="2026面向对象第二单元博客作业 —— 多线程电梯系统总结"></a>2026面向对象第二单元博客作业 —— 多线程电梯系统总结</h1><h2 id="一、总结分析三次作业中同步块的设置和锁的选择"><a href="#一、总结分析三次作业中同步块的设置和锁的选择" class="headerlink" title="一、总结分析三次作业中同步块的设置和锁的选择"></a>一、总结分析三次作业中同步块的设置和锁的选择</h2><h3 id="1-三次迭代中的锁机制演变"><a href="#1-三次迭代中的锁机制演变" class="headerlink" title="1. 三次迭代中的锁机制演变"></a>1. 三次迭代中的锁机制演变</h3><ul>
+<li><strong>第五次作业（基础电梯）：</strong><ul>
+<li><strong>锁的选择：</strong> 主要依靠 <code>synchronized</code> 关键字控制对共享对象 <code>GlobalQueue</code>（全局队列）和 <code>receiveBuffer</code>（各电梯局部分配队列）的并发访问。</li>
+<li><strong>同步块设置：</strong> 在 <code>offer</code>（投入请求）、<code>pop</code>（取出请求）、<code>setEnd</code>（结束标志）等方法外部直接加锁。调度线程和电梯线程在队列为空时执行 <code>wait()</code>，在有新单或终止时 <code>notifyAll()</code>。</li>
+</ul>
+</li>
+<li><strong>第六次作业（加入维护 Reset&#x2F;Maintain）：</strong><ul>
+<li><strong>锁的选择：</strong> 增加了对电梯内部系统队列 <code>sysActionQueue</code> 的 <code>synchronized</code> 锁。维护请求需要剥夺电梯当前运行状态，并将未到达的乘客“退货”给 <code>GlobalQueue</code>。</li>
+<li><strong>同步块设置：</strong> 退货逻辑中，先锁住当前电梯内部等待列表，再锁住 <code>GlobalQueue</code> 进行反向 <code>offer</code> 与唤醒。为了避免<strong>死锁</strong>，严格规定了加锁的顺序（永远从下层请求上层资源，先内部整理再统一投入全局），确保不同类别的锁不会产生环状等待。</li>
+</ul>
+</li>
+<li><strong>第七次作业（双轿厢改造与回收）：</strong><ul>
+<li><strong>锁的选择：</strong> 引入了 <code>ReentrantLock</code>。由于同井道的A、B双轿厢在换乘层（Transfer Floor）不能发生相撞，我为两个电梯的 <code>ElevatorContext</code> 共享了一把防撞锁 <code>sharedTransferLock</code>。</li>
+<li><strong>同步块设置：</strong> 这把锁并非数据读写锁，而是纯粹的“物理空间互斥锁”。电梯在进入换乘层前 <code>lock.lock()</code>，在彻底离开后且保证 <code>lock.isHeldByCurrentThread()</code> 的情况下 <code>lock.unlock()</code>。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-锁与同步块中处理语句的关系"><a href="#2-锁与同步块中处理语句的关系" class="headerlink" title="2. 锁与同步块中处理语句的关系"></a>2. 锁与同步块中处理语句的关系</h3><ul>
+<li><strong>最小化临界区：</strong> 我坚持将计算密集型或发生阻塞的操作剥离出同步块。例如，计算各电梯调度的权重 <code>calCost()</code> 不需要加锁；所有的 <code>Thread.sleep()</code> 模拟行为全部在同步块外执行，避免了某个电梯休眠导致整个电梯调度系统瘫痪的情况。</li>
+<li><strong>原子变量辅助：</strong> 避免频繁对电梯上锁，我使用了 <code>AtomicInteger</code> 记录电梯实时承载量 <code>asyncTotalTasks</code> 和 <code>asyncCurrentWeight</code>，调度器可以无锁读取，极大缓解了全局锁竞争的瓶颈。</li>
+</ul>
+<hr>
+<h2 id="二、并发架构演进与调度器设计"><a href="#二、并发架构演进与调度器设计" class="headerlink" title="二、并发架构演进与调度器设计"></a>二、并发架构演进与调度器设计</h2><p>在这迭代中，对于电梯的调度策略，我尝试了“自由竞争”与“中央集中调度”。</p>
+<h3 id="1-整体并发架构设计：从自由竞争到集中调度"><a href="#1-整体并发架构设计：从自由竞争到集中调度" class="headerlink" title="1. 整体并发架构设计：从自由竞争到集中调度"></a>1. 整体并发架构设计：从自由竞争到集中调度</h3><ul>
+<li><strong>生产者-消费者模式与自由竞争（第六次作业）：</strong><br>系统最初是一个典型的多消费者抢单模型。<code>InputHandler</code> 作为唯一数据源，将乘客请求投入充当缓冲托盘的 <code>GlobalQueue</code> 中。系统没有中央分派器，6 部电梯作为独立的线程并行运行。通过内部的 <code>TaskAcquirer</code> 主动去水池里“抢单”。这种无主调度极大减少了调度死锁的风险，配合生命周期管理：当 <code>InputHandler</code> 读取结束且系统的单例全局计数器 <code>RequestCounter.getInstance().getCount() == 0</code> 时，系统安全结束。</li>
+<li><strong>中央分配器模式（第七次作业采用）：</strong><br>随着双轿厢与复杂回收指令的引入，单纯的盲目抢单已经无法满足全局最优以及双车关联分配协调。因此引入了单一的 <code>DispatchThread</code> 调度器。它起到了“承上启下”的枢纽作用：<ul>
+<li><strong>与全局：</strong> <code>InputHandler</code> 投递后唤醒挂起的调度器。</li>
+<li><strong>与电梯：</strong> 调度器精准锁向目标电梯的 <code>receiveBuffer</code> 并进行分发，并隐式唤醒待机的被选电梯。</li>
+<li><strong>与系统变更：</strong> 遇到断电维护及双轿厢改造时，电梯线程会将乘客清空退回给 <code>GlobalQueue</code>，以此重新唤醒调度器执行二次分配。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-调度策略实现与优化"><a href="#2-调度策略实现与优化" class="headerlink" title="2. 调度策略实现与优化"></a>2. 调度策略实现与优化</h3><p>为了兼顾<strong>时间性能（运行速度与等候时间）<strong>和</strong>电量性能（移动与开关门耗电）</strong>，我的核心调度策略不】如下：</p>
+<ul>
+<li><strong>基础 LOOK 策略：</strong> 电梯在单向上将沿途所有同向请求全部搭载，直到最前端没有请求才掉头，最大限度利用了同次运行，减少开门次数（降低耗电）。</li>
+<li><strong>量子电梯策略：</strong> 采用神奇的量子电梯策略，实现最大程度的时间优化。</li>
+<li><strong>考虑多维指标的动态分配</strong><ul>
+<li><strong>距离与方向代价值 <code>directionAndDistanceCost</code>：</strong> 将与电梯同向、处于电梯前方的乘客代价值设为极小（顺路）；对需要电梯折返的请求增加高惩罚。该策略有效降低了无意义的往复折返，节省了电量。</li>
+<li><strong>负载制衡 <code>queueLenCost</code> 与 防止超载 <code>weightCost</code>：</strong> 在分配时加入各梯已有人数及载重惩罚计算。若某梯接收会导致满载而不能上人，返回极大值强行拒载或重新分配，避免了排队带来的高延时，提高吞吐量以改善平均等待时间。</li>
+<li><strong>针对双轿厢：</strong> 对能够直达和必须经双轿厢换乘的请求进行评估（结合跨楼层区域特性），在可能的情况下优先通过 A&#x2F;B 配合接力完成。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="三、功能设计与性能设计的平衡及可扩展性"><a href="#三、功能设计与性能设计的平衡及可扩展性" class="headerlink" title="三、功能设计与性能设计的平衡及可扩展性"></a>三、功能设计与性能设计的平衡及可扩展性</h2><p>在连续三次迭代中，系统的功能不断膨胀。如果将所有操作揉合在一个类中，必然导致难以扩展且性能低下。为达到高内聚、低耦合，我做了深度的服务化解耦。</p>
+<h3 id="1-架构可扩展性设计与单一职责原则（SRP）"><a href="#1-架构可扩展性设计与单一职责原则（SRP）" class="headerlink" title="1. 架构可扩展性设计与单一职责原则（SRP）"></a>1. 架构可扩展性设计与单一职责原则（SRP）</h3><p>传统的写法很容易把几百行代码全塞在 <code>ElevatorThread.run()</code> 里，而我通过将电梯内部逻辑极致拆解，实现了单一职责（SRP），保证了线程安全并具有极大的可扩展性：</p>
+<ul>
+<li><strong>底层状态机容器（ElevatorContext）：</strong> 充当轻量级上下文与信息聚合体，统一存放当前楼层、方向、载重、乘客列表、接单及系统事件队列等，完全避免了参数在各个方法中来回传递。</li>
+<li><strong>动作决断（Strategy）：</strong> 专注实现经典的LOOK算法。它不关心电梯怎么移动进行，仅仅读取传入的只读约束接口 <code>ElevatorInfo</code> 并返回明确的动作枚举 (<code>MOVE</code>, <code>OPEN</code>, <code>WAIT</code>, <code>REVERSE</code>)。</li>
+<li><strong>主请求捕获器（TaskAcquirer）：</strong> 电梯Idle时专门负责在队列上 <code>wait()</code>，被唤醒时进行调度抢头盘（配合带有距离惩罚机制的抢单优先权计算）。</li>
+<li><strong>机械微服务层（Service）：</strong> <ul>
+<li><code>MovementService</code> 主要负责高精度楼层移动模拟，提供了独创的量子等待（<code>quantumWait</code>）机制，其能在极短的切片内对突发中断指令（如维护）或顺路带客产生阻拦和拦截。</li>
+<li><code>DoorTransferService</code> 专门负责客流转移。实现了“容量+同向”捎带的严格验证逻辑，并在遭遇强行中断时处理完美的退回分发机制 <code>kickAllPassengers()</code>。</li>
+<li><code>SystemActionHandler</code>（包括维护和回收调度）完美封装负责解决处理突发维保时的流程运转和清退结算，实现了系统层面的隔离化接手。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-UML-类图架构设计"><a href="#2-UML-类图架构设计" class="headerlink" title="2. UML 类图架构设计"></a>2. UML 类图架构设计</h3><p><img src="/Blog/images/oou2/1.png" alt="alt text"></p>
+<h3 id="3-UML-协作图-Sequence-Diagram"><a href="#3-UML-协作图-Sequence-Diagram" class="headerlink" title="3. UML 协作图 (Sequence Diagram)"></a>3. UML 协作图 (Sequence Diagram)</h3><p>主线程拉起各个组件后，输入、分发到电梯核心循环的流转机制如下：<br><img src="/Blog/images/oou2/2.png" alt="alt text"></p>
+<hr>
+<h2 id="四、自测与互测中的Bug分析及多线程Debug方法"><a href="#四、自测与互测中的Bug分析及多线程Debug方法" class="headerlink" title="四、自测与互测中的Bug分析及多线程Debug方法"></a>四、自测与互测中的Bug分析及多线程Debug方法</h2><h3 id="1-自测与互测中出现过的Bug分析"><a href="#1-自测与互测中出现过的Bug分析" class="headerlink" title="1. 自测与互测中出现过的Bug分析"></a>1. 自测与互测中出现过的Bug分析</h3><p>以下是我在这几次迭代与hack中发现的真实Bug。</p>
+<ul>
+<li><p><strong>1：中断轮询与无限死循环验证导致CPU超时</strong></p>
+<ul>
+<li><strong>场景：</strong> 包含检修请求的测试中，程序不断轮旋导致CPU时间过长。</li>
+<li><strong>问题所在的类由于方法：</strong> <code>MovementService.tryMoveOneFloor()</code>。</li>
+<li><strong>根因：</strong> 这其实是我当时一个小小的细节上出了问题：在 <code>quantumWait</code> 被瞬间打断，我原先设置的中断判定条件是 <code>interruptedTime &gt; 0</code>，此时若 <code>interruptedTime = 0</code> 将导致系统没有认可电梯遇到中断，而是直接重新回到了轮询开端，接着发现自己要 MOVE 进而再次返回 0，导致了CPU出现了轮询</li>
+<li><strong>修复方案：</strong> 将判断修改为 <code>interruptedTime != -1</code> 即可。只要返回不等于 -1，就意味移动遭到中断流转，顺利导入检修中断状态。</li>
+<li>这提示我在设计任何小的判断时要严格检查逻辑。</li>
+</ul>
+</li>
+<li><p><strong>2：收到检修时盲目踢出所有达乘客弹射，导致到达乘客反复被接收（第六次作业）</strong></p>
+<ul>
+<li><strong>场景：</strong> 触发维护被迫丢弃乘客时，电梯在单层位上下跳动无休止发生。</li>
+<li><strong>问题所在类及方法：</strong> <code>DoorTransferService.kickAllPassengers()</code>。</li>
+<li><strong>根因：</strong> 原先为了清空机舱被抛下了所有乘客丢回了 <code>GlobalQueue</code> 并附加了当前楼层作为 <code>fromFloor</code>。但是代码未能验证它是否就停留在目的地！如原本就要到 F5 的人在 F5 检修强制被抛出，就会生成起点与终点同为 F5 的本地滞留客进总调度，并被其他接收人接到导致计算乘积 0 始终 <code>REVERSE</code> 死循环抽动！</li>
+<li><strong>修复方案：</strong> 增加了终点审核！只要在受检修丢下的那一层恰好便是该名乘客的目的地，便直接将其就地安全下放打印本地 <code>OUT</code>。</li>
+</ul>
+</li>
+<li><p><strong>3：双轿厢在换乘层避让与强制移动引发的联合死锁（第七次作业）</strong></p>
+<ul>
+<li><strong>场景：</strong> 针对大量随机乘客外加 <code>UPDATE</code>（双轿厢改造）以及 <code>RECYCLE</code>（回收特定轿厢）的复杂指令输入（例如当一部双轿厢电梯之一在换乘层F2，另一部需要驶入F2进行回收时），系统完全挂起不输出任何结果，导致最终评测 TLE。</li>
+<li><strong>根因及问题所在：</strong><ol>
+<li><strong><code>Strategy.java</code> 逻辑状态死锁：</strong> 当双车 A 车在换乘层默认返回 <code>WAIT</code>，与 B 车接到了需要跨越换乘层的 <code>RECYCLE</code> 形成永久逻辑对峙（由于防撞逻辑B车不能进，A车占据不出来）。</li>
+<li><strong>物理锁未正确释放：</strong> 遇到回收被强制中断休眠 <code>interrupt()</code> 并调用 <code>moveToTargetAndClearPassengers</code>，系统由于这种抛出打断的不严谨直接结束了代码块，使得电梯不仅带着未释放掉的 <code>ReentrantLock</code> 撤离了换乘层且 <code>lock.unlock()</code> 未被执行。随后的其他所有试图获取此锁的双轿厢相关操作全数被永久阻塞。</li>
+</ol>
+</li>
+<li><strong>修复办法：</strong> <ul>
+<li><code>Strategy</code> 增加对附轿厢状态查探，若发现其处于换乘站的回收状态，占有锁的空车将主动放弃等待选择避让让路。</li>
+<li>在被强行重置状态的处理期间强制判别保护范围，只要明确保证了 <code>lock != null &amp;&amp; lock.isHeldByCurrentThread()</code>，就立即在 finally 等结构内安全闭环执行 <code>lock.unlock()</code>，保障防撞空间互斥锁绝对安全地交还。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-多线程Debug方法"><a href="#2-多线程Debug方法" class="headerlink" title="2. 多线程Debug方法"></a>2. 多线程Debug方法</h3><p>应对多维度不确定性的并发错误，我总结了以下方案：</p>
+<ul>
+<li>使用讨论区提供的数据投喂机</li>
+<li>使用 <code>print 大法</code></li>
+<li>AI 付诸debug，在代码或测试点层面</li>
+</ul>
+<hr>
+<h2 id="五、对线程安全和层次化设计的理解与总结"><a href="#五、对线程安全和层次化设计的理解与总结" class="headerlink" title="五、对线程安全和层次化设计的理解与总结"></a>五、对线程安全和层次化设计的理解与总结</h2><ol>
+<li><p><strong>对于线程安全的深刻转变</strong></p>
+<ul>
+<li>理解了在各个地方都加上 <code>synchronized</code> 的这把锁虽然能防止，但会导致性能退化。</li>
+<li><strong>状态隔离与封闭</strong>：调度器拿不到电梯的具体对象，只能拿到可供只读的 <code>AtomicInteger</code> 负载数据；电梯更接触不到其余电梯的内容。这种完全去中心化、隔离共享变量的思路，才是确保高并发安全且具备高性能的关键点。</li>
+</ul>
+</li>
+<li><p><strong>对于层次化设计的理解</strong></p>
+<ul>
+<li><strong>面向过程变为面向“状态机、策略与服务”的分离：</strong> 面对错综复杂的检修、扩建、改造甚至多车联动等需求，对象分工有着极大帮助。</li>
+<li>将系统拆解为<strong>底层状态机（Context）</strong>、<strong>行为决策层（Strategy）</strong>、<strong>机械功能实现层（Service）</strong>。当第七次出现同路段退回或是需要新开双轿厢时，我的主要调度架构和电梯主线程代码几乎一行未改，纯靠向原有的“微服务”中塞入新的 <code>UpdateHandler</code> 处理机制即可。这正是由于优良的层次边界设计为后续维护买单最好的证明。</li>
+</ul>
+</li>
+</ol>
+<h2 id="六、具体谈谈大模型的使用心得"><a href="#六、具体谈谈大模型的使用心得" class="headerlink" title="六、具体谈谈大模型的使用心得"></a>六、具体谈谈大模型的使用心得</h2><p>说实话，和大模型沟通起来也挺累的。</p>
+<p>在第六次作业里，因为要自己设计<strong>电梯分派逻辑</strong>和<strong>电梯调度逻辑</strong>，为了尽可能提高性能，我阅读了各大往年的博客，最终做出了一个大胆的决策：直接删掉中间的 <code>DispatchThread</code>，直接让电梯自由竞争。<br>这样做的原因还是我看到了往年说“自由竞争相比影子电梯来说性能差不了多少，但实现难度少了很多”，于是我就删删改改，实现了自由竞争 + 影子电梯的模式。</p>
+<p>说回大模型的使用，我感觉这次作业里我编写代码的时间几乎要等于与大模型对话的时间了，在对话中，我逐渐明晰了自己的思路。<br>结果呢？从周天写到周二截止，最终进入了orz房。</p>
+<p>其实最终进行bug修复，我自己修了半天修不出结果，提交上去只是把一些错误的点变成另一些出错的点。最终我把指导书+我的代码一并发给ai，它花费几百秒思考后，指出了问题并改好了代码，我交上去这版代码，显示十几个bug一并改对了。</p>
+<p>可惜的是因为强测对的点太少了，我到现在还是不知道自己这个自由竞争的策略性能和其他方法比较起来如何。</p>
+<p>如果说第六次作业前还是“古法vibe coding”：在对话框里和AI对话，小范围地复制与粘贴代码，那第七次作业——在我对AI的能力不再怀疑之后——开始使用类似cursor这种AI-Native IDE这种工具，确实可以提高效率。</p>
+<hr>
+<p>总结与遇到的问题如下：</p>
+<ol>
+<li>AI 确实很强，用起来效果最好的是 <code> Google AI Studio</code> 里直接调用的 Gemini Pro 模型，当时它就是只用一次思考就改对了我进O房的代码。在第七次的作业里也是，当把指导书和我现有的代码发给它，给以引导的提示词，经过几次，一次几百秒的思考迭代，几乎可以把作业完成的非常好了。</li>
+<li>模型的性能和订阅价格当然挂钩，而额度的限制也影响着我完成作业所需的时间。<br>具体来说，为了完成第七次迭代作业，我需要pro会员所提供的 Gemini Pro 模型差不多两天半的额度（即我完成第七次作业需要两天半的时间，因为我发现除了pro其他模型给出的代码还是无法达到我想要的水平），于是在每天2-3个小时的对话与代码之后，剩下的时间就是在等待额度恢复。</li>
+<li>人工付出与收获的巨大不成比例。如上所述，在第六次作业中，我尝试大部分代码自己设计，自己编写，而设计思路也自己决定并与AI确定。于是我从周六晚上开始，一直写到周二提交截止，用尽了十次无偿提交代价，最终进入了o房。时间没能换来高分，也许我学到了一些内容，但我就像草履虫选择糖水一样，最终选择了分数而不是知识，在第七次作业中全权让AI决策与编写代码，最终拿到了不错的性能分，同时也花费了相比之下极少的精力。<br>是的，没有人会去说这个显然所有人心知肚明的事情：上课是为了让学生学到知识的。但是，也没有人说出自己心里真正的想法：其实比起知识，这个分数（比别人更高的分数）是我真正在意而一直追求的。也许我们并没有意识到这个想法，但我们已经这样做了。</li>
+<li>独立完成作业所需的时间（对于我）完全不够。周四晚上布置作业，此时刚结束或还未结束上次的互测，显然不能开始写作业，周五又是一天满满的课，晚上还有不得不去的研讨和上机——这一天也不可能在作业上有任何进展。周末两天（每周有两天的周末，意义不就在于在忙碌的学习中抽出一天多来休息吗），而现在有了oo作业，周二晚上截止，算算日期，周一周二理论上要上课，那么为了保证作业写完，当然要占用所有的周末来写了。<br>当然我还是选择休息一天，然后从周天开始写，能使用的时间就是周天-周一-周二，代价是翘掉课，而翘掉课的时间也需要之后再补。因此看似有三天时间，减去其他课程必要的占用，实际能写代码的时间预计不足两天，而我在尝试过后，证明这段时间完全不足够我写出能通过强测的代码。为了在ddl之前完成，我不得不使用AI来编写。</li>
+</ol>
+<p>总结：完全不靠AI，自己写出一份令我满意的代码，我认为是可能的，但我需要足够的时间。而现有课程时间安排对我来说太过紧迫，对评测与分数的限制有又过于严格，迫使我高频使用AI生成与修改代码以满足课程条件。这是现状。</p>
+<hr>
+<p>想起来我之前和朋友说：“我们现在的oo作业真的好多，我要花两天多的时间才能写完。”<br>当时我没意识到是什么导致了我要两天才能写完这个作业。是时间不够用吗？不，不是的，是因为每天AI的额度有限，假如AI pro的额度没有限制，一天写完也不是没有可能。</p>
+<hr>
+
+  </div>
+</article>
+
+
+    <div class="blog-post-comments">
+        <div id="utterances_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/Blog/">Home</a></li>
+        
+          <li><a href="/Blog/about/">About</a></li>
+        
+          <li><a href="/Blog/archives/">Writing</a></li>
+        
+          <li><a href="/Blog/tags/">Tags</a></li>
+        
+          <li><a href="/Blog/changelog/">Logs</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#2026%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%AC%E4%BA%8C%E5%8D%95%E5%85%83%E5%8D%9A%E5%AE%A2%E4%BD%9C%E4%B8%9A-%E2%80%94%E2%80%94-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%94%B5%E6%A2%AF%E7%B3%BB%E7%BB%9F%E6%80%BB%E7%BB%93"><span class="toc-number">1.</span> <span class="toc-text">2026面向对象第二单元博客作业 —— 多线程电梯系统总结</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%80%BB%E7%BB%93%E5%88%86%E6%9E%90%E4%B8%89%E6%AC%A1%E4%BD%9C%E4%B8%9A%E4%B8%AD%E5%90%8C%E6%AD%A5%E5%9D%97%E7%9A%84%E8%AE%BE%E7%BD%AE%E5%92%8C%E9%94%81%E7%9A%84%E9%80%89%E6%8B%A9"><span class="toc-number">1.1.</span> <span class="toc-text">一、总结分析三次作业中同步块的设置和锁的选择</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%B8%89%E6%AC%A1%E8%BF%AD%E4%BB%A3%E4%B8%AD%E7%9A%84%E9%94%81%E6%9C%BA%E5%88%B6%E6%BC%94%E5%8F%98"><span class="toc-number">1.1.1.</span> <span class="toc-text">1. 三次迭代中的锁机制演变</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E9%94%81%E4%B8%8E%E5%90%8C%E6%AD%A5%E5%9D%97%E4%B8%AD%E5%A4%84%E7%90%86%E8%AF%AD%E5%8F%A5%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">1.1.2.</span> <span class="toc-text">2. 锁与同步块中处理语句的关系</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%B9%B6%E5%8F%91%E6%9E%B6%E6%9E%84%E6%BC%94%E8%BF%9B%E4%B8%8E%E8%B0%83%E5%BA%A6%E5%99%A8%E8%AE%BE%E8%AE%A1"><span class="toc-number">1.2.</span> <span class="toc-text">二、并发架构演进与调度器设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%95%B4%E4%BD%93%E5%B9%B6%E5%8F%91%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%EF%BC%9A%E4%BB%8E%E8%87%AA%E7%94%B1%E7%AB%9E%E4%BA%89%E5%88%B0%E9%9B%86%E4%B8%AD%E8%B0%83%E5%BA%A6"><span class="toc-number">1.2.1.</span> <span class="toc-text">1. 整体并发架构设计：从自由竞争到集中调度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%B0%83%E5%BA%A6%E7%AD%96%E7%95%A5%E5%AE%9E%E7%8E%B0%E4%B8%8E%E4%BC%98%E5%8C%96"><span class="toc-number">1.2.2.</span> <span class="toc-text">2. 调度策略实现与优化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%8A%9F%E8%83%BD%E8%AE%BE%E8%AE%A1%E4%B8%8E%E6%80%A7%E8%83%BD%E8%AE%BE%E8%AE%A1%E7%9A%84%E5%B9%B3%E8%A1%A1%E5%8F%8A%E5%8F%AF%E6%89%A9%E5%B1%95%E6%80%A7"><span class="toc-number">1.3.</span> <span class="toc-text">三、功能设计与性能设计的平衡及可扩展性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%9E%B6%E6%9E%84%E5%8F%AF%E6%89%A9%E5%B1%95%E6%80%A7%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%8D%95%E4%B8%80%E8%81%8C%E8%B4%A3%E5%8E%9F%E5%88%99%EF%BC%88SRP%EF%BC%89"><span class="toc-number">1.3.1.</span> <span class="toc-text">1. 架构可扩展性设计与单一职责原则（SRP）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-UML-%E7%B1%BB%E5%9B%BE%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1"><span class="toc-number">1.3.2.</span> <span class="toc-text">2. UML 类图架构设计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-UML-%E5%8D%8F%E4%BD%9C%E5%9B%BE-Sequence-Diagram"><span class="toc-number">1.3.3.</span> <span class="toc-text">3. UML 协作图 (Sequence Diagram)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E8%87%AA%E6%B5%8B%E4%B8%8E%E4%BA%92%E6%B5%8B%E4%B8%AD%E7%9A%84Bug%E5%88%86%E6%9E%90%E5%8F%8A%E5%A4%9A%E7%BA%BF%E7%A8%8BDebug%E6%96%B9%E6%B3%95"><span class="toc-number">1.4.</span> <span class="toc-text">四、自测与互测中的Bug分析及多线程Debug方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E8%87%AA%E6%B5%8B%E4%B8%8E%E4%BA%92%E6%B5%8B%E4%B8%AD%E5%87%BA%E7%8E%B0%E8%BF%87%E7%9A%84Bug%E5%88%86%E6%9E%90"><span class="toc-number">1.4.1.</span> <span class="toc-text">1. 自测与互测中出现过的Bug分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%A4%9A%E7%BA%BF%E7%A8%8BDebug%E6%96%B9%E6%B3%95"><span class="toc-number">1.4.2.</span> <span class="toc-text">2. 多线程Debug方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E5%AF%B9%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E5%92%8C%E5%B1%82%E6%AC%A1%E5%8C%96%E8%AE%BE%E8%AE%A1%E7%9A%84%E7%90%86%E8%A7%A3%E4%B8%8E%E6%80%BB%E7%BB%93"><span class="toc-number">1.5.</span> <span class="toc-text">五、对线程安全和层次化设计的理解与总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E5%85%B7%E4%BD%93%E8%B0%88%E8%B0%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E4%BD%BF%E7%94%A8%E5%BF%83%E5%BE%97"><span class="toc-number">1.6.</span> <span class="toc-text">六、具体谈谈大模型的使用心得</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://begineri.github.io/Blog/2026/04/27/2026-OO-u2-Blog/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://begineri.github.io/Blog/2026/04/27/2026-OO-u2-Blog/&text=buaa26-OO-u1"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://begineri.github.io/Blog/2026/04/27/2026-OO-u2-Blog/&title=buaa26-OO-u1"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://begineri.github.io/Blog/2026/04/27/2026-OO-u2-Blog/&is_video=false&description=buaa26-OO-u1"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=buaa26-OO-u1&body=Check out this article: https://begineri.github.io/Blog/2026/04/27/2026-OO-u2-Blog/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://begineri.github.io/Blog/2026/04/27/2026-OO-u2-Blog/&title=buaa26-OO-u1"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://begineri.github.io/Blog/2026/04/27/2026-OO-u2-Blog/&title=buaa26-OO-u1"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://begineri.github.io/Blog/2026/04/27/2026-OO-u2-Blog/&title=buaa26-OO-u1"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://begineri.github.io/Blog/2026/04/27/2026-OO-u2-Blog/&title=buaa26-OO-u1"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://begineri.github.io/Blog/2026/04/27/2026-OO-u2-Blog/&name=buaa26-OO-u1&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://begineri.github.io/Blog/2026/04/27/2026-OO-u2-Blog/&t=buaa26-OO-u1"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025-2026
+    Wang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/Blog/">Home</a></li><!--
+     --><!--
+       --><li><a href="/Blog/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/Blog/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/Blog/tags/">Tags</a></li><!--
+     --><!--
+       --><li><a href="/Blog/changelog/">Logs</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/Blog/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "57783916a7b349829732031e51219ad6"}'></script>
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+    <script type="text/javascript">
+      var utterances_repo = 'begineri/Blog';
+      var utterances_issue_term = 'pathname';
+      var utterances_label = 'Comment';
+      var utterances_theme = 'github-dark';
+
+      (function(){
+          var script = document.createElement('script');
+
+          script.src = 'https://utteranc.es/client.js';
+          script.setAttribute('repo', utterances_repo);
+          script.setAttribute('issue-term', 'pathname');
+          script.setAttribute('label', utterances_label);
+          script.setAttribute('theme', utterances_theme);
+          script.setAttribute('crossorigin', 'anonymous');
+          script.async = true;
+          (document.getElementById('utterances_thread')).appendChild(script);
+      }());
+  </script>
+
+</body>
+</html>

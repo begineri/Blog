@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
     <meta name="description" content="MIPS单周期处理器设计 本文内容为原创，内容仅供参考，请勿照搬  1. 单周期数据通路设计参考图 最终设计 顶层输出端口  1.1 组合部件1.1.1 ALU (算术逻辑运算单元) in: SrcA, SrcB ALUCtrl [3:0] Shift 移位数 5 FlowJudge 是否进行溢出判断   out: Equal(zero) Result Overflow     端口定义">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CO-P3-设计文档-Logisim">
+<meta property="og:title" content="buaa26-CO-P3-设计文档-Logisim">
 <meta property="og:url" content="https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/index.html">
 <meta property="og:site_name" content="My Blog">
 <meta property="og:description" content="MIPS单周期处理器设计 本文内容为原创，内容仅供参考，请勿照搬  1. 单周期数据通路设计参考图 最终设计 顶层输出端口  1.1 组合部件1.1.1 ALU (算术逻辑运算单元) in: SrcA, SrcB ALUCtrl [3:0] Shift 移位数 5 FlowJudge 是否进行溢出判断   out: Equal(zero) Result Overflow     端口定义">
@@ -35,7 +35,7 @@
 <meta property="og:image" content="https://begineri.github.io/Blog/images/MCU.png">
 <meta property="og:image" content="https://begineri.github.io/Blog/images/ACU.png">
 <meta property="article:published_time" content="2025-11-10T14:02:51.000Z">
-<meta property="article:modified_time" content="2025-11-10T15:15:36.664Z">
+<meta property="article:modified_time" content="2026-04-16T15:27:46.231Z">
 <meta property="article:author" content="Wang">
 <meta property="article:tag" content="CO">
 <meta name="twitter:card" content="summary">
@@ -59,7 +59,7 @@
       
     
     <!-- title -->
-    <title>CO-P3-设计文档-Logisim</title>
+    <title>buaa26-CO-P3-设计文档-Logisim</title>
     <!-- async scripts -->
     <!-- Google Analytics -->
 
@@ -163,16 +163,16 @@
     <div id="share" style="display: none">
       <ul>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&text=CO-P3-设计文档-Logisim"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&title=CO-P3-设计文档-Logisim"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&is_video=false&description=CO-P3-设计文档-Logisim"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=CO-P3-设计文档-Logisim&body=Check out this article: https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&title=CO-P3-设计文档-Logisim"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&title=CO-P3-设计文档-Logisim"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&title=CO-P3-设计文档-Logisim"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&title=CO-P3-设计文档-Logisim"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&name=CO-P3-设计文档-Logisim&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&t=CO-P3-设计文档-Logisim"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&text=buaa26-CO-P3-设计文档-Logisim"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&title=buaa26-CO-P3-设计文档-Logisim"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&is_video=false&description=buaa26-CO-P3-设计文档-Logisim"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=buaa26-CO-P3-设计文档-Logisim&body=Check out this article: https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&title=buaa26-CO-P3-设计文档-Logisim"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&title=buaa26-CO-P3-设计文档-Logisim"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&title=buaa26-CO-P3-设计文档-Logisim"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&title=buaa26-CO-P3-设计文档-Logisim"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&name=buaa26-CO-P3-设计文档-Logisim&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&t=buaa26-CO-P3-设计文档-Logisim"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -196,7 +196,7 @@
   <header>
     
     <h1 class="posttitle p-name" itemprop="name headline">
-        CO-P3-设计文档-Logisim
+        buaa26-CO-P3-设计文档-Logisim
     </h1>
 
 
@@ -1464,16 +1464,16 @@
     <div id="share-footer" style="display: none">
       <ul>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&text=CO-P3-设计文档-Logisim"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&title=CO-P3-设计文档-Logisim"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&is_video=false&description=CO-P3-设计文档-Logisim"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=CO-P3-设计文档-Logisim&body=Check out this article: https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&title=CO-P3-设计文档-Logisim"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&title=CO-P3-设计文档-Logisim"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&title=CO-P3-设计文档-Logisim"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&title=CO-P3-设计文档-Logisim"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&name=CO-P3-设计文档-Logisim&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&t=CO-P3-设计文档-Logisim"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&text=buaa26-CO-P3-设计文档-Logisim"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&title=buaa26-CO-P3-设计文档-Logisim"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&is_video=false&description=buaa26-CO-P3-设计文档-Logisim"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=buaa26-CO-P3-设计文档-Logisim&body=Check out this article: https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&title=buaa26-CO-P3-设计文档-Logisim"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&title=buaa26-CO-P3-设计文档-Logisim"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&title=buaa26-CO-P3-设计文档-Logisim"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&title=buaa26-CO-P3-设计文档-Logisim"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&name=buaa26-CO-P3-设计文档-Logisim&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://begineri.github.io/Blog/2025/11/10/CO-P3-%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3-Logisim/&t=buaa26-CO-P3-设计文档-Logisim"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>

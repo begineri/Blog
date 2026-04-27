@@ -1,5 +1,5 @@
 ---
-title: 2025秋 OOPre 课程总结
+title: buaa-2025秋-OOPre-课程总结
 date: 2025-11-05 19:25:29
 tags:
   - OOP

@@ -1,5 +1,5 @@
 ---
-title: buaa OS lab2 总结
+title: buaa26-OS-lab2-总结
 date: 2026-04-16 22:21:04
 tags:
     - OS

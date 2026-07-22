@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="微信是我当前生活学习不可或缺的软件，传文件、看消息都缺少不了它，但同时如果将它安装在个人电脑上，可能会导致侵犯隐私。为了平衡安全性与便利性，我趁着重装完系统的干净电脑，采取了将微信 WeChat 安装在沙盒 Sandboxie-Plus 中的方法，实现了微信的正常使用与隐私隔离。 以下是我的安装记录 1. 安装 Sandboxie-Plus 前往 GitHub 或官网下载最新的 Sandboxie">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【配置记录】在沙盒中运行微信">
+<meta property="og:url" content="https://begineri.github.io/Blog/2026/07/22/%E3%80%90%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95%E3%80%91%E5%9C%A8%E6%B2%99%E7%9B%92%E4%B8%AD%E8%BF%90%E8%A1%8C%E5%BE%AE%E4%BF%A1-win/index.html">
+<meta property="og:site_name" content="My Blog">
+<meta property="og:description" content="微信是我当前生活学习不可或缺的软件，传文件、看消息都缺少不了它，但同时如果将它安装在个人电脑上，可能会导致侵犯隐私。为了平衡安全性与便利性，我趁着重装完系统的干净电脑，采取了将微信 WeChat 安装在沙盒 Sandboxie-Plus 中的方法，实现了微信的正常使用与隐私隔离。 以下是我的安装记录 1. 安装 Sandboxie-Plus 前往 GitHub 或官网下载最新的 Sandboxie">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/%E6%B2%99%E7%9B%92/%E6%96%B0%E5%BB%BA.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/%E6%B2%99%E7%9B%92/%E9%80%89%E9%A1%B9.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/%E6%B2%99%E7%9B%92/%E8%B7%AF%E5%BE%84.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/%E6%B2%99%E7%9B%92/%E5%BF%AB%E6%8D%B7fangshi.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/%E6%B2%99%E7%9B%92/2.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/%E6%B2%99%E7%9B%92/3.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/%E6%B2%99%E7%9B%92/4.png">
+<meta property="article:published_time" content="2026-07-22T08:58:21.000Z">
+<meta property="article:modified_time" content="2026-07-22T09:53:50.029Z">
+<meta property="article:author" content="Wang">
+<meta property="article:tag" content="tools">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://begineri.github.io/Blog/images/%E6%B2%99%E7%9B%92/%E6%96%B0%E5%BB%BA.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/Blog/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/Blog/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/Blog/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>【配置记录】在沙盒中运行微信</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/Blog/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 8.1.1"><link rel="alternate" href="/Blog/atom.xml" title="My Blog" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top"
+    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i
+      class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       -->
+          <li><a href="/Blog/">
+              Home
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/about/">
+              About
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/archives/">
+              Writing
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/tags/">
+              Tags
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/changelog/">
+              Logs
+            </a></li><!--
+     -->
+          
+      </ul>
+    </span>
+    <br />
+    <span id="actions">
+      <ul>
+        
+            
+              <li><a class="icon" aria-label="Next post" href="/Blog/2026/04/27/2026-OO-u2-Blog/"><i
+                    class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();"
+                    onmouseout="$('#i-next').toggle();"></i></a></li>
+              
+                <li><a class="icon" aria-label="Back to top" href="#"
+                    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up"
+                      aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a>
+                </li>
+                <li><a class="icon" aria-label="Share post" href="#"><i
+                      class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();"
+                      onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">
+        Previous post
+      </span>
+      <span id="i-next" class="info" style="display:none;">
+        Next post
+      </span>
+      <span id="i-top" class="info" style="display:none;">
+        Back to top
+      </span>
+      <span id="i-share" class="info" style="display:none;">
+        Share post
+      </span>
+    </span>
+    <br />
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://begineri.github.io/Blog/2026/07/22/%E3%80%90%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95%E3%80%91%E5%9C%A8%E6%B2%99%E7%9B%92%E4%B8%AD%E8%BF%90%E8%A1%8C%E5%BE%AE%E4%BF%A1-win/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://begineri.github.io/Blog/2026/07/22/%E3%80%90%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95%E3%80%91%E5%9C%A8%E6%B2%99%E7%9B%92%E4%B8%AD%E8%BF%90%E8%A1%8C%E5%BE%AE%E4%BF%A1-win/&text=【配置记录】在沙盒中运行微信"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://begineri.github.io/Blog/2026/07/22/%E3%80%90%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95%E3%80%91%E5%9C%A8%E6%B2%99%E7%9B%92%E4%B8%AD%E8%BF%90%E8%A1%8C%E5%BE%AE%E4%BF%A1-win/&title=【配置记录】在沙盒中运行微信"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://begineri.github.io/Blog/2026/07/22/%E3%80%90%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95%E3%80%91%E5%9C%A8%E6%B2%99%E7%9B%92%E4%B8%AD%E8%BF%90%E8%A1%8C%E5%BE%AE%E4%BF%A1-win/&is_video=false&description=【配置记录】在沙盒中运行微信"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=【配置记录】在沙盒中运行微信&body=Check out this article: https://begineri.github.io/Blog/2026/07/22/%E3%80%90%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95%E3%80%91%E5%9C%A8%E6%B2%99%E7%9B%92%E4%B8%AD%E8%BF%90%E8%A1%8C%E5%BE%AE%E4%BF%A1-win/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://begineri.github.io/Blog/2026/07/22/%E3%80%90%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95%E3%80%91%E5%9C%A8%E6%B2%99%E7%9B%92%E4%B8%AD%E8%BF%90%E8%A1%8C%E5%BE%AE%E4%BF%A1-win/&title=【配置记录】在沙盒中运行微信"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://begineri.github.io/Blog/2026/07/22/%E3%80%90%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95%E3%80%91%E5%9C%A8%E6%B2%99%E7%9B%92%E4%B8%AD%E8%BF%90%E8%A1%8C%E5%BE%AE%E4%BF%A1-win/&title=【配置记录】在沙盒中运行微信"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://begineri.github.io/Blog/2026/07/22/%E3%80%90%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95%E3%80%91%E5%9C%A8%E6%B2%99%E7%9B%92%E4%B8%AD%E8%BF%90%E8%A1%8C%E5%BE%AE%E4%BF%A1-win/&title=【配置记录】在沙盒中运行微信"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://begineri.github.io/Blog/2026/07/22/%E3%80%90%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95%E3%80%91%E5%9C%A8%E6%B2%99%E7%9B%92%E4%B8%AD%E8%BF%90%E8%A1%8C%E5%BE%AE%E4%BF%A1-win/&title=【配置记录】在沙盒中运行微信"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://begineri.github.io/Blog/2026/07/22/%E3%80%90%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95%E3%80%91%E5%9C%A8%E6%B2%99%E7%9B%92%E4%B8%AD%E8%BF%90%E8%A1%8C%E5%BE%AE%E4%BF%A1-win/&name=【配置记录】在沙盒中运行微信&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://begineri.github.io/Blog/2026/07/22/%E3%80%90%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95%E3%80%91%E5%9C%A8%E6%B2%99%E7%9B%92%E4%B8%AD%E8%BF%90%E8%A1%8C%E5%BE%AE%E4%BF%A1-win/&t=【配置记录】在沙盒中运行微信"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <!-- 
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85-Sandboxie-Plus"><span class="toc-number">1.</span> <span class="toc-text">1. 安装 Sandboxie-Plus</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%B8%BA%E5%BE%AE%E4%BF%A1%E6%96%B0%E5%BB%BA%E6%B2%99%E7%9B%92"><span class="toc-number">2.</span> <span class="toc-text">2. 为微信新建沙盒</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%88%9B%E5%BB%BA%E6%B2%99%E7%9B%92"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 创建沙盒</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E7%9C%9F%E5%AE%9E%E7%89%A9%E7%90%86%E7%A1%AC%E7%9B%98%E4%BA%A4%E4%BA%92%E5%85%A5%E5%8F%A3%E8%AE%BE%E7%BD%AE"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 真实物理硬盘交互入口设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E8%AE%BE%E7%BD%AE%E6%B2%99%E7%9B%92%E8%A7%84%E5%88%99"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 设置沙盒规则</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%9C%A8%E6%B2%99%E7%9B%92%E4%B8%AD%E5%AE%89%E8%A3%85%E5%BE%AE%E4%BF%A1"><span class="toc-number">3.</span> <span class="toc-text">3. 在沙盒中安装微信</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%97%A5%E5%B8%B8%E4%BD%BF%E7%94%A8%EF%BC%9A%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F%E4%B8%8E%E5%9B%BE%E6%A0%87%E6%81%A2%E5%A4%8D"><span class="toc-number">4.</span> <span class="toc-text">4. 日常使用：快捷方式与图标恢复</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li></ol>
+      </div>
+     -->
+    
+        <div id="toc">
+          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85-Sandboxie-Plus"><span class="toc-number">1.</span> <span class="toc-text">1. 安装 Sandboxie-Plus</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%B8%BA%E5%BE%AE%E4%BF%A1%E6%96%B0%E5%BB%BA%E6%B2%99%E7%9B%92"><span class="toc-number">2.</span> <span class="toc-text">2. 为微信新建沙盒</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%88%9B%E5%BB%BA%E6%B2%99%E7%9B%92"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 创建沙盒</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E7%9C%9F%E5%AE%9E%E7%89%A9%E7%90%86%E7%A1%AC%E7%9B%98%E4%BA%A4%E4%BA%92%E5%85%A5%E5%8F%A3%E8%AE%BE%E7%BD%AE"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 真实物理硬盘交互入口设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E8%AE%BE%E7%BD%AE%E6%B2%99%E7%9B%92%E8%A7%84%E5%88%99"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 设置沙盒规则</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%9C%A8%E6%B2%99%E7%9B%92%E4%B8%AD%E5%AE%89%E8%A3%85%E5%BE%AE%E4%BF%A1"><span class="toc-number">3.</span> <span class="toc-text">3. 在沙盒中安装微信</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%97%A5%E5%B8%B8%E4%BD%BF%E7%94%A8%EF%BC%9A%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F%E4%B8%8E%E5%9B%BE%E6%A0%87%E6%81%A2%E5%A4%8D"><span class="toc-number">4.</span> <span class="toc-text">4. 日常使用：快捷方式与图标恢复</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li></ol>
+        </div>
+        
+  </span>
+</div>
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        【配置记录】在沙盒中运行微信
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Wang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2026-07-22T08:58:21.000Z" class="dt-published" itemprop="datePublished">2026-07-22</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/Blog/tags/tools/" rel="tag">tools</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p>微信是我当前生活学习不可或缺的软件，传文件、看消息都缺少不了它，但同时如果将它安装在个人电脑上，可能会导致侵犯隐私。为了平衡安全性与便利性，我趁着重装完系统的干净电脑，采取了<strong>将微信 WeChat 安装在沙盒 Sandboxie-Plus 中</strong>的方法，实现了微信的正常使用与隐私隔离。</p>
+<p>以下是我的安装记录</p>
+<h2 id="1-安装-Sandboxie-Plus"><a href="#1-安装-Sandboxie-Plus" class="headerlink" title="1. 安装 Sandboxie-Plus"></a>1. 安装 Sandboxie-Plus</h2><ol>
+<li>前往 GitHub 或官网下载最新的 Sandboxie-Plus: <a target="_blank" rel="noopener" href="https://github.com/sandboxie-plus/sandboxie">https://github.com/sandboxie-plus/sandboxie</a></li>
+<li>安装过程中如显示需要输入许可证,跳过即可</li>
+<li>完成安装并重启电脑</li>
+</ol>
+<h2 id="2-为微信新建沙盒"><a href="#2-为微信新建沙盒" class="headerlink" title="2. 为微信新建沙盒"></a>2. 为微信新建沙盒</h2><h3 id="2-1-创建沙盒"><a href="#2-1-创建沙盒" class="headerlink" title="2.1 创建沙盒"></a>2.1 创建沙盒</h3><ol>
+<li>打开 Sandboxie-Plus，点击左上角 沙箱 -&gt; 新建沙箱。  </li>
+<li>命名为 WeChat，沙箱类型选择 <strong>Standard (标准隔离)</strong>。<br><img src="/Blog/images/%E6%B2%99%E7%9B%92/%E6%96%B0%E5%BB%BA.png" alt="alt text"></li>
+</ol>
+<h3 id="2-2-真实物理硬盘交互入口设置"><a href="#2-2-真实物理硬盘交互入口设置" class="headerlink" title="2.2 真实物理硬盘交互入口设置"></a>2.2 真实物理硬盘交互入口设置</h3><p>需要在物理硬盘中,选择一个文件夹存放微信的聊天记录和文件.</p>
+<ol>
+<li>如果电脑上已经有之前的微信文件: 可以使用 <code>Everything</code> 搜索 <code>WeChat Files</code> (针对3.x的微信版本) 或 <code>xwechat_files</code> (针对较新4.x的版本)</li>
+<li>在电脑上自己选定位置(我选择的是 <code>D:\Tencent\Wechat</code>)新建文件夹,然后如有之前文件,直接复制粘贴到此文件夹中即可,如: <code>D:\Tencent\Wechat\WeChat Files</code>; 如果没有就空着</li>
+<li>记住这个文件夹地址, 后续有用</li>
+</ol>
+<h3 id="2-3-设置沙盒规则"><a href="#2-3-设置沙盒规则" class="headerlink" title="2.3 设置沙盒规则"></a>2.3 设置沙盒规则</h3><ol>
+<li>右键刚才新建的沙盒,点击 <strong>沙盒选项</strong> -&gt; <strong>资源访问</strong> -&gt; <strong>文件</strong></li>
+<li>点击“添加文件&#x2F;文件夹”, 将C盘用户目录下的文件, 其他无关的盘全部设置为禁止 (这里没有把D盘全部禁止是因为可能会导致进入微信后找不到我们要的D:\Tencent\Wechat文件夹,所以我手动把除了这个文件夹之外的所有文件夹都单独禁止了)<br>可选如<ul>
+<li>C:\Users\你的用户名\Desktop* (桌面)  </li>
+<li>C:\Users\你的用户名\Documents* (文档)  </li>
+<li>C:\Users\你的用户名\Pictures* (图片)  </li>
+<li>E:\* (彻底封锁其他不需要访问的盘)</li>
+</ul>
+</li>
+<li>为可访问文件夹单独添加 <strong>“完全开放”</strong> 权限, 路径填写：<strong>D:\Tencent\Wechat</strong> (这里选择”开放”会导致聊天记录不能同步)</li>
+</ol>
+<p><img src="/Blog/images/%E6%B2%99%E7%9B%92/%E9%80%89%E9%A1%B9.png" alt="alt text"></p>
+<h2 id="3-在沙盒中安装微信"><a href="#3-在沙盒中安装微信" class="headerlink" title="3. 在沙盒中安装微信"></a>3. 在沙盒中安装微信</h2><p>规则定好后，就可以正式下载微信了: </p>
+<ol>
+<li>去微信官网下载最新的 PC 版安装包: <a target="_blank" rel="noopener" href="https://weixin.qq.com/">https://weixin.qq.com/</a></li>
+<li>在下载好的安装包上 <strong>右键</strong> -&gt; <strong>在沙盘中运行 (Run Sandboxed)</strong> -&gt; 选择 WeChat。  <ul>
+<li>注意, 此时打开安装包的路径要在上面排除的路径之外, 否则无法打开, 可以考虑在C盘根目录下新建文件夹,将安装包复制到此处打开.</li>
+</ul>
+</li>
+<li>在弹出的微信安装界面中，不用修改安装路径, 保持默认的 C:\Program Files\Tencent\WeChat 即可<ul>
+<li>原理：它实际上会被安全地安装进沙盒虚拟出来的 C 盘里，如果此时改到真实的 D 盘，就失去隔离程序本体的意义了。</li>
+</ul>
+</li>
+<li>设置正确的<strong>聊天存储路径</strong>, 此处设置为刚才配置好的路径, 如图.</li>
+<li>之后正常完成安装、登陆即可</li>
+</ol>
+<p><img src="/Blog/images/%E6%B2%99%E7%9B%92/%E8%B7%AF%E5%BE%84.png" alt="alt text"></p>
+<h2 id="4-日常使用：快捷方式与图标恢复"><a href="#4-日常使用：快捷方式与图标恢复" class="headerlink" title="4. 日常使用：快捷方式与图标恢复"></a>4. 日常使用：快捷方式与图标恢复</h2><p>为了像安装在本机上一样方便使用, 可以配置:</p>
+<ol>
+<li><p>打开 Sandboxie-Plus 主界面，右键 WeChatBox -&gt; <strong>沙箱内容</strong> -&gt; <strong>创建快捷方式</strong>。<br><img src="/Blog/images/%E6%B2%99%E7%9B%92/%E5%BF%AB%E6%8D%B7fangshi.png" alt="alt text"></p>
+</li>
+<li><p>一般来说, 可以在这里看见微信.lnk, 点击它,然后保存在本机桌面上即可<br><img src="/Blog/images/%E6%B2%99%E7%9B%92/2.png" alt="alt text"></p>
+</li>
+<li><p>如果这里没有正常显示, 可以点击<em>浏览文件夹</em>,然后随便新建一个</p>
+<ul>
+<li>然后修改目标地址为: <code>D:\DevTools\Sandboxie-Plus\SandMan.exe /box:WeChatBox &quot;C:\Program Files\Tencent\Weixin\Weixin.exe&quot;</code> (示例)</li>
+<li>更改图标为 <code>%SystemDrive%\Sandbox\WANG\WeChatBox\drive\C\Program Files\Tencent\Weixin\Weixin.exe</code> (点击浏览, 然后输入并回车)</li>
+</ul>
+</li>
+</ol>
+<p>即可配置成功,如图 :<br><img src="/Blog/images/%E6%B2%99%E7%9B%92/3.png" alt="alt text"><br><img src="/Blog/images/%E6%B2%99%E7%9B%92/4.png" alt="alt text"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>至此已经配好, 日常启动点击桌面上的图标即可.</p>
+<p>同时聊天记录以及聊天中产生的文件, 可以直接从D盘的 <code>D:\Tencent\Wechat\xwechat_files\wxid_qhxxxxxxx\msg\file</code> 访问.</p>
+
+  </div>
+</article>
+
+
+    <div class="blog-post-comments">
+        <div id="utterances_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/Blog/">Home</a></li>
+        
+          <li><a href="/Blog/about/">About</a></li>
+        
+          <li><a href="/Blog/archives/">Writing</a></li>
+        
+          <li><a href="/Blog/tags/">Tags</a></li>
+        
+          <li><a href="/Blog/changelog/">Logs</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85-Sandboxie-Plus"><span class="toc-number">1.</span> <span class="toc-text">1. 安装 Sandboxie-Plus</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%B8%BA%E5%BE%AE%E4%BF%A1%E6%96%B0%E5%BB%BA%E6%B2%99%E7%9B%92"><span class="toc-number">2.</span> <span class="toc-text">2. 为微信新建沙盒</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%88%9B%E5%BB%BA%E6%B2%99%E7%9B%92"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 创建沙盒</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E7%9C%9F%E5%AE%9E%E7%89%A9%E7%90%86%E7%A1%AC%E7%9B%98%E4%BA%A4%E4%BA%92%E5%85%A5%E5%8F%A3%E8%AE%BE%E7%BD%AE"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 真实物理硬盘交互入口设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E8%AE%BE%E7%BD%AE%E6%B2%99%E7%9B%92%E8%A7%84%E5%88%99"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 设置沙盒规则</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%9C%A8%E6%B2%99%E7%9B%92%E4%B8%AD%E5%AE%89%E8%A3%85%E5%BE%AE%E4%BF%A1"><span class="toc-number">3.</span> <span class="toc-text">3. 在沙盒中安装微信</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%97%A5%E5%B8%B8%E4%BD%BF%E7%94%A8%EF%BC%9A%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F%E4%B8%8E%E5%9B%BE%E6%A0%87%E6%81%A2%E5%A4%8D"><span class="toc-number">4.</span> <span class="toc-text">4. 日常使用：快捷方式与图标恢复</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://begineri.github.io/Blog/2026/07/22/%E3%80%90%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95%E3%80%91%E5%9C%A8%E6%B2%99%E7%9B%92%E4%B8%AD%E8%BF%90%E8%A1%8C%E5%BE%AE%E4%BF%A1-win/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://begineri.github.io/Blog/2026/07/22/%E3%80%90%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95%E3%80%91%E5%9C%A8%E6%B2%99%E7%9B%92%E4%B8%AD%E8%BF%90%E8%A1%8C%E5%BE%AE%E4%BF%A1-win/&text=【配置记录】在沙盒中运行微信"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://begineri.github.io/Blog/2026/07/22/%E3%80%90%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95%E3%80%91%E5%9C%A8%E6%B2%99%E7%9B%92%E4%B8%AD%E8%BF%90%E8%A1%8C%E5%BE%AE%E4%BF%A1-win/&title=【配置记录】在沙盒中运行微信"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://begineri.github.io/Blog/2026/07/22/%E3%80%90%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95%E3%80%91%E5%9C%A8%E6%B2%99%E7%9B%92%E4%B8%AD%E8%BF%90%E8%A1%8C%E5%BE%AE%E4%BF%A1-win/&is_video=false&description=【配置记录】在沙盒中运行微信"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=【配置记录】在沙盒中运行微信&body=Check out this article: https://begineri.github.io/Blog/2026/07/22/%E3%80%90%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95%E3%80%91%E5%9C%A8%E6%B2%99%E7%9B%92%E4%B8%AD%E8%BF%90%E8%A1%8C%E5%BE%AE%E4%BF%A1-win/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://begineri.github.io/Blog/2026/07/22/%E3%80%90%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95%E3%80%91%E5%9C%A8%E6%B2%99%E7%9B%92%E4%B8%AD%E8%BF%90%E8%A1%8C%E5%BE%AE%E4%BF%A1-win/&title=【配置记录】在沙盒中运行微信"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://begineri.github.io/Blog/2026/07/22/%E3%80%90%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95%E3%80%91%E5%9C%A8%E6%B2%99%E7%9B%92%E4%B8%AD%E8%BF%90%E8%A1%8C%E5%BE%AE%E4%BF%A1-win/&title=【配置记录】在沙盒中运行微信"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://begineri.github.io/Blog/2026/07/22/%E3%80%90%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95%E3%80%91%E5%9C%A8%E6%B2%99%E7%9B%92%E4%B8%AD%E8%BF%90%E8%A1%8C%E5%BE%AE%E4%BF%A1-win/&title=【配置记录】在沙盒中运行微信"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://begineri.github.io/Blog/2026/07/22/%E3%80%90%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95%E3%80%91%E5%9C%A8%E6%B2%99%E7%9B%92%E4%B8%AD%E8%BF%90%E8%A1%8C%E5%BE%AE%E4%BF%A1-win/&title=【配置记录】在沙盒中运行微信"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://begineri.github.io/Blog/2026/07/22/%E3%80%90%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95%E3%80%91%E5%9C%A8%E6%B2%99%E7%9B%92%E4%B8%AD%E8%BF%90%E8%A1%8C%E5%BE%AE%E4%BF%A1-win/&name=【配置记录】在沙盒中运行微信&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://begineri.github.io/Blog/2026/07/22/%E3%80%90%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95%E3%80%91%E5%9C%A8%E6%B2%99%E7%9B%92%E4%B8%AD%E8%BF%90%E8%A1%8C%E5%BE%AE%E4%BF%A1-win/&t=【配置记录】在沙盒中运行微信"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025-2026
+    Wang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/Blog/">Home</a></li><!--
+     --><!--
+       --><li><a href="/Blog/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/Blog/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/Blog/tags/">Tags</a></li><!--
+     --><!--
+       --><li><a href="/Blog/changelog/">Logs</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/Blog/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "57783916a7b349829732031e51219ad6"}'></script>
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+    <script type="text/javascript">
+      var utterances_repo = 'begineri/Blog';
+      var utterances_issue_term = 'pathname';
+      var utterances_label = 'Comment';
+      var utterances_theme = 'github-dark';
+
+      (function(){
+          var script = document.createElement('script');
+
+          script.src = 'https://utteranc.es/client.js';
+          script.setAttribute('repo', utterances_repo);
+          script.setAttribute('issue-term', 'pathname');
+          script.setAttribute('label', utterances_label);
+          script.setAttribute('theme', utterances_theme);
+          script.setAttribute('crossorigin', 'anonymous');
+          script.async = true;
+          (document.getElementById('utterances_thread')).appendChild(script);
+      }());
+  </script>
+
+</body>
+</html>

@@ -187,7 +187,7 @@ After analysis, it was found that the items possessed by adventurers (equipment,
     private final Queue<String> usablesQueue = new LinkedList<>();
 ```
 
-* **Decoupling from the Factory:** Methods `addBottle`, `addEquipment`, `learnSpell`, and `buyItem` do not create objects directly; instead, they call method `Factory` to create them, thereby separating creation from management.
+* **Decoupling from the Factory:** Methods `addBottle`, `addEquipment`, `learnSpell`, and `buyItem` do not create objects directly; instead, they call `Factory` to create them, thereby separating creation from management.
 
 ```java
     // Simple factory

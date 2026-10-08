@@ -27,7 +27,7 @@ tags:
     - SrcA, SrcB
     - ALUCtrl [3:0]
     - Shift count: 5
-    - Does FlowJudge Perform an Overflow Check?
+    - whether to check for overflow
   - out:
     - Equal(zero)
     - Result
@@ -39,7 +39,7 @@ tags:
 | :-------- | :---: | :---: | :------------------------- |
 | `SrcA`    |   I   |  32   |32-bit Operand A|
 | `SrcB`    |   I   |  32   |32-bit Operand B|
-| `ALUCtrl` |   I   |   4   |4-bit Operand Control Signal|
+| `ALUCtrl` |   I   |   4   |4-bit operation control signal|
 | `Shift`   |   I   |   5   |5 Shift Amount (`shamt`)|
 | `Result`  |   O   |  32   |Calculation Results|
 | `Zero`    |   O   |   1   |1-bit zero flag `Equal(zero)`|
@@ -66,7 +66,7 @@ tags:
 
 ---
 
-#### 1.1.2 GRF (General-Purpose Register Set, also known as a register file or register stack)
+#### 1.1.2 GRF (General-Purpose Register Set, also known as a register file)
 
 - Read
     in: RA1 RA2
@@ -85,9 +85,9 @@ tags:
 | :---------- | :---: | :---: | :-------------------- |
 | `ReadAddr1` |   I   |   5   |Read address `RA1` from port 1|
 | `ReadAddr2` |   I   |   5   |Read the address at port 2: `RA2`|
-| `WriteAddr` |   I   |   5   |Enter port address  `WA`|
+| `WriteAddr` |   I   |   5   |write-port address `WA`|
 | `WriteData` |   I   |  32   |32 bits of data to be written  `WD`|
-| `RegWrite`  |   I   |   1   |Writing About Enable Signals|
+| `RegWrite`  |   I   |   1   |write enable|
 | `clk`       |   I   |   1   |Clock Signal|
 | `reset`     |   I   |   1   |Asynchronous Reset Signal|
 | `ReadData1` |   O   |  32   | `RF[RA1]`             |
@@ -138,7 +138,7 @@ tags:
 |   1   |Address Mapping <br>|Convert the input 32-bit byte address `Address` into **the** 12-bit word **address** required by internal `RAM` by extracting `[13:2]` bit.|
 |   2   |Memory Read <br> (Memory Read)|When `MemRead = 1`, read 32 bits of data asynchronously from the converted word address and output it from port `ReadData`. (i.e., `RD = DM[A]`)|
 |   3   |Memory Write <br>|When `MemWrite = 1`, on the rising edge of the `clk` signal, write the 32-bit data from port `WriteData` to the converted word address. (i.e., `DM[A] = WD`)|
-|   4   |Asynchronous Reset|When `reset = 1`, asynchronously clear all bits set to `RAM` internally.|
+|   4   |Asynchronous Reset|When `reset = 1`, asynchronously clear every `RAM` cell to zero.|
 
 ![DM](/images/DM.png)
 
@@ -165,12 +165,12 @@ tags:
 | :----------- | :---: | :---: | :------------------------------------------------------------- |
 | `PC_in`  |   I   |  32   |The Value of `PC` (from Module `IFU`)|
 | `Offset_Ext` |   I   |  32   |32-bit **Signed-Extended** Immediate (from the ``EXT`` module)|
-| `imm26`      |   I   |  26   |26 immediate jump counts (from the `Splitter_Unit` module)|
+| `imm26`      |   I   |  26   |26-bit jump immediate (from the `Splitter_Unit` module)|
 | `Ra`         |   I   |  32   |`rs` Register Values (`ReadData1` of `GRF`)|
 | `IsB`        |   I   |   1   |**Branch enable** signal. (`Main_Control[Branch]` **AND** `ALU[Zero]`)|
 | `JUMP`       |   I   |   1   |**`j` Jump Enable** Signal (from `Main_Control_Unit`)|
 | `JR`         |   I   |   1   |**`jr` Jump Enable** Signal (from `ALU_Control_Unit`)|
-| `Next_PC`    |   O   |  32   |**The address of the next instruction**, as calculated (sent to port `Next_PC` at address `IFU`)|
+| `Next_PC`    |   O   |  32   |**The address of the next instruction**, as calculated (sent to the `Next_PC` port of `IFU`)|
 | `PC_plus_4`  |   O   |  32   |The Value of `PC + 4` (from Module `IFU`)|
 
 
@@ -341,13 +341,13 @@ Sign-extend the 16-bit immediate to 32 bits. To improve extensibility, the ``OPE
 #### 2.1.2 Eight control signals:
 |Control Signals|          0          |              1              |
 | :------: | :-----------------: | :-------------------------: |
-|  RegDst  |Reg heap write address: Rt|Reg heap write address: Rd|
-| RegWrite |None|Reg entries: **`Reg[WA] = WD`**|
+|  RegDst  |register file write address: Rt|register file write address: Rd|
+| RegWrite |None|register write: **`Reg[WA] = WD`**|
 |  ALUSrc  |     ALU-B：RD2      |     ALU-B：imm Signext      |
 |  PCSrc   |     PC = (PC+4)     |PC = NAdd (beq destination address)|
 |  PCJump  |PC = MUX output|PC = J-instruction destination address|
 | MemRead  |None|DM Reading (Output)|
-| MemWrite |None|Type in the DM|
+| MemWrite |None|DM write (input)|
 | MemtoReg |Reg write <-- ALU|Reg <-- DM|
 |  Branch  |None|For the Beq command|
 
@@ -367,7 +367,7 @@ Sign-extend the 16-bit immediate to 32 bits. To improve extensibility, the ``OPE
 2.  **`ExtOp` (1):** Used to control expansion units.
     * `0`: Zero Extensions (for `ori`)
     * `1`: Sign Extension (for `lw`, `sw`, `beq`)
-3.  **`Jump` (1 bit):** (`PCJump` in the figure) used for `j` commands.
+3.  **`Jump` (1 bit):** (`PCJump` in the figure) used for the `j` instruction.
 4.  **`JR` Signal:** Moved to `ALU Control Unit`.
 
 ##### 2.2 Port Definitions
@@ -376,13 +376,13 @@ Sign-extend the 16-bit immediate to 32 bits. To improve extensibility, the ``OPE
     * `Opcode[5:0]`: The `[31:26]`-bit (opcode) from the instruction.
 * **Outputs:**
     * `RegDst[0]`: (1: R-type writes `rd`, 0: I-type writes `rt`)
-    * `ALUSrc[0]`: (1: Immediate count, 0: `GRF[ReadData2]`)
+    * `ALUSrc[0]`: (1: immediate, 0: `GRF[ReadData2]`)
     * `MemtoReg[1:0]`: (2 bits) (Choosing a data source to write back to GRF)
     * `RegWrite[0]`: (1: Allows writing to GRF)
     * `MemRead[0]`: (1: Allows reading DMs)
-    * `MemWrite[0]`: (1: Allows DMs)
-    * `Branch[0]`: (1:`beq` command)
-    * `Jump[0]`: (1:`j` command)
+    * `MemWrite[0]`: (1: allows writing to the DM)
+    * `Branch[0]`: (1: `beq` instruction)
+    * `Jump[0]`: (1: `j` instruction)
     * `ExtOp[0]`: (1: sign extension, 0: zero expansion)
     * `ALUOp[2:0]`: (3 bits) (Sent to `ALU Control Unit`)
 
@@ -471,7 +471,7 @@ The reason there can’t be any extra ROMs is that during testing, the system us
 
 ---
 
-Food for thought
+Thinking Questions
 1. Currently, in our modules, IM uses ROM, DM uses RAM, and GRF uses registers. Is this approach reasonable? Please provide an analysis, and if you have any suggestions for improvement, please include them as well.
 A: That makes sense. ROM is read-only memory, so it can be used to store instructions; RAM is both readable and writable, so it meets the DM’s read-write requirements; GRF is a register file, which requires high read-write speeds, so it is suitable for implementation using registers.
 2. In fact, to implement the NOP (no-op) instruction, we don’t need to add it to the control signal truth table. Why? Please explain your reasoning.

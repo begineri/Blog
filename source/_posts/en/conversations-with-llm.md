@@ -13,19 +13,20 @@ Background Paper: [Large Language Model Agent: A Survey on Methodology, Applicat
 
 **Table of Contents**
 
-* [*About Logic*](#关于-逻辑)
-* [*About Probability*](#关于-概率)
-* [*About "Essence"*](#关于-“本质”)
-* [*About Beauty*](#关于-美)
-* [*About Those "Stubborn" Errors*](#关于-那些”顽固”的错误)
-* [*About "You're absolutely right"*](#关于-“您说的完全正确”)
-* [*About Good Prompts*](#关于-好的prompt)
-* [*About Markdown*](#关于-Markdown)
+* [*About Logic*](#about-logic)
+* [*About Probability*](#about-probability)
+* [*About "Essence"*](#about-essence)
+* [*About Beauty*](#about-beauty)
+* [*About Those "Stubborn" Errors*](#about-those-stubborn-errors)
+* [*About "You're absolutely right"*](#about-youre-absolutely-right)
+* [*About Good Prompts*](#about-good-prompts)
+* [*About Markdown*](#about-markdown)
 
 
 
 ---
 
+<span id="about-logic"></span>
 ## *About Logic*
 
 **Me：** 
@@ -139,7 +140,7 @@ However, as we know from discrete mathematics, if a is true and b is true, then 
 > 
 > The `(A=True ∧ B=True) → (A ∧ B = True)` you learned in discrete mathematics is a formal system based on axioms and rules. It doesn’t care what A and B are; it only cares about their truth values.
 > 
-> The “reasoning” of LLMs, however, is entirely different; it is a form **of probability-based simulation**.
+> The “reasoning” of LLMs, however, is entirely different; it is a form **of probability-based imitation**.
 > 
 > ### 1. Probabilistic Models vs. Logical Rules
 > 
@@ -233,6 +234,7 @@ So, why can’t LLMs be given the ability to directly determine absolute truth o
 
 ---
 
+<span id="about-probability"></span>
 ## *About Probability*
 
 
@@ -350,6 +352,7 @@ So, when it comes to fields where there’s nothing to draw on for reference, ho
 
 ---
 
+<span id="about-essence"></span>
 ## *About "Essence"*
 
 **Me：**
@@ -395,6 +398,7 @@ How Do LLMs Define “Essence”?
 
 ---
 
+<span id="about-beauty"></span>
 ## *About Beauty*
 
 **Me：**
@@ -447,6 +451,7 @@ For example, when people ask if there’s a “nicer-looking” layout, how woul
 > This is entirely consistent with the concept of LLM agents as “productivity tools” or “professional roles” mentioned in the first paper you provided.In this context, it plays the role of a “designer” or “typesetting assistant.” The assistance it provides is **genuine** because the human design rules it emulates are valid in themselves, but it does so not out of “aesthetic” considerations, but rather based on “probability.”
 
 --- 
+<span id="about-those-stubborn-errors"></span>
 ## *About Those "Stubborn" Errors*
 
 **Me：**
@@ -547,6 +552,7 @@ At this point, how can users correct this deeply ingrained misconception?
 > To correct a “stubborn” LLM, you must abandon the idea of “persuading” it and instead **“manipulate”** it.You need to alter its current probability calculations by **resetting the context, using strong instructions, introducing external evidence, or disrupting its chain of reasoning**, thereby forcing it into a higher-probability state where it “admits its error.”
 
 ---
+<span id="about-youre-absolutely-right"></span>
 ## *About "You're absolutely right"*
 
 **Me：**
@@ -706,6 +712,7 @@ How to Prevent LLMs from Generating Phrases Like “Once again, you’ve accurat
 
 
 ---
+<span id="about-good-prompts"></span>
 ## *About Good Prompts*
 
 **Me：**
@@ -901,7 +908,7 @@ After asking again, I received the following:
 > 2.  **Key Points:** (Listed using bullet points)
 > 3.  **Beginner’s Pitfalls:** (Highlights the mistakes beginners are most likely to make at this stage)
 > 4.  **A simple analogy:** (Use a simple analogy to explain the most difficult core concept in this unit.)
-> 5.  **Practical Exercise:** (A small hands-on task or thought experiment)
+> 5.  **Practical Exercise:** (A small hands-on task or thinking question)
 > 
 > [Constraints and Interaction]:
 > 1.  All explanations must be completely accessible to someone like me [the background you define, e.g., “a liberal arts college student”], and avoid unnecessary technical jargon.
@@ -943,6 +950,7 @@ After asking again, I received the following:
 Feels like I'm just creating junk...
 
 ---
+<span id="about-markdown"></span>
 ## *About Markdown*
 
 **Me：** 

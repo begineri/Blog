@@ -11,16 +11,17 @@ To complete this experiment, you’ll first need to familiarize yourself with th
 
 #### QEMU Emulator
 Operating systems run on hardware, and to better manage the hardware resources of a computer system, an operating system is required.
-QEMU provides a simulated hardware environment—such as a CPU—that runs the executable files we ultimately [cross-compile](#交叉编译).
+QEMU provides a simulated hardware environment—such as a CPU—that runs the executable files we ultimately [cross-compile](#cross-compilation).
 
 ---
 
+<span id="cross-compilation"></span>
 #### Cross-Compilation
 There are two environments in the experiment
 - Platform A (Host): A jump server provided by the school; this is where we write code and run `make` commands.
 - Platform B (Target): The environment in which the MOS kernel currently under development is to run. In this experiment, this is a hardware environment emulated by QEMU, with a MIPS CPU architecture.
 
-To compile a program on A that runs on B, we need to use **a cross-compilation toolchain**—such as the ``mips-linux-gnu-gcc`` option in the [Makefile](#Makefile)—which translates C code into low-level binary instructions for the MIPS architecture.
+To compile a program on A that runs on B, we need to use **a cross-compilation toolchain**—such as the ``mips-linux-gnu-gcc`` tool in the [Makefile](#Makefile)—which translates C code into low-level binary instructions for the MIPS architecture.
 
 ---
 
@@ -38,7 +39,7 @@ $(modules): # Run make in each subdirectory
 
 Key takeaways:
 1. `all`:`make`—The Default Starting Point
-2. `$(modules)`: Compile separately in the `lib`, `init`, and `kern` subdirectories; the top-level directory is only responsible for uniformly calling [the linker `$(LD)` and the link script `kernel.lds` ](#链接器与链接脚本)to[ ](#链接器与链接脚本)assemble[ ](#链接器与链接脚本)them[ ](#链接器与链接脚本)into `mos.elf`
+2. `$(modules)`: Compile separately in the `lib`, `init`, and `kern` subdirectories; the top-level directory is only responsible for uniformly calling [the linker `$(LD)` and the link script `kernel.lds`](#linkers-and-link-scripts) to assemble them into `mos.elf`
 3. `include.mk`: This file configures a cross-compilation environment; by running `include include.mk` in the top-level Makefile, you can set up tools such as `gcc` or `ld`.
 
 ---
@@ -64,6 +65,7 @@ unsigned int entry_address = elf_header->e_entry;
 
 ---
 
+<span id="linkers-and-link-scripts"></span>
 #### Linkers and Link Scripts
 ##### Linker
 The compiler (gcc) is responsible for converting each `.c` source file into a separate `.o` object file. The linker’s task is to combine these scattered `.o` files into a complete, executable file (such as `mos.elf`).

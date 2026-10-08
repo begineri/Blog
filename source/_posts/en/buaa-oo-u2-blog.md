@@ -35,8 +35,8 @@ In this iteration, I experimented with “free competition” and “centralized
 - **The Producer-Consumer Model and Free Competition (Sixth Assignment):**
 The system was originally a typical multi-consumer order-grabbing model. `InputHandler`, as the sole data source, places passenger requests into `GlobalQueue`, which acts as a buffer tray.The system has no central dispatcher; the six elevators run in parallel as independent threads. Internally, `TaskAcquirer` actively “snatches orders” from the pool. This leaderless scheduling greatly reduces the risk of scheduling deadlocks. Combined with lifecycle management, the system safely terminates when `InputHandler` finishes reading and the system’s singleton global counter reaches `RequestCounter.getInstance().getCount() == 0`.
 - **Central Dispatcher Pattern (used in the seventh assignment):**
-With the introduction of dual-cabins and complex recovery instructions, simply rushing to accept orders blindly is no longer sufficient to achieve global optimality or coordinate the allocation between the two vehicles. Therefore, a single `DispatchThread` scheduler has been introduced. It serves as a pivotal hub that “bridges the gap”:
-  - **With `global:** `InputHandler``, wake up the suspended scheduler after submission.
+With the introduction of dual-cabins and complex recycle commands, simply rushing to accept orders blindly is no longer sufficient to achieve global optimality or coordinate the allocation between the two vehicles. Therefore, a single `DispatchThread` scheduler has been introduced. It serves as a pivotal hub that “bridges the gap”:
+  - **With the global queue:** after `InputHandler` delivers a request, it wakes the suspended scheduler.
   - **Regarding the elevator:** The dispatcher precisely locks onto the target elevator’s `receiveBuffer` and distributes the request, implicitly waking up the selected elevator that is on standby.
   - **System Changes:** When a power outage for maintenance or a conversion to a dual-car system occurs, the elevator thread clears out the passengers and returns them to `GlobalQueue`, thereby reawakening the dispatcher to perform reallocation.
 
@@ -98,13 +98,13 @@ Here are some real bugs I’ve discovered during these recent iterations and hac
     1. **`Strategy.java` Logical deadlock:** When Car A, at the transfer level, defaults to returning `WAIT`, and Car B receives a `RECYCLE` command requiring it to cross the transfer level, a permanent logical stalemate is formed (because the anti-collision logic prevents Car B from entering, and Car A is stuck and cannot exit).
     2. **Physical lock not properly released:** Encountered a forced interruption of sleep at `interrupt()` and called `moveToTargetAndClearPassengers`; due to the lack of rigor in handling this thrown interruption, the system terminated the code block prematurely, causing the elevator not only to leave the transfer level with `ReentrantLock` still unreleased but also preventing `lock.unlock()` from being executed.Subsequently, all other operations related to the two cabins that attempted to acquire this lock were permanently blocked.
   - **Solution:**
-    - `Strategy` Added monitoring of attached car status; if it is detected to be in the retrieval state at a transfer station, an empty car holding the lock will proactively give up its place in the queue to yield the right of way.
+    - `Strategy` Added monitoring of attached car status; if it is detected to be in the retrieval state at a transfer station, an empty car holding the lock will proactively stop waiting and yield.
     - During the handling of a forced state reset, the protection scope is strictly determined; as long as `lock != null && lock.isHeldByCurrentThread()` is explicitly guaranteed, `lock.unlock()` is immediately and safely executed within a finally block or similar structure, ensuring that the mutual exclusion lock for the collision-free space is returned with absolute safety.
 
 ### 2. Methods for Debugging Multithreading
 To address concurrent errors arising from multidimensional uncertainty, I have summarized the following solutions:
 - Using the data feeder provided by the discussion forum
-- Usage: `print Dafa`
+- Debugging by printing
 - AI-assisted debugging at the code or test case level
 
 ---

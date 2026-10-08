@@ -87,7 +87,7 @@ It looks simple, but it was actually the result of quite a bit of searching and 
 
 ## I was too confident, so I didn't back it up.
 ### Background
-It’s been over half a year since I last updated to the global version, so it’s time for another update. I’m planning to upgrade from version 15.831 to 15.864.
+It’s been over half a year since I last flashed the global ROM, so it’s time for another update. I’m planning to upgrade from version 15.831 to 15.864.
 I chose version 864 because it’s the latest version of OOS15. Any newer version would be OOS16, which was just released not long ago and represents a major version jump, so I decided to skip it.
 
 Before updating, I saw that this tutorial on OTA updates looked so simple that I was in a hurry to update. As a result, I didn’t back up my data at all, nor did I turn off the local module; I just started the process right away. After executing:
@@ -114,7 +114,7 @@ Compared to last time, I now have more experience—and Gemini’s constant assi
 
 It’s already past midnight (yes, yet another problem caused by flashing the ROM late at night). Faced with a phone stuck in an endless reboot loop and the data on it that I might never, ever see again, I’ve decided to go to sleep and tackle this with a clear head tomorrow morning... (See the next section for a detailed account of my thoughts.)
 When I woke up this morning, I tried the following again:
-- I started searching major forums (KuAn, XDA...), but didn't find much information.
+- I started searching major forums (Coolapk, XDA...), but didn't find much information.
 - Desperate, I tried to find a professional to save my bricked phone: I asked everyone I could find on forums, QQ groups, and Xianyu, but only two people, after hearing my description, said there was a small chance *the data could still be recovered;* the rest all said the only option was to wipe the device and flash the firmware.
 - *Struggling to save* the *data that wasn’t backed up*, I’m cautiously trying out the methods suggested by AI.
 - Key Points and Turning Points: Using the earlier full firmware package, I flashed the new system in full once more.
@@ -157,7 +157,7 @@ There’s no denying that, in the end, we managed to preserve the data thanks to
 ## Goal-Oriented Learning
 I flash my phone’s firmware not because I’m particularly interested in the process or want to study the underlying principles (though, of course, as I’ve delved deeper, I’ve gradually discovered the fun in it), but purely for practical reasons: I want my new phone to have the Google framework, a clean international version of the OS, and the freedom to customize it however I like after flashing.
 
-With this goal in mind, I started researching from scratch how to achieve it. As mentioned earlier, when I first downloaded KuAn, I had no idea what any of the terms meant. All I could do was bookmark a post and close the app—a one-step process—hoping to find a reliable guide I could follow exactly. At the same time, I checked out some educational articles and videos to brush up on the theory.Eventually, I found this tailor-made tutorial on XDA, and all that was left was to take action.
+With this goal in mind, I started researching from scratch how to achieve it. As mentioned earlier, when I first downloaded Coolapk, I had no idea what any of the terms meant. All I could do was bookmark a post and then close the app, hoping to find a reliable guide I could follow exactly. At the same time, I checked out some educational articles and videos to brush up on the theory.Eventually, I found this tailor-made tutorial on XDA, and all that was left was to take action.
 
 Of course, taking action requires **determination**, and with less than a week until school starts and the loss of the comforts of home just around the corner, these are great motivators.
 

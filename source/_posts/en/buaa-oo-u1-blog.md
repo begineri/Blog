@@ -11,16 +11,17 @@ This post is a summary of the iterative assignments from Unit 1 of the 2026 Obje
 
 ## Table of Contents:
 
-- [Program Structure](#程序结构)
-- [Experiences in Architecture Design](#架构设计体验)
-- [Design Patterns Used](#设计模式)
-- [Analyzing Bugs in My Own Programs](#分析自己程序的bug)
-- [Using Large Language Models](#大模型相关使用)
-- [Future Directions](#未来方向)
-- [Food for thought](#思考题)
+- [Program Structure](#program-structure)
+- [Experiences in Architecture Design](#experiences-in-architecture-design)
+- [Design Patterns Used](#design-patterns)
+- [Analyzing Bugs in My Own Programs](#analyzing-bugs-in-my-own-programs)
+- [Using Large Language Models](#using-large-language-models)
+- [Future Directions](#future-directions)
+- [Thinking Questions](#thinking-questions)
 
 ---
 
+<span id="program-structure"></span>
 ## Program Structure
 The following data is analyzed from the code in the final iteration. The entire project consists of 20 core business classes, with a total of approximately 1,080 lines of business code, including 126 methods.
 
@@ -42,9 +43,9 @@ Complete class diagram for hw3:
    - In the whole project, there are 126 methods, with an average of just 8.16 lines of code per method.
    - The longest method, ``Mono.toString()``, is 47 lines long, while the core logic for differentiation (the ``derive`` method for various node types) typically ranges from 2 to 5 lines.
 
-4. Controlling the Number of Branches (Circle Complexity v(G))
-   - The average cycle complexity (v(G)) for the entire project is only 1.93.
-   - Extremely low circle complexity is a direct benefit of the polymorphism (dynamic dispatch) mechanism. This architecture completely eliminates the verbose `if-else / switch`-type checks found in traditional procedural programming, delegating common operations to their respective subclasses and achieving true O(1) logical addressing.
+4. Controlling the Number of Branches (cyclomatic complexity v(G))
+   - The average cyclomatic complexity (v(G)) for the entire project is only 1.93.
+   - Extremely low cyclomatic complexity is a direct benefit of the polymorphism (dynamic dispatch) mechanism. This architecture completely eliminates the verbose `if-else / switch`-type checks found in traditional procedural programming, delegating common operations to their respective subclasses and achieving true O(1) logical addressing.
 
 ---
 
@@ -78,13 +79,14 @@ For low-level polynomial operations (such as `mulP`) and substitution operations
 
 - Cons:
   1. Memory Overhead Caused by HashMap:
-To achieve $O(1)$ performance for merging like terms, the underlying code instantiates a large number of `MonoKey` and `Mono` objects. When handling extremely nested power-of-n test cases (such as the expansion of `expP(8)` to very high powers), this generates a large number of short-lived objects, placing significant memory pressure on the JVM’s garbage collection (GC).In the future, we may consider introducing **the Flyweight Pattern** to cache certain monomial characteristics.
+To achieve $O(1)$ performance for merging like terms, the underlying code instantiates a large number of `MonoKey` and `Mono` objects. When handling extremely nested power-of-n test cases (such as the expansion of `expP(8)` to very high powers), this generates a large number of short-lived objects, placing significant memory pressure on the JVM’s garbage collection (GC).In the future, I may consider introducing **the Flyweight Pattern** to cache certain monomial characteristics.
   2. Extensibility Limitations of the Interpreter Pattern:
 The current architecture hard-codes the `derive` and `toPoly` methods directly into each AST node class. If future requirements increase (for example, if support for integration operations is needed), it will be necessary to open the source code of each class to make modifications, which to some extent violates the “Open-Closed Principle (OCP).”
 In subsequent refactoring, **the Visitor Pattern** can be introduced. The AST can be completely reduced to a pure data structure, and operations such as “derivative calculation” and “simplification” can be abstracted into independent Visitor classes, thereby achieving complete decoupling of data and algorithms.
 
 ---
 
+<span id="experiences-in-architecture-design"></span>
 ## Experiences in Architecture Design
 This assignment went through three iterations, and during that process, the architecture
 ### The Iteration Process
@@ -105,7 +107,7 @@ public class Main {
 }
 ```
 As can be seen, the overall approach based on **the Recursive Descent algorithm** was established from the very beginning, and the basic abstract syntax tree (AST) for `Expr -> Term -> Factor` was constructed.`Lexer-Parser`
-At this point, we only need to handle simple polynomial merging and simplification.
+At this point, I only need to handle simple polynomial merging and simplification.
 
 * hw2
 With the introduction of nested parentheses (expression factors) and exponential functions (`exp`), simple AST traversal is insufficient to handle extremely complex algebraic expansions.
@@ -120,7 +122,7 @@ To expand recursive functions, I use the concept of memoization. By caching the 
 
 #### Analysis of Custom Iteration Scenarios and Scalability
 
-Suppose the next time we need to introduce trigonometric functions (sin, cos) and support nested complex expressions and chain rule differentiation within them.
+Suppose the next time I need to introduce trigonometric functions (sin, cos) and support nested complex expressions and chain rule differentiation within them.
 
 Here are the scalability solutions for the current design:
 
@@ -147,7 +149,7 @@ By using Interface `Factor`, when Object `Term` calls Method `derive()` on the L
 Methods `public static Expr zero()` and `public static Expr of(Factor... factors)`, written in the ``Expr`` class, provide clear and semantically meaningful names for the object creation process.In future development, if you decide that method ``Expr.zero()`` should no longer create a new object via ``new Expr()`` every time, but instead return a cached, immutable singleton object, you can easily implement this change without modifying any existing code that calls this method.
 
 3. **Singleton Pattern**
-Since there is only one function template in the entire program, we implement the singleton pattern for it:
+Since there is only one function template in the entire program, I implement the singleton pattern for it:
 ```java
 public class FuncDefinition {
     public static final FuncDefinition INSTANCE = new FuncDefinition();
@@ -199,11 +201,12 @@ public class DerivativeVisitor implements ASTVisitor {
 
 ---
 
+<span id="analyzing-bugs-in-my-own-programs"></span>
 ## Analyzing Bugs in My Own Programs
 
 ![alt text](/images/oou1/image-3.png)
 
-There’s not much to write about this section, since we achieved **zero bugs** in all three rounds of mandatory and peer testing—thanks in part to the principle emphasized by Professor RWG:
+There’s not much to write about this section, since I achieved **zero bugs** in all three rounds of mandatory and peer testing—thanks in part to the principle emphasized by Professor RWG:
 > **Don’t sacrifice correctness for performance**
 
 In the second and third iterations, I first ensured the correctness of polynomial merging without focusing on extracting and simplifying coefficients inside `exp` expressions. As a result, my optimization score may not be very high, but this was indeed the method I used to ensure the program was bug-free.
@@ -222,7 +225,7 @@ Actually, there’s one more thing I want to vent about HW3: I didn’t do much 
 ### Analysis of the optimizations I’ve made
 
 1. $O(1)$ Merging of Like Terms Based on Hashing and Canonicalization
-In polynomial multiplication and higher-order expansions (such as `(x+1)^8`), if we use the traditional two-layer, `List`-pass method to compare like terms, the time complexity will reach a catastrophic $O(N^2)$.
+In polynomial multiplication and higher-order expansions (such as `(x+1)^8`), if I use the traditional two-layer, `List`-pass method to compare like terms, the time complexity will reach a catastrophic $O(N^2)$.
 By extracting the immutable mathematical characteristics of monomials (the exponent of x, the exponent of y, and the contents of nested expressions), encapsulate them into Class `MonoKey`, and override methods `equals` and `hashCode`.
 Implemented fast coefficient merging using `HashMap<MonoKey, BigInteger>`.
 
@@ -242,6 +245,7 @@ public interface AstNode<T> extends
 
 ----
 
+<span id="using-large-language-models"></span>
 ## Using Large Language Models
 ### Code Generation Usage
 * Percentage of AI-generated code: 0%
@@ -250,7 +254,7 @@ public interface AstNode<T> extends
 ### Practical Applications and Insights on Large Language Models
 Although I don’t have large language models generate code directly, they actually play a significant role in my coding process:
 
-Unlike when I was learning C, where we started with every single syntax rule and every detail, in the OO course we were immediately faced with problem statements of over a thousand characters and hundreds of lines of code to write. This meant that we had to teach ourselves all the Java syntax and the details of implementing these tasks.
+Unlike when I was learning C, where I started with every single syntax rule and every detail, in the OO course I were immediately faced with problem statements of over a thousand characters and hundreds of lines of code to write. This meant that I had to teach myself all the Java syntax and the details of implementing these tasks.
 
 There are many ways to teach yourself: reading JDK documentation, checking out online resources like Runoob (菜鸟教程), taking online courses, or simply asking an AI.It’s easy to imagine that in the past, when people were learning Java, they would scour various documentation and tutorials (I did the same when I was learning C last year), but such searches were often time-consuming and lacked depth. Today, AI can essentially replace that entire process.
 For example, if I want to learn about *the singleton pattern*, I can simply ask the AI, and it will provide different ways to implement it. Furthermore, you can ask it which one is best suited for my specific task, or what the underlying principles of the singleton pattern are.
@@ -271,14 +275,16 @@ It worked pretty well at first, but as the context grew, the LLM would sometimes
 All in all, using AI has definitely improved my Java skills, cultivated my object-oriented mindset, and given me a deeper understanding of some underlying principles (by asking LLMs questions whenever I needed to). I also believe that I’ll learn more by using AI technology than I would without it—the key is using it correctly.
 
 ---
+<span id="future-directions"></span>
 ## Future Directions
-How do you think we could modify the lessons in Unit 1 to help everyone learn the material more effectively?
+How do you think I could modify the lessons in Unit 1 to help everyone learn the material more effectively?
 
 You could provide more tutorials or tips on the design patterns or specific syntax used in the assignments. The WeChat Official Account article from the first iteration was very helpful for my design, so I hope there will be similar guidance for each assignment.
 
 ---
 
-## Food for thought
+<span id="thinking-questions"></span>
+## Thinking Questions
 1. How do you check if input meets the requirements? This includes spaces, consecutive symbols, and more.
 
    1. Blocking Invalid Combinations

@@ -471,7 +471,7 @@ html {
   margin: 0;
   padding: 0;
   height: 100%;
-  border-top: 2px solid #22272a;
+  border-top: none;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
 }
@@ -1090,7 +1090,7 @@ body {
 }
 article header .posttitle {
   margin-top: 0;
-  margin-bottom: 0;
+  margin-bottom: 0.75rem;
   text-transform: none;
   font-size: 1.5em;
   line-height: 1.25;
@@ -1679,14 +1679,14 @@ code {
 #header-post #actions {
   direction: ltr !important;
 }
-/* Language switch: fixed top-right, independent of nav */
+/* Language switch: fixed top-right; on post desktop sit left of hamburger */
 .lang-switch {
   position: fixed;
   top: 1rem;
   right: 1rem;
   z-index: 200;
   font-size: 0.85rem;
-  line-height: 1;
+  line-height: 1.25;
   letter-spacing: 0.02em;
 }
 .lang-switch a {
@@ -1704,4 +1704,12 @@ code {
   margin: 0 0.35rem;
   color: #cc2a41;
   opacity: 0.55;
+}
+/* #header-post shows from 501px up; keep clear of menu-icon (margin-right: 2rem) */
+@media screen and (min-width: 501px) {
+  body.is-post .lang-switch {
+    top: 2rem;
+    right: 4.25rem;
+    padding-top: 0.15rem;
+  }
 }

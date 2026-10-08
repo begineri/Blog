@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+
+<html lang=&#34;en&#34;>
+<head>
+    
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="The Truth About Flashing ROMs:  No flashing ROMs at night Back up your device before flashing the ROM    FLASH AT YOUR OWN RISKPLEASE READ ALL OF THIS BEFORE FLASHING  Background Device: OnePlus 13 E">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flashing and Brick Recovery Logs">
+<meta property="og:url" content="https://begineri.github.io/Blog/en/2026/02/16/phone-flashing-notes/index.html">
+<meta property="og:site_name" content="My Blog">
+<meta property="og:description" content="The Truth About Flashing ROMs:  No flashing ROMs at night Back up your device before flashing the ROM    FLASH AT YOUR OWN RISKPLEASE READ ALL OF THIS BEFORE FLASHING  Background Device: OnePlus 13 E">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/%E5%88%B7%E6%9C%BA/image-1.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/%E5%88%B7%E6%9C%BA/image-2.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/%E5%88%B7%E6%9C%BA/image-3.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/%E5%88%B7%E6%9C%BA/image-4.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/%E5%88%B7%E6%9C%BA/image-5.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/%E5%88%B7%E6%9C%BA/image.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/%E5%88%B7%E6%9C%BA/image-6.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/%E5%88%B7%E6%9C%BA/1.png">
+<meta property="article:published_time" content="2026-02-16T16:03:52.000Z">
+<meta property="article:modified_time" content="2026-10-08T23:10:32.866Z">
+<meta property="article:author" content="Wang">
+<meta property="article:tag" content="flashing">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://begineri.github.io/Blog/images/%E5%88%B7%E6%9C%BA/image-1.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/Blog/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/Blog/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/Blog/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Flashing and Brick Recovery Logs</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/Blog/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 8.1.1"><link rel="alternate" href="/Blog/en/atom.xml" title="My Blog" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr is-post">
+    
+<nav class="lang-switch" aria-label="Language">
+  <a href="/Blog/zh-CN/2026/02/16/phone-flashing-notes/" class="">中</a>
+  <span class="lang-switch__sep" aria-hidden="true">|</span>
+  <a href="/Blog/en/2026/02/16/phone-flashing-notes/" class="is-active">EN</a>
+</nav>
+
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top"
+    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i
+      class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       -->
+          <li><a href="/Blog/en/">
+              Home
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/en/about/">
+              About
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/en/archives/">
+              Articles
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/en/tags/">
+              Tags
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/en/changelog/">
+              Logs
+            </a></li><!--
+     -->
+          
+      </ul>
+      
+<nav class="lang-switch lang-switch--inline" aria-label="Language">
+  <a href="/Blog/zh-CN/2026/02/16/phone-flashing-notes/" class="">中</a>
+  <span class="lang-switch__sep" aria-hidden="true">|</span>
+  <a href="/Blog/en/2026/02/16/phone-flashing-notes/" class="is-active">EN</a>
+</nav>
+
+    </span>
+    <br />
+    <span id="actions">
+      <ul>
+        
+        
+          <li><a class="icon" aria-label="Previous post" href="/Blog/en/2026/03/27/buaa-oo-u1-blog/"><i
+                class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();"
+                onmouseout="$('#i-prev').toggle();"></i></a></li>
+          
+            
+              <li><a class="icon" aria-label="Next post" href="/Blog/en/2025/12/25/co-pitfalls/"><i
+                    class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();"
+                    onmouseout="$('#i-next').toggle();"></i></a></li>
+              
+                <li><a class="icon" aria-label="Back to top" href="#"
+                    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up"
+                      aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a>
+                </li>
+                <li><a class="icon" aria-label="Share post" href="#"><i
+                      class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();"
+                      onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">
+        Previous post
+      </span>
+      <span id="i-next" class="info" style="display:none;">
+        Next post
+      </span>
+      <span id="i-top" class="info" style="display:none;">
+        Back to top
+      </span>
+      <span id="i-share" class="info" style="display:none;">
+        Share post
+      </span>
+    </span>
+    <br />
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://begineri.github.io/Blog/en/2026/02/16/phone-flashing-notes/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://begineri.github.io/Blog/en/2026/02/16/phone-flashing-notes/&text=Flashing and Brick Recovery Logs"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://begineri.github.io/Blog/en/2026/02/16/phone-flashing-notes/&title=Flashing and Brick Recovery Logs"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://begineri.github.io/Blog/en/2026/02/16/phone-flashing-notes/&is_video=false&description=Flashing and Brick Recovery Logs"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Flashing and Brick Recovery Logs&body=Check out this article: https://begineri.github.io/Blog/en/2026/02/16/phone-flashing-notes/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://begineri.github.io/Blog/en/2026/02/16/phone-flashing-notes/&title=Flashing and Brick Recovery Logs"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://begineri.github.io/Blog/en/2026/02/16/phone-flashing-notes/&title=Flashing and Brick Recovery Logs"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://begineri.github.io/Blog/en/2026/02/16/phone-flashing-notes/&title=Flashing and Brick Recovery Logs"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://begineri.github.io/Blog/en/2026/02/16/phone-flashing-notes/&title=Flashing and Brick Recovery Logs"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://begineri.github.io/Blog/en/2026/02/16/phone-flashing-notes/&name=Flashing and Brick Recovery Logs&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://begineri.github.io/Blog/en/2026/02/16/phone-flashing-notes/&t=Flashing and Brick Recovery Logs"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <!-- 
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Background"><span class="toc-number">1.</span> <span class="toc-text">Background</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Motivation"><span class="toc-number">2.</span> <span class="toc-text">Motivation</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Action"><span class="toc-number">3.</span> <span class="toc-text">Action</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Ultimate-Goal"><span class="toc-number">3.1.</span> <span class="toc-text">Ultimate Goal</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Steps"><span class="toc-number">3.2.</span> <span class="toc-text">Steps</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Installed-Modules"><span class="toc-number">3.3.</span> <span class="toc-text">Installed Modules</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Final-Results"><span class="toc-number">3.4.</span> <span class="toc-text">Final Results</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Brick-Rescue"><span class="toc-number">4.</span> <span class="toc-text">Brick Rescue</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Consequences-of-Haphazardly-Installing-Modules"><span class="toc-number">4.1.</span> <span class="toc-text">The Consequences of Haphazardly Installing Modules</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#How-It-All-Began"><span class="toc-number">4.1.1.</span> <span class="toc-text">How It All Began</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#The-Process-of-Rescuing-a-Bricked-Device"><span class="toc-number">4.1.2.</span> <span class="toc-text">The Process of Rescuing a Bricked Device</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#I-was-too-confident-so-I-didn%E2%80%99t-back-it-up"><span class="toc-number">4.2.</span> <span class="toc-text">I was too confident, so I didn’t back it up.</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Background-1"><span class="toc-number">4.2.1.</span> <span class="toc-text">Background</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Brick-Rescue-1"><span class="toc-number">4.2.2.</span> <span class="toc-text">Brick Rescue</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Post-Flash-Notes"><span class="toc-number">5.</span> <span class="toc-text">Post-Flash Notes</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Despair-and-Helplessness-Faced-with-Data-That-May-Be-Lost-Forever"><span class="toc-number">5.1.</span> <span class="toc-text">The Despair and Helplessness Faced with Data That May Be Lost Forever</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Same-Old-AI-Issues"><span class="toc-number">5.2.</span> <span class="toc-text">The Same Old AI Issues</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Goal-Oriented-Learning"><span class="toc-number">5.3.</span> <span class="toc-text">Goal-Oriented Learning</span></a></li></ol></li></ol>
+      </div>
+     -->
+    
+        <div id="toc">
+          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Background"><span class="toc-number">1.</span> <span class="toc-text">Background</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Motivation"><span class="toc-number">2.</span> <span class="toc-text">Motivation</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Action"><span class="toc-number">3.</span> <span class="toc-text">Action</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Ultimate-Goal"><span class="toc-number">3.1.</span> <span class="toc-text">Ultimate Goal</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Steps"><span class="toc-number">3.2.</span> <span class="toc-text">Steps</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Installed-Modules"><span class="toc-number">3.3.</span> <span class="toc-text">Installed Modules</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Final-Results"><span class="toc-number">3.4.</span> <span class="toc-text">Final Results</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Brick-Rescue"><span class="toc-number">4.</span> <span class="toc-text">Brick Rescue</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Consequences-of-Haphazardly-Installing-Modules"><span class="toc-number">4.1.</span> <span class="toc-text">The Consequences of Haphazardly Installing Modules</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#How-It-All-Began"><span class="toc-number">4.1.1.</span> <span class="toc-text">How It All Began</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#The-Process-of-Rescuing-a-Bricked-Device"><span class="toc-number">4.1.2.</span> <span class="toc-text">The Process of Rescuing a Bricked Device</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#I-was-too-confident-so-I-didn%E2%80%99t-back-it-up"><span class="toc-number">4.2.</span> <span class="toc-text">I was too confident, so I didn’t back it up.</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Background-1"><span class="toc-number">4.2.1.</span> <span class="toc-text">Background</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Brick-Rescue-1"><span class="toc-number">4.2.2.</span> <span class="toc-text">Brick Rescue</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Post-Flash-Notes"><span class="toc-number">5.</span> <span class="toc-text">Post-Flash Notes</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Despair-and-Helplessness-Faced-with-Data-That-May-Be-Lost-Forever"><span class="toc-number">5.1.</span> <span class="toc-text">The Despair and Helplessness Faced with Data That May Be Lost Forever</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Same-Old-AI-Issues"><span class="toc-number">5.2.</span> <span class="toc-text">The Same Old AI Issues</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Goal-Oriented-Learning"><span class="toc-number">5.3.</span> <span class="toc-text">Goal-Oriented Learning</span></a></li></ol></li></ol>
+        </div>
+        
+  </span>
+</div>
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Flashing and Brick Recovery Logs
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Wang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2026-02-16T16:03:52.000Z" class="dt-published" itemprop="datePublished">2026-02-16</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        
+          <a class="p-category" href="/Blog/en/tags/flashing/">flashing</a>
+        
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <blockquote>
+<p>The Truth About Flashing ROMs:</p>
+<ul>
+<li>No flashing ROMs at night</li>
+<li>Back up your device before flashing the ROM</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><strong><strong>FLASH AT YOUR OWN RISK</strong></strong><br><strong><strong>PLEASE READ ALL OF THIS BEFORE FLASHING</strong></strong></p>
+</blockquote>
+<h1 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h1><ul>
+<li>Device: OnePlus 13</li>
+<li>Experience: 0</li>
+<li>Tools: Computer, Internet, forums</li>
+</ul>
+<h1 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h1><p>My old phone was with me throughout my three years of high school and the first half of my college years. After three years of (relatively) heavy use, it ran out of storage space and its battery life became poor, so it was finally time for an upgrade.</p>
+<p>My old phone was a Honor, which couldn’t install the Google framework, let alone be flashed. Back then, being young and naive, I had no choice but to put up with all sorts of ads I couldn’t delete, extremely low privacy, and terrible ad experiences.</p>
+<p>Finally, I saw a content creator I really like recommend the OnePlus 13, and that’s <em>when</em> I <em>first</em> learned about the concept of flashing a ROM—it felt like a whole new world had opened up to me.</p>
+<p>Skipping over the process of going from knowing absolutely nothing about terms like “flashing,” “BL,” “root,” and “ROM,” to buying a phone, to searching high and low for tutorials, I finally decided to start flashing my phone during the last week of the summer break in 2025, right before heading back to school.</p>
+<h1 id="Action"><a href="#Action" class="headerlink" title="Action"></a>Action</h1><p>As a leading choice for flashing today, OnePlus has a wealth of tutorials and an active forum. I ultimately decided to follow a tutorial on XDA to flash my device:</p>
+<p><a target="_blank" rel="noopener" href="https://xdaforums.com/t/pjz110-21-jan-coloros-to-oxygenos-glo-in-eu-16-0-3-501-na-16-0-1-304.4707431/">[PJZ110][21 Jan] ColorOS to OxygenOS</a></p>
+<h2 id="Ultimate-Goal"><a href="#Ultimate-Goal" class="headerlink" title="Ultimate Goal"></a>Ultimate Goal</h2><p>To take full advantage of Google services and minimize the built-in ads on my phone, I chose to flash the OnePlus <strong>Global</strong> Edition ROM—the one mentioned in the title here: <code>from ColorOS to OxygenOS</code>.</p>
+<h2 id="Steps"><a href="#Steps" class="headerlink" title="Steps"></a>Steps</h2><ol>
+<li>Backing Up System Files</li>
+<li>Unlocking the Bootloader (BL)<br><img src="/Blog/images/%E5%88%B7%E6%9C%BA/image-1.png" alt="alt text"></li>
+<li>Flashing the Global Version (Flash)<br><img src="/Blog/images/%E5%88%B7%E6%9C%BA/image-2.png" alt="alt text"><br>Gaining Root Access<br><img src="/Blog/images/%E5%88%B7%E6%9C%BA/image-3.png" alt="alt text"></li>
+<li>Installing modules, hiding environments, etc.<br><img src="/Blog/images/%E5%88%B7%E6%9C%BA/image-4.png" alt="alt text"></li>
+</ol>
+<h2 id="Installed-Modules"><a href="#Installed-Modules" class="headerlink" title="Installed Modules"></a>Installed Modules</h2><ul>
+<li>Fix Signal OnePlus 13: Dedicated to fixing signal issues</li>
+<li>Zygisk Next </li>
+<li>Play Integrity Fix (Tricky Store): Passing Google’s Security Verification</li>
+<li>Wi-Fi 7 Enabler: Unlocking the Wi-Fi 7 (6 GHz) Band</li>
+<li>LSPosed: Primarily for using LuckyTool, which is optimized specifically for OnePlus phones.</li>
+<li>Zygisk Assistant</li>
+</ul>
+<h2 id="Final-Results"><a href="#Final-Results" class="headerlink" title="Final Results"></a>Final Results</h2><p>After a day of tinkering, I successfully flashed the global version of the OS and am now happily using it.<br>Although there are some hardware compatibility issues—such as NFC not working in certain situations and location data for weather apps being erratic—I’m willing to put up with these trade-offs in exchange for a relatively clean system.<br><img src="/Blog/images/%E5%88%B7%E6%9C%BA/image-5.png" alt="alt text"></p>
+<hr>
+<h1 id="Brick-Rescue"><a href="#Brick-Rescue" class="headerlink" title="Brick Rescue"></a>Brick Rescue</h1><p>Of course, when you’re flashing a ROM for the first time, even if you expect everything to go smoothly, something’s bound to go wrong. Here are my two crashes and miraculous recoveries so far.</p>
+<blockquote>
+<p>Let’s keep this truth about flashing ROMs in mind once again:</p>
+<ul>
+<li>No flashing ROMs at night</li>
+<li>Back up your device before flashing the ROM</li>
+</ul>
+</blockquote>
+<h2 id="The-Consequences-of-Haphazardly-Installing-Modules"><a href="#The-Consequences-of-Haphazardly-Installing-Modules" class="headerlink" title="The Consequences of Haphazardly Installing Modules"></a>The Consequences of Haphazardly Installing Modules</h2><h3 id="How-It-All-Began"><a href="#How-It-All-Began" class="headerlink" title="How It All Began"></a>How It All Began</h3><p>After flashing my device for the first time and gaining root access, faced with such a wide variety of modules to choose from, I downloaded every one that looked interesting, one by one. Even though I installed them one at a time, problems still arose—and that’s when I made my first mistake: never flash your device at night.</p>
+<p>Just before going to bed, I hurriedly installed a few modules, tapped through them briefly to test them out, and felt reassured enough to put my phone down and go to sleep. When I woke up, I found that my phone was turned off and showed that the battery was completely dead (it had been at over 40% the night before), and after plugging it in to charge, it got stuck in a reboot loop.<br>Looking back, the main cause was probably a <strong>charging module</strong> I installed that night (which just goes to show that you should be careful with battery-related modules). I’m not sure if there were any other contributing factors, but in any case, it won’t turn on now.</p>
+<h3 id="The-Process-of-Rescuing-a-Bricked-Device"><a href="#The-Process-of-Rescuing-a-Bricked-Device" class="headerlink" title="The Process of Rescuing a Bricked Device"></a>The Process of Rescuing a Bricked Device</h3><p>Here’s how I went about it:</p>
+<ul>
+<li>Since this is a module issue, I tried using key presses to disable all KernelSU modules at startup: it failed, and I couldn’t disable them.</li>
+<li>Unroot the device, and the module will naturally stop working: Specifically, I reflashed the stock init_boot partition, and the device did indeed boot up successfully in the end.</li>
+</ul>
+<p>It looks simple, but it was actually the result of quite a bit of searching and trial and error. It seems natural and easy to understand now, but at the time, I spent a long time searching all over the web before I could confirm this method. I even went to customer service at one point, but just as I was about to demonstrate my reboot loop to them, my phone <em>miraculously</em> restarted right then and there(I hadn’t been able to do it before—even though I’d flashed <code>init_boot</code>, once I regained root access and flashed the patched <code>init_boot</code> partition back, the phone got stuck in a boot loop again).If I hadn’t succeeded here, I would have had to wipe all my data, but I don’t know what prerequisite was met at that moment—everything returned to normal, and the crisis was over.</p>
+<h2 id="I-was-too-confident-so-I-didn’t-back-it-up"><a href="#I-was-too-confident-so-I-didn’t-back-it-up" class="headerlink" title="I was too confident, so I didn’t back it up."></a>I was too confident, so I didn’t back it up.</h2><h3 id="Background-1"><a href="#Background-1" class="headerlink" title="Background"></a>Background</h3><p>It’s been over half a year since I last flashed the global ROM, so it’s time for another update. I’m planning to upgrade from version 15.831 to 15.864.<br>I chose version 864 because it’s the latest version of OOS15. Any newer version would be OOS16, which was just released not long ago and represents a major version jump, so I decided to skip it.</p>
+<p>Before updating, I saw that this tutorial on OTA updates looked so simple that I was in a hurry to update. As a result, I didn’t back up my data at all, nor did I turn off the local module; I just started the process right away. After executing:</p>
+<ol>
+<li>Launch the local installation</li>
+<li>Download the installation package on the computer (REPO)</li>
+<li>Install on Your Phone</li>
+<li>KSU Install to inactive slot (After OTA)</li>
+<li>Select “Restart” in the software update section</li>
+</ol>
+<p>Based entirely on the following tutorial:<br><img src="/Blog/images/%E5%88%B7%E6%9C%BA/image.png" alt="参考"></p>
+<p>After that sequence of steps, it wouldn’t turn on again.</p>
+<h3 id="Brick-Rescue-1"><a href="#Brick-Rescue-1" class="headerlink" title="Brick Rescue"></a>Brick Rescue</h3><p>Current Status: This OnePlus model uses an A&#x2F;B partition design with seamless updates. Currently, the new version is on the B partition, the old version is on the A partition, and the data partition is shared.</p>
+<p>Compared to last time, I now have more experience—and Gemini’s constant assistance (and interference)—so I tried the following steps in order:</p>
+<ul>
+<li>Tried booting from partition a: Failed</li>
+<li>Restoring the original <code>init_boot</code> on both the A and B partitions: Failed</li>
+<li>Cancel merge update <code>snapshot-update cancel</code>: Failed</li>
+<li>Restored the stock vbmeta, boot, and other partitions: Things got even worse</li>
+</ul>
+<p>It’s already past midnight (yes, yet another problem caused by flashing the ROM late at night). Faced with a phone stuck in an endless reboot loop and the data on it that I might never, ever see again, I’ve decided to go to sleep and tackle this with a clear head tomorrow morning… (See the next section for a detailed account of my thoughts.)<br>When I woke up this morning, I tried the following again:</p>
+<ul>
+<li>I started searching major forums (Coolapk, XDA…), but didn’t find much information.</li>
+<li>Desperate, I tried to find a professional to save my bricked phone: I asked everyone I could find on forums, QQ groups, and Xianyu, but only two people, after hearing my description, said there was a small chance <em>the data could still be recovered;</em> the rest all said the only option was to wipe the device and flash the firmware.</li>
+<li><em>Struggling to save</em> the <em>data that wasn’t backed up</em>, I’m cautiously trying out the methods suggested by AI.</li>
+<li>Key Points and Turning Points: Using the earlier full firmware package, I flashed the new system in full once more.</li>
+<li>Disable vbmeta validation as follows:<br><img src="/Blog/images/%E5%88%B7%E6%9C%BA/image-6.png" alt="alt text"></li>
+</ul>
+<p>And with that, it’s successfully booted up!<br>Even though root was lost, the data is still intact, and the update was successful!</p>
+<hr>
+<h1 id="Post-Flash-Notes"><a href="#Post-Flash-Notes" class="headerlink" title="Post-Flash Notes"></a>Post-Flash Notes</h1><h2 id="The-Despair-and-Helplessness-Faced-with-Data-That-May-Be-Lost-Forever"><a href="#The-Despair-and-Helplessness-Faced-with-Data-That-May-Be-Lost-Forever" class="headerlink" title="The Despair and Helplessness Faced with Data That May Be Lost Forever"></a>The Despair and Helplessness Faced with Data That May Be Lost Forever</h2><p>The world of data, unlike the real world, is intangible and cannot be touched. So it’s possible that one second your photos and data are perfectly intact, and the next, you can no longer access them.To put it more positively, if the device hasn’t been completely formatted, your data still lies in that ocean of 0s and 1s—or, one might even say, within those transistors—though I’m simply unable to decipher it.</p>
+<p>On that night when my phone wouldn’t turn on—and I faced the possibility of losing all the data on it—I thought about a lot of things.<br>Let me start by considering the worst-case scenario: What do I have on my phone that’s one-of-a-kind and would be lost forever if I formatted it?</p>
+<ul>
+<li>Photos: My photo album contains pictures from the past six months or so, including photos from trips with friends and classmates. The most precious ones are the many photos from my trip to Sri Lanka last month. I haven’t backed any of these up, and I’ve only sent a few of the Sri Lanka photos to friends; other than that, the photos are only on my phone.<br>If I can’t recover these photos, I’m prepared to console myself with the thought that it’s enough to have those wonderful memories stored in my mind…</li>
+<li>WeChat chat history: Although the records on my computer and phone are usually synchronized, there are a few instances where the messages on my computer are incomplete. However, this is still acceptable.</li>
+<li>Notes: Contains some notes</li>
+<li>Other system and desktop settings, etc…</li>
+</ul>
+<p>In short, I was trying to imagine the worst-case scenario and prepare myself mentally. Even so, that night, I lay in bed tossing and turning, my mind a tangled mess. I wanted to die along with my data.</p>
+<p>Faced with such precious yet fragile data, we are helpless in this situation.<br>Recovering that data in the end was the result of my last-ditch effort.</p>
+<p>To be honest, both times I managed to fix things by sheer luck. Why doesn’t this approach work? Why does that one work?<br>I still haven’t figured out exactly what went wrong (feel free to discuss in the comments), but I tried this one that looked promising, then that one that seemed reliable, and after one step, it magically booted up—my data was back, and I was saved from the brink of disaster.</p>
+<h2 id="The-Same-Old-AI-Issues"><a href="#The-Same-Old-AI-Issues" class="headerlink" title="The Same Old AI Issues"></a>The Same Old AI Issues</h2><p>In 99% of cases, when AI encounters something it’s unsure about or simply doesn’t know, it will just make up an answer. If we blindly accept or carelessly copy and paste those instructions without critical thinking, we’re likely to make an already bad situation even worse—to the point where it becomes unsolvable.We fall into this trap time and time again, and it’s only after we’ve fallen in that we remind ourselves to be more cautious next time.</p>
+<p>(Screenshot of despair) Cut your losses while you can<br><img src="/Blog/images/%E5%88%B7%E6%9C%BA/1.png" alt="alt text"></p>
+<p>There’s no denying that, in the end, we managed to preserve the data thanks to a solution that AI and I worked out together through trial and error. So it’s not that AI can’t provide the right answer—it’s that humans are needed to make the most critical <strong>decisions and judgments</strong>.</p>
+<h2 id="Goal-Oriented-Learning"><a href="#Goal-Oriented-Learning" class="headerlink" title="Goal-Oriented Learning"></a>Goal-Oriented Learning</h2><p>I flash my phone’s firmware not because I’m particularly interested in the process or want to study the underlying principles (though, of course, as I’ve delved deeper, I’ve gradually discovered the fun in it), but purely for practical reasons: I want my new phone to have the Google framework, a clean international version of the OS, and the freedom to customize it however I like after flashing.</p>
+<p>With this goal in mind, I started researching from scratch how to achieve it. As mentioned earlier, when I first downloaded Coolapk, I had no idea what any of the terms meant. All I could do was bookmark a post and then close the app, hoping to find a reliable guide I could follow exactly. At the same time, I checked out some educational articles and videos to brush up on the theory.Eventually, I found this tailor-made tutorial on XDA, and all that was left was to take action.</p>
+<p>Of course, taking action requires <strong>determination</strong>, and with less than a week until school starts and the loss of the comforts of home just around the corner, these are great motivators.</p>
+<p>Moreover, there’s often a gap between reality and what’s written in tutorials—you can’t simply replicate them step-for-step. While following a tutorial, I ran into countless problems and tried every possible solution: scouring forums, Googling, and asking AI. It was only through this process that I truly understood what I was doing at each step and gradually grasped the underlying principles—which taught me more than reading ten thousand tutorials ever could.</p>
+<hr>
+<p>To be added: Glossary of terms related to flashing firmware</p>
+
+  </div>
+</article>
+
+
+    <div class="blog-post-comments">
+        <div id="utterances_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/Blog/en/">Home</a></li>
+        
+          <li><a href="/Blog/en/about/">About</a></li>
+        
+          <li><a href="/Blog/en/archives/">Articles</a></li>
+        
+          <li><a href="/Blog/en/tags/">Tags</a></li>
+        
+          <li><a href="/Blog/en/changelog/">Logs</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Background"><span class="toc-number">1.</span> <span class="toc-text">Background</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Motivation"><span class="toc-number">2.</span> <span class="toc-text">Motivation</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Action"><span class="toc-number">3.</span> <span class="toc-text">Action</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Ultimate-Goal"><span class="toc-number">3.1.</span> <span class="toc-text">Ultimate Goal</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Steps"><span class="toc-number">3.2.</span> <span class="toc-text">Steps</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Installed-Modules"><span class="toc-number">3.3.</span> <span class="toc-text">Installed Modules</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Final-Results"><span class="toc-number">3.4.</span> <span class="toc-text">Final Results</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Brick-Rescue"><span class="toc-number">4.</span> <span class="toc-text">Brick Rescue</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Consequences-of-Haphazardly-Installing-Modules"><span class="toc-number">4.1.</span> <span class="toc-text">The Consequences of Haphazardly Installing Modules</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#How-It-All-Began"><span class="toc-number">4.1.1.</span> <span class="toc-text">How It All Began</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#The-Process-of-Rescuing-a-Bricked-Device"><span class="toc-number">4.1.2.</span> <span class="toc-text">The Process of Rescuing a Bricked Device</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#I-was-too-confident-so-I-didn%E2%80%99t-back-it-up"><span class="toc-number">4.2.</span> <span class="toc-text">I was too confident, so I didn’t back it up.</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Background-1"><span class="toc-number">4.2.1.</span> <span class="toc-text">Background</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Brick-Rescue-1"><span class="toc-number">4.2.2.</span> <span class="toc-text">Brick Rescue</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Post-Flash-Notes"><span class="toc-number">5.</span> <span class="toc-text">Post-Flash Notes</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Despair-and-Helplessness-Faced-with-Data-That-May-Be-Lost-Forever"><span class="toc-number">5.1.</span> <span class="toc-text">The Despair and Helplessness Faced with Data That May Be Lost Forever</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Same-Old-AI-Issues"><span class="toc-number">5.2.</span> <span class="toc-text">The Same Old AI Issues</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Goal-Oriented-Learning"><span class="toc-number">5.3.</span> <span class="toc-text">Goal-Oriented Learning</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://begineri.github.io/Blog/en/2026/02/16/phone-flashing-notes/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://begineri.github.io/Blog/en/2026/02/16/phone-flashing-notes/&text=Flashing and Brick Recovery Logs"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://begineri.github.io/Blog/en/2026/02/16/phone-flashing-notes/&title=Flashing and Brick Recovery Logs"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://begineri.github.io/Blog/en/2026/02/16/phone-flashing-notes/&is_video=false&description=Flashing and Brick Recovery Logs"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Flashing and Brick Recovery Logs&body=Check out this article: https://begineri.github.io/Blog/en/2026/02/16/phone-flashing-notes/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://begineri.github.io/Blog/en/2026/02/16/phone-flashing-notes/&title=Flashing and Brick Recovery Logs"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://begineri.github.io/Blog/en/2026/02/16/phone-flashing-notes/&title=Flashing and Brick Recovery Logs"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://begineri.github.io/Blog/en/2026/02/16/phone-flashing-notes/&title=Flashing and Brick Recovery Logs"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://begineri.github.io/Blog/en/2026/02/16/phone-flashing-notes/&title=Flashing and Brick Recovery Logs"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://begineri.github.io/Blog/en/2026/02/16/phone-flashing-notes/&name=Flashing and Brick Recovery Logs&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://begineri.github.io/Blog/en/2026/02/16/phone-flashing-notes/&t=Flashing and Brick Recovery Logs"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025-2026
+    Wang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/Blog/en/">Home</a></li><!--
+     --><!--
+       --><li><a href="/Blog/en/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/Blog/en/archives/">Articles</a></li><!--
+     --><!--
+       --><li><a href="/Blog/en/tags/">Tags</a></li><!--
+     --><!--
+       --><li><a href="/Blog/en/changelog/">Logs</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/Blog/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "57783916a7b349829732031e51219ad6"}'></script>
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+    <script type="text/javascript">
+      var utterances_repo = 'begineri/Blog';
+      var utterances_issue_term = 'pathname';
+      var utterances_label = 'Comment';
+      var utterances_theme = 'github-dark';
+
+      (function(){
+          var script = document.createElement('script');
+
+          script.src = 'https://utteranc.es/client.js';
+          script.setAttribute('repo', utterances_repo);
+          script.setAttribute('issue-term', 'pathname');
+          script.setAttribute('label', utterances_label);
+          script.setAttribute('theme', utterances_theme);
+          script.setAttribute('crossorigin', 'anonymous');
+          script.async = true;
+          (document.getElementById('utterances_thread')).appendChild(script);
+      }());
+  </script>
+
+</body>
+</html>

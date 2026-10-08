@@ -1679,13 +1679,14 @@ code {
 #header-post #actions {
   direction: ltr !important;
 }
-/* Language switch: fixed top-right; on post desktop sit left of hamburger */
+/* Shared by the homepage corner and the article menu. */
 .lang-switch {
   position: fixed;
   top: 1rem;
   right: 1rem;
   z-index: 200;
   font-size: 0.85rem;
+  font-weight: 400;
   line-height: 1.25;
   letter-spacing: 0.02em;
 }
@@ -1705,11 +1706,31 @@ code {
   color: #cc2a41;
   opacity: 0.55;
 }
-/* #header-post shows from 501px up; keep clear of menu-icon (margin-right: 2rem) */
-@media screen and (min-width: 501px) {
-  body.is-post .lang-switch {
-    top: 2rem;
-    right: 4.25rem;
-    padding-top: 0.15rem;
-  }
+.lang-switch--inline {
+  display: inline-block;
+  position: static;
+  top: auto;
+  right: auto;
+  z-index: auto;
+  vertical-align: middle;
+  margin-left: 0.9rem;
+}
+#header-post .lang-switch--inline a {
+  color: #cc2a41;
+  text-decoration: none;
+}
+#header-post .lang-switch--inline a:hover {
+  text-decoration: underline;
+}
+#header-post .lang-switch--inline a.is-active {
+  color: #cc2a41;
+  font-weight: 700;
+  text-decoration: none;
+  pointer-events: none;
+}
+#header-post .lang-switch--inline .lang-switch__sep {
+  color: #cc2a41;
+}
+body.is-post > .lang-switch {
+  display: none;
 }

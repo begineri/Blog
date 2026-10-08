@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+
+<html lang=&#34;en&#34;>
+<head>
+    
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="lab2 HighlightsActually, Lab 2 is divided into three parts. 1. Physical MemoryJust keep the following points in mind:  When the operating system starts up: it determines the size of physical memory, t">
+<meta property="og:type" content="article">
+<meta property="og:title" content="buaa26-OS-lab2-Summary">
+<meta property="og:url" content="https://begineri.github.io/Blog/en/2026/04/16/buaa-os-lab2-summary/index.html">
+<meta property="og:site_name" content="My Blog">
+<meta property="og:description" content="lab2 HighlightsActually, Lab 2 is divided into three parts. 1. Physical MemoryJust keep the following points in mind:  When the operating system starts up: it determines the size of physical memory, t">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/lab2/%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/lab2/image-1.png">
+<meta property="article:published_time" content="2026-04-16T21:21:04.000Z">
+<meta property="article:modified_time" content="2026-10-08T22:56:04.079Z">
+<meta property="article:author" content="Wang">
+<meta property="article:tag" content="OS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://begineri.github.io/Blog/images/lab2/%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/Blog/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/Blog/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/Blog/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>buaa26-OS-lab2-Summary</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/Blog/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 8.1.1"><link rel="alternate" href="/Blog/en/atom.xml" title="My Blog" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr is-post">
+    
+<nav class="lang-switch" aria-label="Language">
+  <a href="/Blog/zh-CN/2026/04/16/buaa-os-lab2-summary/" class="">中</a>
+  <span class="lang-switch__sep" aria-hidden="true">|</span>
+  <a href="/Blog/en/2026/04/16/buaa-os-lab2-summary/" class="is-active">EN</a>
+</nav>
+
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top"
+    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i
+      class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       -->
+          <li><a href="/Blog/en/">
+              Home
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/en/about/">
+              About
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/en/archives/">
+              Articles
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/en/tags/">
+              Tags
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/en/changelog/">
+              Logs
+            </a></li><!--
+     -->
+          
+      </ul>
+      
+<nav class="lang-switch lang-switch--inline" aria-label="Language">
+  <a href="/Blog/zh-CN/2026/04/16/buaa-os-lab2-summary/" class="">中</a>
+  <span class="lang-switch__sep" aria-hidden="true">|</span>
+  <a href="/Blog/en/2026/04/16/buaa-os-lab2-summary/" class="is-active">EN</a>
+</nav>
+
+    </span>
+    <br />
+    <span id="actions">
+      <ul>
+        
+        
+          <li><a class="icon" aria-label="Previous post" href="/Blog/en/2026/04/27/buaa-oo-u2-blog/"><i
+                class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();"
+                onmouseout="$('#i-prev').toggle();"></i></a></li>
+          
+            
+              <li><a class="icon" aria-label="Next post" href="/Blog/en/2026/04/15/buaa-os-lab1-summary/"><i
+                    class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();"
+                    onmouseout="$('#i-next').toggle();"></i></a></li>
+              
+                <li><a class="icon" aria-label="Back to top" href="#"
+                    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up"
+                      aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a>
+                </li>
+                <li><a class="icon" aria-label="Share post" href="#"><i
+                      class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();"
+                      onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">
+        Previous post
+      </span>
+      <span id="i-next" class="info" style="display:none;">
+        Next post
+      </span>
+      <span id="i-top" class="info" style="display:none;">
+        Back to top
+      </span>
+      <span id="i-share" class="info" style="display:none;">
+        Share post
+      </span>
+    </span>
+    <br />
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://begineri.github.io/Blog/en/2026/04/16/buaa-os-lab2-summary/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://begineri.github.io/Blog/en/2026/04/16/buaa-os-lab2-summary/&text=buaa26-OS-lab2-Summary"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://begineri.github.io/Blog/en/2026/04/16/buaa-os-lab2-summary/&title=buaa26-OS-lab2-Summary"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://begineri.github.io/Blog/en/2026/04/16/buaa-os-lab2-summary/&is_video=false&description=buaa26-OS-lab2-Summary"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=buaa26-OS-lab2-Summary&body=Check out this article: https://begineri.github.io/Blog/en/2026/04/16/buaa-os-lab2-summary/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://begineri.github.io/Blog/en/2026/04/16/buaa-os-lab2-summary/&title=buaa26-OS-lab2-Summary"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://begineri.github.io/Blog/en/2026/04/16/buaa-os-lab2-summary/&title=buaa26-OS-lab2-Summary"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://begineri.github.io/Blog/en/2026/04/16/buaa-os-lab2-summary/&title=buaa26-OS-lab2-Summary"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://begineri.github.io/Blog/en/2026/04/16/buaa-os-lab2-summary/&title=buaa26-OS-lab2-Summary"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://begineri.github.io/Blog/en/2026/04/16/buaa-os-lab2-summary/&name=buaa26-OS-lab2-Summary&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://begineri.github.io/Blog/en/2026/04/16/buaa-os-lab2-summary/&t=buaa26-OS-lab2-Summary"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <!-- 
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#lab2-Highlights"><span class="toc-number">1.</span> <span class="toc-text">lab2 Highlights</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Physical-Memory"><span class="toc-number">1.1.</span> <span class="toc-text">1. Physical Memory</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Virtual-Memory-Management"><span class="toc-number">1.2.</span> <span class="toc-text">2. Virtual Memory Management</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-TLB-Flushing-and-Refilling"><span class="toc-number">1.3.</span> <span class="toc-text">3. TLB Flushing and Refilling</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Analysis-of-Challenges"><span class="toc-number">2.</span> <span class="toc-text">Analysis of Challenges:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Experiment-Reflections"><span class="toc-number">3.</span> <span class="toc-text">Experiment Reflections</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Original-Content-Note"><span class="toc-number">4.</span> <span class="toc-text">Original Content Note</span></a></li></ol>
+      </div>
+     -->
+    
+        <div id="toc">
+          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#lab2-Highlights"><span class="toc-number">1.</span> <span class="toc-text">lab2 Highlights</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Physical-Memory"><span class="toc-number">1.1.</span> <span class="toc-text">1. Physical Memory</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Virtual-Memory-Management"><span class="toc-number">1.2.</span> <span class="toc-text">2. Virtual Memory Management</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-TLB-Flushing-and-Refilling"><span class="toc-number">1.3.</span> <span class="toc-text">3. TLB Flushing and Refilling</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Analysis-of-Challenges"><span class="toc-number">2.</span> <span class="toc-text">Analysis of Challenges:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Experiment-Reflections"><span class="toc-number">3.</span> <span class="toc-text">Experiment Reflections</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Original-Content-Note"><span class="toc-number">4.</span> <span class="toc-text">Original Content Note</span></a></li></ol>
+        </div>
+        
+  </span>
+</div>
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        buaa26-OS-lab2-Summary
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Wang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2026-04-16T21:21:04.000Z" class="dt-published" itemprop="datePublished">2026-04-16</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        
+          <a class="p-category" href="/Blog/en/tags/OS/">OS</a>
+        
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="lab2-Highlights"><a href="#lab2-Highlights" class="headerlink" title="lab2 Highlights"></a>lab2 Highlights</h2><p>Actually, Lab 2 is divided into three parts.</p>
+<h3 id="1-Physical-Memory"><a href="#1-Physical-Memory" class="headerlink" title="1. Physical Memory"></a>1. Physical Memory</h3><p>Just keep the following points in mind:</p>
+<ol>
+<li>When the operating system starts up: it determines the size of physical memory, then creates a massive array (pages), divides the physical memory into 4KB chunks, and allocates a <code>struct Page</code> to each chunk.</li>
+<li>Physical Memory Paging: 4 KB per page</li>
+<li>Free Memory Pool: Build a free list pool. The point is that you don’t have to go through the hassle of allocating memory from the main memory every time—instead, you can simply retrieve a block from the head of the free list you’ve built. When freeing the memory, you can similarly just reinsert the block back into the head of the list.</li>
+<li>Double-linked list: It achieves O(1) complexity for insertion, deletion, modification, and lookup, making it convenient and efficient. The key to understanding it is the secondary pointer: it always points to the arrow pointing back at you (which makes it easier to directly modify the content pointed to by the previous node).</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Page</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">Page</span> *<span class="title">le_next</span>;</span>  </span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">Page</span> **<span class="title">le_prev</span>;</span>  </span><br><span class="line">    &#125; pp_link; </span><br><span class="line"></span><br><span class="line">    u_short pp_ref;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-Virtual-Memory-Management"><a href="#2-Virtual-Memory-Management" class="headerlink" title="2. Virtual Memory Management"></a>2. Virtual Memory Management</h3><ol>
+<li>Virtual address: PDX (high 10 bits) + PTX (middle 10 bits) + Offset (low 12 bits).</li>
+<li>Virtual Address &lt;–&gt; Physical Address: Whether through the CPU’s time-consuming memory access or the TLB, this diagram clearly illustrates the conversion relationship between these addresses:<br><img src="/Blog/images/lab2/%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2.png" alt="alt text"></li>
+<li>pgdir_walk &#x2F; page_insert &#x2F; Self-mapping: See the analysis of challenges below for details.</li>
+</ol>
+<h3 id="3-TLB-Flushing-and-Refilling"><a href="#3-TLB-Flushing-and-Refilling" class="headerlink" title="3. TLB Flushing and Refilling"></a>3. TLB Flushing and Refilling</h3><ol>
+<li>Purpose of the TLB: To speed up CPU memory access</li>
+<li>TLB Refill: <code>do_tlb_refill</code>, write TLB</li>
+<li>TLB Invalidation: When a page table entry is modified, <code>tlb_invalidate → tlb_out</code></li>
+<li>Always ensure absolute consistency between the CPU cache (i.e., TLB) and memory.</li>
+</ol>
+<hr>
+<h2 id="Analysis-of-Challenges"><a href="#Analysis-of-Challenges" class="headerlink" title="Analysis of Challenges:"></a>Analysis of Challenges:</h2><p>That description sounds simple enough, but in reality, even by relying on reading PowerPoint slides, the lab guide, watching online courses, and even asking AI, I still encountered significant difficulties in understanding the material during my studies.Ultimately, I believe the main reasons were the obscure translations and the completely incomprehensible phrasing in the PowerPoint slides and the lab guide: they were not at all intuitive, offered no explanation of “why this is needed” or “why it’s structured this way,” and simply presented all the concepts right from the start, leaving students to figure out the reading comprehension on their own.</p>
+<p>Take an example from a guidebook—it starts right off with a long, complex sentence:</p>
+<blockquote>
+<p>“int pgdir_walk(Pde *pgdir, u_long va, int create, Pte **ppte). This function stores a pointer to the second-level page table entry containing the virtual address va in the second-level page table structure corresponding to the first-level page table base address pgdir at the location pointed to by ppte.”</p>
+</blockquote>
+<p>That single sentence touches on countless concepts:</p>
+<ol>
+<li>Level 1 Page Table: Page Directory (which might as well be called the “Page Table”—a table), refers to the table that stores all page tables.</li>
+<li>Level-1 page table base address: i.e., the parameter <code>pgdir</code>, which is the starting address of the large page directory table</li>
+<li>Two-level page table structure: This refers to the structure consisting of a first-level page table and a second-level page table (duh).</li>
+<li>Virtual Address (VA): Key point—the data we pass in is used to perform lookups through it.</li>
+<li>Second-Level Page Table: Page Table—the location where all page table entries are actually stored</li>
+<li>Pointer to a secondary page table entry: a pointer to a page table</li>
+<li>In the space pointed to by ppte: What is ppte? It is a pointer that points to the secondary page table found as described above, and returns it as the result.</li>
+</ol>
+<p>To put it simply, the <code>pgdir_walk</code> function works as follows: Given a virtual address <code>va</code>, the CPU traverses the <code>pgdir</code> downward until it finds the page table that contains the physical page corresponding to <code>va</code>, and then returns a pointer to that page table so that we can modify it.</p>
+<hr>
+<p>Similarly, for <code>page_insert</code>:</p>
+<blockquote>
+<p>“int page_insert(Pde *pgdir, u_int asid, struct Page *pp, u_long va, u_int perm), which maps the virtual address va in the second-level page table corresponding to the base address pgdir of the first-level page table to the physical page associated with the page control block pp, and sets the page table entry permissions to perm.”</p>
+</blockquote>
+<p>Key Concepts:</p>
+<ol>
+<li>Page control block (pp): A pointer to a structure, <code>struct Page *</code>, which directly corresponds to a physical page</li>
+<li>Page table entry permissions: Specify whether the memory corresponding to <code>pp</code> is “read-only,” “read-write,” or “kernel-visible only.”</li>
+<li>This uses page2pa: converting a page pointer to a physical address</li>
+</ol>
+<p>In other words: Given a VA and a page table, locate the corresponding page table, then fill in the page table entry (using the VA, PP, and perm).</p>
+<hr>
+<p>Regarding <code>page_lookup</code>:</p>
+<blockquote>
+<p>“struct Page *page_lookup(Pde *pgdir, u_long va, Pte **ppte), which returns the page control block for the physical page mapped by the virtual address va in the second-level page table corresponding to the base address pgdir of the first-level page table, and sets the location pointed to by ppte to the address of the corresponding second-level page table entry.”</p>
+</blockquote>
+<p>Breakdown:</p>
+<ol>
+<li>In a two-level page table structure, the page control block of the physical page to which the virtual address (va) is mapped: va -&gt; struct Page*, which is returned as the return value, returning the physical block corresponding to va.</li>
+<li>Set the space pointed to by <code>ppte</code> to the address of the corresponding secondary page table entry: *ppte &#x3D; the page table entry address found by <code>pgdir_walk(va)</code></li>
+</ol>
+<p>To summarize, this function uses <code>va</code> to return the physical block corresponding to the current page table entry, while also returning the page table entry containing this data so it can be modified.</p>
+<hr>
+<p>Just like in math, many people find certain concepts to seem difficult at first glance, but in reality, it’s simply because they’re unfamiliar with the underlying components of those concepts, which prevents them from grasping the concept as a whole. Therefore, as demonstrated in the process above, when you break down a complex concept, you’ll discover it consists of countless smaller components—and only after understanding those components can you truly grasp the whole.</p>
+<p>When I first encountered the concept <strong>of self-mapping</strong> during this lab session, I sat staring at the PowerPoint slides, racking my brain but completely lost. Even the AI couldn’t explain it clearly to me—one moment it was talking about physical addresses, the next it was switching to virtual addresses. Why? What is it? There were no answers at all, just densely packed text and incomprehensible diagrams on the slides.That afternoon, as I struggled desperately to understand it, I thought this was a mysterious and profound concept.</p>
+<p>When I finally read through the C code, I realized it was nothing more than a few techniques for accessing and assigning values to pointers:<br>Let’s make a change to this image that appears in the manual:<br><img src="/Blog/images/lab2/image-1.png" alt="alt text"></p>
+<p>Four 32-bit headers with different formats are pointing back and forth. When I first saw this, I thought multiple addresses were being accessed here. In reality, this is simply a process of obtaining a pointer (address) and dereferencing the pointer (data), but this diagram fails to distinguish between the two.</p>
+<p>In short, the process is as follows (va → page table entry, i.e., the pgdir_walk process):</p>
+<ol>
+<li>(pgdir | va[31:22] | 00) -&gt; PDX* type, assuming it is named a</li>
+<li>Dereference a (*a) → Obtain the base address of the PTB (this is a physical address; it must be converted to a virtual address so the CPU can access it)</li>
+<li>PTBbase | va[21:12] | 00 -&gt; PTB* type, assuming it is named b</li>
+<li>b is the page table entry we’re ultimately looking for; returning it allows us to add to or modify the page table entry later.</li>
+</ol>
+<p>This is what the diagram illustrates, and the so-called “self-mapping” provides a convenience for the CPU: the CPU only uses this process to locate data, but this method can only find page table entries.To enable direct modification of page tables and even the page table directory (pgdir), the CPU employs a clever mechanism: it inserts the page table directory itself as one of the many page tables. This way, when accessing it, the following can be used: pgdir[a] → pgdir, and padir[b] → a specific page table (rather than a page table entry).</p>
+<p>Through the same process, the CPU can access and modify the entire page table.</p>
+<p>The lab guide and the slides never spell out the “why” and the “how” here—readers will just have to figure it out for themselves.</p>
+<hr>
+<h2 id="Experiment-Reflections"><a href="#Experiment-Reflections" class="headerlink" title="Experiment Reflections"></a>Experiment Reflections</h2><p>In future experiments, keep the following points in mind:</p>
+<ol>
+<li>Start studying early—don’t wait until two days before the lab session to begin;</li>
+<li>More importantly, make sure you have a solid grasp of the theoretical knowledge—that is, the content of the lecture slides;</li>
+<li>More importantly, when you just can’t seem to wrap your head around the theory, take a look at the code—it’s actually easier to understand that way.</li>
+</ol>
+<h1 id="Original-Content-Note"><a href="#Original-Content-Note" class="headerlink" title="Original Content Note"></a>Original Content Note</h1><p>All content in this post is original.</p>
+
+  </div>
+</article>
+
+
+    <div class="blog-post-comments">
+        <div id="utterances_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/Blog/en/">Home</a></li>
+        
+          <li><a href="/Blog/en/about/">About</a></li>
+        
+          <li><a href="/Blog/en/archives/">Articles</a></li>
+        
+          <li><a href="/Blog/en/tags/">Tags</a></li>
+        
+          <li><a href="/Blog/en/changelog/">Logs</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#lab2-Highlights"><span class="toc-number">1.</span> <span class="toc-text">lab2 Highlights</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Physical-Memory"><span class="toc-number">1.1.</span> <span class="toc-text">1. Physical Memory</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Virtual-Memory-Management"><span class="toc-number">1.2.</span> <span class="toc-text">2. Virtual Memory Management</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-TLB-Flushing-and-Refilling"><span class="toc-number">1.3.</span> <span class="toc-text">3. TLB Flushing and Refilling</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Analysis-of-Challenges"><span class="toc-number">2.</span> <span class="toc-text">Analysis of Challenges:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Experiment-Reflections"><span class="toc-number">3.</span> <span class="toc-text">Experiment Reflections</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Original-Content-Note"><span class="toc-number">4.</span> <span class="toc-text">Original Content Note</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://begineri.github.io/Blog/en/2026/04/16/buaa-os-lab2-summary/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://begineri.github.io/Blog/en/2026/04/16/buaa-os-lab2-summary/&text=buaa26-OS-lab2-Summary"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://begineri.github.io/Blog/en/2026/04/16/buaa-os-lab2-summary/&title=buaa26-OS-lab2-Summary"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://begineri.github.io/Blog/en/2026/04/16/buaa-os-lab2-summary/&is_video=false&description=buaa26-OS-lab2-Summary"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=buaa26-OS-lab2-Summary&body=Check out this article: https://begineri.github.io/Blog/en/2026/04/16/buaa-os-lab2-summary/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://begineri.github.io/Blog/en/2026/04/16/buaa-os-lab2-summary/&title=buaa26-OS-lab2-Summary"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://begineri.github.io/Blog/en/2026/04/16/buaa-os-lab2-summary/&title=buaa26-OS-lab2-Summary"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://begineri.github.io/Blog/en/2026/04/16/buaa-os-lab2-summary/&title=buaa26-OS-lab2-Summary"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://begineri.github.io/Blog/en/2026/04/16/buaa-os-lab2-summary/&title=buaa26-OS-lab2-Summary"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://begineri.github.io/Blog/en/2026/04/16/buaa-os-lab2-summary/&name=buaa26-OS-lab2-Summary&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://begineri.github.io/Blog/en/2026/04/16/buaa-os-lab2-summary/&t=buaa26-OS-lab2-Summary"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025-2026
+    Wang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/Blog/en/">Home</a></li><!--
+     --><!--
+       --><li><a href="/Blog/en/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/Blog/en/archives/">Articles</a></li><!--
+     --><!--
+       --><li><a href="/Blog/en/tags/">Tags</a></li><!--
+     --><!--
+       --><li><a href="/Blog/en/changelog/">Logs</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/Blog/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "57783916a7b349829732031e51219ad6"}'></script>
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+    <script type="text/javascript">
+      var utterances_repo = 'begineri/Blog';
+      var utterances_issue_term = 'pathname';
+      var utterances_label = 'Comment';
+      var utterances_theme = 'github-dark';
+
+      (function(){
+          var script = document.createElement('script');
+
+          script.src = 'https://utteranc.es/client.js';
+          script.setAttribute('repo', utterances_repo);
+          script.setAttribute('issue-term', 'pathname');
+          script.setAttribute('label', utterances_label);
+          script.setAttribute('theme', utterances_theme);
+          script.setAttribute('crossorigin', 'anonymous');
+          script.async = true;
+          (document.getElementById('utterances_thread')).appendChild(script);
+      }());
+  </script>
+
+</body>
+</html>

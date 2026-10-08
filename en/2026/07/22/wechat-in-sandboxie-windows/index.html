@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+
+<html lang=&#34;en&#34;>
+<head>
+    
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="WeChat is an indispensable part of my daily life and studies—I can’t do without it for sharing files or checking messages. However, installing it on my personal computer could potentially compromise m">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Configuration Notes] Running WeChat in a Sandbox">
+<meta property="og:url" content="https://begineri.github.io/Blog/en/2026/07/22/wechat-in-sandboxie-windows/index.html">
+<meta property="og:site_name" content="My Blog">
+<meta property="og:description" content="WeChat is an indispensable part of my daily life and studies—I can’t do without it for sharing files or checking messages. However, installing it on my personal computer could potentially compromise m">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/%E6%B2%99%E7%9B%92/%E6%96%B0%E5%BB%BA.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/%E6%B2%99%E7%9B%92/%E9%80%89%E9%A1%B9.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/%E6%B2%99%E7%9B%92/%E8%B7%AF%E5%BE%84.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/%E6%B2%99%E7%9B%92/%E5%BF%AB%E6%8D%B7fangshi.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/%E6%B2%99%E7%9B%92/2.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/%E6%B2%99%E7%9B%92/3.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/%E6%B2%99%E7%9B%92/4.png">
+<meta property="article:published_time" content="2026-07-22T15:58:21.000Z">
+<meta property="article:modified_time" content="2026-10-08T22:54:58.744Z">
+<meta property="article:author" content="Wang">
+<meta property="article:tag" content="tools">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://begineri.github.io/Blog/images/%E6%B2%99%E7%9B%92/%E6%96%B0%E5%BB%BA.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/Blog/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/Blog/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/Blog/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>[Configuration Notes] Running WeChat in a Sandbox</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/Blog/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 8.1.1"><link rel="alternate" href="/Blog/en/atom.xml" title="My Blog" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr is-post">
+    
+<nav class="lang-switch" aria-label="Language">
+  <a href="/Blog/zh-CN/2026/07/22/wechat-in-sandboxie-windows/" class="">中</a>
+  <span class="lang-switch__sep" aria-hidden="true">|</span>
+  <a href="/Blog/en/2026/07/22/wechat-in-sandboxie-windows/" class="is-active">EN</a>
+</nav>
+
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top"
+    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i
+      class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       -->
+          <li><a href="/Blog/en/">
+              Home
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/en/about/">
+              About
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/en/archives/">
+              Articles
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/en/tags/">
+              Tags
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/en/changelog/">
+              Logs
+            </a></li><!--
+     -->
+          
+      </ul>
+      
+<nav class="lang-switch lang-switch--inline" aria-label="Language">
+  <a href="/Blog/zh-CN/2026/07/22/wechat-in-sandboxie-windows/" class="">中</a>
+  <span class="lang-switch__sep" aria-hidden="true">|</span>
+  <a href="/Blog/en/2026/07/22/wechat-in-sandboxie-windows/" class="is-active">EN</a>
+</nav>
+
+    </span>
+    <br />
+    <span id="actions">
+      <ul>
+        
+        
+          <li><a class="icon" aria-label="Previous post" href="/Blog/en/2026/10/08/foolproof-hexo-blog-setup/"><i
+                class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();"
+                onmouseout="$('#i-prev').toggle();"></i></a></li>
+          
+            
+              <li><a class="icon" aria-label="Next post" href="/Blog/en/2026/04/27/buaa-oo-u2-blog/"><i
+                    class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();"
+                    onmouseout="$('#i-next').toggle();"></i></a></li>
+              
+                <li><a class="icon" aria-label="Back to top" href="#"
+                    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up"
+                      aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a>
+                </li>
+                <li><a class="icon" aria-label="Share post" href="#"><i
+                      class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();"
+                      onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">
+        Previous post
+      </span>
+      <span id="i-next" class="info" style="display:none;">
+        Next post
+      </span>
+      <span id="i-top" class="info" style="display:none;">
+        Back to top
+      </span>
+      <span id="i-share" class="info" style="display:none;">
+        Share post
+      </span>
+    </span>
+    <br />
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://begineri.github.io/Blog/en/2026/07/22/wechat-in-sandboxie-windows/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://begineri.github.io/Blog/en/2026/07/22/wechat-in-sandboxie-windows/&text=[Configuration Notes] Running WeChat in a Sandbox"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://begineri.github.io/Blog/en/2026/07/22/wechat-in-sandboxie-windows/&title=[Configuration Notes] Running WeChat in a Sandbox"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://begineri.github.io/Blog/en/2026/07/22/wechat-in-sandboxie-windows/&is_video=false&description=[Configuration Notes] Running WeChat in a Sandbox"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=[Configuration Notes] Running WeChat in a Sandbox&body=Check out this article: https://begineri.github.io/Blog/en/2026/07/22/wechat-in-sandboxie-windows/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://begineri.github.io/Blog/en/2026/07/22/wechat-in-sandboxie-windows/&title=[Configuration Notes] Running WeChat in a Sandbox"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://begineri.github.io/Blog/en/2026/07/22/wechat-in-sandboxie-windows/&title=[Configuration Notes] Running WeChat in a Sandbox"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://begineri.github.io/Blog/en/2026/07/22/wechat-in-sandboxie-windows/&title=[Configuration Notes] Running WeChat in a Sandbox"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://begineri.github.io/Blog/en/2026/07/22/wechat-in-sandboxie-windows/&title=[Configuration Notes] Running WeChat in a Sandbox"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://begineri.github.io/Blog/en/2026/07/22/wechat-in-sandboxie-windows/&name=[Configuration Notes] Running WeChat in a Sandbox&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://begineri.github.io/Blog/en/2026/07/22/wechat-in-sandboxie-windows/&t=[Configuration Notes] Running WeChat in a Sandbox"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <!-- 
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Installing-Sandboxie-Plus"><span class="toc-number">1.</span> <span class="toc-text">1. Installing Sandboxie-Plus</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Create-a-new-sandbox-for-WeChat"><span class="toc-number">2.</span> <span class="toc-text">2. Create a new sandbox for WeChat</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-Creating-a-Sandbox"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 Creating a Sandbox</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-Configuring-the-Interface-for-Interacting-with-a-Physical-Hard-Drive"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 Configuring the Interface for Interacting with a Physical Hard Drive</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-Setting-Up-Sandbox-Rules"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 Setting Up Sandbox Rules</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Install-WeChat-in-the-sandbox"><span class="toc-number">3.</span> <span class="toc-text">3. Install WeChat in the sandbox</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Everyday-Use-Shortcuts-and-Icon-Restoration"><span class="toc-number">4.</span> <span class="toc-text">4. Everyday Use: Shortcuts and Icon Restoration</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Summary"><span class="toc-number">5.</span> <span class="toc-text">Summary</span></a></li></ol>
+      </div>
+     -->
+    
+        <div id="toc">
+          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Installing-Sandboxie-Plus"><span class="toc-number">1.</span> <span class="toc-text">1. Installing Sandboxie-Plus</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Create-a-new-sandbox-for-WeChat"><span class="toc-number">2.</span> <span class="toc-text">2. Create a new sandbox for WeChat</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-Creating-a-Sandbox"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 Creating a Sandbox</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-Configuring-the-Interface-for-Interacting-with-a-Physical-Hard-Drive"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 Configuring the Interface for Interacting with a Physical Hard Drive</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-Setting-Up-Sandbox-Rules"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 Setting Up Sandbox Rules</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Install-WeChat-in-the-sandbox"><span class="toc-number">3.</span> <span class="toc-text">3. Install WeChat in the sandbox</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Everyday-Use-Shortcuts-and-Icon-Restoration"><span class="toc-number">4.</span> <span class="toc-text">4. Everyday Use: Shortcuts and Icon Restoration</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Summary"><span class="toc-number">5.</span> <span class="toc-text">Summary</span></a></li></ol>
+        </div>
+        
+  </span>
+</div>
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        [Configuration Notes] Running WeChat in a Sandbox
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Wang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2026-07-22T15:58:21.000Z" class="dt-published" itemprop="datePublished">2026-07-22</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        
+          <a class="p-category" href="/Blog/en/tags/tools/">tools</a>
+        
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p>WeChat is an indispensable part of my daily life and studies—I can’t do without it for sharing files or checking messages. However, installing it on my personal computer could potentially compromise my privacy.To strike a balance between security and convenience, I took advantage of a clean computer after reinstalling the operating system and** installed WeChat within Sandboxie-Plus**, thereby enabling normal use of WeChat while isolating my privacy.</p>
+<p>Here is my installation log</p>
+<h2 id="1-Installing-Sandboxie-Plus"><a href="#1-Installing-Sandboxie-Plus" class="headerlink" title="1. Installing Sandboxie-Plus"></a>1. Installing Sandboxie-Plus</h2><ol>
+<li>Go to GitHub or the official website to download the latest version of Sandboxie-Plus: <a target="_blank" rel="noopener" href="https://github.com/sandboxie-plus/sandboxie">https://github.com/sandboxie-plus/sandboxie</a></li>
+<li>If you’re prompted to enter a license key during installation, just skip it.</li>
+<li>Complete the installation and restart your computer.</li>
+</ol>
+<h2 id="2-Create-a-new-sandbox-for-WeChat"><a href="#2-Create-a-new-sandbox-for-WeChat" class="headerlink" title="2. Create a new sandbox for WeChat"></a>2. Create a new sandbox for WeChat</h2><h3 id="2-1-Creating-a-Sandbox"><a href="#2-1-Creating-a-Sandbox" class="headerlink" title="2.1 Creating a Sandbox"></a>2.1 Creating a Sandbox</h3><ol>
+<li>Open Sandboxie-Plus, click “Sandbox” in the upper-left corner, then select “New Sandbox.”</li>
+<li>Name it WeChat, and select <strong>Standard (Standard Isolation) for</strong> the sandbox type.<br><img src="/Blog/images/%E6%B2%99%E7%9B%92/%E6%96%B0%E5%BB%BA.png" alt="alt text"></li>
+</ol>
+<h3 id="2-2-Configuring-the-Interface-for-Interacting-with-a-Physical-Hard-Drive"><a href="#2-2-Configuring-the-Interface-for-Interacting-with-a-Physical-Hard-Drive" class="headerlink" title="2.2 Configuring the Interface for Interacting with a Physical Hard Drive"></a>2.2 Configuring the Interface for Interacting with a Physical Hard Drive</h3><p>You need to select a folder on your physical hard drive to store your WeChat chat history and files.</p>
+<ol>
+<li>If you already have previous WeChat files on your computer: You can use <code>Everything</code> to search for <code>WeChat Files</code> (for WeChat version 3.x) or <code>xwechat_files</code> (for the newer 4.x version).</li>
+<li>Create a new folder in a location of your choice on your computer (I chose <code>D:\Tencent\Wechat</code>). Then, if you have any previous files, simply copy and paste them into this folder, for example: <code>D:\Tencent\Wechat\WeChat Files</code>; if not, leave it empty.</li>
+<li>Make a note of this folder path—it’ll come in handy later.</li>
+</ol>
+<h3 id="2-3-Setting-Up-Sandbox-Rules"><a href="#2-3-Setting-Up-Sandbox-Rules" class="headerlink" title="2.3 Setting Up Sandbox Rules"></a>2.3 Setting Up Sandbox Rules</h3><ol>
+<li>Right-click the sandbox you just created, then click <strong>Sandbox Options</strong> -&gt; <strong>Resource Access</strong> -&gt; Files</li>
+<li>Click “Add File&#x2F;Folder,” then set all files in the user directory on Drive C and all other unrelated drives to “Block” (I didn’t block the entire D: drive here because that might prevent WeChat from finding the D:\Tencent\Wechat folder we need; so I manually blocked all folders except this one individually).<br>Optional examples include<ul>
+<li>C:\Users\YourUsername\Desktop* (Desktop)</li>
+<li>C:\Users\YourUsername\Documents* (Documents)</li>
+<li>C:\Users\Your Username\Pictures* (Pictures)</li>
+<li>E:\* (Completely block access to other drives that aren’t needed)</li>
+</ul>
+</li>
+<li>Add <strong>“Full Access”</strong> permissions to the accessible folder separately. Enter the following path: <strong>D:\Tencent\Wechat</strong> (Selecting “Open” here will prevent chat history from syncing.)</li>
+</ol>
+<p><img src="/Blog/images/%E6%B2%99%E7%9B%92/%E9%80%89%E9%A1%B9.png" alt="alt text"></p>
+<h2 id="3-Install-WeChat-in-the-sandbox"><a href="#3-Install-WeChat-in-the-sandbox" class="headerlink" title="3. Install WeChat in the sandbox"></a>3. Install WeChat in the sandbox</h2><p>Once the rules are set, you can officially download WeChat:</p>
+<ol>
+<li>Go to the official WeChat website to download the latest PC installer: <a target="_blank" rel="noopener" href="https://weixin.qq.com/">https://weixin.qq.com/</a></li>
+<li><strong>Right-click</strong> the downloaded installer -&gt; <strong>Select “Run Sandboxed”</strong> -&gt; Select WeChat.<ul>
+<li>Note: The path where you open the installer must be outside the paths listed above; otherwise, it won’t open. You may want to create a new folder in the root directory of Drive C: and copy the installer there to open it.</li>
+</ul>
+</li>
+<li>In the WeChat installation window that pops up, there’s no need to change the installation path—just keep the default: C:\Program Files\Tencent\WeChat.<ul>
+<li>Principle: It is actually installed securely within a virtualized C: drive created by the sandbox; if you switch to the real D: drive at this point, it defeats the purpose of isolating the program itself.</li>
+</ul>
+</li>
+<li>Set <strong>the</strong> correct <strong>chat storage path</strong>; here, set it to the path you just configured, as shown in the figure.</li>
+<li>After that, just complete the installation and log in as usual.</li>
+</ol>
+<p><img src="/Blog/images/%E6%B2%99%E7%9B%92/%E8%B7%AF%E5%BE%84.png" alt="alt text"></p>
+<h2 id="4-Everyday-Use-Shortcuts-and-Icon-Restoration"><a href="#4-Everyday-Use-Shortcuts-and-Icon-Restoration" class="headerlink" title="4. Everyday Use: Shortcuts and Icon Restoration"></a>4. Everyday Use: Shortcuts and Icon Restoration</h2><p>To make it as convenient to use as if it were installed on your local machine, you can configure:</p>
+<ol>
+<li><p>Open the Sandboxie-Plus main interface, right-click WeChatBox -&gt; <strong>Sandbox Contents</strong> -&gt; Create <strong>Shortcut</strong>.<br><img src="/Blog/images/%E6%B2%99%E7%9B%92/%E5%BF%AB%E6%8D%B7fangshi.png" alt="alt text"></p>
+</li>
+<li><p>Generally speaking, you’ll find a WeChat.lnk file here. Just click it and save it to your desktop.<br><img src="/Blog/images/%E6%B2%99%E7%9B%92/2.png" alt="alt text"></p>
+</li>
+<li><p>If this isn’t displaying properly here, you can click <em>to browse the folder</em> and then create a new one.</p>
+<ul>
+<li>Then change the target address to: <code>D:\DevTools\Sandboxie-Plus\SandMan.exe /box:WeChatBox &quot;C:\Program Files\Tencent\Weixin\Weixin.exe&quot;</code> (example)</li>
+<li>Change the icon to <code>%SystemDrive%\Sandbox\WANG\WeChatBox\drive\C\Program Files\Tencent\Weixin\Weixin.exe</code> (click Browse, then type it in and press Enter)</li>
+</ul>
+</li>
+</ol>
+<p>Configuration is now complete, as shown in the figure:<br><img src="/Blog/images/%E6%B2%99%E7%9B%92/3.png" alt="alt text"><br><img src="/Blog/images/%E6%B2%99%E7%9B%92/4.png" alt="alt text"></p>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>It’s now all set up. To start it daily, just click the icon on your desktop.</p>
+<p>Chat logs and files generated during chats can be accessed directly from <code>D:\Tencent\Wechat\xwechat_files\wxid_qhxxxxxxx\msg\file</code> on Drive D.</p>
+
+  </div>
+</article>
+
+
+    <div class="blog-post-comments">
+        <div id="utterances_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/Blog/en/">Home</a></li>
+        
+          <li><a href="/Blog/en/about/">About</a></li>
+        
+          <li><a href="/Blog/en/archives/">Articles</a></li>
+        
+          <li><a href="/Blog/en/tags/">Tags</a></li>
+        
+          <li><a href="/Blog/en/changelog/">Logs</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Installing-Sandboxie-Plus"><span class="toc-number">1.</span> <span class="toc-text">1. Installing Sandboxie-Plus</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Create-a-new-sandbox-for-WeChat"><span class="toc-number">2.</span> <span class="toc-text">2. Create a new sandbox for WeChat</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-Creating-a-Sandbox"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 Creating a Sandbox</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-Configuring-the-Interface-for-Interacting-with-a-Physical-Hard-Drive"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 Configuring the Interface for Interacting with a Physical Hard Drive</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-Setting-Up-Sandbox-Rules"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 Setting Up Sandbox Rules</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Install-WeChat-in-the-sandbox"><span class="toc-number">3.</span> <span class="toc-text">3. Install WeChat in the sandbox</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Everyday-Use-Shortcuts-and-Icon-Restoration"><span class="toc-number">4.</span> <span class="toc-text">4. Everyday Use: Shortcuts and Icon Restoration</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Summary"><span class="toc-number">5.</span> <span class="toc-text">Summary</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://begineri.github.io/Blog/en/2026/07/22/wechat-in-sandboxie-windows/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://begineri.github.io/Blog/en/2026/07/22/wechat-in-sandboxie-windows/&text=[Configuration Notes] Running WeChat in a Sandbox"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://begineri.github.io/Blog/en/2026/07/22/wechat-in-sandboxie-windows/&title=[Configuration Notes] Running WeChat in a Sandbox"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://begineri.github.io/Blog/en/2026/07/22/wechat-in-sandboxie-windows/&is_video=false&description=[Configuration Notes] Running WeChat in a Sandbox"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=[Configuration Notes] Running WeChat in a Sandbox&body=Check out this article: https://begineri.github.io/Blog/en/2026/07/22/wechat-in-sandboxie-windows/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://begineri.github.io/Blog/en/2026/07/22/wechat-in-sandboxie-windows/&title=[Configuration Notes] Running WeChat in a Sandbox"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://begineri.github.io/Blog/en/2026/07/22/wechat-in-sandboxie-windows/&title=[Configuration Notes] Running WeChat in a Sandbox"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://begineri.github.io/Blog/en/2026/07/22/wechat-in-sandboxie-windows/&title=[Configuration Notes] Running WeChat in a Sandbox"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://begineri.github.io/Blog/en/2026/07/22/wechat-in-sandboxie-windows/&title=[Configuration Notes] Running WeChat in a Sandbox"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://begineri.github.io/Blog/en/2026/07/22/wechat-in-sandboxie-windows/&name=[Configuration Notes] Running WeChat in a Sandbox&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://begineri.github.io/Blog/en/2026/07/22/wechat-in-sandboxie-windows/&t=[Configuration Notes] Running WeChat in a Sandbox"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025-2026
+    Wang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/Blog/en/">Home</a></li><!--
+     --><!--
+       --><li><a href="/Blog/en/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/Blog/en/archives/">Articles</a></li><!--
+     --><!--
+       --><li><a href="/Blog/en/tags/">Tags</a></li><!--
+     --><!--
+       --><li><a href="/Blog/en/changelog/">Logs</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/Blog/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "57783916a7b349829732031e51219ad6"}'></script>
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+    <script type="text/javascript">
+      var utterances_repo = 'begineri/Blog';
+      var utterances_issue_term = 'pathname';
+      var utterances_label = 'Comment';
+      var utterances_theme = 'github-dark';
+
+      (function(){
+          var script = document.createElement('script');
+
+          script.src = 'https://utteranc.es/client.js';
+          script.setAttribute('repo', utterances_repo);
+          script.setAttribute('issue-term', 'pathname');
+          script.setAttribute('label', utterances_label);
+          script.setAttribute('theme', utterances_theme);
+          script.setAttribute('crossorigin', 'anonymous');
+          script.async = true;
+          (document.getElementById('utterances_thread')).appendChild(script);
+      }());
+  </script>
+
+</body>
+</html>

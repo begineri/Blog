@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+
+<html lang=&#34;en&#34;>
+<head>
+    
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Basic ConceptsTo complete this experiment, you’ll first need to familiarize yourself with the following concepts: QEMU EmulatorOperating systems run on hardware, and to better manage the hardware reso">
+<meta property="og:type" content="article">
+<meta property="og:title" content="buaa26-OS-lab1-Summary">
+<meta property="og:url" content="https://begineri.github.io/Blog/en/2026/04/15/buaa-os-lab1-summary/index.html">
+<meta property="og:site_name" content="My Blog">
+<meta property="og:description" content="Basic ConceptsTo complete this experiment, you’ll first need to familiarize yourself with the following concepts: QEMU EmulatorOperating systems run on hardware, and to better manage the hardware reso">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/lab1/1.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/lab1/2.png">
+<meta property="article:published_time" content="2026-04-15T22:23:00.000Z">
+<meta property="article:modified_time" content="2026-10-08T23:08:40.396Z">
+<meta property="article:author" content="Wang">
+<meta property="article:tag" content="OS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://begineri.github.io/Blog/images/lab1/1.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/Blog/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/Blog/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/Blog/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>buaa26-OS-lab1-Summary</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/Blog/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 8.1.1"><link rel="alternate" href="/Blog/en/atom.xml" title="My Blog" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr is-post">
+    
+<nav class="lang-switch" aria-label="Language">
+  <a href="/Blog/zh-CN/2026/04/15/buaa-os-lab1-summary/" class="">中</a>
+  <span class="lang-switch__sep" aria-hidden="true">|</span>
+  <a href="/Blog/en/2026/04/15/buaa-os-lab1-summary/" class="is-active">EN</a>
+</nav>
+
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top"
+    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i
+      class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       -->
+          <li><a href="/Blog/en/">
+              Home
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/en/about/">
+              About
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/en/archives/">
+              Articles
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/en/tags/">
+              Tags
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/en/changelog/">
+              Logs
+            </a></li><!--
+     -->
+          
+      </ul>
+      
+<nav class="lang-switch lang-switch--inline" aria-label="Language">
+  <a href="/Blog/zh-CN/2026/04/15/buaa-os-lab1-summary/" class="">中</a>
+  <span class="lang-switch__sep" aria-hidden="true">|</span>
+  <a href="/Blog/en/2026/04/15/buaa-os-lab1-summary/" class="is-active">EN</a>
+</nav>
+
+    </span>
+    <br />
+    <span id="actions">
+      <ul>
+        
+        
+          <li><a class="icon" aria-label="Previous post" href="/Blog/en/2026/04/16/buaa-os-lab2-summary/"><i
+                class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();"
+                onmouseout="$('#i-prev').toggle();"></i></a></li>
+          
+            
+              <li><a class="icon" aria-label="Next post" href="/Blog/en/2026/04/10/wakapi-wakatime-setup/"><i
+                    class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();"
+                    onmouseout="$('#i-next').toggle();"></i></a></li>
+              
+                <li><a class="icon" aria-label="Back to top" href="#"
+                    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up"
+                      aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a>
+                </li>
+                <li><a class="icon" aria-label="Share post" href="#"><i
+                      class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();"
+                      onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">
+        Previous post
+      </span>
+      <span id="i-next" class="info" style="display:none;">
+        Next post
+      </span>
+      <span id="i-top" class="info" style="display:none;">
+        Back to top
+      </span>
+      <span id="i-share" class="info" style="display:none;">
+        Share post
+      </span>
+    </span>
+    <br />
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://begineri.github.io/Blog/en/2026/04/15/buaa-os-lab1-summary/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://begineri.github.io/Blog/en/2026/04/15/buaa-os-lab1-summary/&text=buaa26-OS-lab1-Summary"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://begineri.github.io/Blog/en/2026/04/15/buaa-os-lab1-summary/&title=buaa26-OS-lab1-Summary"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://begineri.github.io/Blog/en/2026/04/15/buaa-os-lab1-summary/&is_video=false&description=buaa26-OS-lab1-Summary"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=buaa26-OS-lab1-Summary&body=Check out this article: https://begineri.github.io/Blog/en/2026/04/15/buaa-os-lab1-summary/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://begineri.github.io/Blog/en/2026/04/15/buaa-os-lab1-summary/&title=buaa26-OS-lab1-Summary"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://begineri.github.io/Blog/en/2026/04/15/buaa-os-lab1-summary/&title=buaa26-OS-lab1-Summary"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://begineri.github.io/Blog/en/2026/04/15/buaa-os-lab1-summary/&title=buaa26-OS-lab1-Summary"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://begineri.github.io/Blog/en/2026/04/15/buaa-os-lab1-summary/&title=buaa26-OS-lab1-Summary"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://begineri.github.io/Blog/en/2026/04/15/buaa-os-lab1-summary/&name=buaa26-OS-lab1-Summary&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://begineri.github.io/Blog/en/2026/04/15/buaa-os-lab1-summary/&t=buaa26-OS-lab1-Summary"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <!-- 
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Basic-Concepts"><span class="toc-number">1.</span> <span class="toc-text">Basic Concepts</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#QEMU-Emulator"><span class="toc-number">1.1.</span> <span class="toc-text">QEMU Emulator</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Cross-Compilation"><span class="toc-number">1.2.</span> <span class="toc-text">Cross-Compilation</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Makefile"><span class="toc-number">1.3.</span> <span class="toc-text">Makefile</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ELF-files"><span class="toc-number">1.4.</span> <span class="toc-text">ELF files</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Linkers-and-Link-Scripts"><span class="toc-number">1.5.</span> <span class="toc-text">Linkers and Link Scripts</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Linker"><span class="toc-number">1.5.1.</span> <span class="toc-text">Linker</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Linker-Script"><span class="toc-number">1.5.2.</span> <span class="toc-text">Linker Script</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MIPS-Memory-Layout"><span class="toc-number">1.6.</span> <span class="toc-text">MIPS Memory Layout</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Content-Overview"><span class="toc-number">2.</span> <span class="toc-text">Content Overview</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Building-a-Kernel-from-Scratch"><span class="toc-number">2.1.</span> <span class="toc-text">Building a Kernel from Scratch</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Operating-System-Boot-Process"><span class="toc-number">2.2.</span> <span class="toc-text">Operating System Boot Process</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Experiment-Reflections"><span class="toc-number">3.</span> <span class="toc-text">Experiment Reflections</span></a></li></ol>
+      </div>
+     -->
+    
+        <div id="toc">
+          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Basic-Concepts"><span class="toc-number">1.</span> <span class="toc-text">Basic Concepts</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#QEMU-Emulator"><span class="toc-number">1.1.</span> <span class="toc-text">QEMU Emulator</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Cross-Compilation"><span class="toc-number">1.2.</span> <span class="toc-text">Cross-Compilation</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Makefile"><span class="toc-number">1.3.</span> <span class="toc-text">Makefile</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ELF-files"><span class="toc-number">1.4.</span> <span class="toc-text">ELF files</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Linkers-and-Link-Scripts"><span class="toc-number">1.5.</span> <span class="toc-text">Linkers and Link Scripts</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Linker"><span class="toc-number">1.5.1.</span> <span class="toc-text">Linker</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Linker-Script"><span class="toc-number">1.5.2.</span> <span class="toc-text">Linker Script</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MIPS-Memory-Layout"><span class="toc-number">1.6.</span> <span class="toc-text">MIPS Memory Layout</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Content-Overview"><span class="toc-number">2.</span> <span class="toc-text">Content Overview</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Building-a-Kernel-from-Scratch"><span class="toc-number">2.1.</span> <span class="toc-text">Building a Kernel from Scratch</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Operating-System-Boot-Process"><span class="toc-number">2.2.</span> <span class="toc-text">Operating System Boot Process</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Experiment-Reflections"><span class="toc-number">3.</span> <span class="toc-text">Experiment Reflections</span></a></li></ol>
+        </div>
+        
+  </span>
+</div>
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        buaa26-OS-lab1-Summary
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Wang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2026-04-15T22:23:00.000Z" class="dt-published" itemprop="datePublished">2026-04-15</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        
+          <a class="p-category" href="/Blog/en/tags/OS/">OS</a>
+        
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="Basic-Concepts"><a href="#Basic-Concepts" class="headerlink" title="Basic Concepts"></a>Basic Concepts</h2><p>To complete this experiment, you’ll first need to familiarize yourself with the following concepts:</p>
+<h4 id="QEMU-Emulator"><a href="#QEMU-Emulator" class="headerlink" title="QEMU Emulator"></a>QEMU Emulator</h4><p>Operating systems run on hardware, and to better manage the hardware resources of a computer system, an operating system is required.<br>QEMU provides a simulated hardware environment—such as a CPU—that runs the executable files we ultimately <a href="#cross-compilation">cross-compile</a>.</p>
+<hr>
+<p><span id="cross-compilation"></span></p>
+<h4 id="Cross-Compilation"><a href="#Cross-Compilation" class="headerlink" title="Cross-Compilation"></a>Cross-Compilation</h4><p>There are two environments in the experiment</p>
+<ul>
+<li>Platform A (Host): A jump server provided by the school; this is where we write code and run <code>make</code> commands.</li>
+<li>Platform B (Target): The environment in which the MOS kernel currently under development is to run. In this experiment, this is a hardware environment emulated by QEMU, with a MIPS CPU architecture.</li>
+</ul>
+<p>To compile a program on A that runs on B, we need to use <strong>a cross-compilation toolchain</strong>—such as the <code>mips-linux-gnu-gcc</code> tool in the <a href="#Makefile">Makefile</a>—which translates C code into low-level binary instructions for the MIPS architecture.</p>
+<hr>
+<h4 id="Makefile"><a href="#Makefile" class="headerlink" title="Makefile"></a>Makefile</h4><p>The top-level Makefile specifies how the source files in each subdirectory are assembled, step by step, into the final system image, <code>mos.elf</code>.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">all: $(mos_elf)     <span class="meta"># the final target</span></span><br><span class="line">$(mos_elf): $(modules) # Call the linker $(LD) to link all object files</span><br><span class="line">    $(LD) $(LDFLAGS) -o $(mos_elf) -N -T $(link_script) $(objects)</span><br><span class="line"></span><br><span class="line">$(modules): # Run make in each subdirectory</span><br><span class="line">    $(MAKE) --directory=$@</span><br></pre></td></tr></table></figure>
+
+<p>Key takeaways:</p>
+<ol>
+<li><code>all</code>:<code>make</code>—The Default Starting Point</li>
+<li><code>$(modules)</code>: Compile separately in the <code>lib</code>, <code>init</code>, and <code>kern</code> subdirectories; the top-level directory is only responsible for uniformly calling <a href="#linkers-and-link-scripts">the linker <code>$(LD)</code> and the link script <code>kernel.lds</code></a> to assemble them into <code>mos.elf</code></li>
+<li><code>include.mk</code>: This file configures a cross-compilation environment; by running <code>include include.mk</code> in the top-level Makefile, you can set up tools such as <code>gcc</code> or <code>ld</code>.</li>
+</ol>
+<hr>
+<h4 id="ELF-files"><a href="#ELF-files" class="headerlink" title="ELF files"></a>ELF files</h4><p>ELF is a file format.<br><code>.c</code> The file was compiled by the compiler (gcc), generating an object file (.o), which is a relocatable file in the ELF format.<br><img src="/Blog/images/lab1/1.png" alt="alt text"></p>
+<p>An ELF file can be viewed from two perspectives:</p>
+<ul>
+<li>Section Header Table: This is for the linker. It organizes the program into “sections”—such as “code (.text)” and “data (.data)”—to facilitate the linker’s assembly of the program.</li>
+<li>Program Header Table: This is intended for the operating system loader (in this experiment, QEMU). It groups sections with the same attributes into larger “segments,” recording the address in virtual memory where the segment should be loaded (<code>VirtAddr</code>), the amount of memory space required (<code>MemSiz</code>), and the read and write permissions.</li>
+<li><code>readelf</code>. Tools can easily parse the contents of ELF files.</li>
+</ul>
+<p>ELF files can be accessed in code as structures:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// binary points to the start of that block of raw bytes</span></span><br><span class="line">Elf32_Ehdr *elf_header = (Elf32_Ehdr *)binary; </span><br><span class="line"></span><br><span class="line"><span class="comment">// Read through the struct fields; the compiler computes the byte offsets, so the data in the block can be accessed and modified</span></span><br><span class="line"><span class="type">unsigned</span> <span class="type">int</span> entry_address = elf_header-&gt;e_entry;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><span id="linkers-and-link-scripts"></span></p>
+<h4 id="Linkers-and-Link-Scripts"><a href="#Linkers-and-Link-Scripts" class="headerlink" title="Linkers and Link Scripts"></a>Linkers and Link Scripts</h4><h5 id="Linker"><a href="#Linker" class="headerlink" title="Linker"></a>Linker</h5><p>The compiler (gcc) is responsible for converting each <code>.c</code> source file into a separate <code>.o</code> object file. The linker’s task is to combine these scattered <code>.o</code> files into a complete, executable file (such as <code>mos.elf</code>).</p>
+<p>The linker is responsible for the following tasks:</p>
+<ul>
+<li>Merging Sections: Merge all code segments (<code>.text</code>) from the input files together, merge all data segments (<code>.data</code>) together, and do the same for the other segments.</li>
+<li>Relocation: Assigning an absolute memory address to every line of code and every variable so that the CPU can access them.</li>
+<li>Symbol Resolution: The linker is responsible for finding the exact address of the called function and directing the call instruction to that location. For example, when <code>main.c</code> calls a function in <code>fibo.c</code>.</li>
+</ul>
+<h5 id="Linker-Script"><a href="#Linker-Script" class="headerlink" title="Linker Script"></a>Linker Script</h5><p>A linker script is a plain text file (<code>kernel.lds</code>) that instructs the linker on how to organize memory.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">ENTRY(_start)</span><br><span class="line"></span><br><span class="line">SECTIONS</span><br><span class="line">&#123;</span><br><span class="line">	. = 0x80020000;</span><br><span class="line">	.text : &#123; *(.text) &#125;</span><br><span class="line">	.data : &#123; *(.data) &#125;</span><br><span class="line"></span><br><span class="line">	bss_start = .;</span><br><span class="line">	.bss  : &#123; *(.bss) &#125;</span><br><span class="line"></span><br><span class="line">	bss_end = .;</span><br><span class="line">	. = 0x80400000;</span><br><span class="line">	end = . ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>As shown in the code above, the script defines the following:</p>
+<ul>
+<li>Using the location counter (<code>.</code>), the kernel’s <code>.text</code> is forced to start at a specific address.</li>
+<li>The rules state that memory must first contain a <code>.text</code>, then a <code>.data</code>, and finally a <code>.bss</code>.</li>
+<li>Handling CPU Alignment Requirements</li>
+<li>Specifies the entry point for the first instruction after the system powers on (<code>_start</code>)</li>
+</ul>
+<hr>
+<h4 id="MIPS-Memory-Layout"><a href="#MIPS-Memory-Layout" class="headerlink" title="MIPS Memory Layout"></a>MIPS Memory Layout</h4><p>For 32-bit processors, <strong>the virtual address space</strong> is 4 GB.<br>In the MIPS architecture, the virtual address space is divided into four major regions:<br><img src="/Blog/images/lab1/2.png" alt="alt text"></p>
+<ul>
+<li><code>kuseg</code> (0x00000000 - 0x7FFFFFFF): 2 GB, user mode; physical memory must be accessed via the MMU</li>
+<li><code>kseg0</code> (0x80000000 - 0x9FFFFFFF): 512 MB, kernel mode, most significant bit set to zero, via cache</li>
+<li><code>kseg1</code> (0xA0000000 - 0xBFFFFFFF): 512 MB, kernel mode, top three bits cleared, bypasses the cache (used for accessing peripherals)</li>
+<li><code>kseg2</code> (0xC0000000 - 0xFFFFFFFF): 1 GB, kernel mode, memory access via MMU, via cache</li>
+</ul>
+<p>Topics covered include:</p>
+<ul>
+<li>MMU (Memory Management Unit): A unit that manages memory, looks up the TLB and page directory, and maps virtual addresses (VPN) to physical addresses (PA).</li>
+<li>Cache: A type of SRAM located next to the CPU, used to retrieve data based on an address.</li>
+</ul>
+<hr>
+<h2 id="Content-Overview"><a href="#Content-Overview" class="headerlink" title="Content Overview"></a>Content Overview</h2><!-- This lab focuses on the operating system boot process; the subsequent section on writing the prinkfk function primarily covers basic C programming concepts and will not be elaborated on here. -->
+
+<h3 id="Building-a-Kernel-from-Scratch"><a href="#Building-a-Kernel-from-Scratch" class="headerlink" title="Building a Kernel from Scratch"></a>Building a Kernel from Scratch</h3><p>Based on the Makefile mentioned earlier, the following steps were taken from running <code>make</code> to building the MOS kernel:</p>
+<ol>
+<li>After executing command <code>make</code>, the top-level Makefile begins to traverse the subdirectories <code>lib</code>, <code>init</code>, and <code>kern</code> in sequence, invoking their respective sub-Makefiles to compile all C code (<code>.c</code>) and assembly code into the corresponding relocatable object files (<code>.o</code>).</li>
+<li>The linker (<code>ld</code>) follows the linker script (<code>kernel.lds</code>) to perform section aggregation and symbol resolution on all object files (<code>.o</code>). It then registers symbol <code>_start</code> as the program entry point in the ELF header, ultimately producing the complete kernel binary image <code>mos.elf</code>.</li>
+</ol>
+<h3 id="Operating-System-Boot-Process"><a href="#Operating-System-Boot-Process" class="headerlink" title="Operating System Boot Process"></a>Operating System Boot Process</h3><blockquote>
+<p>pull oneself up by one’s bootstraps</p>
+</blockquote>
+<p>Faced with a blank memory, how does a complex operating system boot up?On actual bare-metal hardware, when the power is first turned on, a small piece of basic code (the bootloader) is needed to load the massive operating system from the hard drive into memory. In our experiment, however, QEMU comes with built-in boot functionality that can directly recognize and load the ELF-format kernel we’ve compiled,so we don’t have to worry about the complex boot process.</p>
+<p>So, after the emulator (QEMU) loads the kernel, it first jumps to the assembly entry point at <code>_start</code>:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">.text</span><br><span class="line">EXPORT(_start)</span><br><span class="line">.set at</span><br><span class="line">.set reorder</span><br><span class="line">	/* clear .bss segment */</span><br><span class="line">	la      v0, bss_start</span><br><span class="line">	la      v1, bss_end</span><br><span class="line">clear_bss_loop:</span><br><span class="line">	beq     v0, v1, clear_bss_done</span><br><span class="line">	sb      zero, 0(v0)</span><br><span class="line">	addiu   v0, v0, 1</span><br><span class="line">	j       clear_bss_loop</span><br><span class="line"></span><br><span class="line">clear_bss_done:</span><br><span class="line">	/* disable interrupts */</span><br><span class="line">	mtc0    zero, CP0_STATUS</span><br><span class="line"></span><br><span class="line">	/* set up the kernel stack */</span><br><span class="line">	li 		sp, 0x80400000</span><br><span class="line">	/* jump to mips_init */</span><br><span class="line">	j mips_init</span><br></pre></td></tr></table></figure>
+<p>The following preparations are made here:</p>
+<ol>
+<li>Iterate through the virtual address range of Section <code>.bss</code> (from <code>bss_start</code> to <code>bss_end</code>) and set the memory of uninitialized global&#x2F;static variables to zero.</li>
+<li>Interrupt Masking: <code>mtc0 zero, CP0_STATUS</code> Masks external interrupts to ensure that subsequent boot logic is not interrupted.</li>
+<li>Building the stack: Stack pointer register (<code>sp</code>) &lt;- kernel stack top address (<code>KSTACKTOP</code>), providing the necessary space for the function call stack and local variables.</li>
+<li>Via <code>j mips_init</code>, the program counter (PC) points to the initialization main function defined in C. At this point, the kernel’s low-level boot phase is complete, and system control is handed over to the C portion of the kernel.</li>
+</ol>
+<p>And with that, the work on Lab 1 is complete.</p>
+<hr>
+<h2 id="Experiment-Reflections"><a href="#Experiment-Reflections" class="headerlink" title="Experiment Reflections"></a>Experiment Reflections</h2><p>This experiment was generally fairly easy, and even the hands-on exercises provided plenty of hints—it was very user-friendly. (I almost forgot about the function for comparing string equality—strcmp—but there happened to be a hint right below it.)</p>
+<p>Aside from the many issues with my new main computer during the lab session, the process of solving the problems went quite smoothly—I just had to follow the instructions step by step.</p>
+<p>It feels good to be writing C again after such a long time—including working with variable-length arrays, assigning and passing pointers, and using callback functions.</p>
+<p>Writing source code has truly deepened my understanding of theoretical concepts, particularly giving me a more in-depth understanding of the ELF file structure, linker scripts, and the MIPS architecture.</p>
+<hr>
+<p>Appendix: kernel memory layout diagram in <code>include/mmu.h</code>):</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> o     4G -----------&gt;  +----------------------------+------------0x100000000</span></span><br><span class="line"><span class="comment"> o                      |       ...                  |  kseg2</span></span><br><span class="line"><span class="comment"> o      KSEG2    -----&gt; +----------------------------+------------0xc000 0000</span></span><br><span class="line"><span class="comment"> o                      |          Devices           |  kseg1</span></span><br><span class="line"><span class="comment"> o      KSEG1    -----&gt; +----------------------------+------------0xa000 0000</span></span><br><span class="line"><span class="comment"> o                      |      Invalid Memory        |   /|\</span></span><br><span class="line"><span class="comment"> o                      +----------------------------+----|-------Physical Memory Max</span></span><br><span class="line"><span class="comment"> o                      |       ...                  |  kseg0</span></span><br><span class="line"><span class="comment"> o      KSTACKTOP-----&gt; +----------------------------+----|-------0x8040 0000-------end</span></span><br><span class="line"><span class="comment"> o                      |       Kernel Stack         |    | KSTKSIZE            /|\</span></span><br><span class="line"><span class="comment"> o                      +----------------------------+----|------                |</span></span><br><span class="line"><span class="comment"> o                      |       Kernel Text          |    |                    PDMAP</span></span><br><span class="line"><span class="comment"> o      KERNBASE -----&gt; +----------------------------+----|-------0x8002 0000    |</span></span><br><span class="line"><span class="comment"> o                      |      Exception Entry       |   \|/                    \|/</span></span><br><span class="line"><span class="comment"> o      ULIM     -----&gt; +----------------------------+------------0x8000 0000-------</span></span><br><span class="line"><span class="comment"> o                      |         User VPT           |     PDMAP                /|\</span></span><br><span class="line"><span class="comment"> o      UVPT     -----&gt; +----------------------------+------------0x7fc0 0000    |</span></span><br><span class="line"><span class="comment"> o                      |           pages            |     PDMAP                 |</span></span><br><span class="line"><span class="comment"> o      UPAGES   -----&gt; +----------------------------+------------0x7f80 0000    |</span></span><br><span class="line"><span class="comment"> o                      |           envs             |     PDMAP                 |</span></span><br><span class="line"><span class="comment"> o  UTOP,UENVS   -----&gt; +----------------------------+------------0x7f40 0000    |</span></span><br><span class="line"><span class="comment"> o  UXSTACKTOP -/       |     user exception stack   |     PTMAP                 |</span></span><br><span class="line"><span class="comment"> o                      +----------------------------+------------0x7f3f f000    |</span></span><br><span class="line"><span class="comment"> o                      |                            |     PTMAP                 |</span></span><br><span class="line"><span class="comment"> o      USTACKTOP ----&gt; +----------------------------+------------0x7f3f e000    |</span></span><br><span class="line"><span class="comment"> o                      |     normal user stack      |     PTMAP                 |</span></span><br><span class="line"><span class="comment"> o                      +----------------------------+------------0x7f3f d000    |</span></span><br><span class="line"><span class="comment"> a                      |                            |                           |</span></span><br><span class="line"><span class="comment"> a                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~                           |</span></span><br><span class="line"><span class="comment"> a                      .                            .                           |</span></span><br><span class="line"><span class="comment"> a                      .                            .                         kuseg</span></span><br><span class="line"><span class="comment"> a                      .                            .                           |</span></span><br><span class="line"><span class="comment"> a                      |~~~~~~~~~~~~~~~~~~~~~~~~~~~~|                           |</span></span><br><span class="line"><span class="comment"> a                      |                            |                           |</span></span><br><span class="line"><span class="comment"> o       UTEXT   -----&gt; +----------------------------+------------0x0040 0000    |</span></span><br><span class="line"><span class="comment"> o                      |      reserved for COW      |     PTMAP                 |</span></span><br><span class="line"><span class="comment"> o       UCOW    -----&gt; +----------------------------+------------0x003f f000    |</span></span><br><span class="line"><span class="comment"> o                      |   reversed for temporary   |     PTMAP                 |</span></span><br><span class="line"><span class="comment"> o       UTEMP   -----&gt; +----------------------------+------------0x003f e000    |</span></span><br><span class="line"><span class="comment"> o                      |       invalid memory       |                          \|/</span></span><br><span class="line"><span class="comment"> a     0 ------------&gt;  +----------------------------+ ----------------------------</span></span><br><span class="line"><span class="comment"> o</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>Here, KERNBASE is the starting virtual address of the kernel image.</p>
+
+  </div>
+</article>
+
+
+    <div class="blog-post-comments">
+        <div id="utterances_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/Blog/en/">Home</a></li>
+        
+          <li><a href="/Blog/en/about/">About</a></li>
+        
+          <li><a href="/Blog/en/archives/">Articles</a></li>
+        
+          <li><a href="/Blog/en/tags/">Tags</a></li>
+        
+          <li><a href="/Blog/en/changelog/">Logs</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Basic-Concepts"><span class="toc-number">1.</span> <span class="toc-text">Basic Concepts</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#QEMU-Emulator"><span class="toc-number">1.1.</span> <span class="toc-text">QEMU Emulator</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Cross-Compilation"><span class="toc-number">1.2.</span> <span class="toc-text">Cross-Compilation</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Makefile"><span class="toc-number">1.3.</span> <span class="toc-text">Makefile</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ELF-files"><span class="toc-number">1.4.</span> <span class="toc-text">ELF files</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Linkers-and-Link-Scripts"><span class="toc-number">1.5.</span> <span class="toc-text">Linkers and Link Scripts</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Linker"><span class="toc-number">1.5.1.</span> <span class="toc-text">Linker</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Linker-Script"><span class="toc-number">1.5.2.</span> <span class="toc-text">Linker Script</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MIPS-Memory-Layout"><span class="toc-number">1.6.</span> <span class="toc-text">MIPS Memory Layout</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Content-Overview"><span class="toc-number">2.</span> <span class="toc-text">Content Overview</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Building-a-Kernel-from-Scratch"><span class="toc-number">2.1.</span> <span class="toc-text">Building a Kernel from Scratch</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Operating-System-Boot-Process"><span class="toc-number">2.2.</span> <span class="toc-text">Operating System Boot Process</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Experiment-Reflections"><span class="toc-number">3.</span> <span class="toc-text">Experiment Reflections</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://begineri.github.io/Blog/en/2026/04/15/buaa-os-lab1-summary/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://begineri.github.io/Blog/en/2026/04/15/buaa-os-lab1-summary/&text=buaa26-OS-lab1-Summary"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://begineri.github.io/Blog/en/2026/04/15/buaa-os-lab1-summary/&title=buaa26-OS-lab1-Summary"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://begineri.github.io/Blog/en/2026/04/15/buaa-os-lab1-summary/&is_video=false&description=buaa26-OS-lab1-Summary"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=buaa26-OS-lab1-Summary&body=Check out this article: https://begineri.github.io/Blog/en/2026/04/15/buaa-os-lab1-summary/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://begineri.github.io/Blog/en/2026/04/15/buaa-os-lab1-summary/&title=buaa26-OS-lab1-Summary"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://begineri.github.io/Blog/en/2026/04/15/buaa-os-lab1-summary/&title=buaa26-OS-lab1-Summary"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://begineri.github.io/Blog/en/2026/04/15/buaa-os-lab1-summary/&title=buaa26-OS-lab1-Summary"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://begineri.github.io/Blog/en/2026/04/15/buaa-os-lab1-summary/&title=buaa26-OS-lab1-Summary"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://begineri.github.io/Blog/en/2026/04/15/buaa-os-lab1-summary/&name=buaa26-OS-lab1-Summary&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://begineri.github.io/Blog/en/2026/04/15/buaa-os-lab1-summary/&t=buaa26-OS-lab1-Summary"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025-2026
+    Wang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/Blog/en/">Home</a></li><!--
+     --><!--
+       --><li><a href="/Blog/en/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/Blog/en/archives/">Articles</a></li><!--
+     --><!--
+       --><li><a href="/Blog/en/tags/">Tags</a></li><!--
+     --><!--
+       --><li><a href="/Blog/en/changelog/">Logs</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/Blog/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "57783916a7b349829732031e51219ad6"}'></script>
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+    <script type="text/javascript">
+      var utterances_repo = 'begineri/Blog';
+      var utterances_issue_term = 'pathname';
+      var utterances_label = 'Comment';
+      var utterances_theme = 'github-dark';
+
+      (function(){
+          var script = document.createElement('script');
+
+          script.src = 'https://utteranc.es/client.js';
+          script.setAttribute('repo', utterances_repo);
+          script.setAttribute('issue-term', 'pathname');
+          script.setAttribute('label', utterances_label);
+          script.setAttribute('theme', utterances_theme);
+          script.setAttribute('crossorigin', 'anonymous');
+          script.async = true;
+          (document.getElementById('utterances_thread')).appendChild(script);
+      }());
+  </script>
+
+</body>
+</html>

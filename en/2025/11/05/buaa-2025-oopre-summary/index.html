@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+
+<html lang=&#34;en&#34;>
+<head>
+    
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Brief description of the iterative assignment:Assignment Task Framework Adventurer Items (Bottle, Equipment) Spell Bag (Backpack System) UseItem (Potions and Spells) Fight (Combat System and Adventure">
+<meta property="og:type" content="article">
+<meta property="og:title" content="buaa-2025 Fall - OOPre Course Summary">
+<meta property="og:url" content="https://begineri.github.io/Blog/en/2025/11/05/buaa-2025-oopre-summary/index.html">
+<meta property="og:site_name" content="My Blog">
+<meta property="og:description" content="Brief description of the iterative assignment:Assignment Task Framework Adventurer Items (Bottle, Equipment) Spell Bag (Backpack System) UseItem (Potions and Spells) Fight (Combat System and Adventure">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/Diagram.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/CommandUtil.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/Item.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/Adventurer.png">
+<meta property="article:published_time" content="2025-11-05T19:25:29.000Z">
+<meta property="article:modified_time" content="2026-10-08T23:08:39.883Z">
+<meta property="article:author" content="Wang">
+<meta property="article:tag" content="OOP">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://begineri.github.io/Blog/images/Diagram.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/Blog/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/Blog/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/Blog/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>buaa-2025 Fall - OOPre Course Summary</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/Blog/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 8.1.1"><link rel="alternate" href="/Blog/en/atom.xml" title="My Blog" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr is-post">
+    
+<nav class="lang-switch" aria-label="Language">
+  <a href="/Blog/zh-CN/2025/11/05/buaa-2025-oopre-summary/" class="">中</a>
+  <span class="lang-switch__sep" aria-hidden="true">|</span>
+  <a href="/Blog/en/2025/11/05/buaa-2025-oopre-summary/" class="is-active">EN</a>
+</nav>
+
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top"
+    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i
+      class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       -->
+          <li><a href="/Blog/en/">
+              Home
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/en/about/">
+              About
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/en/archives/">
+              Articles
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/en/tags/">
+              Tags
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/en/changelog/">
+              Logs
+            </a></li><!--
+     -->
+          
+      </ul>
+      
+<nav class="lang-switch lang-switch--inline" aria-label="Language">
+  <a href="/Blog/zh-CN/2025/11/05/buaa-2025-oopre-summary/" class="">中</a>
+  <span class="lang-switch__sep" aria-hidden="true">|</span>
+  <a href="/Blog/en/2025/11/05/buaa-2025-oopre-summary/" class="is-active">EN</a>
+</nav>
+
+    </span>
+    <br />
+    <span id="actions">
+      <ul>
+        
+        
+          <li><a class="icon" aria-label="Previous post" href="/Blog/en/2025/11/06/why-i-created-this-blog/"><i
+                class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();"
+                onmouseout="$('#i-prev').toggle();"></i></a></li>
+          
+            
+                <li><a class="icon" aria-label="Back to top" href="#"
+                    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up"
+                      aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a>
+                </li>
+                <li><a class="icon" aria-label="Share post" href="#"><i
+                      class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();"
+                      onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">
+        Previous post
+      </span>
+      <span id="i-next" class="info" style="display:none;">
+        Next post
+      </span>
+      <span id="i-top" class="info" style="display:none;">
+        Back to top
+      </span>
+      <span id="i-share" class="info" style="display:none;">
+        Share post
+      </span>
+    </span>
+    <br />
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://begineri.github.io/Blog/en/2025/11/05/buaa-2025-oopre-summary/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://begineri.github.io/Blog/en/2025/11/05/buaa-2025-oopre-summary/&text=buaa-2025 Fall - OOPre Course Summary"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://begineri.github.io/Blog/en/2025/11/05/buaa-2025-oopre-summary/&title=buaa-2025 Fall - OOPre Course Summary"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://begineri.github.io/Blog/en/2025/11/05/buaa-2025-oopre-summary/&is_video=false&description=buaa-2025 Fall - OOPre Course Summary"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=buaa-2025 Fall - OOPre Course Summary&body=Check out this article: https://begineri.github.io/Blog/en/2025/11/05/buaa-2025-oopre-summary/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://begineri.github.io/Blog/en/2025/11/05/buaa-2025-oopre-summary/&title=buaa-2025 Fall - OOPre Course Summary"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://begineri.github.io/Blog/en/2025/11/05/buaa-2025-oopre-summary/&title=buaa-2025 Fall - OOPre Course Summary"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://begineri.github.io/Blog/en/2025/11/05/buaa-2025-oopre-summary/&title=buaa-2025 Fall - OOPre Course Summary"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://begineri.github.io/Blog/en/2025/11/05/buaa-2025-oopre-summary/&title=buaa-2025 Fall - OOPre Course Summary"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://begineri.github.io/Blog/en/2025/11/05/buaa-2025-oopre-summary/&name=buaa-2025 Fall - OOPre Course Summary&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://begineri.github.io/Blog/en/2025/11/05/buaa-2025-oopre-summary/&t=buaa-2025 Fall - OOPre Course Summary"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <!-- 
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Brief-description-of-the-iterative-assignment"><span class="toc-number">1.</span> <span class="toc-text">Brief description of the iterative assignment:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Assignment-Task-Framework"><span class="toc-number">1.1.</span> <span class="toc-text">Assignment Task Framework</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tasks-to-be-completed"><span class="toc-number">1.2.</span> <span class="toc-text">Tasks to be completed</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Final-architecture-design-adjustments-and-considerations-%F0%9F%98%B8"><span class="toc-number">1.3.</span> <span class="toc-text">Final architecture design, adjustments, and considerations 😸</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Implementation-of-the-CommandUtil-Interface"><span class="toc-number">1.3.1.</span> <span class="toc-text">1. Implementation of the CommandUtil Interface</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Item-Inheritance-from-Abstract-Classes"><span class="toc-number">1.3.2.</span> <span class="toc-text">2.Item Inheritance from Abstract Classes</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Adventurer-Class-and-Feature-Implementation"><span class="toc-number">1.3.3.</span> <span class="toc-text">3.Adventurer Class and Feature Implementation</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#State-Management"><span class="toc-number">1.3.3.1.</span> <span class="toc-text">State Management</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Inventory-Management"><span class="toc-number">1.3.3.2.</span> <span class="toc-text">Inventory Management</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Action-Execution-and-Polymorphism"><span class="toc-number">1.3.3.3.</span> <span class="toc-text">Action Execution and Polymorphism</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Implementing-an-Employment-Relationship"><span class="toc-number">1.3.3.4.</span> <span class="toc-text">Implementing an Employment Relationship</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Assistance-System-Observer-Pattern"><span class="toc-number">1.3.3.5.</span> <span class="toc-text">Assistance System (Observer Pattern)</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thoughts-on-Using-JUnit"><span class="toc-number">2.</span> <span class="toc-text">Thoughts on Using JUnit</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#My-Experience-Learning-OOPre"><span class="toc-number">3.</span> <span class="toc-text">My Experience Learning OOPre</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Course-Recommendations"><span class="toc-number">4.</span> <span class="toc-text">Course Recommendations</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-The-lecture-class-was-too-brief"><span class="toc-number">4.1.</span> <span class="toc-text">1. The lecture class was too brief.</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-The-Gradual-Introduction-of-Engineering-Architecture-Concepts"><span class="toc-number">4.2.</span> <span class="toc-text">2. The Gradual Introduction of Engineering Architecture Concepts</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%9E%EF%B9%8F%EF%BC%9C"><span class="toc-number">5.</span> <span class="toc-text">＞﹏＜</span></a></li></ol>
+      </div>
+     -->
+    
+        <div id="toc">
+          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Brief-description-of-the-iterative-assignment"><span class="toc-number">1.</span> <span class="toc-text">Brief description of the iterative assignment:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Assignment-Task-Framework"><span class="toc-number">1.1.</span> <span class="toc-text">Assignment Task Framework</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tasks-to-be-completed"><span class="toc-number">1.2.</span> <span class="toc-text">Tasks to be completed</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Final-architecture-design-adjustments-and-considerations-%F0%9F%98%B8"><span class="toc-number">1.3.</span> <span class="toc-text">Final architecture design, adjustments, and considerations 😸</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Implementation-of-the-CommandUtil-Interface"><span class="toc-number">1.3.1.</span> <span class="toc-text">1. Implementation of the CommandUtil Interface</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Item-Inheritance-from-Abstract-Classes"><span class="toc-number">1.3.2.</span> <span class="toc-text">2.Item Inheritance from Abstract Classes</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Adventurer-Class-and-Feature-Implementation"><span class="toc-number">1.3.3.</span> <span class="toc-text">3.Adventurer Class and Feature Implementation</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#State-Management"><span class="toc-number">1.3.3.1.</span> <span class="toc-text">State Management</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Inventory-Management"><span class="toc-number">1.3.3.2.</span> <span class="toc-text">Inventory Management</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Action-Execution-and-Polymorphism"><span class="toc-number">1.3.3.3.</span> <span class="toc-text">Action Execution and Polymorphism</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Implementing-an-Employment-Relationship"><span class="toc-number">1.3.3.4.</span> <span class="toc-text">Implementing an Employment Relationship</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Assistance-System-Observer-Pattern"><span class="toc-number">1.3.3.5.</span> <span class="toc-text">Assistance System (Observer Pattern)</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thoughts-on-Using-JUnit"><span class="toc-number">2.</span> <span class="toc-text">Thoughts on Using JUnit</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#My-Experience-Learning-OOPre"><span class="toc-number">3.</span> <span class="toc-text">My Experience Learning OOPre</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Course-Recommendations"><span class="toc-number">4.</span> <span class="toc-text">Course Recommendations</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-The-lecture-class-was-too-brief"><span class="toc-number">4.1.</span> <span class="toc-text">1. The lecture class was too brief.</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-The-Gradual-Introduction-of-Engineering-Architecture-Concepts"><span class="toc-number">4.2.</span> <span class="toc-text">2. The Gradual Introduction of Engineering Architecture Concepts</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%9E%EF%B9%8F%EF%BC%9C"><span class="toc-number">5.</span> <span class="toc-text">＞﹏＜</span></a></li></ol>
+        </div>
+        
+  </span>
+</div>
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        buaa-2025 Fall - OOPre Course Summary
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Wang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-11-05T19:25:29.000Z" class="dt-published" itemprop="datePublished">2025-11-05</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        
+          <a class="p-category" href="/Blog/en/tags/OOP/">OOP</a>
+        
+          <a class="p-category" href="/Blog/en/tags/java/">java</a>
+        
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="Brief-description-of-the-iterative-assignment"><a href="#Brief-description-of-the-iterative-assignment" class="headerlink" title="Brief description of the iterative assignment:"></a>Brief description of the iterative assignment:</h2><h3 id="Assignment-Task-Framework"><a href="#Assignment-Task-Framework" class="headerlink" title="Assignment Task Framework"></a>Assignment Task Framework</h3><ul>
+<li>Adventurer</li>
+<li>Items (Bottle, Equipment)</li>
+<li>Spell</li>
+<li>Bag (Backpack System)</li>
+<li>UseItem (Potions and Spells)</li>
+<li>Fight (Combat System and Adventurer Attributes)</li>
+<li>Money System</li>
+<li>Employer, Employee (Employment Relationships and Assistance)</li>
+</ul>
+<hr>
+<h3 id="Tasks-to-be-completed"><a href="#Tasks-to-be-completed" class="headerlink" title="Tasks to be completed"></a>Tasks to be completed</h3><ol>
+<li><code>add adventurer</code>: Add an adventurer to be managed (Newly added adventurers do not carry any potion bottles or equipment, and have an initial stamina of 500, an initial attack power of 1, an initial defense of 0, an initial mana of 10, and 50 gold coins).</li>
+<li><code>add bottle</code>: Add a potion bottle to a certain adventurer</li>
+<li><code>add equipment</code>: Adding a piece of equipment to an adventurer</li>
+<li><code>learn spell</code>: Teaching a Spell to an Adventurer</li>
+<li><code>remove item</code>: Deleting an item from an adventurer</li>
+<li><code>take item</code>: The adventurer attempts to carry an item he owns</li>
+<li><code>use</code>: The adventurer uses an available item on a target</li>
+<li><code>buy item</code>: The adventurer goes to the store to purchase item</li>
+<li><code>fight</code>: An Adventurer Fights a Battle</li>
+<li><code>add relation</code>: Add an employment relationship</li>
+<li><code>remove relation</code>: Deleting an Employment Relationship</li>
+<li><code>load relation</code>: Import a set of employment relationships</li>
+</ol>
+<hr>
+<h3 id="Final-architecture-design-adjustments-and-considerations-😸"><a href="#Final-architecture-design-adjustments-and-considerations-😸" class="headerlink" title="Final architecture design, adjustments, and considerations 😸"></a>Final architecture design, adjustments, and considerations 😸</h3><p><img src="/Blog/images/Diagram.png" alt="Overview" title="The overall design architecture is shown in the figure"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">\SRC</span><br><span class="line">├─commands</span><br><span class="line">│      AddAdventurer.java</span><br><span class="line">│      AddBottle.java</span><br><span class="line">│      AddEquipment.java</span><br><span class="line">│      AddRelation.java</span><br><span class="line">│      BuyItem.java</span><br><span class="line">│      CommandUtil.java</span><br><span class="line">│      Fight.java</span><br><span class="line">│      LearnSpell.java</span><br><span class="line">│      LoadRelationship.java</span><br><span class="line">│      RemoveItem.java</span><br><span class="line">│      RemoveRelation.java</span><br><span class="line">│      TakeItem.java</span><br><span class="line">│      Use.java</span><br><span class="line">├─game</span><br><span class="line">│  │  Adventurer.java</span><br><span class="line">│  │  CommandFactory.java</span><br><span class="line">│  │  Factory.java</span><br><span class="line">│  │  Main.java</span><br><span class="line">│  └─interfaces</span><br><span class="line">│          Employee.java</span><br><span class="line">│          Employer.java</span><br><span class="line">├─items</span><br><span class="line">│  │  Bottle.java</span><br><span class="line">│  │  Equipment.java</span><br><span class="line">│  │  Item.java</span><br><span class="line">│  │  Spell.java</span><br><span class="line">│  ├─bottles</span><br><span class="line">│  │      AtkBottle.java</span><br><span class="line">│  │      DefBottle.java</span><br><span class="line">│  │      HpBottle.java</span><br><span class="line">│  │      ManaBottle.java</span><br><span class="line">│  ├─equipments</span><br><span class="line">│  │      Armour.java</span><br><span class="line">│  │      Magicbook.java</span><br><span class="line">│  │      Sword.java</span><br><span class="line">│  │      Weapon.java</span><br><span class="line">│  └─spells</span><br><span class="line">│          AttackSpell.java</span><br><span class="line">│          HealSpell.java</span><br><span class="line">└─parser</span><br><span class="line">        AdventureHireManager.java</span><br><span class="line">        Lexer.java</span><br><span class="line">        Parser.java</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="1-Implementation-of-the-CommandUtil-Interface"><a href="#1-Implementation-of-the-CommandUtil-Interface" class="headerlink" title="1. Implementation of the CommandUtil Interface"></a>1. Implementation of the <code>CommandUtil</code> Interface</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">CommandUtil</span> &#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">execute</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/Blog/images/CommandUtil.png" alt="CommandUtil"><br>Using the <strong>Command Pattern</strong>, each command implements the <code>(Implementation)</code> CommandUtil interface, encapsulating each “operation” into an independent object to achieve <strong>decoupling</strong> and <strong>encapsulation</strong>, making it easy to extend.</p>
+<p>With Class <code>CommandFactory</code>, you can call it directly within Class <code>Main</code>:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">CommandUtil</span> <span class="variable">command</span> <span class="operator">=</span> CommandFactory.createCommand(input, adventureList);</span><br><span class="line"><span class="keyword">if</span> (command != <span class="literal">null</span>) &#123;</span><br><span class="line">    command.execute();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Code examples of specific interface implementations:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> game.Adventurer;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LearnSpell</span> <span class="keyword">implements</span> <span class="title class_">CommandUtil</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Adventurer adventure;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String speId;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String type;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">int</span> manaCost;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">int</span> power;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">LearnSpell</span><span class="params">(Adventurer adventure, String speId, String type, <span class="type">int</span> manaCost, <span class="type">int</span> power)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.adventure = adventure;</span><br><span class="line">        <span class="built_in">this</span>.speId = speId;</span><br><span class="line">        <span class="built_in">this</span>.type = type;</span><br><span class="line">        <span class="built_in">this</span>.manaCost = manaCost;</span><br><span class="line">        <span class="built_in">this</span>.power = power;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">execute</span><span class="params">()</span> &#123;</span><br><span class="line">        adventure.learnSpell(speId, type, manaCost, power);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="2-Item-Inheritance-from-Abstract-Classes"><a href="#2-Item-Inheritance-from-Abstract-Classes" class="headerlink" title="2.Item Inheritance from Abstract Classes"></a>2.<code>Item</code> Inheritance from Abstract Classes</h4><p><img src="/Blog/images/Item.png" alt="Item"></p>
+<p>After analysis, it was found that the items possessed by adventurers (equipment, potions, spells) can be abstracted into a unified Class <code>Item</code> for easier centralized management. Therefore, the following <strong>inheritance hierarchy</strong> can be designed:</p>
+<ul>
+<li><p><strong>Top-level abstraction (Root): <code>Item</code></strong></p>
+<ul>
+<li>Define the common <strong>characteristics</strong> of all “items.” For example, the <code>id</code> and <code>use</code> methods.</li>
+</ul>
+</li>
+<li><p><strong>First-level categories (Branches): <code>Equipment</code>, <code>Spell</code>, <code>Bottle</code></strong></p>
+<ul>
+<li>These three classes extend <code>Item</code>.</li>
+<li>They are <strong>abstract classes</strong> themselves, used to define the common characteristics of their respective categories.</li>
+</ul>
+</li>
+<li><p><strong>Specific implementations (Leaves): <code>HpBottle</code>, <code>Sword</code>, <code>AttackSpell</code>, etc.</strong></p>
+<ul>
+<li>These <strong>concrete classes</strong> inherit from their respective “base classes” and can actually be instantiated (<code>new</code>).</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="3-Adventurer-Class-and-Feature-Implementation"><a href="#3-Adventurer-Class-and-Feature-Implementation" class="headerlink" title="3.Adventurer Class and Feature Implementation"></a>3.<code>Adventurer</code> Class and Feature Implementation</h4><h5 id="State-Management"><a href="#State-Management" class="headerlink" title="State Management"></a>State Management</h5><ul>
+<li><strong>Stores core attributes:</strong> Contains all of the adventurer’s base attributes, such as <code>id</code>, <code>hitPoint</code>, <code>atk</code>, <code>def</code>, <code>mana</code>, and <code>money</code>.</li>
+<li><strong>Death Handling:</strong> Contains <code>isDead()</code> checks. <code>deductHitPoint()</code> method that automatically calls the method responsible for handling post-death relationships when HP reaches zero.</li>
+<li><strong>Calculate Total Value:</strong> <code>calculateAllMoney()</code>. This method is used to calculate the “total value” (gold coins + item value) dropped when an adventurer dies.</li>
+</ul>
+<h5 id="Inventory-Management"><a href="#Inventory-Management" class="headerlink" title="Inventory Management"></a>Inventory Management</h5><ul>
+<li><strong>Distinguishing Between Ownership, Carrying, and Equipment:</strong><ul>
+<li><code>items</code> (HashMap): All items <strong>owned by</strong> the adventurer.</li>
+<li><code>usables</code> (HashMap) &#x2F; <code>usablesQueue</code> (Queue): Potions <strong>carried</strong> by the adventurer; the queue is used to implement the replacement logic for “up to 10 bottles.”</li>
+<li><code>armour</code> &#x2F; <code>weapon</code> (Equipment): The armor and weapons <strong>currently equipped</strong> by the adventurer.</li>
+</ul>
+</li>
+<li><strong>Spell Management:</strong> <code>spells</code> (HashMap) stores all learned spells.</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Items owned (including bottles and weapons)</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> HashMap&lt;String, Item&gt; items = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Items in the bag (bottles)</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> HashMap&lt;String, Item&gt; usables = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Learned spells</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> HashMap&lt;String, Spell&gt; spells = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line"><span class="comment">// List of carried bottles</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> Queue&lt;String&gt; usablesQueue = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>Decoupling from the Factory:</strong> Methods <code>addBottle</code>, <code>addEquipment</code>, <code>learnSpell</code>, and <code>buyItem</code> do not create objects directly; instead, they call <code>Factory</code> to create them, thereby separating creation from management.</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Simple factory</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> Equipment <span class="title function_">createEquipment</span><span class="params">(String type, String equId, <span class="type">int</span> ce)</span> &#123;</span><br><span class="line">    Equipment newEquipment;</span><br><span class="line">    <span class="keyword">switch</span> (type) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;Armour&quot;</span>:</span><br><span class="line">            newEquipment = <span class="keyword">new</span> <span class="title class_">Armour</span>(equId, ce);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;Sword&quot;</span>:</span><br><span class="line">            newEquipment = <span class="keyword">new</span> <span class="title class_">Sword</span>(equId, ce);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;Magicbook&quot;</span>:</span><br><span class="line">            newEquipment = <span class="keyword">new</span> <span class="title class_">Magicbook</span>(equId, ce);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            newEquipment = <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> newEquipment;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="Action-Execution-and-Polymorphism"><a href="#Action-Execution-and-Polymorphism" class="headerlink" title="Action Execution and Polymorphism"></a>Action Execution and Polymorphism</h5><ul>
+<li><strong><code>fight(targets)</code>:</strong> Encapsulated the combat logic.</li>
+<li><strong><code>useItem(target)</code>:</strong> Encapsulates the logic for using items and spells. It delegates execution to the <code>Item</code> object’s own <code>checkUse()</code> and <code>useSuccessfully()</code> methods, thereby implementing polymorphism.</li>
+<li><strong><code>takeItem(itemId)</code> &#x2F; <code>removeItem(itemId)</code>:</strong> Methods <code>equip()</code> and <code>unequip()</code> are both delegated to object <code>Item</code>; class <code>Adventurer</code> is not concerned with the logic of specific equipment and is only responsible for making the calls.</li>
+</ul>
+<h5 id="Implementing-an-Employment-Relationship"><a href="#Implementing-an-Employment-Relationship" class="headerlink" title="Implementing an Employment Relationship"></a>Implementing an Employment Relationship</h5><ul>
+<li>Implement both <strong>the Employee and Employer interfaces</strong>:<ul>
+<li>As <code>Employer</code>: It has methods <code>hire()</code> and <code>fire()</code>, and maintains a <strong>list of subordinates</strong>.</li>
+<li>As <code>Employee</code>: It has a <strong>direct superior</strong>.</li>
+</ul>
+</li>
+<li><strong>Relationship Graph Traversal:</strong> Provides the <code>getAllEmployers()</code>  and <code>getAllEmployees()</code>  methods.</li>
+<li><strong>Definition of an ally:</strong> <code>getAllAllies()</code>-iteration.</li>
+<li><strong>Rule check:</strong> Methods <code>checkContainsEmployer()</code> and <code>checkIsNotAlly()</code>.</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Adventurer</span> <span class="keyword">implements</span> <span class="title class_">Employee</span>, Employer &#123;</span><br><span class="line">    <span class="comment">// Direct superior</span></span><br><span class="line">    <span class="keyword">private</span> Employer employer;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// List of directly hired adventurers</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> HashMap&lt;String, Employee&gt; hired = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="Assistance-System-Observer-Pattern"><a href="#Assistance-System-Observer-Pattern" class="headerlink" title="Assistance System (Observer Pattern)"></a>Assistance System (Observer Pattern)</h5><ul>
+<li><strong>Subject:</strong><ol>
+<li>When <code>Adventurer</code> <code>takeDamage()</code> is called and the reduced HP meets the conditions for issuing a rescue,</li>
+<li>Call <code>notifyEmployees()</code> to “send a notification.”</li>
+</ol>
+</li>
+<li><strong>Observer:</strong><ol>
+<li>In <code>notifyEmployees()</code>, iterate through all subordinates (observers) and call their <code>aidEmployer()</code> method.</li>
+<li><strong>The observer</strong> reviews the assistance logic and attempts to assist the supervisor (Employer).</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="comment">// Notify employees</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">notifyEmployees</span><span class="params">()</span> &#123;</span><br><span class="line">    ArrayList&lt;Employee&gt; allEmployees = getAllEmployees();</span><br><span class="line">    </span><br><span class="line">    <span class="type">int</span> <span class="variable">sucAdiAdvNum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (Employee employee : allEmployees) &#123;</span><br><span class="line">        <span class="keyword">if</span> (employee.aidEmployer(<span class="built_in">this</span>)) &#123;</span><br><span class="line">            sucAdiAdvNum++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/Blog/images/Adventurer.png" alt="Adventurer"></p>
+<hr>
+<h2 id="Thoughts-on-Using-JUnit"><a href="#Thoughts-on-Using-JUnit" class="headerlink" title="Thoughts on Using JUnit"></a>Thoughts on Using JUnit</h2><p><code>import org.junit.Test;</code><br><code>import static org.junit.Assert.*;</code></p>
+<table>
+<thead>
+<tr>
+<th>Methods</th>
+<th>Introduction</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>assertEquals(expected, actual)</code></td>
+<td>Checking if two values are equal</td>
+</tr>
+<tr>
+<td><code>assertTrue(condition)</code></td>
+<td>Check if the condition is true</td>
+</tr>
+<tr>
+<td><code>assertFalse(condition)</code></td>
+<td>Check whether the condition is false</td>
+</tr>
+<tr>
+<td><code>assertNotNull(object)</code></td>
+<td>Check if it is not empty</td>
+</tr>
+<tr>
+<td><code>assertNull(object)</code></td>
+<td>Check if it is empty</td>
+</tr>
+<tr>
+<td><code>assertNotSame(expected, actual)</code></td>
+<td>Check whether two related objects do not point to the same object</td>
+</tr>
+<tr>
+<td><code>assertSame(expected, actual)</code></td>
+<td>Checking whether two related objects point to the same object</td>
+</tr>
+<tr>
+<td><code>assertArrayEquals(expectedArray, resultArray)</code></td>
+<td>Checking if two arrays are equal</td>
+</tr>
+</tbody></table>
+<p>Based on my experience using JUnit in the OOPro course, I’ve found that:</p>
+<ul>
+<li><strong>What JUnit can do</strong>: detect logical issues within methods caused by oversight. By ensuring a coverage rate of <code>Run with Coverage</code>, you can test nearly all the code you write, making it easy to spot even minor errors in your code when constructing and testing test cases.</li>
+<li><strong>What JUnit Can’t Do</strong>: Detect Certain Logical Flaws.Since I’ve been writing all my JUnit tests myself at this stage, if I didn’t consider a particular scenario while writing the code, I naturally wouldn’t construct such a test case when writing the JUnit tests. Consequently, I couldn’t detect errors in the program, which led to new, undetected bugs appearing on the strong tests of later assignments. To find these bugs, I had to reexamine the program’s logic.</li>
+</ul>
+<hr>
+<h2 id="My-Experience-Learning-OOPre"><a href="#My-Experience-Learning-OOPre" class="headerlink" title="My Experience Learning OOPre"></a>My Experience Learning OOPre</h2><blockquote>
+<p>The transition from <strong>Procedure-Oriented Programming (POP)</strong>* to <strong>Object-Oriented Programming <em>(<em>OOP</em>)</em></strong>.</p>
+</blockquote>
+<ul>
+<li><strong>POP</strong>: <strong>Process</strong> or <strong>function-oriented</strong>, emphasizing the execution flow and steps of a program.</li>
+<li><strong>OOP</strong>: A programming paradigm in which things are broken down into individual <strong>objects</strong>, which then divide tasks and collaborate with one another.<ul>
+<li><p><strong>Encapsulation</strong>: Hide internal implementation details and expose only the necessary interfaces.</p>
+</li>
+<li><p><strong>Inheritance</strong>: A subclass inherits the properties and methods of its parent class to achieve code reuse.</p>
+</li>
+<li><p><strong>Polymorphism</strong>: A single interface can be implemented by different objects to exhibit different behaviors.</p>
+</li>
+<li><p><strong>Abstraction</strong>: Extract common characteristics and define abstract classes or interfaces.</p>
+</li>
+<li><p>Through these mechanisms, OOP languages offer a high degree of flexibility, maintainability, and scalability when dealing with similar types of problems, providing us with new approaches to problem-solving.</p>
+</li>
+</ul>
+</li>
+<li>After completing the OOPre course, I gained a basic understanding of the most critical concepts in object-oriented languages, laying the groundwork for the main course ahead.</li>
+<li>At the same time, introducing the concept of <code>CheckStyle</code> can help students develop good coding practices right from the start.</li>
+</ul>
+<hr>
+<h2 id="Course-Recommendations"><a href="#Course-Recommendations" class="headerlink" title="Course Recommendations"></a>Course Recommendations</h2><h4 id="1-The-lecture-class-was-too-brief"><a href="#1-The-lecture-class-was-too-brief" class="headerlink" title="1. The lecture class was too brief."></a>1. The lecture class was too brief.</h4><ul>
+<li>The material covered in class accounts for only 40% of the knowledge needed to complete assignments and design programs. To complete assignments and design a relatively optimal program structure, students need to study a significant amount of supplementary material outside of class.Some of this material is derived from the in-class PowerPoint presentations (often, the presentations and lectures merely list concepts and touch on them superficially, which is insufficient for students to write the code required for their assignments), while other material is not covered in the presentations at all.</li>
+<li>If there is limited time for instruction during class, I recommend that the course team provide more optional reference materials for out-of-class assignments. For example, regarding the Command Pattern, they could provide concrete examples of its implementation in real-world projects (such as design concepts or code examples) to help students gain a concrete understanding of it, rather than just a few lines of text on a PowerPoint slide.</li>
+</ul>
+<h4 id="2-The-Gradual-Introduction-of-Engineering-Architecture-Concepts"><a href="#2-The-Gradual-Introduction-of-Engineering-Architecture-Concepts" class="headerlink" title="2. The Gradual Introduction of Engineering Architecture Concepts"></a>2. The Gradual Introduction of Engineering Architecture Concepts</h4><ul>
+<li><p>I recommend incorporating a bit of architectural thinking into each assignment, rather than just briefly mentioning it at the end, so that students can adjust and improve their frameworks in a timely manner—rather than letting them become increasingly cluttered, which severely impacts readability and makes it difficult to add new features later on.</p>
+</li>
+<li><p>The course could also introduce package management, which would make it easier to manage multiple classes within a project.</p>
+</li>
+<li><p>I suggest the course team provide an introduction to some of IDEA’s features (such as keyboard shortcuts, quick methods, etc.).</p>
+</li>
+</ul>
+<h1 id="＞﹏＜"><a href="#＞﹏＜" class="headerlink" title="＞﹏＜"></a>＞﹏＜</h1>
+  </div>
+</article>
+
+
+    <div class="blog-post-comments">
+        <div id="utterances_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/Blog/en/">Home</a></li>
+        
+          <li><a href="/Blog/en/about/">About</a></li>
+        
+          <li><a href="/Blog/en/archives/">Articles</a></li>
+        
+          <li><a href="/Blog/en/tags/">Tags</a></li>
+        
+          <li><a href="/Blog/en/changelog/">Logs</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Brief-description-of-the-iterative-assignment"><span class="toc-number">1.</span> <span class="toc-text">Brief description of the iterative assignment:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Assignment-Task-Framework"><span class="toc-number">1.1.</span> <span class="toc-text">Assignment Task Framework</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tasks-to-be-completed"><span class="toc-number">1.2.</span> <span class="toc-text">Tasks to be completed</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Final-architecture-design-adjustments-and-considerations-%F0%9F%98%B8"><span class="toc-number">1.3.</span> <span class="toc-text">Final architecture design, adjustments, and considerations 😸</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Implementation-of-the-CommandUtil-Interface"><span class="toc-number">1.3.1.</span> <span class="toc-text">1. Implementation of the CommandUtil Interface</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Item-Inheritance-from-Abstract-Classes"><span class="toc-number">1.3.2.</span> <span class="toc-text">2.Item Inheritance from Abstract Classes</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Adventurer-Class-and-Feature-Implementation"><span class="toc-number">1.3.3.</span> <span class="toc-text">3.Adventurer Class and Feature Implementation</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#State-Management"><span class="toc-number">1.3.3.1.</span> <span class="toc-text">State Management</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Inventory-Management"><span class="toc-number">1.3.3.2.</span> <span class="toc-text">Inventory Management</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Action-Execution-and-Polymorphism"><span class="toc-number">1.3.3.3.</span> <span class="toc-text">Action Execution and Polymorphism</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Implementing-an-Employment-Relationship"><span class="toc-number">1.3.3.4.</span> <span class="toc-text">Implementing an Employment Relationship</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Assistance-System-Observer-Pattern"><span class="toc-number">1.3.3.5.</span> <span class="toc-text">Assistance System (Observer Pattern)</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thoughts-on-Using-JUnit"><span class="toc-number">2.</span> <span class="toc-text">Thoughts on Using JUnit</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#My-Experience-Learning-OOPre"><span class="toc-number">3.</span> <span class="toc-text">My Experience Learning OOPre</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Course-Recommendations"><span class="toc-number">4.</span> <span class="toc-text">Course Recommendations</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-The-lecture-class-was-too-brief"><span class="toc-number">4.1.</span> <span class="toc-text">1. The lecture class was too brief.</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-The-Gradual-Introduction-of-Engineering-Architecture-Concepts"><span class="toc-number">4.2.</span> <span class="toc-text">2. The Gradual Introduction of Engineering Architecture Concepts</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EF%BC%9E%EF%B9%8F%EF%BC%9C"><span class="toc-number">5.</span> <span class="toc-text">＞﹏＜</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://begineri.github.io/Blog/en/2025/11/05/buaa-2025-oopre-summary/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://begineri.github.io/Blog/en/2025/11/05/buaa-2025-oopre-summary/&text=buaa-2025 Fall - OOPre Course Summary"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://begineri.github.io/Blog/en/2025/11/05/buaa-2025-oopre-summary/&title=buaa-2025 Fall - OOPre Course Summary"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://begineri.github.io/Blog/en/2025/11/05/buaa-2025-oopre-summary/&is_video=false&description=buaa-2025 Fall - OOPre Course Summary"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=buaa-2025 Fall - OOPre Course Summary&body=Check out this article: https://begineri.github.io/Blog/en/2025/11/05/buaa-2025-oopre-summary/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://begineri.github.io/Blog/en/2025/11/05/buaa-2025-oopre-summary/&title=buaa-2025 Fall - OOPre Course Summary"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://begineri.github.io/Blog/en/2025/11/05/buaa-2025-oopre-summary/&title=buaa-2025 Fall - OOPre Course Summary"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://begineri.github.io/Blog/en/2025/11/05/buaa-2025-oopre-summary/&title=buaa-2025 Fall - OOPre Course Summary"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://begineri.github.io/Blog/en/2025/11/05/buaa-2025-oopre-summary/&title=buaa-2025 Fall - OOPre Course Summary"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://begineri.github.io/Blog/en/2025/11/05/buaa-2025-oopre-summary/&name=buaa-2025 Fall - OOPre Course Summary&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://begineri.github.io/Blog/en/2025/11/05/buaa-2025-oopre-summary/&t=buaa-2025 Fall - OOPre Course Summary"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025-2026
+    Wang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/Blog/en/">Home</a></li><!--
+     --><!--
+       --><li><a href="/Blog/en/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/Blog/en/archives/">Articles</a></li><!--
+     --><!--
+       --><li><a href="/Blog/en/tags/">Tags</a></li><!--
+     --><!--
+       --><li><a href="/Blog/en/changelog/">Logs</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/Blog/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "57783916a7b349829732031e51219ad6"}'></script>
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+    <script type="text/javascript">
+      var utterances_repo = 'begineri/Blog';
+      var utterances_issue_term = 'pathname';
+      var utterances_label = 'Comment';
+      var utterances_theme = 'github-dark';
+
+      (function(){
+          var script = document.createElement('script');
+
+          script.src = 'https://utteranc.es/client.js';
+          script.setAttribute('repo', utterances_repo);
+          script.setAttribute('issue-term', 'pathname');
+          script.setAttribute('label', utterances_label);
+          script.setAttribute('theme', utterances_theme);
+          script.setAttribute('crossorigin', 'anonymous');
+          script.async = true;
+          (document.getElementById('utterances_thread')).appendChild(script);
+      }());
+  </script>
+
+</body>
+</html>

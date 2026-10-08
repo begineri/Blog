@@ -1,0 +1,1616 @@
+<!DOCTYPE html>
+
+<html lang=&#34;en&#34;>
+<head>
+    
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Design of a Single-Cycle MIPS Processor The content of this post is original and is provided for reference only; please do not copy it verbatim.  1. Single-Cycle Data Path DesignReference image Final">
+<meta property="og:type" content="article">
+<meta property="og:title" content="buaa26-CO-P3-Design Document-Logisim">
+<meta property="og:url" content="https://begineri.github.io/Blog/en/2025/11/10/co-p3-mips-cpu-logisim/index.html">
+<meta property="og:site_name" content="My Blog">
+<meta property="og:description" content="Design of a Single-Cycle MIPS Processor The content of this post is original and is provided for reference only; please do not copy it verbatim.  1. Single-Cycle Data Path DesignReference image Final">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/%E8%AE%BE%E8%AE%A1%E9%80%9A%E8%B7%AF.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/all.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/output.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/ALU.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/%E5%AF%84%E5%AD%98%E5%99%A8%E5%A0%86%E5%86%85%E9%83%A8%E7%BB%93%E6%9E%84.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/GRF.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/DM.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/nPC.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/IMm.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/IFU.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/EXT.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/SPLI.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/R%E5%9E%8B%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/LW&SW%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/%E5%88%86%E6%94%AF%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/%E8%B7%B3%E8%BD%AC%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/%E5%8D%95%E5%91%A8%E6%9C%9F%E6%8E%A7%E5%88%B6%E5%99%A8%E8%AE%BE%E8%AE%A1.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/controler.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/%E4%B8%BB%E6%8E%A7%E5%8D%95%E5%85%83%E9%80%BB%E8%BE%91%E5%AE%9E%E7%8E%B0.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/MCU.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/ACU.png">
+<meta property="article:published_time" content="2025-11-10T22:02:51.000Z">
+<meta property="article:modified_time" content="2026-10-08T23:10:32.867Z">
+<meta property="article:author" content="Wang">
+<meta property="article:tag" content="CO">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://begineri.github.io/Blog/images/%E8%AE%BE%E8%AE%A1%E9%80%9A%E8%B7%AF.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/Blog/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/Blog/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/Blog/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>buaa26-CO-P3-Design Document-Logisim</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/Blog/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 8.1.1"><link rel="alternate" href="/Blog/en/atom.xml" title="My Blog" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr is-post">
+    
+<nav class="lang-switch" aria-label="Language">
+  <a href="/Blog/zh-CN/2025/11/10/co-p3-mips-cpu-logisim/" class="">中</a>
+  <span class="lang-switch__sep" aria-hidden="true">|</span>
+  <a href="/Blog/en/2025/11/10/co-p3-mips-cpu-logisim/" class="is-active">EN</a>
+</nav>
+
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top"
+    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i
+      class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       -->
+          <li><a href="/Blog/en/">
+              Home
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/en/about/">
+              About
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/en/archives/">
+              Articles
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/en/tags/">
+              Tags
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/en/changelog/">
+              Logs
+            </a></li><!--
+     -->
+          
+      </ul>
+      
+<nav class="lang-switch lang-switch--inline" aria-label="Language">
+  <a href="/Blog/zh-CN/2025/11/10/co-p3-mips-cpu-logisim/" class="">中</a>
+  <span class="lang-switch__sep" aria-hidden="true">|</span>
+  <a href="/Blog/en/2025/11/10/co-p3-mips-cpu-logisim/" class="is-active">EN</a>
+</nav>
+
+    </span>
+    <br />
+    <span id="actions">
+      <ul>
+        
+        
+          <li><a class="icon" aria-label="Previous post" href="/Blog/en/2025/11/13/conversations-with-llm/"><i
+                class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();"
+                onmouseout="$('#i-prev').toggle();"></i></a></li>
+          
+            
+              <li><a class="icon" aria-label="Next post" href="/Blog/en/2025/11/06/why-i-created-this-blog/"><i
+                    class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();"
+                    onmouseout="$('#i-next').toggle();"></i></a></li>
+              
+                <li><a class="icon" aria-label="Back to top" href="#"
+                    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up"
+                      aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a>
+                </li>
+                <li><a class="icon" aria-label="Share post" href="#"><i
+                      class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();"
+                      onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">
+        Previous post
+      </span>
+      <span id="i-next" class="info" style="display:none;">
+        Next post
+      </span>
+      <span id="i-top" class="info" style="display:none;">
+        Back to top
+      </span>
+      <span id="i-share" class="info" style="display:none;">
+        Share post
+      </span>
+    </span>
+    <br />
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://begineri.github.io/Blog/en/2025/11/10/co-p3-mips-cpu-logisim/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://begineri.github.io/Blog/en/2025/11/10/co-p3-mips-cpu-logisim/&text=buaa26-CO-P3-Design Document-Logisim"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://begineri.github.io/Blog/en/2025/11/10/co-p3-mips-cpu-logisim/&title=buaa26-CO-P3-Design Document-Logisim"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://begineri.github.io/Blog/en/2025/11/10/co-p3-mips-cpu-logisim/&is_video=false&description=buaa26-CO-P3-Design Document-Logisim"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=buaa26-CO-P3-Design Document-Logisim&body=Check out this article: https://begineri.github.io/Blog/en/2025/11/10/co-p3-mips-cpu-logisim/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://begineri.github.io/Blog/en/2025/11/10/co-p3-mips-cpu-logisim/&title=buaa26-CO-P3-Design Document-Logisim"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://begineri.github.io/Blog/en/2025/11/10/co-p3-mips-cpu-logisim/&title=buaa26-CO-P3-Design Document-Logisim"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://begineri.github.io/Blog/en/2025/11/10/co-p3-mips-cpu-logisim/&title=buaa26-CO-P3-Design Document-Logisim"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://begineri.github.io/Blog/en/2025/11/10/co-p3-mips-cpu-logisim/&title=buaa26-CO-P3-Design Document-Logisim"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://begineri.github.io/Blog/en/2025/11/10/co-p3-mips-cpu-logisim/&name=buaa26-CO-P3-Design Document-Logisim&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://begineri.github.io/Blog/en/2025/11/10/co-p3-mips-cpu-logisim/&t=buaa26-CO-P3-Design Document-Logisim"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <!-- 
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Design-of-a-Single-Cycle-MIPS-Processor"><span class="toc-number">1.</span> <span class="toc-text">Design of a Single-Cycle MIPS Processor</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Single-Cycle-Data-Path-Design"><span class="toc-number">1.1.</span> <span class="toc-text">1. Single-Cycle Data Path Design</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Reference-image"><span class="toc-number">1.1.1.</span> <span class="toc-text">Reference image</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Final-Design"><span class="toc-number">1.1.2.</span> <span class="toc-text">Final Design</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Top-level-output-port"><span class="toc-number">1.1.3.</span> <span class="toc-text">Top-level output port</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-Combinational-Components"><span class="toc-number">1.1.4.</span> <span class="toc-text">1.1 Combinational Components</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-1-ALU-Arithmetic-Logic-Unit"><span class="toc-number">1.1.4.1.</span> <span class="toc-text">1.1.1 ALU (Arithmetic Logic Unit)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-2-GRF-General-Purpose-Register-Set-also-known-as-a-register-file"><span class="toc-number">1.1.4.2.</span> <span class="toc-text">1.1.2 GRF (General-Purpose Register Set, also known as a register file)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-3-DM-Data-Memory"><span class="toc-number">1.1.4.3.</span> <span class="toc-text">1.1.3 DM (Data Memory)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-4-nPC-%E2%80%94-Finite-State-Machine"><span class="toc-number">1.1.4.4.</span> <span class="toc-text">1.1.4 nPC — Finite-State Machine:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-5-IFU-Instruction-Fetch-Unit"><span class="toc-number">1.1.4.5.</span> <span class="toc-text">1.1.5 IFU (Instruction Fetch Unit)</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#IM-Instruction-Memory"><span class="toc-number">1.1.4.5.1.</span> <span class="toc-text">IM (Instruction Memory)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#IFU-Instruction-Fetch-Unit"><span class="toc-number">1.1.4.5.2.</span> <span class="toc-text">IFU (Instruction Fetch Unit)</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-6-EXT-Extension-Module"><span class="toc-number">1.1.4.6.</span> <span class="toc-text">1.1.6 EXT (Extension Module)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-7-SPLI-Instruction-Separator-Module"><span class="toc-number">1.1.4.7.</span> <span class="toc-text">1.1.7 SPLI (Instruction Separator Module)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Instruction-Format"><span class="toc-number">1.1.5.</span> <span class="toc-text">Instruction Format</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#R-type-Instruction-Format"><span class="toc-number">1.1.5.1.</span> <span class="toc-text">R-type Instruction Format</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#add-sub-and-or-rd-rs-rt"><span class="toc-number">1.1.5.1.1.</span> <span class="toc-text">add,sub,and,or rd, rs, rt</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LW-SW-Instruction-Format"><span class="toc-number">1.1.5.2.</span> <span class="toc-text">LW&amp;SW Instruction Format</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#lw-sw-rt-rs-imm16"><span class="toc-number">1.1.5.2.1.</span> <span class="toc-text">lw,sw rt, rs, imm16</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Branch-Instruction-Format"><span class="toc-number">1.1.5.3.</span> <span class="toc-text">Branch Instruction Format</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#beq-rs-rt-imm16"><span class="toc-number">1.1.5.3.1.</span> <span class="toc-text">beq rs,  rt,  imm16</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Jump-Instruction-Format"><span class="toc-number">1.1.5.4.</span> <span class="toc-text">Jump Instruction Format</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#j-add26"><span class="toc-number">1.1.5.4.1.</span> <span class="toc-text">j add26 </span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Single-Cycle-Controller-Design"><span class="toc-number">1.2.</span> <span class="toc-text">2. Single-Cycle Controller Design</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-Control-Signals-Required-for-a-Single-Cycle-Path"><span class="toc-number">1.2.1.</span> <span class="toc-text">2.1 Control Signals Required for a Single-Cycle Path</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-1-ALU-Control-ALUCtrl-4-bits"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">2.1.1 ALU Control (ALUCtrl): 4 bits</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-2-Eight-control-signals"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">2.1.2 Eight control signals:</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-Controller-Design"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.2 Controller Design</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-1-Main-Control-Unit"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">2.2.1 Main Control Unit</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1-Design-Approach"><span class="toc-number">1.2.2.1.1.</span> <span class="toc-text">2.1 Design Approach</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-Port-Definitions"><span class="toc-number">1.2.2.1.2.</span> <span class="toc-text">2.2 Port Definitions</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3-Truth-Tables"><span class="toc-number">1.2.2.1.3.</span> <span class="toc-text">2.3 Truth Tables</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Additional-Notes-on-Top-Level-Logic"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">Additional Notes on Top-Level Logic</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-2-ALU-Control-Unit"><span class="toc-number">1.2.2.3.</span> <span class="toc-text">2.2.2 ALU Control Unit</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-2-Port-Definitions"><span class="toc-number">1.2.2.3.1.</span> <span class="toc-text">1.2 Port Definitions</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-3-Truth-Tables"><span class="toc-number">1.2.2.3.2.</span> <span class="toc-text">1.3 Truth Tables</span></a></li></ol></li></ol></li></ol></li></ol></li></ol>
+      </div>
+     -->
+    
+        <div id="toc">
+          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Design-of-a-Single-Cycle-MIPS-Processor"><span class="toc-number">1.</span> <span class="toc-text">Design of a Single-Cycle MIPS Processor</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Single-Cycle-Data-Path-Design"><span class="toc-number">1.1.</span> <span class="toc-text">1. Single-Cycle Data Path Design</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Reference-image"><span class="toc-number">1.1.1.</span> <span class="toc-text">Reference image</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Final-Design"><span class="toc-number">1.1.2.</span> <span class="toc-text">Final Design</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Top-level-output-port"><span class="toc-number">1.1.3.</span> <span class="toc-text">Top-level output port</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-Combinational-Components"><span class="toc-number">1.1.4.</span> <span class="toc-text">1.1 Combinational Components</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-1-ALU-Arithmetic-Logic-Unit"><span class="toc-number">1.1.4.1.</span> <span class="toc-text">1.1.1 ALU (Arithmetic Logic Unit)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-2-GRF-General-Purpose-Register-Set-also-known-as-a-register-file"><span class="toc-number">1.1.4.2.</span> <span class="toc-text">1.1.2 GRF (General-Purpose Register Set, also known as a register file)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-3-DM-Data-Memory"><span class="toc-number">1.1.4.3.</span> <span class="toc-text">1.1.3 DM (Data Memory)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-4-nPC-%E2%80%94-Finite-State-Machine"><span class="toc-number">1.1.4.4.</span> <span class="toc-text">1.1.4 nPC — Finite-State Machine:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-5-IFU-Instruction-Fetch-Unit"><span class="toc-number">1.1.4.5.</span> <span class="toc-text">1.1.5 IFU (Instruction Fetch Unit)</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#IM-Instruction-Memory"><span class="toc-number">1.1.4.5.1.</span> <span class="toc-text">IM (Instruction Memory)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#IFU-Instruction-Fetch-Unit"><span class="toc-number">1.1.4.5.2.</span> <span class="toc-text">IFU (Instruction Fetch Unit)</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-6-EXT-Extension-Module"><span class="toc-number">1.1.4.6.</span> <span class="toc-text">1.1.6 EXT (Extension Module)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-7-SPLI-Instruction-Separator-Module"><span class="toc-number">1.1.4.7.</span> <span class="toc-text">1.1.7 SPLI (Instruction Separator Module)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Instruction-Format"><span class="toc-number">1.1.5.</span> <span class="toc-text">Instruction Format</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#R-type-Instruction-Format"><span class="toc-number">1.1.5.1.</span> <span class="toc-text">R-type Instruction Format</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#add-sub-and-or-rd-rs-rt"><span class="toc-number">1.1.5.1.1.</span> <span class="toc-text">add,sub,and,or rd, rs, rt</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LW-SW-Instruction-Format"><span class="toc-number">1.1.5.2.</span> <span class="toc-text">LW&amp;SW Instruction Format</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#lw-sw-rt-rs-imm16"><span class="toc-number">1.1.5.2.1.</span> <span class="toc-text">lw,sw rt, rs, imm16</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Branch-Instruction-Format"><span class="toc-number">1.1.5.3.</span> <span class="toc-text">Branch Instruction Format</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#beq-rs-rt-imm16"><span class="toc-number">1.1.5.3.1.</span> <span class="toc-text">beq rs,  rt,  imm16</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Jump-Instruction-Format"><span class="toc-number">1.1.5.4.</span> <span class="toc-text">Jump Instruction Format</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#j-add26"><span class="toc-number">1.1.5.4.1.</span> <span class="toc-text">j add26 </span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Single-Cycle-Controller-Design"><span class="toc-number">1.2.</span> <span class="toc-text">2. Single-Cycle Controller Design</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-Control-Signals-Required-for-a-Single-Cycle-Path"><span class="toc-number">1.2.1.</span> <span class="toc-text">2.1 Control Signals Required for a Single-Cycle Path</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-1-ALU-Control-ALUCtrl-4-bits"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">2.1.1 ALU Control (ALUCtrl): 4 bits</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-2-Eight-control-signals"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">2.1.2 Eight control signals:</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-Controller-Design"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.2 Controller Design</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-1-Main-Control-Unit"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">2.2.1 Main Control Unit</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1-Design-Approach"><span class="toc-number">1.2.2.1.1.</span> <span class="toc-text">2.1 Design Approach</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-Port-Definitions"><span class="toc-number">1.2.2.1.2.</span> <span class="toc-text">2.2 Port Definitions</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3-Truth-Tables"><span class="toc-number">1.2.2.1.3.</span> <span class="toc-text">2.3 Truth Tables</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Additional-Notes-on-Top-Level-Logic"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">Additional Notes on Top-Level Logic</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-2-ALU-Control-Unit"><span class="toc-number">1.2.2.3.</span> <span class="toc-text">2.2.2 ALU Control Unit</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-2-Port-Definitions"><span class="toc-number">1.2.2.3.1.</span> <span class="toc-text">1.2 Port Definitions</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-3-Truth-Tables"><span class="toc-number">1.2.2.3.2.</span> <span class="toc-text">1.3 Truth Tables</span></a></li></ol></li></ol></li></ol></li></ol></li></ol>
+        </div>
+        
+  </span>
+</div>
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        buaa26-CO-P3-Design Document-Logisim
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Wang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-11-10T22:02:51.000Z" class="dt-published" itemprop="datePublished">2025-11-10</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        
+          <a class="p-category" href="/Blog/en/tags/CO/">CO</a>
+        
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="Design-of-a-Single-Cycle-MIPS-Processor"><a href="#Design-of-a-Single-Cycle-MIPS-Processor" class="headerlink" title="Design of a Single-Cycle MIPS Processor"></a>Design of a Single-Cycle MIPS Processor</h1><blockquote>
+<p>The content of this post is original and is provided for reference only; please do not copy it verbatim.</p>
+</blockquote>
+<h2 id="1-Single-Cycle-Data-Path-Design"><a href="#1-Single-Cycle-Data-Path-Design" class="headerlink" title="1. Single-Cycle Data Path Design"></a>1. Single-Cycle Data Path Design</h2><h3 id="Reference-image"><a href="#Reference-image" class="headerlink" title="Reference image"></a>Reference image</h3><p><img src="/Blog/images/%E8%AE%BE%E8%AE%A1%E9%80%9A%E8%B7%AF.png" alt="Design Path" title="Reference image"></p>
+<h3 id="Final-Design"><a href="#Final-Design" class="headerlink" title="Final Design"></a>Final Design</h3><p><img src="/Blog/images/all.png" alt="Final Design" title="all"></p>
+<h3 id="Top-level-output-port"><a href="#Top-level-output-port" class="headerlink" title="Top-level output port"></a>Top-level output port</h3><p><img src="/Blog/images/output.png" alt="Final Design" title="output"></p>
+<hr>
+<h3 id="1-1-Combinational-Components"><a href="#1-1-Combinational-Components" class="headerlink" title="1.1 Combinational Components"></a>1.1 Combinational Components</h3><h4 id="1-1-1-ALU-Arithmetic-Logic-Unit"><a href="#1-1-1-ALU-Arithmetic-Logic-Unit" class="headerlink" title="1.1.1 ALU (Arithmetic Logic Unit)"></a>1.1.1 ALU (Arithmetic Logic Unit)</h4><ul>
+<li>in:<ul>
+<li>SrcA, SrcB</li>
+<li>ALUCtrl [3:0]</li>
+<li>Shift count: 5</li>
+<li>whether to check for overflow</li>
+</ul>
+</li>
+<li>out:<ul>
+<li>Equal(zero)</li>
+<li>Result</li>
+<li>Overflow</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>Port Definitions</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">Signal Name</th>
+<th align="center">Direction</th>
+<th align="center">Bit width</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>SrcA</code></td>
+<td align="center">I</td>
+<td align="center">32</td>
+<td align="left">32-bit Operand A</td>
+</tr>
+<tr>
+<td align="left"><code>SrcB</code></td>
+<td align="center">I</td>
+<td align="center">32</td>
+<td align="left">32-bit Operand B</td>
+</tr>
+<tr>
+<td align="left"><code>ALUCtrl</code></td>
+<td align="center">I</td>
+<td align="center">4</td>
+<td align="left">4-bit operation control signal</td>
+</tr>
+<tr>
+<td align="left"><code>Shift</code></td>
+<td align="center">I</td>
+<td align="center">5</td>
+<td align="left">5 Shift Amount (<code>shamt</code>)</td>
+</tr>
+<tr>
+<td align="left"><code>Result</code></td>
+<td align="center">O</td>
+<td align="center">32</td>
+<td align="left">Calculation Results</td>
+</tr>
+<tr>
+<td align="left"><code>Zero</code></td>
+<td align="center">O</td>
+<td align="center">1</td>
+<td align="left">1-bit zero flag <code>Equal(zero)</code></td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>Functional Definition</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">Number</th>
+<th align="left">Feature Name</th>
+<th align="left">Feature Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="left">Computational Choices</td>
+<td align="left">Based on the 4-bit <code>ALUCtrl</code> signal, select the operation to be performed (see the table below).</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="left">Arithmetic and Logical Operations</td>
+<td align="left">Perform the selected 32-bit operations on <code>SrcA</code>, <code>SrcB</code>, and <code>Shift</code>, and output the result to port <code>Result</code>.</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="left">Zero flag</td>
+<td align="left">Check whether the 32-bit output on Port <code>Result</code> <strong>is equal to</strong> <code>0x00000000</code>. If so, Port <code>Zero</code> outputs 1; otherwise, it outputs 0.</td>
+</tr>
+</tbody></table>
+<p><strong>Detailed logic for <code>ALUCtrl</code> (Feature 1):</strong></p>
+<ul>
+<li><code>0000</code>: <code>Result = SrcA + SrcB</code> (Addition)</li>
+<li><code>0001</code>: <code>Result = SrcA - SrcB</code> (Subtraction)</li>
+<li><code>0010</code>: <code>Result = SrcA &amp; SrcB</code> (bitwise AND)</li>
+<li><code>0011</code>: <code>Result = SrcA | SrcB</code> (bitwise OR)</li>
+<li><code>0100</code>: <code>Result = (SrcA &lt; SrcB) ? 1 : 0</code> (signed <code>slt</code>)</li>
+<li><code>0101</code>: <code>Result = SrcB &lt;&lt; Shift</code> (Logical Shift Left)</li>
+</ul>
+<p><img src="/Blog/images/ALU.png" alt="ALU"></p>
+<hr>
+<h4 id="1-1-2-GRF-General-Purpose-Register-Set-also-known-as-a-register-file"><a href="#1-1-2-GRF-General-Purpose-Register-Set-also-known-as-a-register-file" class="headerlink" title="1.1.2 GRF (General-Purpose Register Set, also known as a register file)"></a>1.1.2 GRF (General-Purpose Register Set, also known as a register file)</h4><ul>
+<li>Read<br>  in: RA1 RA2<br>  out: RD1&#x3D;RF[RA1] ,   RD2&#x3D;RF[RA2]</li>
+<li>Writing<br>  in: WA, WD, clk<table>
+<thead>
+<tr>
+<th align="center">RegWrite</th>
+<th align="center">out</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">RF[WA] -&gt; WD</td>
+</tr>
+<tr>
+<td align="center">0</td>
+<td align="center">None</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<ul>
+<li><strong>Port Definitions</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">Signal Name</th>
+<th align="center">Direction</th>
+<th align="center">Bit width</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>ReadAddr1</code></td>
+<td align="center">I</td>
+<td align="center">5</td>
+<td align="left">Read address <code>RA1</code> from port 1</td>
+</tr>
+<tr>
+<td align="left"><code>ReadAddr2</code></td>
+<td align="center">I</td>
+<td align="center">5</td>
+<td align="left">Read the address at port 2: <code>RA2</code></td>
+</tr>
+<tr>
+<td align="left"><code>WriteAddr</code></td>
+<td align="center">I</td>
+<td align="center">5</td>
+<td align="left">write-port address <code>WA</code></td>
+</tr>
+<tr>
+<td align="left"><code>WriteData</code></td>
+<td align="center">I</td>
+<td align="center">32</td>
+<td align="left">32 bits of data to be written  <code>WD</code></td>
+</tr>
+<tr>
+<td align="left"><code>RegWrite</code></td>
+<td align="center">I</td>
+<td align="center">1</td>
+<td align="left">write enable</td>
+</tr>
+<tr>
+<td align="left"><code>clk</code></td>
+<td align="center">I</td>
+<td align="center">1</td>
+<td align="left">Clock Signal</td>
+</tr>
+<tr>
+<td align="left"><code>reset</code></td>
+<td align="center">I</td>
+<td align="center">1</td>
+<td align="left">Asynchronous Reset Signal</td>
+</tr>
+<tr>
+<td align="left"><code>ReadData1</code></td>
+<td align="center">O</td>
+<td align="center">32</td>
+<td align="left"><code>RF[RA1]</code></td>
+</tr>
+<tr>
+<td align="left"><code>ReadData2</code></td>
+<td align="center">O</td>
+<td align="center">32</td>
+<td align="left"><code>RF[RA2]</code></td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>Functional Definition</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">Number</th>
+<th align="left">Feature Name</th>
+<th align="left">Feature Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="left">Concurrent Asynchronous Read <br> (Concurrent Read)</td>
+<td align="left">Read 32-bit data asynchronously (i.e., immediately) from addresses specified as <code>ReadAddr1</code> and <code>ReadAddr2</code>, and output it to ports <code>ReadData1</code> and <code>ReadData2</code>, respectively. (i.e., <code>RD1=RF[RA1]</code>, <code>RD2=RF[RA2]</code>)</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="left"><br> (Synchronous Write)</td>
+<td align="left">When <code>RegWrite = 1</code>, on the rising edge of the <code>clk</code> signal, write the 32-bit data from port <code>WriteData</code> to the register specified by <code>WriteAddr</code>. (That is, <code>RF[WA] = WD</code>)</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="left"><code>$zero</code> Register Logic</td>
+<td align="left">Port <code>ReadData</code> <strong>must</strong> output <code>0x00000000</code>. <br> <code>Reg0</code> must never be modified.</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="left">Asynchronous Reset</td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<p><img src="/Blog/images/%E5%AF%84%E5%AD%98%E5%99%A8%E5%A0%86%E5%86%85%E9%83%A8%E7%BB%93%E6%9E%84.png" alt="寄存器堆内部结构"></p>
+<p><img src="/Blog/images/GRF.png" alt="GRF"></p>
+<hr>
+<h4 id="1-1-3-DM-Data-Memory"><a href="#1-1-3-DM-Data-Memory" class="headerlink" title="1.1.3 DM (Data Memory)"></a>1.1.3 DM (Data Memory)</h4><ul>
+<li>MemRead RE<ul>
+<li>Read<br>in: A<br>out: RD &#x3D; DM[A]</li>
+</ul>
+</li>
+<li>MemWrite WE<ul>
+<li>Writing</li>
+<li>clk<br>in: A, WD<br>out: DM[A] &#x3D; WD</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>Port Definitions</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">Signal Name</th>
+<th align="center">Direction</th>
+<th align="center">Bit width</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>Address</code></td>
+<td align="center">I</td>
+<td align="center">32</td>
+<td align="left">32-bit <strong>byte address</strong> (from <code>ALUResult</code>)</td>
+</tr>
+<tr>
+<td align="left"><code>WriteData</code></td>
+<td align="center">I</td>
+<td align="center">32</td>
+<td align="left">32 bits of data to be written (<code>WA</code>)</td>
+</tr>
+<tr>
+<td align="left"><code>MemRead</code></td>
+<td align="center">I</td>
+<td align="center">1</td>
+<td align="left">Reading Enable Signals (<code>RE</code>)</td>
+</tr>
+<tr>
+<td align="left"><code>MemWrite</code></td>
+<td align="center">I</td>
+<td align="center">1</td>
+<td align="left">Writing Enable Signals (<code>WE</code>)</td>
+</tr>
+<tr>
+<td align="left"><code>clk</code></td>
+<td align="center">I</td>
+<td align="center">1</td>
+<td align="left">Clock signal (used for synchronous writing)</td>
+</tr>
+<tr>
+<td align="left"><code>reset</code></td>
+<td align="center">I</td>
+<td align="center">1</td>
+<td align="left">Asynchronous Reset Signal (Used to Clear RAM)</td>
+</tr>
+<tr>
+<td align="left"><code>ReadData</code></td>
+<td align="center">O</td>
+<td align="center">32</td>
+<td align="left">32-bit data read (outputted to <code>MemtoReg MUX</code>)</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>Functional Definition</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">Number</th>
+<th align="left">Feature Name</th>
+<th align="left">Feature Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="left">Address Mapping <br></td>
+<td align="left">Convert the input 32-bit byte address <code>Address</code> into <strong>the</strong> 12-bit word <strong>address</strong> required by internal <code>RAM</code> by extracting <code>[13:2]</code> bit.</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="left">Memory Read <br> (Memory Read)</td>
+<td align="left">When <code>MemRead = 1</code>, read 32 bits of data asynchronously from the converted word address and output it from port <code>ReadData</code>. (i.e., <code>RD = DM[A]</code>)</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="left">Memory Write <br></td>
+<td align="left">When <code>MemWrite = 1</code>, on the rising edge of the <code>clk</code> signal, write the 32-bit data from port <code>WriteData</code> to the converted word address. (i.e., <code>DM[A] = WD</code>)</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="left">Asynchronous Reset</td>
+<td align="left">When <code>reset = 1</code>, asynchronously clear every <code>RAM</code> cell to zero.</td>
+</tr>
+</tbody></table>
+<p><img src="/Blog/images/DM.png" alt="DM"></p>
+<hr>
+<h4 id="1-1-4-nPC-—-Finite-State-Machine"><a href="#1-1-4-nPC-—-Finite-State-Machine" class="headerlink" title="1.1.4 nPC — Finite-State Machine:"></a>1.1.4 nPC — Finite-State Machine:</h4><ul>
+<li>PC (Program Counter) — State Transition —&gt; nPC<ul>
+<li><p>PC Registers — State Storage Module</p>
+<ul>
+<li>en, reset, clk</li>
+</ul>
+</li>
+<li><p>NPC Module — State Transition Circuit</p>
+</li>
+<li><p>Pc +&#x3D; 4</p>
+</li>
+<li><p>in: </p>
+<ul>
+<li>pc</li>
+<li>IsB –&gt; Offset(32) &lt;&lt; 2 + pc</li>
+<li>JUMP –&gt; In_26(26) &lt;&lt; 2 + pc[31:28]</li>
+<li>JR –&gt; Ra</li>
+</ul>
+</li>
+<li><p>out: </p>
+<ul>
+<li>Next_PC</li>
+<li>PC+4</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>Port Definitions</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">Signal Name</th>
+<th align="center">Direction</th>
+<th align="center">Bit width</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>PC_in</code></td>
+<td align="center">I</td>
+<td align="center">32</td>
+<td align="left">The Value of <code>PC</code> (from Module <code>IFU</code>)</td>
+</tr>
+<tr>
+<td align="left"><code>Offset_Ext</code></td>
+<td align="center">I</td>
+<td align="center">32</td>
+<td align="left">32-bit <strong>Signed-Extended</strong> Immediate (from the <code>EXT</code> module)</td>
+</tr>
+<tr>
+<td align="left"><code>imm26</code></td>
+<td align="center">I</td>
+<td align="center">26</td>
+<td align="left">26-bit jump immediate (from the <code>Splitter_Unit</code> module)</td>
+</tr>
+<tr>
+<td align="left"><code>Ra</code></td>
+<td align="center">I</td>
+<td align="center">32</td>
+<td align="left"><code>rs</code> Register Values (<code>ReadData1</code> of <code>GRF</code>)</td>
+</tr>
+<tr>
+<td align="left"><code>IsB</code></td>
+<td align="center">I</td>
+<td align="center">1</td>
+<td align="left"><strong>Branch enable</strong> signal. (<code>Main_Control[Branch]</code> <strong>AND</strong> <code>ALU[Zero]</code>)</td>
+</tr>
+<tr>
+<td align="left"><code>JUMP</code></td>
+<td align="center">I</td>
+<td align="center">1</td>
+<td align="left"><strong><code>j</code> Jump Enable</strong> Signal (from <code>Main_Control_Unit</code>)</td>
+</tr>
+<tr>
+<td align="left"><code>JR</code></td>
+<td align="center">I</td>
+<td align="center">1</td>
+<td align="left"><strong><code>jr</code> Jump Enable</strong> Signal (from <code>ALU_Control_Unit</code>)</td>
+</tr>
+<tr>
+<td align="left"><code>Next_PC</code></td>
+<td align="center">O</td>
+<td align="center">32</td>
+<td align="left"><strong>The address of the next instruction</strong>, as calculated (sent to the <code>Next_PC</code> port of <code>IFU</code>)</td>
+</tr>
+<tr>
+<td align="left"><code>PC_plus_4</code></td>
+<td align="center">O</td>
+<td align="center">32</td>
+<td align="left">The Value of <code>PC + 4</code> (from Module <code>IFU</code>)</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>Functional Definition</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">Number</th>
+<th align="left">Feature Name</th>
+<th align="left">Feature Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="left">Branch Target Calculation <br></td>
+<td align="left">Compute the destination address of instruction <code>beq</code>: <br><code>Branch_Target = PC_plus_4 + (Offset_Ext &lt;&lt; 2)</code>.</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="left">Jump Target Calculation <br></td>
+<td align="left">Compute the destination address of instruction <code>j</code>: <br><code>Jump_Target = { PC_plus_4[31:28] , (imm26 &lt;&lt; 2) }</code>.</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="left">PC Priority Selection <br> (Next PC Selection)</td>
+<td align="left">Using a 4-to-1 MUX (multiplexer), select one of the four possible next addresses as output <code>Next_PC</code> based on the priority of the <code>JR</code>, <code>JUMP</code>, and <code>IsB</code> signals.</td>
+</tr>
+</tbody></table>
+<p><strong>Detailed logic behind PC priority selection (Feature 3):</strong></p>
+<ul>
+<li><strong><code>JR</code> &#x3D; 1:</strong> <code>Next_PC = Ra</code> (Highest Priority)</li>
+<li><strong><code>JR</code> &#x3D; 0, <code>JUMP</code> &#x3D; 1:</strong> <code>Next_PC = Jump_Target</code></li>
+<li><strong><code>JR</code> &#x3D; 0, <code>JUMP</code> &#x3D; 0, <code>IsB</code> &#x3D; 1:</strong> <code>Next_PC = Branch_Target</code></li>
+<li><strong><code>JR</code> &#x3D; 0, <code>JUMP</code> &#x3D; 0, <code>IsB</code> &#x3D; 0:</strong> <code>Next_PC = PC_plus_4</code> (executed in default order)</li>
+</ul>
+<p><img src="/Blog/images/nPC.png" alt="nPC"></p>
+<hr>
+<h4 id="1-1-5-IFU-Instruction-Fetch-Unit"><a href="#1-1-5-IFU-Instruction-Fetch-Unit" class="headerlink" title="1.1.5 IFU (Instruction Fetch Unit)"></a>1.1.5 IFU (Instruction Fetch Unit)</h4><h5 id="IM-Instruction-Memory"><a href="#IM-Instruction-Memory" class="headerlink" title="IM (Instruction Memory)"></a>IM (Instruction Memory)</h5><ul>
+<li><strong>Port Definitions</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">Signal Name</th>
+<th align="center">Direction</th>
+<th align="center">Bit width</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>A</code></td>
+<td align="center">I</td>
+<td align="center">32</td>
+<td align="left">32-bit <strong>byte address</strong> (<code>PC</code> from module <code>IFU</code>)</td>
+</tr>
+<tr>
+<td align="left"><code>RD</code></td>
+<td align="center">O</td>
+<td align="center">32</td>
+<td align="left">A 32-bit <strong>instruction code</strong> read from memory</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>Functional Definition</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">Number</th>
+<th align="left">Feature Name</th>
+<th align="left">Feature Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="left">Address Mapping <br></td>
+<td align="left">Convert the input 32-bit byte address <code>A</code> into <strong>a</strong> 12-bit <strong>word address</strong> by subtracting the starting address offset of <code>0x3000</code> and shifting it two bits to the right (i.e., extracting <code>[13:2]</code> bits).</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="left">Instruction Read <br></td>
+<td align="left">Using the converted 12-bit word address, asynchronously read a 32-bit instruction from internal <code>ROM</code> (read-only memory) and output it from port <code>RD</code>.</td>
+</tr>
+</tbody></table>
+<p><img src="/Blog/images/IMm.png" alt="IMm"></p>
+<h5 id="IFU-Instruction-Fetch-Unit"><a href="#IFU-Instruction-Fetch-Unit" class="headerlink" title="IFU (Instruction Fetch Unit)"></a>IFU (Instruction Fetch Unit)</h5><ul>
+<li><strong>Port Definitions</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">Signal Name</th>
+<th align="center">Direction</th>
+<th align="center">Bit width</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>Next_PC</code></td>
+<td align="center">I</td>
+<td align="center">32</td>
+<td align="left">The PC value to be loaded in the next clock cycle (from module <code>NPC</code>)</td>
+</tr>
+<tr>
+<td align="left"><code>clk</code></td>
+<td align="center">I</td>
+<td align="center">1</td>
+<td align="left">System Clock Signal</td>
+</tr>
+<tr>
+<td align="left"><code>reset</code></td>
+<td align="center">I</td>
+<td align="center">1</td>
+<td align="left">System Asynchronous Reset Signal</td>
+</tr>
+<tr>
+<td align="left"><code>stop</code></td>
+<td align="center">I</td>
+<td align="center">1</td>
+<td align="left">Clock Enable signal (active-low, used to pause the PC)</td>
+</tr>
+<tr>
+<td align="left"><code>PC</code></td>
+<td align="center">O</td>
+<td align="center">32</td>
+<td align="left">Address values stored in the <strong>current</strong> PC register (set to <code>IM</code> and <code>NPC</code>)</td>
+</tr>
+<tr>
+<td align="left"><code>Instr</code></td>
+<td align="center">O</td>
+<td align="center">32</td>
+<td align="left"><code>PC</code>: Corresponding <strong>current instruction</strong> (from Module <code>IM</code>)</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>Functional Definition</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">Number</th>
+<th align="left">Feature Name</th>
+<th align="left">Feature Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="left">PC Update <br> (PC Update)</td>
+<td align="left">When the rising edge of <code>clk</code> occurs and the signal for <code>stop</code> is 0 (invalid), load the value of <code>Next_PC</code> into the PC register.</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="left">PC Reset <br> (PC Reset)</td>
+<td align="left">When signal <code>reset</code> is set to 1, the value of the PC register is asynchronously forced to the start address <code>0x00003000</code>.</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="left">Instruction Fetch <br></td>
+<td align="left">Output the current value of register <code>PC</code> to port <code>PC</code>, send it to internal module <code>IM</code> to retrieve the corresponding 32-bit instruction, and output it from port <code>Instr</code>.</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="left">PC+4 Calculation <br> (PC+4 Calculation)</td>
+<td align="left">Compute the result of adding 4 to the current value of register <code>PC</code> in parallel, and output it from port <code>PC_plus_4</code>.</td>
+</tr>
+</tbody></table>
+<p><img src="/Blog/images/IFU.png" alt="IFU"></p>
+<hr>
+<h4 id="1-1-6-EXT-Extension-Module"><a href="#1-1-6-EXT-Extension-Module" class="headerlink" title="1.1.6 EXT (Extension Module)"></a>1.1.6 EXT (Extension Module)</h4><p>Sign-extend the 16-bit immediate to 32 bits. To improve extensibility, the <code>OPExt</code> interface has been added here.</p>
+<ul>
+<li><strong>Port Definitions</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">Signal Name</th>
+<th align="left">Direction</th>
+<th align="left">Bit width</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Imm_16</td>
+<td align="left">I</td>
+<td align="left">16</td>
+<td align="left">16-bit immediate number input signal</td>
+</tr>
+<tr>
+<td align="left">OPExt</td>
+<td align="left">I</td>
+<td align="left">1</td>
+<td align="left">Sign Extension Signal <br> 0: Unsigned extension (0 extension) <br> 1: Signed extension</td>
+</tr>
+<tr>
+<td align="left">Imm_32</td>
+<td align="left">O</td>
+<td align="left">32</td>
+<td align="left">32-bit immediate output signal</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>Functional Definition</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">Number</th>
+<th align="left">Feature Name</th>
+<th align="left">Feature Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left">Sign Extension</td>
+<td align="left">Sign extension of a 16-bit immediate number</td>
+</tr>
+</tbody></table>
+<p><img src="/Blog/images/EXT.png" alt="EXT"></p>
+<hr>
+<h4 id="1-1-7-SPLI-Instruction-Separator-Module"><a href="#1-1-7-SPLI-Instruction-Separator-Module" class="headerlink" title="1.1.7 SPLI (Instruction Separator Module)"></a>1.1.7 SPLI (Instruction Separator Module)</h4><ul>
+<li><strong>Port Definitions</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">Signal Name</th>
+<th align="center">Direction</th>
+<th align="center">Bit width</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>Instr</code></td>
+<td align="center">I</td>
+<td align="center">32</td>
+<td align="left">A complete 32-bit instruction from the IFU (Instruction Fetch Unit)</td>
+</tr>
+<tr>
+<td align="left"><code>Opcode</code></td>
+<td align="center">O</td>
+<td align="center">6</td>
+<td align="left">Opcode (<code>[31:26]</code>), sent to <code>Main Control Unit</code></td>
+</tr>
+<tr>
+<td align="left"><code>rs</code></td>
+<td align="center">O</td>
+<td align="center">5</td>
+<td align="left">Source register 1 (<code>[25:21]</code>), sent to <code>GRF[RA1]</code> and <code>NPC[Ra]</code></td>
+</tr>
+<tr>
+<td align="left"><code>rt</code></td>
+<td align="center">O</td>
+<td align="center">5</td>
+<td align="left">Source register 2 &#x2F; Destination (<code>[20:16]</code>), sent to <code>GRF[RA2]</code> and <code>RegDst MUX</code></td>
+</tr>
+<tr>
+<td align="left"><code>rd</code></td>
+<td align="center">O</td>
+<td align="center">5</td>
+<td align="left">Target register (<code>[15:11]</code>), sent to <code>RegDst MUX</code></td>
+</tr>
+<tr>
+<td align="left"><code>shamt</code></td>
+<td align="center">O</td>
+<td align="center">5</td>
+<td align="left">Shift amount (<code>[10:6]</code>), sent to <code>ALU[Shamt]</code></td>
+</tr>
+<tr>
+<td align="left"><code>funct</code></td>
+<td align="center">O</td>
+<td align="center">6</td>
+<td align="left">Function code (<code>[5:0]</code>), sent to <code>ALU Control Unit</code></td>
+</tr>
+<tr>
+<td align="left"><code>imm16</code></td>
+<td align="center">O</td>
+<td align="center">16</td>
+<td align="left">16-bit immediate value (<code>[15:0]</code>), sent to <code>EXT</code> and <code>LUI Shifter</code></td>
+</tr>
+<tr>
+<td align="left"><code>imm26</code></td>
+<td align="center">O</td>
+<td align="center">26</td>
+<td align="left">26-bit jump address (<code>[25:0]</code>), forwarded to <code>NPC</code></td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>Functional Definition</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">Number</th>
+<th align="left">Feature Name</th>
+<th align="left">Feature Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="left">Instruction Field Separation <br></td>
+<td align="left">Input a 32-bit <code>Instruction</code> and, following the MIPS instruction format, split it in parallel into <code>Op</code>, <code>rs</code>, <code>rt</code>, <code>rd</code>, <code>shamt</code>, <code>funct</code>, <code>imm16</code>, and <code>imm26</code>—a total of 8 fields—and output them from the corresponding ports.</td>
+</tr>
+</tbody></table>
+<p><img src="/Blog/images/SPLI.png" alt="SPLI"></p>
+<hr>
+<h3 id="Instruction-Format"><a href="#Instruction-Format" class="headerlink" title="Instruction Format"></a>Instruction Format</h3><h4 id="R-type-Instruction-Format"><a href="#R-type-Instruction-Format" class="headerlink" title="R-type Instruction Format"></a>R-type Instruction Format</h4><p><img src="/Blog/images/R%E5%9E%8B%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F.png" alt="R型指令格式"></p>
+<h5 id="add-sub-and-or-rd-rs-rt"><a href="#add-sub-and-or-rd-rs-rt" class="headerlink" title="add,sub,and,or rd, rs, rt"></a><code>add,sub,and,or rd, rs, rt</code></h5><table>
+<thead>
+<tr>
+<th align="center">Operations</th>
+<th align="center">Op</th>
+<th align="center">Rs</th>
+<th align="center">Rt</th>
+<th align="center">Rd</th>
+<th align="center">Shamt</th>
+<th align="center">Func</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Bit width</td>
+<td align="center">6</td>
+<td align="center">5</td>
+<td align="center">5</td>
+<td align="center">5</td>
+<td align="center">5</td>
+<td align="center">6</td>
+</tr>
+</tbody></table>
+<h4 id="LW-SW-Instruction-Format"><a href="#LW-SW-Instruction-Format" class="headerlink" title="LW&amp;SW Instruction Format"></a>LW&amp;SW Instruction Format</h4><p><img src="/Blog/images/LW&SW%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F.png" alt="LW&amp;SW指令格式"></p>
+<h5 id="lw-sw-rt-rs-imm16"><a href="#lw-sw-rt-rs-imm16" class="headerlink" title="lw,sw rt, rs, imm16"></a><code>lw,sw rt, rs, imm16</code></h5><table>
+<thead>
+<tr>
+<th align="center">Operations</th>
+<th align="center">Op</th>
+<th align="center">Rs</th>
+<th align="center">Rt</th>
+<th align="center">imm</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Bit width</td>
+<td align="center">6</td>
+<td align="center">5</td>
+<td align="center">5</td>
+<td align="center">16</td>
+</tr>
+</tbody></table>
+<h4 id="Branch-Instruction-Format"><a href="#Branch-Instruction-Format" class="headerlink" title="Branch Instruction Format"></a>Branch Instruction Format</h4><p><img src="/Blog/images/%E5%88%86%E6%94%AF%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F.png" alt="分支指令格式"></p>
+<h5 id="beq-rs-rt-imm16"><a href="#beq-rs-rt-imm16" class="headerlink" title="beq rs,  rt,  imm16"></a><code>beq rs,  rt,  imm16</code></h5><table>
+<thead>
+<tr>
+<th align="center">Operations</th>
+<th align="center">Op</th>
+<th align="center">Rs</th>
+<th align="center">Rt</th>
+<th align="center">imm</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Bit width</td>
+<td align="center">6</td>
+<td align="center">5</td>
+<td align="center">5</td>
+<td align="center">16</td>
+</tr>
+</tbody></table>
+<h4 id="Jump-Instruction-Format"><a href="#Jump-Instruction-Format" class="headerlink" title="Jump Instruction Format"></a>Jump Instruction Format</h4><p><img src="/Blog/images/%E8%B7%B3%E8%BD%AC%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F.png" alt="跳转指令格式"></p>
+<h5 id="j-add26"><a href="#j-add26" class="headerlink" title="j add26 "></a><code>j add26 </code></h5><table>
+<thead>
+<tr>
+<th align="center">Operations</th>
+<th align="center">Op</th>
+<th align="center">JAdd</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Bit width</td>
+<td align="center">6</td>
+<td align="center">26</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="2-Single-Cycle-Controller-Design"><a href="#2-Single-Cycle-Controller-Design" class="headerlink" title="2. Single-Cycle Controller Design"></a>2. Single-Cycle Controller Design</h2><p><img src="/Blog/images/%E5%8D%95%E5%91%A8%E6%9C%9F%E6%8E%A7%E5%88%B6%E5%99%A8%E8%AE%BE%E8%AE%A1.png" alt="单周期控制器设计"></p>
+<h3 id="2-1-Control-Signals-Required-for-a-Single-Cycle-Path"><a href="#2-1-Control-Signals-Required-for-a-Single-Cycle-Path" class="headerlink" title="2.1 Control Signals Required for a Single-Cycle Path"></a>2.1 Control Signals Required for a Single-Cycle Path</h3><h4 id="2-1-1-ALU-Control-ALUCtrl-4-bits"><a href="#2-1-1-ALU-Control-ALUCtrl-4-bits" class="headerlink" title="2.1.1 ALU Control (ALUCtrl): 4 bits"></a>2.1.1 ALU Control (ALUCtrl): 4 bits</h4><table>
+<thead>
+<tr>
+<th align="left">Input</th>
+<th align="center">ALUCtrl</th>
+<th align="center">Computations</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">A, B</td>
+<td align="center">0000</td>
+<td align="center"><code>A &amp; B</code></td>
+</tr>
+<tr>
+<td align="left">A, B</td>
+<td align="center">0001</td>
+<td align="center"><code>A | B</code></td>
+</tr>
+<tr>
+<td align="left">A, B</td>
+<td align="center">0010</td>
+<td align="center"><code>A + B</code></td>
+</tr>
+<tr>
+<td align="left">A, B</td>
+<td align="center">0110</td>
+<td align="center"><code>A - B</code></td>
+</tr>
+</tbody></table>
+<h4 id="2-1-2-Eight-control-signals"><a href="#2-1-2-Eight-control-signals" class="headerlink" title="2.1.2 Eight control signals:"></a>2.1.2 Eight control signals:</h4><table>
+<thead>
+<tr>
+<th align="center">Control Signals</th>
+<th align="center">0</th>
+<th align="center">1</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">RegDst</td>
+<td align="center">register file write address: Rt</td>
+<td align="center">register file write address: Rd</td>
+</tr>
+<tr>
+<td align="center">RegWrite</td>
+<td align="center">None</td>
+<td align="center">register write: <strong><code>Reg[WA] = WD</code></strong></td>
+</tr>
+<tr>
+<td align="center">ALUSrc</td>
+<td align="center">ALU-B：RD2</td>
+<td align="center">ALU-B：imm Signext</td>
+</tr>
+<tr>
+<td align="center">PCSrc</td>
+<td align="center">PC &#x3D; (PC+4)</td>
+<td align="center">PC &#x3D; NAdd (beq destination address)</td>
+</tr>
+<tr>
+<td align="center">PCJump</td>
+<td align="center">PC &#x3D; MUX output</td>
+<td align="center">PC &#x3D; J-instruction destination address</td>
+</tr>
+<tr>
+<td align="center">MemRead</td>
+<td align="center">None</td>
+<td align="center">DM Reading (Output)</td>
+</tr>
+<tr>
+<td align="center">MemWrite</td>
+<td align="center">None</td>
+<td align="center">DM write (input)</td>
+</tr>
+<tr>
+<td align="center">MemtoReg</td>
+<td align="center">Reg write &lt;– ALU</td>
+<td align="center">Reg &lt;– DM</td>
+</tr>
+<tr>
+<td align="center">Branch</td>
+<td align="center">None</td>
+<td align="center">For the Beq command</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="2-2-Controller-Design"><a href="#2-2-Controller-Design" class="headerlink" title="2.2 Controller Design"></a>2.2 Controller Design</h3><p><img src="/Blog/images/controler.png" alt="controler"></p>
+<h4 id="2-2-1-Main-Control-Unit"><a href="#2-2-1-Main-Control-Unit" class="headerlink" title="2.2.1 Main Control Unit"></a>2.2.1 Main Control Unit</h4><h5 id="2-1-Design-Approach"><a href="#2-1-Design-Approach" class="headerlink" title="2.1 Design Approach"></a>2.1 Design Approach</h5><ol>
+<li><strong><code>MemtoReg</code> (2 bits):</strong><ul>
+<li><code>00</code>: <code>ALUResult</code> (for R-type, <code>ori</code>)</li>
+<li><code>01</code>: <code>DM[ReadData]</code> (for <code>lw</code>)</li>
+<li><code>10</code>: <code>LUI_Value</code> (for <code>lui</code>)</li>
+</ul>
+</li>
+<li><strong><code>ExtOp</code> (1):</strong> Used to control expansion units.<ul>
+<li><code>0</code>: Zero Extensions (for <code>ori</code>)</li>
+<li><code>1</code>: Sign Extension (for <code>lw</code>, <code>sw</code>, <code>beq</code>)</li>
+</ul>
+</li>
+<li><strong><code>Jump</code> (1 bit):</strong> (<code>PCJump</code> in the figure) used for the <code>j</code> instruction.</li>
+<li><strong><code>JR</code> Signal:</strong> Moved to <code>ALU Control Unit</code>.</li>
+</ol>
+<h5 id="2-2-Port-Definitions"><a href="#2-2-Port-Definitions" class="headerlink" title="2.2 Port Definitions"></a>2.2 Port Definitions</h5><ul>
+<li><strong>Inputs:</strong><ul>
+<li><code>Opcode[5:0]</code>: The <code>[31:26]</code>-bit (opcode) from the instruction.</li>
+</ul>
+</li>
+<li><strong>Outputs:</strong><ul>
+<li><code>RegDst[0]</code>: (1: R-type writes <code>rd</code>, 0: I-type writes <code>rt</code>)</li>
+<li><code>ALUSrc[0]</code>: (1: immediate, 0: <code>GRF[ReadData2]</code>)</li>
+<li><code>MemtoReg[1:0]</code>: (2 bits) (Choosing a data source to write back to GRF)</li>
+<li><code>RegWrite[0]</code>: (1: Allows writing to GRF)</li>
+<li><code>MemRead[0]</code>: (1: Allows reading DMs)</li>
+<li><code>MemWrite[0]</code>: (1: allows writing to the DM)</li>
+<li><code>Branch[0]</code>: (1: <code>beq</code> instruction)</li>
+<li><code>Jump[0]</code>: (1: <code>j</code> instruction)</li>
+<li><code>ExtOp[0]</code>: (1: sign extension, 0: zero expansion)</li>
+<li><code>ALUOp[2:0]</code>: (3 bits) (Sent to <code>ALU Control Unit</code>)</li>
+</ul>
+</li>
+</ul>
+<h5 id="2-3-Truth-Tables"><a href="#2-3-Truth-Tables" class="headerlink" title="2.3 Truth Tables"></a>2.3 Truth Tables</h5><table>
+<thead>
+<tr>
+<th align="center">Instructions</th>
+<th align="center"><code>Opcode</code></th>
+<th align="center"><code>RegDst</code></th>
+<th align="center"><code>ALUSrc</code></th>
+<th align="center"><code>MemtoReg</code></th>
+<th align="center"><code>RegWrite</code></th>
+<th align="center"><code>MemRead</code></th>
+<th align="center"><code>MemWrite</code></th>
+<th align="center"><code>Branch</code></th>
+<th align="center"><code>Jump</code></th>
+<th align="center"><code>ExtOp</code></th>
+<th align="center"><strong><code>ALUOp[2:0]</code></strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong><code>R-type</code></strong></td>
+<td align="center"><code>000000</code></td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center"><code>00</code></td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">X</td>
+<td align="center"><strong><code>100</code></strong></td>
+</tr>
+<tr>
+<td align="center"><strong><code>lw</code></strong></td>
+<td align="center"><code>100011</code></td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center"><code>01</code></td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center"><strong><code>000</code></strong></td>
+</tr>
+<tr>
+<td align="center"><strong><code>sw</code></strong></td>
+<td align="center"><code>101011</code></td>
+<td align="center">X</td>
+<td align="center">1</td>
+<td align="center"><code>XX</code></td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center"><strong><code>000</code></strong></td>
+</tr>
+<tr>
+<td align="center"><strong><code>beq</code></strong></td>
+<td align="center"><code>000100</code></td>
+<td align="center">X</td>
+<td align="center">0</td>
+<td align="center"><code>XX</code></td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center"><strong><code>001</code></strong></td>
+</tr>
+<tr>
+<td align="center"><strong><code>ori</code></strong></td>
+<td align="center"><code>001101</code></td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center"><code>00</code></td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center"><strong><code>010</code></strong></td>
+</tr>
+<tr>
+<td align="center"><strong><code>lui</code></strong></td>
+<td align="center"><code>001111</code></td>
+<td align="center">0</td>
+<td align="center">X</td>
+<td align="center"><code>10</code></td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">X</td>
+<td align="center"><code>XXX</code></td>
+</tr>
+<tr>
+<td align="center"><strong><code>addi</code></strong></td>
+<td align="center"><code>001000</code></td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center"><code>00</code></td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center"><strong><code>000</code></strong></td>
+</tr>
+<tr>
+<td align="center"><strong><code>j</code></strong></td>
+<td align="center"><code>000010</code></td>
+<td align="center">X</td>
+<td align="center">X</td>
+<td align="center"><code>XX</code></td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">X</td>
+<td align="center"><code>XXX</code></td>
+</tr>
+</tbody></table>
+<p><strong><code>ALUOp</code>-coded:</strong></p>
+<ul>
+<li><code>000</code>: <code>lw</code>&#x2F;<code>sw</code> (Main controller requires <strong>ADD</strong>)</li>
+<li><code>001</code>: <code>beq</code> (Master controller requests <strong>SUB</strong>)</li>
+<li><code>010</code>: <code>ori</code> (Master Controller Requires <strong>OR</strong>)</li>
+<li><code>011</code>: (Reserved, e.g., for <code>andi</code>)</li>
+<li><code>100</code>: <strong>R-type</strong> (The main controller says, “I don’t know. Please check Code <code>funct</code>.”)</li>
+<li><code>101</code>: (Reserved, e.g., for <code>xori</code>)</li>
+<li><code>110</code>: (Reserved, e.g., for <code>addi</code>)</li>
+<li><code>111</code>: (Reserved)</li>
+</ul>
+<p><strong>Explanation of <code>nop</code> (0x00000000):</strong><br><code>nop</code>: Command <code>Opcode</code> is <code>000000</code>, and <code>Funct</code> is <code>000000</code>.</p>
+<ol>
+<li><code>Main Control</code> would consider it an <strong>R-type</strong>.</li>
+<li><code>ALU Control</code> is treated as <strong><code>sll</code></strong>.</li>
+<li>It ultimately executes <code>sll $zero, $zero, 0</code>.</li>
+<li>The controller will attempt to write the result <code>0</code> to register <code>$zero</code>.</li>
+</ol>
+<hr>
+<h4 id="Additional-Notes-on-Top-Level-Logic"><a href="#Additional-Notes-on-Top-Level-Logic" class="headerlink" title="Additional Notes on Top-Level Logic"></a>Additional Notes on Top-Level Logic</h4><ul>
+<li><strong>The final <code>RegWrite</code> signal:</strong> The <code>jr</code> instruction should not write to a register. Therefore, the final <code>RegWrite_Enable</code> signal connected to the GRF should be:<ul>
+<li><code>RegWrite_Enable</code> &#x3D; <code>Main_Control[RegWrite]</code> <strong>AND</strong> ( <strong>NOT</strong> <code>ALU_Control[JR]</code> )</li>
+</ul>
+</li>
+</ul>
+<p><img src="/Blog/images/%E4%B8%BB%E6%8E%A7%E5%8D%95%E5%85%83%E9%80%BB%E8%BE%91%E5%AE%9E%E7%8E%B0.png" alt="主控单元逻辑实现"></p>
+<p><img src="/Blog/images/MCU.png" alt="MCU"></p>
+<hr>
+<h4 id="2-2-2-ALU-Control-Unit"><a href="#2-2-2-ALU-Control-Unit" class="headerlink" title="2.2.2 ALU Control Unit"></a>2.2.2 ALU Control Unit</h4><h5 id="1-2-Port-Definitions"><a href="#1-2-Port-Definitions" class="headerlink" title="1.2 Port Definitions"></a>1.2 Port Definitions</h5><ul>
+<li><strong>Inputs:</strong><ul>
+<li><code>ALUOp[2:0]</code>: A 3-bit opcode from the Main Control Unit.</li>
+<li><code>Func[5:0]</code>: The <code>[5:0]</code>-bit (function code) from the instruction.</li>
+</ul>
+</li>
+<li><strong>Outputs:</strong><ul>
+<li><code>ALUCtrl[3:0]</code>: The 4-bit final operation code sent to the ALU (we previously agreed that <code>0000</code> &#x3D; ADD, <code>0001</code> &#x3D; SUB, <code>0010</code> &#x3D; AND, <code>0011</code> &#x3D; OR, <code>0100</code> &#x3D; SLT, and <code>0101</code> &#x3D; SLL).</li>
+<li><code>JR[0]</code>: <strong>(New output)</strong> Used for command <code>jr</code>. This signal is 1 when <code>ALUOp=100</code> and <code>Func=001000</code> are true.</li>
+</ul>
+</li>
+</ul>
+<h5 id="1-3-Truth-Tables"><a href="#1-3-Truth-Tables" class="headerlink" title="1.3 Truth Tables"></a>1.3 Truth Tables</h5><table>
+<thead>
+<tr>
+<th align="center"><code>ALUOp[2:0]</code> (Input)</th>
+<th align="center"><code>Func[5:0]</code> (Input)</th>
+<th align="center">Notes (Instructions)</th>
+<th align="center"><strong><code>ALUCtrl[3:0]</code> (Output)</strong></th>
+<th align="center"><strong><code>JR[0]</code> (Output)</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>000</code></td>
+<td align="center">X (any)</td>
+<td align="center"><code>lw</code> &#x2F; <code>sw</code></td>
+<td align="center"><strong><code>0000</code></strong> (ADD)</td>
+<td align="center"><strong>0</strong></td>
+</tr>
+<tr>
+<td align="center"><code>001</code></td>
+<td align="center">X (any)</td>
+<td align="center"><code>beq</code></td>
+<td align="center"><strong><code>0001</code></strong> (SUB)</td>
+<td align="center"><strong>0</strong></td>
+</tr>
+<tr>
+<td align="center"><code>010</code></td>
+<td align="center">X (any)</td>
+<td align="center"><code>ori</code></td>
+<td align="center"><strong><code>0011</code></strong> (OR)</td>
+<td align="center"><strong>0</strong></td>
+</tr>
+<tr>
+<td align="center"><code>011</code></td>
+<td align="center">X (any)</td>
+<td align="center">(Reserved)</td>
+<td align="center">X (e.g., <code>0000</code>)</td>
+<td align="center"><strong>0</strong></td>
+</tr>
+<tr>
+<td align="center"><strong><code>100</code></strong></td>
+<td align="center"><code>100000</code></td>
+<td align="center"><code>add</code></td>
+<td align="center"><strong><code>0000</code></strong> (ADD)</td>
+<td align="center"><strong>0</strong></td>
+</tr>
+<tr>
+<td align="center"><strong><code>100</code></strong></td>
+<td align="center"><code>100010</code></td>
+<td align="center"><code>sub</code></td>
+<td align="center"><strong><code>0001</code></strong> (SUB)</td>
+<td align="center"><strong>0</strong></td>
+</tr>
+<tr>
+<td align="center"><strong><code>100</code></strong></td>
+<td align="center"><code>100100</code></td>
+<td align="center"><code>and</code></td>
+<td align="center"><strong><code>0010</code></strong> (AND)</td>
+<td align="center"><strong>0</strong></td>
+</tr>
+<tr>
+<td align="center"><strong><code>100</code></strong></td>
+<td align="center"><code>101010</code></td>
+<td align="center"><code>slt</code></td>
+<td align="center"><strong><code>0100</code></strong> (SLT)</td>
+<td align="center"><strong>0</strong></td>
+</tr>
+<tr>
+<td align="center"><strong><code>100</code></strong></td>
+<td align="center"><code>000000</code></td>
+<td align="center"><code>sll</code> (or <code>nop</code>)</td>
+<td align="center"><strong><code>0101</code></strong> (SLL)</td>
+<td align="center"><strong>0</strong></td>
+</tr>
+<tr>
+<td align="center"><strong><code>100</code></strong></td>
+<td align="center"><code>001000</code></td>
+<td align="center"><strong><code>jr</code></strong></td>
+<td align="center">X (e.g., <code>0000</code>)</td>
+<td align="center"><strong>1</strong></td>
+</tr>
+<tr>
+<td align="center">(other)</td>
+<td align="center">(other)</td>
+<td align="center">(Undefined)</td>
+<td align="center">X (e.g., <code>0000</code>)</td>
+<td align="center"><strong>0</strong></td>
+</tr>
+</tbody></table>
+<p><img src="/Blog/images/ACU.png" alt="ACU"></p>
+<hr>
+<p>After-Class Summary:<br>I managed to solve two problems for P3, so I guess I passed. During the first week, I didn’t estimate the time needed to complete the tasks properly, so I didn’t finish by Sunday and ended up falling a week behind schedule.<br>So on Monday I got the lab test off, and it still took more than a day and a half to finish the final version.<br>But the final version didn’t even pass the weak test. Skipping over the lengthy debugging phase, I eventually asked a teaching assistant for help and discovered that the cause of the bug was actually <strong>an extra ROM</strong>!!<br>After converting this ROM into logic elements, it passed the test.<br>The reason there can’t be any extra ROMs is that during testing, the system uses regular expressions to match the ROMs and then reads the data from them, so adding a ROM would cause the test to fail.</p>
+<hr>
+<p>Thinking Questions</p>
+<ol>
+<li>Currently, in our modules, IM uses ROM, DM uses RAM, and GRF uses registers. Is this approach reasonable? Please provide an analysis, and if you have any suggestions for improvement, please include them as well.<br>A: That makes sense. ROM is read-only memory, so it can be used to store instructions; RAM is both readable and writable, so it meets the DM’s read-write requirements; GRF is a register file, which requires high read-write speeds, so it is suitable for implementation using registers.</li>
+<li>In fact, to implement the NOP (no-op) instruction, we don’t need to add it to the control signal truth table. Why? Please explain your reasoning.<br>A: The NOP instruction has the code 0x00000000, which is equivalent to <code>sll $0, $0, 0</code>. This shifts the value in the $0 register 0 bits to the left and writes it back to the $0 register. Since the value of $0 is always 0, it remains unchanged; therefore, executing this instruction has no effect.Even if the CPU does not support the SLL instruction, the NOP instruction will not perform any operations on any circuit components and will have no effect on the circuit.</li>
+</ol>
+
+  </div>
+</article>
+
+
+    <div class="blog-post-comments">
+        <div id="utterances_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/Blog/en/">Home</a></li>
+        
+          <li><a href="/Blog/en/about/">About</a></li>
+        
+          <li><a href="/Blog/en/archives/">Articles</a></li>
+        
+          <li><a href="/Blog/en/tags/">Tags</a></li>
+        
+          <li><a href="/Blog/en/changelog/">Logs</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Design-of-a-Single-Cycle-MIPS-Processor"><span class="toc-number">1.</span> <span class="toc-text">Design of a Single-Cycle MIPS Processor</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Single-Cycle-Data-Path-Design"><span class="toc-number">1.1.</span> <span class="toc-text">1. Single-Cycle Data Path Design</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Reference-image"><span class="toc-number">1.1.1.</span> <span class="toc-text">Reference image</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Final-Design"><span class="toc-number">1.1.2.</span> <span class="toc-text">Final Design</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Top-level-output-port"><span class="toc-number">1.1.3.</span> <span class="toc-text">Top-level output port</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-Combinational-Components"><span class="toc-number">1.1.4.</span> <span class="toc-text">1.1 Combinational Components</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-1-ALU-Arithmetic-Logic-Unit"><span class="toc-number">1.1.4.1.</span> <span class="toc-text">1.1.1 ALU (Arithmetic Logic Unit)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-2-GRF-General-Purpose-Register-Set-also-known-as-a-register-file"><span class="toc-number">1.1.4.2.</span> <span class="toc-text">1.1.2 GRF (General-Purpose Register Set, also known as a register file)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-3-DM-Data-Memory"><span class="toc-number">1.1.4.3.</span> <span class="toc-text">1.1.3 DM (Data Memory)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-4-nPC-%E2%80%94-Finite-State-Machine"><span class="toc-number">1.1.4.4.</span> <span class="toc-text">1.1.4 nPC — Finite-State Machine:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-5-IFU-Instruction-Fetch-Unit"><span class="toc-number">1.1.4.5.</span> <span class="toc-text">1.1.5 IFU (Instruction Fetch Unit)</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#IM-Instruction-Memory"><span class="toc-number">1.1.4.5.1.</span> <span class="toc-text">IM (Instruction Memory)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#IFU-Instruction-Fetch-Unit"><span class="toc-number">1.1.4.5.2.</span> <span class="toc-text">IFU (Instruction Fetch Unit)</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-6-EXT-Extension-Module"><span class="toc-number">1.1.4.6.</span> <span class="toc-text">1.1.6 EXT (Extension Module)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-7-SPLI-Instruction-Separator-Module"><span class="toc-number">1.1.4.7.</span> <span class="toc-text">1.1.7 SPLI (Instruction Separator Module)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Instruction-Format"><span class="toc-number">1.1.5.</span> <span class="toc-text">Instruction Format</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#R-type-Instruction-Format"><span class="toc-number">1.1.5.1.</span> <span class="toc-text">R-type Instruction Format</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#add-sub-and-or-rd-rs-rt"><span class="toc-number">1.1.5.1.1.</span> <span class="toc-text">add,sub,and,or rd, rs, rt</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LW-SW-Instruction-Format"><span class="toc-number">1.1.5.2.</span> <span class="toc-text">LW&amp;SW Instruction Format</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#lw-sw-rt-rs-imm16"><span class="toc-number">1.1.5.2.1.</span> <span class="toc-text">lw,sw rt, rs, imm16</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Branch-Instruction-Format"><span class="toc-number">1.1.5.3.</span> <span class="toc-text">Branch Instruction Format</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#beq-rs-rt-imm16"><span class="toc-number">1.1.5.3.1.</span> <span class="toc-text">beq rs,  rt,  imm16</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Jump-Instruction-Format"><span class="toc-number">1.1.5.4.</span> <span class="toc-text">Jump Instruction Format</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#j-add26"><span class="toc-number">1.1.5.4.1.</span> <span class="toc-text">j add26 </span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Single-Cycle-Controller-Design"><span class="toc-number">1.2.</span> <span class="toc-text">2. Single-Cycle Controller Design</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-Control-Signals-Required-for-a-Single-Cycle-Path"><span class="toc-number">1.2.1.</span> <span class="toc-text">2.1 Control Signals Required for a Single-Cycle Path</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-1-ALU-Control-ALUCtrl-4-bits"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">2.1.1 ALU Control (ALUCtrl): 4 bits</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-2-Eight-control-signals"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">2.1.2 Eight control signals:</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-Controller-Design"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.2 Controller Design</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-1-Main-Control-Unit"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">2.2.1 Main Control Unit</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1-Design-Approach"><span class="toc-number">1.2.2.1.1.</span> <span class="toc-text">2.1 Design Approach</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-Port-Definitions"><span class="toc-number">1.2.2.1.2.</span> <span class="toc-text">2.2 Port Definitions</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3-Truth-Tables"><span class="toc-number">1.2.2.1.3.</span> <span class="toc-text">2.3 Truth Tables</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Additional-Notes-on-Top-Level-Logic"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">Additional Notes on Top-Level Logic</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-2-ALU-Control-Unit"><span class="toc-number">1.2.2.3.</span> <span class="toc-text">2.2.2 ALU Control Unit</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-2-Port-Definitions"><span class="toc-number">1.2.2.3.1.</span> <span class="toc-text">1.2 Port Definitions</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-3-Truth-Tables"><span class="toc-number">1.2.2.3.2.</span> <span class="toc-text">1.3 Truth Tables</span></a></li></ol></li></ol></li></ol></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://begineri.github.io/Blog/en/2025/11/10/co-p3-mips-cpu-logisim/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://begineri.github.io/Blog/en/2025/11/10/co-p3-mips-cpu-logisim/&text=buaa26-CO-P3-Design Document-Logisim"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://begineri.github.io/Blog/en/2025/11/10/co-p3-mips-cpu-logisim/&title=buaa26-CO-P3-Design Document-Logisim"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://begineri.github.io/Blog/en/2025/11/10/co-p3-mips-cpu-logisim/&is_video=false&description=buaa26-CO-P3-Design Document-Logisim"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=buaa26-CO-P3-Design Document-Logisim&body=Check out this article: https://begineri.github.io/Blog/en/2025/11/10/co-p3-mips-cpu-logisim/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://begineri.github.io/Blog/en/2025/11/10/co-p3-mips-cpu-logisim/&title=buaa26-CO-P3-Design Document-Logisim"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://begineri.github.io/Blog/en/2025/11/10/co-p3-mips-cpu-logisim/&title=buaa26-CO-P3-Design Document-Logisim"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://begineri.github.io/Blog/en/2025/11/10/co-p3-mips-cpu-logisim/&title=buaa26-CO-P3-Design Document-Logisim"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://begineri.github.io/Blog/en/2025/11/10/co-p3-mips-cpu-logisim/&title=buaa26-CO-P3-Design Document-Logisim"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://begineri.github.io/Blog/en/2025/11/10/co-p3-mips-cpu-logisim/&name=buaa26-CO-P3-Design Document-Logisim&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://begineri.github.io/Blog/en/2025/11/10/co-p3-mips-cpu-logisim/&t=buaa26-CO-P3-Design Document-Logisim"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025-2026
+    Wang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/Blog/en/">Home</a></li><!--
+     --><!--
+       --><li><a href="/Blog/en/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/Blog/en/archives/">Articles</a></li><!--
+     --><!--
+       --><li><a href="/Blog/en/tags/">Tags</a></li><!--
+     --><!--
+       --><li><a href="/Blog/en/changelog/">Logs</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/Blog/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "57783916a7b349829732031e51219ad6"}'></script>
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+    <script type="text/javascript">
+      var utterances_repo = 'begineri/Blog';
+      var utterances_issue_term = 'pathname';
+      var utterances_label = 'Comment';
+      var utterances_theme = 'github-dark';
+
+      (function(){
+          var script = document.createElement('script');
+
+          script.src = 'https://utteranc.es/client.js';
+          script.setAttribute('repo', utterances_repo);
+          script.setAttribute('issue-term', 'pathname');
+          script.setAttribute('label', utterances_label);
+          script.setAttribute('theme', utterances_theme);
+          script.setAttribute('crossorigin', 'anonymous');
+          script.async = true;
+          (document.getElementById('utterances_thread')).appendChild(script);
+      }());
+  </script>
+
+</body>
+</html>

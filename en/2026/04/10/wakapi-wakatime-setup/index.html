@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+
+<html lang=&#34;en&#34;>
+<head>
+    
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="BackgroundI was looking for a tool to automatically track my coding time, so I came across WakaTime. WakaTime supports a wide range of IDEs. For more details, visit: https:&#x2F;&#x2F;wakatime.com&#x2F;plugins Howev">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Wakapi &amp; WakaTime Setup: Tracking Coding Time">
+<meta property="og:url" content="https://begineri.github.io/Blog/en/2026/04/10/wakapi-wakatime-setup/index.html">
+<meta property="og:site_name" content="My Blog">
+<meta property="og:description" content="BackgroundI was looking for a tool to automatically track my coding time, so I came across WakaTime. WakaTime supports a wide range of IDEs. For more details, visit: https:&#x2F;&#x2F;wakatime.com&#x2F;plugins Howev">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/Wakapi/dash.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/Wakapi/%E7%A4%BA%E6%84%8F.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/Wakapi/%E5%AF%BC%E5%85%A5.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/Wakapi/deepseek_mermaid_20260410_efc909.png">
+<meta property="article:published_time" content="2026-04-10T11:27:15.000Z">
+<meta property="article:modified_time" content="2026-10-08T13:39:00.098Z">
+<meta property="article:author" content="Wang">
+<meta property="article:tag" content="coding">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://begineri.github.io/Blog/images/Wakapi/dash.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/Blog/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/Blog/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/Blog/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Wakapi &amp; WakaTime Setup: Tracking Coding Time</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/Blog/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 8.1.1"><link rel="alternate" href="/Blog/en/atom.xml" title="My Blog" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr is-post">
+    
+<nav class="lang-switch" aria-label="Language">
+  <a href="/Blog/zh-CN/2026/04/10/wakapi-wakatime-setup/" class="">中</a>
+  <span class="lang-switch__sep" aria-hidden="true">|</span>
+  <a href="/Blog/en/2026/04/10/wakapi-wakatime-setup/" class="is-active">EN</a>
+</nav>
+
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top"
+    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i
+      class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       -->
+          <li><a href="/Blog/en/">
+              Home
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/en/about/">
+              About
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/en/archives/">
+              Articles
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/en/tags/">
+              Tags
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/en/changelog/">
+              Logs
+            </a></li><!--
+     -->
+          
+      </ul>
+      
+<nav class="lang-switch lang-switch--inline" aria-label="Language">
+  <a href="/Blog/zh-CN/2026/04/10/wakapi-wakatime-setup/" class="">中</a>
+  <span class="lang-switch__sep" aria-hidden="true">|</span>
+  <a href="/Blog/en/2026/04/10/wakapi-wakatime-setup/" class="is-active">EN</a>
+</nav>
+
+    </span>
+    <br />
+    <span id="actions">
+      <ul>
+        
+        
+          <li><a class="icon" aria-label="Previous post" href="/Blog/en/2026/04/15/buaa-os-lab1-summary/"><i
+                class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();"
+                onmouseout="$('#i-prev').toggle();"></i></a></li>
+          
+            
+              <li><a class="icon" aria-label="Next post" href="/Blog/en/2026/03/27/buaa-oo-u1-blog/"><i
+                    class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();"
+                    onmouseout="$('#i-next').toggle();"></i></a></li>
+              
+                <li><a class="icon" aria-label="Back to top" href="#"
+                    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up"
+                      aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a>
+                </li>
+                <li><a class="icon" aria-label="Share post" href="#"><i
+                      class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();"
+                      onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">
+        Previous post
+      </span>
+      <span id="i-next" class="info" style="display:none;">
+        Next post
+      </span>
+      <span id="i-top" class="info" style="display:none;">
+        Back to top
+      </span>
+      <span id="i-share" class="info" style="display:none;">
+        Share post
+      </span>
+    </span>
+    <br />
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://begineri.github.io/Blog/en/2026/04/10/wakapi-wakatime-setup/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://begineri.github.io/Blog/en/2026/04/10/wakapi-wakatime-setup/&text=Wakapi &amp; WakaTime Setup: Tracking Coding Time"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://begineri.github.io/Blog/en/2026/04/10/wakapi-wakatime-setup/&title=Wakapi &amp; WakaTime Setup: Tracking Coding Time"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://begineri.github.io/Blog/en/2026/04/10/wakapi-wakatime-setup/&is_video=false&description=Wakapi &amp; WakaTime Setup: Tracking Coding Time"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Wakapi &amp; WakaTime Setup: Tracking Coding Time&body=Check out this article: https://begineri.github.io/Blog/en/2026/04/10/wakapi-wakatime-setup/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://begineri.github.io/Blog/en/2026/04/10/wakapi-wakatime-setup/&title=Wakapi &amp; WakaTime Setup: Tracking Coding Time"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://begineri.github.io/Blog/en/2026/04/10/wakapi-wakatime-setup/&title=Wakapi &amp; WakaTime Setup: Tracking Coding Time"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://begineri.github.io/Blog/en/2026/04/10/wakapi-wakatime-setup/&title=Wakapi &amp; WakaTime Setup: Tracking Coding Time"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://begineri.github.io/Blog/en/2026/04/10/wakapi-wakatime-setup/&title=Wakapi &amp; WakaTime Setup: Tracking Coding Time"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://begineri.github.io/Blog/en/2026/04/10/wakapi-wakatime-setup/&name=Wakapi &amp; WakaTime Setup: Tracking Coding Time&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://begineri.github.io/Blog/en/2026/04/10/wakapi-wakatime-setup/&t=Wakapi &amp; WakaTime Setup: Tracking Coding Time"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <!-- 
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Background"><span class="toc-number">1.</span> <span class="toc-text">Background</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Deployment-Reference-Process"><span class="toc-number">2.</span> <span class="toc-text">Deployment Reference Process</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploying-Wakapi"><span class="toc-number">2.1.</span> <span class="toc-text">Deploying Wakapi</span></a></li></ol></li></ol>
+      </div>
+     -->
+    
+        <div id="toc">
+          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Background"><span class="toc-number">1.</span> <span class="toc-text">Background</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Deployment-Reference-Process"><span class="toc-number">2.</span> <span class="toc-text">Deployment Reference Process</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploying-Wakapi"><span class="toc-number">2.1.</span> <span class="toc-text">Deploying Wakapi</span></a></li></ol></li></ol>
+        </div>
+        
+  </span>
+</div>
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Wakapi &amp; WakaTime Setup: Tracking Coding Time
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Wang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2026-04-10T11:27:15.000Z" class="dt-published" itemprop="datePublished">2026-04-10</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        
+          <a class="p-category" href="/Blog/en/tags/coding/">coding</a>
+        
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>I was looking for a tool to automatically track my coding time, so I came across WakaTime.</p>
+<p>WakaTime supports a wide range of IDEs. For more details, visit: <a target="_blank" rel="noopener" href="https://wakatime.com/plugins">https://wakatime.com/plugins</a></p>
+<p>However, much of WakaTime’s content requires an additional fee; for example, free users can only view their coding time for the past 7 days, which is quite inconvenient.</p>
+<hr>
+<p>Therefore, using Wakapi to store data locally is a great choice.<br>I’ve been using WakaTime all along, and now I can import my data with a single click. Here’s what my dashboard looks like now:<br><img src="/Blog/images/Wakapi/dash.png" alt="alt text"></p>
+<p>It’s very clear—you can click on each project to view its specific time breakdown. For example, for last semester’s CO (you can see that I spent over 6 hours writing P5 code and documentation; clicking further reveals even more detailed information):<br><img src="/Blog/images/Wakapi/%E7%A4%BA%E6%84%8F.png" alt="alt text"></p>
+<hr>
+<h2 id="Deployment-Reference-Process"><a href="#Deployment-Reference-Process" class="headerlink" title="Deployment Reference Process"></a>Deployment Reference Process</h2><p>Here is my deployment plan. For more information, see:<br>Wakapi on GitHub：<a target="_blank" rel="noopener" href="https://github.com/muety/wakapi">https://wakatime.com</a><br>WakaTime：<a target="_blank" rel="noopener" href="https://wakatime.com/">https://wakatime.com</a></p>
+<h3 id="Deploying-Wakapi"><a href="#Deploying-Wakapi" class="headerlink" title="Deploying Wakapi"></a>Deploying Wakapi</h3><p>I use Docker:</p>
+<ol>
+<li>One-Click Backend Deployment with Docker</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Create a persistent volume</span></span><br><span class="line">$ docker volume create wakapi-data</span><br><span class="line"></span><br><span class="line">$ SALT=<span class="string">&quot;<span class="subst">$(cat /dev/urandom | LC_ALL=C tr -dc &#x27;a-zA-Z0-9&#x27; | fold -w $&#123;1:-32&#125; | head -n 1)</span>&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Run the container</span></span><br><span class="line">$ docker run -d \</span><br><span class="line">  --init \</span><br><span class="line">  -p 3000:3000 \</span><br><span class="line">  -e <span class="string">&quot;WAKAPI_PASSWORD_SALT=<span class="variable">$SALT</span>&quot;</span> \</span><br><span class="line">  -v wakapi-data:/data \</span><br><span class="line">  --name wakapi \</span><br><span class="line">  --restart unless-stopped \</span><br><span class="line">  ghcr.io/muety/wakapi:latest</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>Open <code>http://localhost:3000/login</code> locally and register an account to access the API.</p>
+</li>
+<li><p>Data linked to the IDE<br>At this point, you can simply follow the instructions on the webpage. For reference, see:</p>
+<ul>
+<li>If you’ve already been using WakaTime, you can import your data directly (my choice):<ul>
+<li>As shown in the image, simply paste your WakaTime API key into the settings, then click <code>Import Data</code> to import historical data.<br><img src="/Blog/images/Wakapi/%E5%AF%BC%E5%85%A5.png" alt="alt text"></li>
+<li>It’s working fine now, so I’ve decided to keep the original WakaTime configuration. WakaTime is still running on my local machine, and I’ll only sync when necessary (since switching to wakapi might introduce unknown bugs that can’t be resolved).</li>
+</ul>
+</li>
+<li>Or configure it from scratch (see the steps on the website):<ol>
+<li>Download and install the required IDE plugin from <a target="_blank" rel="noopener" href="https://wakatime.com/plugins">https://wakatime.com/plugins</a></li>
+<li>Modify content <code>~/.wakatime.cfg</code> to ():</li>
+</ol>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[settings]</span><br><span class="line"> api_url = https://wakapi.dev/api</span><br><span class="line"> api_key = &lt;put your api key here&gt;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>Refresh, done!</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+<hr>
+<p>After that, data should be recorded automatically.<br>Below is a schematic diagram illustrating the principle (generated by AI):</p>
+<p><img src="/Blog/images/Wakapi/deepseek_mermaid_20260410_efc909.png" alt="alt text"></p>
+
+  </div>
+</article>
+
+
+    <div class="blog-post-comments">
+        <div id="utterances_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/Blog/en/">Home</a></li>
+        
+          <li><a href="/Blog/en/about/">About</a></li>
+        
+          <li><a href="/Blog/en/archives/">Articles</a></li>
+        
+          <li><a href="/Blog/en/tags/">Tags</a></li>
+        
+          <li><a href="/Blog/en/changelog/">Logs</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Background"><span class="toc-number">1.</span> <span class="toc-text">Background</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Deployment-Reference-Process"><span class="toc-number">2.</span> <span class="toc-text">Deployment Reference Process</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploying-Wakapi"><span class="toc-number">2.1.</span> <span class="toc-text">Deploying Wakapi</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://begineri.github.io/Blog/en/2026/04/10/wakapi-wakatime-setup/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://begineri.github.io/Blog/en/2026/04/10/wakapi-wakatime-setup/&text=Wakapi &amp; WakaTime Setup: Tracking Coding Time"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://begineri.github.io/Blog/en/2026/04/10/wakapi-wakatime-setup/&title=Wakapi &amp; WakaTime Setup: Tracking Coding Time"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://begineri.github.io/Blog/en/2026/04/10/wakapi-wakatime-setup/&is_video=false&description=Wakapi &amp; WakaTime Setup: Tracking Coding Time"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Wakapi &amp; WakaTime Setup: Tracking Coding Time&body=Check out this article: https://begineri.github.io/Blog/en/2026/04/10/wakapi-wakatime-setup/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://begineri.github.io/Blog/en/2026/04/10/wakapi-wakatime-setup/&title=Wakapi &amp; WakaTime Setup: Tracking Coding Time"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://begineri.github.io/Blog/en/2026/04/10/wakapi-wakatime-setup/&title=Wakapi &amp; WakaTime Setup: Tracking Coding Time"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://begineri.github.io/Blog/en/2026/04/10/wakapi-wakatime-setup/&title=Wakapi &amp; WakaTime Setup: Tracking Coding Time"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://begineri.github.io/Blog/en/2026/04/10/wakapi-wakatime-setup/&title=Wakapi &amp; WakaTime Setup: Tracking Coding Time"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://begineri.github.io/Blog/en/2026/04/10/wakapi-wakatime-setup/&name=Wakapi &amp; WakaTime Setup: Tracking Coding Time&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://begineri.github.io/Blog/en/2026/04/10/wakapi-wakatime-setup/&t=Wakapi &amp; WakaTime Setup: Tracking Coding Time"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025-2026
+    Wang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/Blog/en/">Home</a></li><!--
+     --><!--
+       --><li><a href="/Blog/en/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/Blog/en/archives/">Articles</a></li><!--
+     --><!--
+       --><li><a href="/Blog/en/tags/">Tags</a></li><!--
+     --><!--
+       --><li><a href="/Blog/en/changelog/">Logs</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/Blog/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "57783916a7b349829732031e51219ad6"}'></script>
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+    <script type="text/javascript">
+      var utterances_repo = 'begineri/Blog';
+      var utterances_issue_term = 'pathname';
+      var utterances_label = 'Comment';
+      var utterances_theme = 'github-dark';
+
+      (function(){
+          var script = document.createElement('script');
+
+          script.src = 'https://utteranc.es/client.js';
+          script.setAttribute('repo', utterances_repo);
+          script.setAttribute('issue-term', 'pathname');
+          script.setAttribute('label', utterances_label);
+          script.setAttribute('theme', utterances_theme);
+          script.setAttribute('crossorigin', 'anonymous');
+          script.async = true;
+          (document.getElementById('utterances_thread')).appendChild(script);
+      }());
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+
+<html lang=&#34;en&#34;>
+<head>
+    
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="2026 Object-Oriented Programming Unit 2 Blog Assignment — Summary of the Multithreaded Elevator SystemI. Summary and Analysis of Synchronization Block Configuration and Lock Selection in the Three Ass">
+<meta property="og:type" content="article">
+<meta property="og:title" content="buaa26-OO-u2">
+<meta property="og:url" content="https://begineri.github.io/Blog/en/2026/04/27/buaa-oo-u2-blog/index.html">
+<meta property="og:site_name" content="My Blog">
+<meta property="og:description" content="2026 Object-Oriented Programming Unit 2 Blog Assignment — Summary of the Multithreaded Elevator SystemI. Summary and Analysis of Synchronization Block Configuration and Lock Selection in the Three Ass">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/oou2/1.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/oou2/2.png">
+<meta property="article:published_time" content="2026-04-27T16:21:26.000Z">
+<meta property="article:modified_time" content="2026-10-08T23:10:32.866Z">
+<meta property="article:author" content="Wang">
+<meta property="article:tag" content="OOP">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://begineri.github.io/Blog/images/oou2/1.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/Blog/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/Blog/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/Blog/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>buaa26-OO-u2</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/Blog/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 8.1.1"><link rel="alternate" href="/Blog/en/atom.xml" title="My Blog" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr is-post">
+    
+<nav class="lang-switch" aria-label="Language">
+  <a href="/Blog/zh-CN/2026/04/27/buaa-oo-u2-blog/" class="">中</a>
+  <span class="lang-switch__sep" aria-hidden="true">|</span>
+  <a href="/Blog/en/2026/04/27/buaa-oo-u2-blog/" class="is-active">EN</a>
+</nav>
+
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top"
+    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i
+      class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       -->
+          <li><a href="/Blog/en/">
+              Home
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/en/about/">
+              About
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/en/archives/">
+              Articles
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/en/tags/">
+              Tags
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/en/changelog/">
+              Logs
+            </a></li><!--
+     -->
+          
+      </ul>
+      
+<nav class="lang-switch lang-switch--inline" aria-label="Language">
+  <a href="/Blog/zh-CN/2026/04/27/buaa-oo-u2-blog/" class="">中</a>
+  <span class="lang-switch__sep" aria-hidden="true">|</span>
+  <a href="/Blog/en/2026/04/27/buaa-oo-u2-blog/" class="is-active">EN</a>
+</nav>
+
+    </span>
+    <br />
+    <span id="actions">
+      <ul>
+        
+        
+          <li><a class="icon" aria-label="Previous post" href="/Blog/en/2026/07/22/wechat-in-sandboxie-windows/"><i
+                class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();"
+                onmouseout="$('#i-prev').toggle();"></i></a></li>
+          
+            
+              <li><a class="icon" aria-label="Next post" href="/Blog/en/2026/04/16/buaa-os-lab2-summary/"><i
+                    class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();"
+                    onmouseout="$('#i-next').toggle();"></i></a></li>
+              
+                <li><a class="icon" aria-label="Back to top" href="#"
+                    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up"
+                      aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a>
+                </li>
+                <li><a class="icon" aria-label="Share post" href="#"><i
+                      class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();"
+                      onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">
+        Previous post
+      </span>
+      <span id="i-next" class="info" style="display:none;">
+        Next post
+      </span>
+      <span id="i-top" class="info" style="display:none;">
+        Back to top
+      </span>
+      <span id="i-share" class="info" style="display:none;">
+        Share post
+      </span>
+    </span>
+    <br />
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://begineri.github.io/Blog/en/2026/04/27/buaa-oo-u2-blog/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://begineri.github.io/Blog/en/2026/04/27/buaa-oo-u2-blog/&text=buaa26-OO-u2"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://begineri.github.io/Blog/en/2026/04/27/buaa-oo-u2-blog/&title=buaa26-OO-u2"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://begineri.github.io/Blog/en/2026/04/27/buaa-oo-u2-blog/&is_video=false&description=buaa26-OO-u2"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=buaa26-OO-u2&body=Check out this article: https://begineri.github.io/Blog/en/2026/04/27/buaa-oo-u2-blog/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://begineri.github.io/Blog/en/2026/04/27/buaa-oo-u2-blog/&title=buaa26-OO-u2"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://begineri.github.io/Blog/en/2026/04/27/buaa-oo-u2-blog/&title=buaa26-OO-u2"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://begineri.github.io/Blog/en/2026/04/27/buaa-oo-u2-blog/&title=buaa26-OO-u2"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://begineri.github.io/Blog/en/2026/04/27/buaa-oo-u2-blog/&title=buaa26-OO-u2"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://begineri.github.io/Blog/en/2026/04/27/buaa-oo-u2-blog/&name=buaa26-OO-u2&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://begineri.github.io/Blog/en/2026/04/27/buaa-oo-u2-blog/&t=buaa26-OO-u2"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <!-- 
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#2026-Object-Oriented-Programming-Unit-2-Blog-Assignment-%E2%80%94-Summary-of-the-Multithreaded-Elevator-System"><span class="toc-number">1.</span> <span class="toc-text">2026 Object-Oriented Programming Unit 2 Blog Assignment — Summary of the Multithreaded Elevator System</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#I-Summary-and-Analysis-of-Synchronization-Block-Configuration-and-Lock-Selection-in-the-Three-Assignments"><span class="toc-number">1.1.</span> <span class="toc-text">I. Summary and Analysis of Synchronization Block Configuration and Lock Selection in the Three Assignments</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-The-Evolution-of-Lock-Mechanisms-Across-Three-Iterations"><span class="toc-number">1.1.1.</span> <span class="toc-text">1. The Evolution of Lock Mechanisms Across Three Iterations</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-The-Relationship-Between-Statements-and-Synchronization-Blocks-in-Locks"><span class="toc-number">1.1.2.</span> <span class="toc-text">2. The Relationship Between Statements and Synchronization Blocks in Locks</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#II-Evolution-of-Concurrency-Architectures-and-Scheduler-Design"><span class="toc-number">1.2.</span> <span class="toc-text">II. Evolution of Concurrency Architectures and Scheduler Design</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Overall-Concurrency-Architecture-Design-From-Free-Competition-to-Centralized-Scheduling"><span class="toc-number">1.2.1.</span> <span class="toc-text">1. Overall Concurrency Architecture Design: From Free Competition to Centralized Scheduling</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Implementation-and-Optimization-of-Scheduling-Strategies"><span class="toc-number">1.2.2.</span> <span class="toc-text">2. Implementation and Optimization of Scheduling Strategies</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#III-Balancing-Functional-and-Performance-Design-and-Scalability"><span class="toc-number">1.3.</span> <span class="toc-text">III. Balancing Functional and Performance Design, and Scalability</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Designing-Scalable-Architectures-and-the-Single-Responsibility-Principle-SRP"><span class="toc-number">1.3.1.</span> <span class="toc-text">1. Designing Scalable Architectures and the Single Responsibility Principle (SRP)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-UML-Class-Diagram-Architecture-Design"><span class="toc-number">1.3.2.</span> <span class="toc-text">2. UML Class Diagram Architecture Design</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-UML-Sequence-Diagram"><span class="toc-number">1.3.3.</span> <span class="toc-text">3. UML Sequence Diagram</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IV-Bug-Analysis-in-Self-Testing-and-Peer-Testing-and-Multithreading-Debugging-Methods"><span class="toc-number">1.4.</span> <span class="toc-text">IV. Bug Analysis in Self-Testing and Peer Testing, and Multithreading Debugging Methods</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Analysis-of-Bugs-Encountered-During-Self-Testing-and-Peer-Testing"><span class="toc-number">1.4.1.</span> <span class="toc-text">1. Analysis of Bugs Encountered During Self-Testing and Peer Testing</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Methods-for-Debugging-Multithreading"><span class="toc-number">1.4.2.</span> <span class="toc-text">2. Methods for Debugging Multithreading</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#V-Understanding-and-Summary-of-Thread-Safety-and-Layered-Design"><span class="toc-number">1.5.</span> <span class="toc-text">V. Understanding and Summary of Thread Safety and Layered Design</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#VI-Specific-Insights-on-Using-Large-Language-Models"><span class="toc-number">1.6.</span> <span class="toc-text">VI. Specific Insights on Using Large Language Models</span></a></li></ol></li></ol>
+      </div>
+     -->
+    
+        <div id="toc">
+          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#2026-Object-Oriented-Programming-Unit-2-Blog-Assignment-%E2%80%94-Summary-of-the-Multithreaded-Elevator-System"><span class="toc-number">1.</span> <span class="toc-text">2026 Object-Oriented Programming Unit 2 Blog Assignment — Summary of the Multithreaded Elevator System</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#I-Summary-and-Analysis-of-Synchronization-Block-Configuration-and-Lock-Selection-in-the-Three-Assignments"><span class="toc-number">1.1.</span> <span class="toc-text">I. Summary and Analysis of Synchronization Block Configuration and Lock Selection in the Three Assignments</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-The-Evolution-of-Lock-Mechanisms-Across-Three-Iterations"><span class="toc-number">1.1.1.</span> <span class="toc-text">1. The Evolution of Lock Mechanisms Across Three Iterations</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-The-Relationship-Between-Statements-and-Synchronization-Blocks-in-Locks"><span class="toc-number">1.1.2.</span> <span class="toc-text">2. The Relationship Between Statements and Synchronization Blocks in Locks</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#II-Evolution-of-Concurrency-Architectures-and-Scheduler-Design"><span class="toc-number">1.2.</span> <span class="toc-text">II. Evolution of Concurrency Architectures and Scheduler Design</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Overall-Concurrency-Architecture-Design-From-Free-Competition-to-Centralized-Scheduling"><span class="toc-number">1.2.1.</span> <span class="toc-text">1. Overall Concurrency Architecture Design: From Free Competition to Centralized Scheduling</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Implementation-and-Optimization-of-Scheduling-Strategies"><span class="toc-number">1.2.2.</span> <span class="toc-text">2. Implementation and Optimization of Scheduling Strategies</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#III-Balancing-Functional-and-Performance-Design-and-Scalability"><span class="toc-number">1.3.</span> <span class="toc-text">III. Balancing Functional and Performance Design, and Scalability</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Designing-Scalable-Architectures-and-the-Single-Responsibility-Principle-SRP"><span class="toc-number">1.3.1.</span> <span class="toc-text">1. Designing Scalable Architectures and the Single Responsibility Principle (SRP)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-UML-Class-Diagram-Architecture-Design"><span class="toc-number">1.3.2.</span> <span class="toc-text">2. UML Class Diagram Architecture Design</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-UML-Sequence-Diagram"><span class="toc-number">1.3.3.</span> <span class="toc-text">3. UML Sequence Diagram</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IV-Bug-Analysis-in-Self-Testing-and-Peer-Testing-and-Multithreading-Debugging-Methods"><span class="toc-number">1.4.</span> <span class="toc-text">IV. Bug Analysis in Self-Testing and Peer Testing, and Multithreading Debugging Methods</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Analysis-of-Bugs-Encountered-During-Self-Testing-and-Peer-Testing"><span class="toc-number">1.4.1.</span> <span class="toc-text">1. Analysis of Bugs Encountered During Self-Testing and Peer Testing</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Methods-for-Debugging-Multithreading"><span class="toc-number">1.4.2.</span> <span class="toc-text">2. Methods for Debugging Multithreading</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#V-Understanding-and-Summary-of-Thread-Safety-and-Layered-Design"><span class="toc-number">1.5.</span> <span class="toc-text">V. Understanding and Summary of Thread Safety and Layered Design</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#VI-Specific-Insights-on-Using-Large-Language-Models"><span class="toc-number">1.6.</span> <span class="toc-text">VI. Specific Insights on Using Large Language Models</span></a></li></ol></li></ol>
+        </div>
+        
+  </span>
+</div>
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        buaa26-OO-u2
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Wang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2026-04-27T16:21:26.000Z" class="dt-published" itemprop="datePublished">2026-04-27</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        
+          <a class="p-category" href="/Blog/en/tags/OOP/">OOP</a>
+        
+          <a class="p-category" href="/Blog/en/tags/java/">java</a>
+        
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="2026-Object-Oriented-Programming-Unit-2-Blog-Assignment-—-Summary-of-the-Multithreaded-Elevator-System"><a href="#2026-Object-Oriented-Programming-Unit-2-Blog-Assignment-—-Summary-of-the-Multithreaded-Elevator-System" class="headerlink" title="2026 Object-Oriented Programming Unit 2 Blog Assignment — Summary of the Multithreaded Elevator System"></a>2026 Object-Oriented Programming Unit 2 Blog Assignment — Summary of the Multithreaded Elevator System</h1><h2 id="I-Summary-and-Analysis-of-Synchronization-Block-Configuration-and-Lock-Selection-in-the-Three-Assignments"><a href="#I-Summary-and-Analysis-of-Synchronization-Block-Configuration-and-Lock-Selection-in-the-Three-Assignments" class="headerlink" title="I. Summary and Analysis of Synchronization Block Configuration and Lock Selection in the Three Assignments"></a>I. Summary and Analysis of Synchronization Block Configuration and Lock Selection in the Three Assignments</h2><h3 id="1-The-Evolution-of-Lock-Mechanisms-Across-Three-Iterations"><a href="#1-The-Evolution-of-Lock-Mechanisms-Across-Three-Iterations" class="headerlink" title="1. The Evolution of Lock Mechanisms Across Three Iterations"></a>1. The Evolution of Lock Mechanisms Across Three Iterations</h3><ul>
+<li><strong>Fifth Assignment (Basic Elevator):</strong><ul>
+<li><strong>Lock Selection:</strong> Concurrent access to shared objects <code>GlobalQueue</code> (global queue) and <code>receiveBuffer</code> (local allocation queues for each elevator) is primarily controlled by the <code>synchronized</code> keyword.</li>
+<li><strong>Synchronization block setup:</strong> Apply locks directly outside methods such as <code>offer</code> (put in a request), <code>pop</code> (take out a request), and <code>setEnd</code> (end flag). The scheduler thread and elevator thread execute step <code>wait()</code> when the queue is empty, and step <code>notifyAll()</code> when a new request arrives or the process terminates.</li>
+</ul>
+</li>
+<li><strong>Sixth Assignment (Add “Reset&#x2F;Maintain”):</strong><ul>
+<li><strong>Lock Selection:</strong> Added a <code>synchronized</code> lock for queue <code>sysActionQueue</code> in the elevator’s internal system. Maintaining this request requires revoking the elevator’s current operational status and “returning” passengers who have not yet arrived to queue <code>GlobalQueue</code>.</li>
+<li><strong>Synchronization Block Configuration:</strong> In the return logic, the current elevator’s internal waiting list is locked first, followed by locking <code>GlobalQueue</code> to perform reverse <code>offer</code> and wake-up operations. To avoid <strong>deadlocks</strong>, the locking order is strictly defined (always requesting upper-level resources from lower levels, and first processing internal tasks before releasing them to the global pool), ensuring that locks of different categories do not create circular waits.</li>
+</ul>
+</li>
+<li><strong>Assignment 7 (Dual-Cabin Modification and Recycling):</strong><ul>
+<li><strong>Lock Selection:</strong> Introduced <code>ReentrantLock</code>. Since the dual cabins A and B in the same hoistway cannot collide at the Transfer Floor, I assigned a single anti-collision lock <code>sharedTransferLock</code> to both elevators <code>ElevatorContext</code>.</li>
+<li><strong>Synchronization Block Settings:</strong> This lock is not a data read&#x2F;write lock, but rather a pure “physical space mutual exclusion lock.” The elevator is set to <code>lock.lock()</code> before entering the transfer level, and to <code>lock.unlock()</code> after it has completely left the level and <code>lock.isHeldByCurrentThread()</code> is guaranteed.</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-The-Relationship-Between-Statements-and-Synchronization-Blocks-in-Locks"><a href="#2-The-Relationship-Between-Statements-and-Synchronization-Blocks-in-Locks" class="headerlink" title="2. The Relationship Between Statements and Synchronization Blocks in Locks"></a>2. The Relationship Between Statements and Synchronization Blocks in Locks</h3><ul>
+<li><strong>Minimizing Critical Sections:</strong> I consistently isolate computation-intensive or blocking operations from synchronization blocks. For example, calculating the weights for each elevator’s scheduling (<code>calCost()</code>) does not require locking; all <code>Thread.sleep()</code> simulation behaviors are executed entirely outside the synchronization block, preventing a situation where the entire elevator scheduling system becomes paralyzed due to a single elevator going into sleep mode.</li>
+<li><strong>Atomic variable assistance:</strong> To avoid frequent locking of the elevator, I used <code>AtomicInteger</code> to track the elevator’s real-time capacity (<code>asyncTotalTasks</code> and <code>asyncCurrentWeight</code>). The scheduler can read this value without a lock, which significantly alleviates the bottleneck caused by global lock contention.</li>
+</ul>
+<hr>
+<h2 id="II-Evolution-of-Concurrency-Architectures-and-Scheduler-Design"><a href="#II-Evolution-of-Concurrency-Architectures-and-Scheduler-Design" class="headerlink" title="II. Evolution of Concurrency Architectures and Scheduler Design"></a>II. Evolution of Concurrency Architectures and Scheduler Design</h2><p>In this iteration, I experimented with “free competition” and “centralized scheduling” as elevator scheduling strategies.</p>
+<h3 id="1-Overall-Concurrency-Architecture-Design-From-Free-Competition-to-Centralized-Scheduling"><a href="#1-Overall-Concurrency-Architecture-Design-From-Free-Competition-to-Centralized-Scheduling" class="headerlink" title="1. Overall Concurrency Architecture Design: From Free Competition to Centralized Scheduling"></a>1. Overall Concurrency Architecture Design: From Free Competition to Centralized Scheduling</h3><ul>
+<li><strong>The Producer-Consumer Model and Free Competition (Sixth Assignment):</strong><br>The system was originally a typical multi-consumer order-grabbing model. <code>InputHandler</code>, as the sole data source, places passenger requests into <code>GlobalQueue</code>, which acts as a buffer tray.The system has no central dispatcher; the six elevators run in parallel as independent threads. Internally, <code>TaskAcquirer</code> actively “snatches orders” from the pool. This leaderless scheduling greatly reduces the risk of scheduling deadlocks. Combined with lifecycle management, the system safely terminates when <code>InputHandler</code> finishes reading and the system’s singleton global counter reaches <code>RequestCounter.getInstance().getCount() == 0</code>.</li>
+<li><strong>Central Dispatcher Pattern (used in the seventh assignment):</strong><br>With the introduction of dual-cabins and complex recycle commands, simply rushing to accept orders blindly is no longer sufficient to achieve global optimality or coordinate the allocation between the two vehicles. Therefore, a single <code>DispatchThread</code> scheduler has been introduced. It serves as a pivotal hub that “bridges the gap”:<ul>
+<li><strong>With the global queue:</strong> after <code>InputHandler</code> delivers a request, it wakes the suspended scheduler.</li>
+<li><strong>Regarding the elevator:</strong> The dispatcher precisely locks onto the target elevator’s <code>receiveBuffer</code> and distributes the request, implicitly waking up the selected elevator that is on standby.</li>
+<li><strong>System Changes:</strong> When a power outage for maintenance or a conversion to a dual-car system occurs, the elevator thread clears out the passengers and returns them to <code>GlobalQueue</code>, thereby reawakening the dispatcher to perform reallocation.</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-Implementation-and-Optimization-of-Scheduling-Strategies"><a href="#2-Implementation-and-Optimization-of-Scheduling-Strategies" class="headerlink" title="2. Implementation and Optimization of Scheduling Strategies"></a>2. Implementation and Optimization of Scheduling Strategies</h3><p>To balance <strong>time performance (operating speed and wait time)</strong> <strong>and power consumption (energy used during movement and door opening&#x2F;closing)</strong>, my core scheduling strategy is as follows:</p>
+<ul>
+<li><strong>Basic LOOK Strategy:</strong> The elevator picks up all requests traveling in the same direction along its route until there are no more requests at the front, at which point it reverses direction. This maximizes the use of a single trip and reduces the number of door openings (thereby lowering power consumption).</li>
+<li><strong>Quantum Elevator Strategy:</strong> Use the magical quantum elevator strategy to maximize time efficiency.</li>
+<li><strong>Dynamic Allocation Considering Multidimensional Metrics</strong><ul>
+<li><strong>Distance and Direction Weight <code>directionAndDistanceCost</code>:</strong> Set the cost for passengers traveling in the same direction as the elevator and located in front of it to a minimum (same route); impose a high penalty on requests that require the elevator to turn around. This strategy effectively reduces unnecessary back-and-forth trips and saves electricity.</li>
+<li><strong>Load Balancing <code>queueLenCost</code> and Overload Prevention <code>weightCost</code>:</strong> When assigning passengers, factor in the number of people already on each elevator and apply load penalty calculations. If assigning a passenger to a particular elevator would cause it to reach full capacity and prevent further boarding, it returns a very large cost and either forcibly rejects the passenger or reassigns them. This avoids the high latency caused by queuing, increases throughput, and improves average wait time.</li>
+<li><strong>Regarding dual-cabin elevators:</strong> Evaluate requests that can be served directly versus those requiring a transfer via dual-cabin elevators (taking into account the characteristics of cross-floor zones), and prioritize completing the trip via a coordinated A&#x2F;B relay whenever possible.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="III-Balancing-Functional-and-Performance-Design-and-Scalability"><a href="#III-Balancing-Functional-and-Performance-Design-and-Scalability" class="headerlink" title="III. Balancing Functional and Performance Design, and Scalability"></a>III. Balancing Functional and Performance Design, and Scalability</h2><p>Over the course of three consecutive iterations, the system’s functionality continued to expand. If all operations were combined into a single class, it would inevitably lead to difficulty in scaling and poor performance. To achieve high cohesion and low coupling, I performed a thorough decoupling of services.</p>
+<h3 id="1-Designing-Scalable-Architectures-and-the-Single-Responsibility-Principle-SRP"><a href="#1-Designing-Scalable-Architectures-and-the-Single-Responsibility-Principle-SRP" class="headerlink" title="1. Designing Scalable Architectures and the Single Responsibility Principle (SRP)"></a>1. Designing Scalable Architectures and the Single Responsibility Principle (SRP)</h3><p>Traditional approaches tend to cram hundreds of lines of code into a single <code>ElevatorThread.run()</code> block, but by breaking down the elevator’s internal logic to the utmost detail, I’ve implemented the Single Responsibility Principle (SRP), ensuring thread safety and providing tremendous scalability:</p>
+<ul>
+<li><strong>Low-level state machine container (ElevatorContext):</strong> Acts as a lightweight context and information aggregator, centrally storing the current floor, direction, load, passenger list, order queue, and system event queue, completely eliminating the need to pass parameters back and forth between methods.</li>
+<li><strong>Action Decision (Strategy):</strong> Focuses on implementing the classic LOOK algorithm. It does not concern itself with how the elevator moves; it simply reads the input read-only constraint interface <code>ElevatorInfo</code> and returns a specific action enumeration (<code>MOVE</code>, <code>OPEN</code>, <code>WAIT</code>, <code>REVERSE</code>).</li>
+<li><strong>Main Request Acquirer (TaskAcquirer):</strong> When the elevator is idle, it is specifically responsible for setting the queue to <code>wait()</code>; when awakened, it schedules the task to take the lead (in conjunction with order priority calculations that incorporate a distance penalty mechanism).</li>
+<li><strong>Mechanical Microservices Layer (Service):</strong><ul>
+<li><code>MovementService</code> Primarily responsible for high-precision elevator movement simulation, it provides an innovative “quantum wait” (<code>quantumWait</code>) mechanism that can block and intercept sudden interrupt commands (such as maintenance) or pickups along the route within an extremely short time slice.</li>
+<li><code>DoorTransferService</code> Specifically responsible for traffic redirection. Implemented strict validation logic for “capacity + same-direction” traffic routing and a flawless rollback distribution mechanism in the event of a forced interruption <code>kickAllPassengers()</code>.</li>
+<li><code>SystemActionHandler</code> (including maintenance and recycling scheduling) perfectly encapsulates the processes responsible for handling unexpected maintenance situations, including operational continuity and settlement, thereby achieving system-level isolation and handover.</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-UML-Class-Diagram-Architecture-Design"><a href="#2-UML-Class-Diagram-Architecture-Design" class="headerlink" title="2. UML Class Diagram Architecture Design"></a>2. UML Class Diagram Architecture Design</h3><p><img src="/Blog/images/oou2/1.png" alt="alt text"></p>
+<h3 id="3-UML-Sequence-Diagram"><a href="#3-UML-Sequence-Diagram" class="headerlink" title="3. UML Sequence Diagram"></a>3. UML Sequence Diagram</h3><p>After the main thread loads the various components, the flow of data from input to distribution to the elevator core loop is as follows:<br><img src="/Blog/images/oou2/2.png" alt="alt text"></p>
+<hr>
+<h2 id="IV-Bug-Analysis-in-Self-Testing-and-Peer-Testing-and-Multithreading-Debugging-Methods"><a href="#IV-Bug-Analysis-in-Self-Testing-and-Peer-Testing-and-Multithreading-Debugging-Methods" class="headerlink" title="IV. Bug Analysis in Self-Testing and Peer Testing, and Multithreading Debugging Methods"></a>IV. Bug Analysis in Self-Testing and Peer Testing, and Multithreading Debugging Methods</h2><h3 id="1-Analysis-of-Bugs-Encountered-During-Self-Testing-and-Peer-Testing"><a href="#1-Analysis-of-Bugs-Encountered-During-Self-Testing-and-Peer-Testing" class="headerlink" title="1. Analysis of Bugs Encountered During Self-Testing and Peer Testing"></a>1. Analysis of Bugs Encountered During Self-Testing and Peer Testing</h3><p>Here are some real bugs I’ve discovered during these recent iterations and hacks.</p>
+<ul>
+<li><p><strong>1: CPU timeout caused by interrupt polling and infinite loop verification</strong></p>
+<ul>
+<li><strong>Scenario:</strong> During a test involving maintenance requests, the program kept looping, resulting in excessive CPU time.</li>
+<li><strong>The class where the problem lies has</strong> <code>MovementService.tryMoveOneFloor()</code> <strong>methods</strong>.</li>
+<li><strong>Root cause:</strong> This was actually due to a minor oversight on my part at the time: the program was instantly interrupted at 0. I had originally set the interruption detection condition to <code>interruptedTime &gt; 0</code>. In this situation, if the value reached <code>interruptedTime = 0</code>, the system would not recognize that the elevator had encountered an interruption; instead, it would immediately return to the beginning of the polling cycle. It would then detect that it needed to MOVE and return 0 again, causing the CPU to enter a polling loop.</li>
+<li><strong>Solution:</strong> Simply change the condition to <code>interruptedTime != -1</code>. As long as the return value is not equal to -1, it means the move was interrupted and has successfully transitioned to the maintenance-interrupted state.</li>
+<li>This reminds me to thoroughly check the logic whenever I design even the smallest decision-making process.</li>
+</ul>
+</li>
+<li><p><strong>2: During maintenance, all arriving passengers were blindly ejected, causing them to be repeatedly accepted (sixth operation).</strong></p>
+<ul>
+<li><strong>Scenario:</strong> When maintenance triggers the forced ejection of passengers, the elevator repeatedly jumps up and down between floors without stopping.</li>
+<li><strong>Classes and methods involved:</strong><code>DoorTransferService.kickAllPassengers()</code>.</li>
+<li><strong>Root cause:</strong> Originally, to clear the cabin, all passengers were discarded, thrown back into <code>GlobalQueue</code>, and the current floor was appended as <code>fromFloor</code>. However, the code failed to verify whether the elevator actually stopped at the destination!For example, if a passenger originally headed to F5 is forcibly ejected during maintenance at F5, this generates a local passenger entry request with both the origin and destination as F5. When this request is picked up by another recipient, it causes the calculation of the product to remain at <code>REVERSE</code>, resulting in an infinite loop!</li>
+<li><strong>Solution:</strong> Added a final destination check! As long as the floor where the passenger was left behind during maintenance happens to be their destination, they are safely disembarked on the spot, and “<code>OUT</code>“ is printed.</li>
+</ul>
+</li>
+<li><p><strong>3: Joint Deadlock Caused by Two Elevator Cabins Yielding and Forced Movement at the Transfer Level (Seventh Assignment)</strong></p>
+<ul>
+<li><strong>Scenario:</strong> Handling complex command inputs involving a large number of random passengers, plus <code>UPDATE</code> (dual-cabin conversion) and <code>RECYCLE</code> (retrieval of a specific cabin)(For example, when one of the two cabins in a dual-cabin elevator is at transfer floor F2 and the other needs to travel to F2 for retrieval), the system freezes completely and does not output any results, resulting in a TLE during the final evaluation.</li>
+<li><strong>Root causes and issues:</strong><ol>
+<li><strong><code>Strategy.java</code> Logical deadlock:</strong> When Car A, at the transfer level, defaults to returning <code>WAIT</code>, and Car B receives a <code>RECYCLE</code> command requiring it to cross the transfer level, a permanent logical stalemate is formed (because the anti-collision logic prevents Car B from entering, and Car A is stuck and cannot exit).</li>
+<li><strong>Physical lock not properly released:</strong> Encountered a forced interruption of sleep at <code>interrupt()</code> and called <code>moveToTargetAndClearPassengers</code>; due to the lack of rigor in handling this thrown interruption, the system terminated the code block prematurely, causing the elevator not only to leave the transfer level with <code>ReentrantLock</code> still unreleased but also preventing <code>lock.unlock()</code> from being executed.Subsequently, all other operations related to the two cabins that attempted to acquire this lock were permanently blocked.</li>
+</ol>
+</li>
+<li><strong>Solution:</strong><ul>
+<li><code>Strategy</code> Added monitoring of attached car status; if it is detected to be in the retrieval state at a transfer station, an empty car holding the lock will proactively stop waiting and yield.</li>
+<li>During the handling of a forced state reset, the protection scope is strictly determined; as long as <code>lock != null &amp;&amp; lock.isHeldByCurrentThread()</code> is explicitly guaranteed, <code>lock.unlock()</code> is immediately and safely executed within a finally block or similar structure, ensuring that the mutual exclusion lock for the collision-free space is returned with absolute safety.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-Methods-for-Debugging-Multithreading"><a href="#2-Methods-for-Debugging-Multithreading" class="headerlink" title="2. Methods for Debugging Multithreading"></a>2. Methods for Debugging Multithreading</h3><p>To address concurrent errors arising from multidimensional uncertainty, I have summarized the following solutions:</p>
+<ul>
+<li>Using the data feeder provided by the discussion forum</li>
+<li>Debugging by printing</li>
+<li>AI-assisted debugging at the code or test case level</li>
+</ul>
+<hr>
+<h2 id="V-Understanding-and-Summary-of-Thread-Safety-and-Layered-Design"><a href="#V-Understanding-and-Summary-of-Thread-Safety-and-Layered-Design" class="headerlink" title="V. Understanding and Summary of Thread Safety and Layered Design"></a>V. Understanding and Summary of Thread Safety and Layered Design</h2><ol>
+<li><p><strong>A Profound Shift in Thread Safety</strong></p>
+<ul>
+<li>I now understand that while adding a <code>synchronized</code> to every place in this lock can prevent issues, it also leads to performance degradation.</li>
+<li><strong>State isolation and encapsulation</strong>: The scheduler cannot access the specific elevator object; it can only access read-only <code>AtomicInteger</code> load figures. Similarly, individual elevators have no access to the state of other elevators. This approach—which involves fully decentralized, isolated shared variables—is the key to ensuring high concurrency is both safe and highly performant.</li>
+</ul>
+</li>
+<li><p><strong>Understanding Hierarchical Design</strong></p>
+<ul>
+<li><strong>The shift from a procedural approach to a separation of “state machines, strategies, and services”:</strong> When faced with complex requirements such as maintenance, expansion, retrofitting, and even coordinated operations involving multiple vehicles, the division of responsibilities among objects is extremely helpful.</li>
+<li>I broke the system down into <strong>a low-level state machine (Context)</strong>, <strong>a behavior and decision-making layer (Strategy)</strong>, and <strong>a mechanical implementation layer (Service)</strong>.When the seventh assignment brought same-route passenger returns, or a new dual cabin had to be added, I didn’t have to change a single line of code in my main dispatch architecture or the elevator’s main thread—I simply incorporated a new <code>UpdateHandler</code> handling mechanism into the existing “microservices.” This is the best proof that well-designed layer boundaries pay off in terms of future maintenance.</li>
+</ul>
+</li>
+</ol>
+<h2 id="VI-Specific-Insights-on-Using-Large-Language-Models"><a href="#VI-Specific-Insights-on-Using-Large-Language-Models" class="headerlink" title="VI. Specific Insights on Using Large Language Models"></a>VI. Specific Insights on Using Large Language Models</h2><p>To be honest, communicating with large language models can be pretty exhausting.</p>
+<p>For the sixth assignment, since I had to design <strong>the elevator assignment and</strong> <strong>dispatch logic</strong> myself, I read through blogs from previous years to maximize performance as much as possible. Ultimately, I made a bold decision: I removed the intermediate <code>DispatchThread</code> entirely and let the elevators compete freely.<br>The reason I did this is that I saw comments from previous years saying, “Free Competition isn’t much worse in performance than Shadow Elevator, but it’s much easier to implement,” so I tweaked and refined the code to implement a model combining Free Competition and Shadow Elevator.</p>
+<p>Getting back to using large language models, I feel like the time I spent writing code for this assignment was almost equal to the time I spent conversing with the model. Through those conversations, my thoughts gradually became clearer.<br>And the result? I wrote from Sunday until the Tuesday deadline, and ended up in the “orz” room.</p>
+<p>Actually, when it came to fixing the bugs, I spent half the day trying to fix them myself without success; when I submitted the code, I just ended up turning some errors into different ones.In the end, I sent both the guide and my code to the AI. After thinking for a few hundred seconds, it pinpointed the issues and fixed the code. When I submitted that version, it showed that over a dozen bugs had been fixed at once.</p>
+<p>Unfortunately, because I got too few points right on the strong test, I still don’t know how the performance of my free-competition strategy compares to other methods.</p>
+<p>If my approach before the sixth assignment was still “old-school vibe coding”—chatting with the AI in a dialog box and doing a bit of copy-and-paste with code—then the seventh assignment—after I had stopped doubting the AI’s capabilities—marked the start of using AI-native IDE tools like Cursor, which really do boost efficiency.</p>
+<hr>
+<p>Here is a summary of the issues I encountered:</p>
+<ol>
+<li>AI is indeed very powerful; the best way to use it is &#96;<br>The Gemini Pro model, accessed directly within Google AI Studio, corrected my code for the O-room challenge in just one go.The same was true for the seventh assignment: when I sent it the guide and my existing code, along with a guiding prompt, after a few iterations—each lasting a few hundred seconds—it was able to complete the assignment almost perfectly.</li>
+<li>Model performance is, of course, tied to the subscription price, and quota limits also affect the time it takes me to complete my assignments.<br>Specifically, to complete the seventh iteration assignment,I needed about two and a half days’ worth of quota for the Gemini Pro model available to Pro members (that is, it took me two and a half days to complete the seventh assignment, because I found that the code generated by models other than Gemini Pro still didn’t meet my standards). So, after spending 2–3 hours each day on conversations and coding, the rest of the time was spent waiting for the quota to replenish.</li>
+<li>The effort I put in was vastly disproportionate to the results I got. As mentioned above, for the sixth assignment, I tried to design and write most of the code myself, and I decided on the design approach on my own after consulting with the AI. So I started on Saturday night and kept coding until the Tuesday deadline, using up all ten of my free submission attempts, and ultimately ended up in the “O” room.My time didn’t translate into a high score. Perhaps I learned a few things, but just like a paramecium choosing sugar water, I ultimately chose grades over knowledge. For the seventh assignment, I let the AI handle all decision-making and code writing, which earned me a decent performance score while requiring comparatively little effort.<br>Yes, no one would ever say this—something everyone obviously knows deep down: classes are meant for students to gain knowledge. But no one voices what they truly think: actually, more than knowledge, it’s this grade—a higher grade than others—that I really care about and have always been striving for. Maybe we aren’t even aware of this thought, but we’ve already been acting on it.</li>
+<li>The time allotted for completing assignments on my own is simply not enough. Assignments are assigned on Thursday evening, right after we’ve just finished—or are still in the middle of—the previous peer assessment, so I obviously can’t start working on them then. Friday is another day packed with classes, and in the evening there are seminars and lab sessions I have to attend—so it’s impossible to make any progress on the assignments that day either.There are two days on the weekend (after all, isn’t the whole point of having a two-day weekend to carve out a little extra time to rest amid a busy academic schedule?), but now that we have this OO assignment—due Tuesday night—if I do the math, Monday and Tuesday are theoretically class days. So, to ensure the assignment gets done, I’ll naturally have to use up the entire weekend to work on it.<br>Of course, I decided to take a day off and start writing on Sunday. The time I’d have available would be Sunday through Tuesday—at the cost of skipping classes, which I’d have to make up later.So, while it seems like I have three days, after subtracting the time required for other classes, the actual time available for coding is estimated to be less than two days. After trying it out, I found that this time was completely insufficient for me to write code that could pass the strong test. To finish before the deadline, I had no choice but to use AI to write the code.</li>
+</ol>
+<p>Summary: I believe it’s possible to write code that satisfies me entirely on my own, without relying on AI—but I need enough time to do so. The current course schedule is too tight for me, and the restrictions on assessments and grades are too strict, forcing me to frequently use AI to generate and modify code in order to meet the course requirements. That’s the reality of the situation.</p>
+<hr>
+<p>Come to think of it, I told a friend earlier, “We really have so many OO assignments right now; it’s going to take me more than two days to finish them.”<br>At the time, I didn’t realize what was causing me to take two days to finish this assignment. Was it a lack of time? No, that wasn’t it—it was because the daily AI quota is limited. If there were no limits on the AI Pro quota, it wouldn’t have been impossible to finish it in a single day.</p>
+<hr>
+
+  </div>
+</article>
+
+
+    <div class="blog-post-comments">
+        <div id="utterances_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/Blog/en/">Home</a></li>
+        
+          <li><a href="/Blog/en/about/">About</a></li>
+        
+          <li><a href="/Blog/en/archives/">Articles</a></li>
+        
+          <li><a href="/Blog/en/tags/">Tags</a></li>
+        
+          <li><a href="/Blog/en/changelog/">Logs</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#2026-Object-Oriented-Programming-Unit-2-Blog-Assignment-%E2%80%94-Summary-of-the-Multithreaded-Elevator-System"><span class="toc-number">1.</span> <span class="toc-text">2026 Object-Oriented Programming Unit 2 Blog Assignment — Summary of the Multithreaded Elevator System</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#I-Summary-and-Analysis-of-Synchronization-Block-Configuration-and-Lock-Selection-in-the-Three-Assignments"><span class="toc-number">1.1.</span> <span class="toc-text">I. Summary and Analysis of Synchronization Block Configuration and Lock Selection in the Three Assignments</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-The-Evolution-of-Lock-Mechanisms-Across-Three-Iterations"><span class="toc-number">1.1.1.</span> <span class="toc-text">1. The Evolution of Lock Mechanisms Across Three Iterations</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-The-Relationship-Between-Statements-and-Synchronization-Blocks-in-Locks"><span class="toc-number">1.1.2.</span> <span class="toc-text">2. The Relationship Between Statements and Synchronization Blocks in Locks</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#II-Evolution-of-Concurrency-Architectures-and-Scheduler-Design"><span class="toc-number">1.2.</span> <span class="toc-text">II. Evolution of Concurrency Architectures and Scheduler Design</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Overall-Concurrency-Architecture-Design-From-Free-Competition-to-Centralized-Scheduling"><span class="toc-number">1.2.1.</span> <span class="toc-text">1. Overall Concurrency Architecture Design: From Free Competition to Centralized Scheduling</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Implementation-and-Optimization-of-Scheduling-Strategies"><span class="toc-number">1.2.2.</span> <span class="toc-text">2. Implementation and Optimization of Scheduling Strategies</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#III-Balancing-Functional-and-Performance-Design-and-Scalability"><span class="toc-number">1.3.</span> <span class="toc-text">III. Balancing Functional and Performance Design, and Scalability</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Designing-Scalable-Architectures-and-the-Single-Responsibility-Principle-SRP"><span class="toc-number">1.3.1.</span> <span class="toc-text">1. Designing Scalable Architectures and the Single Responsibility Principle (SRP)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-UML-Class-Diagram-Architecture-Design"><span class="toc-number">1.3.2.</span> <span class="toc-text">2. UML Class Diagram Architecture Design</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-UML-Sequence-Diagram"><span class="toc-number">1.3.3.</span> <span class="toc-text">3. UML Sequence Diagram</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IV-Bug-Analysis-in-Self-Testing-and-Peer-Testing-and-Multithreading-Debugging-Methods"><span class="toc-number">1.4.</span> <span class="toc-text">IV. Bug Analysis in Self-Testing and Peer Testing, and Multithreading Debugging Methods</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Analysis-of-Bugs-Encountered-During-Self-Testing-and-Peer-Testing"><span class="toc-number">1.4.1.</span> <span class="toc-text">1. Analysis of Bugs Encountered During Self-Testing and Peer Testing</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Methods-for-Debugging-Multithreading"><span class="toc-number">1.4.2.</span> <span class="toc-text">2. Methods for Debugging Multithreading</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#V-Understanding-and-Summary-of-Thread-Safety-and-Layered-Design"><span class="toc-number">1.5.</span> <span class="toc-text">V. Understanding and Summary of Thread Safety and Layered Design</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#VI-Specific-Insights-on-Using-Large-Language-Models"><span class="toc-number">1.6.</span> <span class="toc-text">VI. Specific Insights on Using Large Language Models</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://begineri.github.io/Blog/en/2026/04/27/buaa-oo-u2-blog/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://begineri.github.io/Blog/en/2026/04/27/buaa-oo-u2-blog/&text=buaa26-OO-u2"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://begineri.github.io/Blog/en/2026/04/27/buaa-oo-u2-blog/&title=buaa26-OO-u2"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://begineri.github.io/Blog/en/2026/04/27/buaa-oo-u2-blog/&is_video=false&description=buaa26-OO-u2"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=buaa26-OO-u2&body=Check out this article: https://begineri.github.io/Blog/en/2026/04/27/buaa-oo-u2-blog/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://begineri.github.io/Blog/en/2026/04/27/buaa-oo-u2-blog/&title=buaa26-OO-u2"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://begineri.github.io/Blog/en/2026/04/27/buaa-oo-u2-blog/&title=buaa26-OO-u2"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://begineri.github.io/Blog/en/2026/04/27/buaa-oo-u2-blog/&title=buaa26-OO-u2"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://begineri.github.io/Blog/en/2026/04/27/buaa-oo-u2-blog/&title=buaa26-OO-u2"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://begineri.github.io/Blog/en/2026/04/27/buaa-oo-u2-blog/&name=buaa26-OO-u2&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://begineri.github.io/Blog/en/2026/04/27/buaa-oo-u2-blog/&t=buaa26-OO-u2"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025-2026
+    Wang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/Blog/en/">Home</a></li><!--
+     --><!--
+       --><li><a href="/Blog/en/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/Blog/en/archives/">Articles</a></li><!--
+     --><!--
+       --><li><a href="/Blog/en/tags/">Tags</a></li><!--
+     --><!--
+       --><li><a href="/Blog/en/changelog/">Logs</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/Blog/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "57783916a7b349829732031e51219ad6"}'></script>
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+    <script type="text/javascript">
+      var utterances_repo = 'begineri/Blog';
+      var utterances_issue_term = 'pathname';
+      var utterances_label = 'Comment';
+      var utterances_theme = 'github-dark';
+
+      (function(){
+          var script = document.createElement('script');
+
+          script.src = 'https://utteranc.es/client.js';
+          script.setAttribute('repo', utterances_repo);
+          script.setAttribute('issue-term', 'pathname');
+          script.setAttribute('label', utterances_label);
+          script.setAttribute('theme', utterances_theme);
+          script.setAttribute('crossorigin', 'anonymous');
+          script.async = true;
+          (document.getElementById('utterances_thread')).appendChild(script);
+      }());
+  </script>
+
+</body>
+</html>

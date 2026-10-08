@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+
+<html lang=&#34;en&#34;>
+<head>
+    
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="This post is a summary of the iterative assignments from Unit 1 of the 2026 Object-Oriented Programming course. Table of Contents: Program Structure Experiences in Architecture Design Design Patterns">
+<meta property="og:type" content="article">
+<meta property="og:title" content="buaa26-OO-u1">
+<meta property="og:url" content="https://begineri.github.io/Blog/en/2026/03/27/buaa-oo-u1-blog/index.html">
+<meta property="og:site_name" content="My Blog">
+<meta property="og:description" content="This post is a summary of the iterative assignments from Unit 1 of the 2026 Object-Oriented Programming course. Table of Contents: Program Structure Experiences in Architecture Design Design Patterns">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/oou1/com.drawio.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/oou1/image-2.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/oou1/image-1.png">
+<meta property="og:image" content="https://begineri.github.io/Blog/images/oou1/image-3.png">
+<meta property="article:published_time" content="2026-03-27T18:01:31.000Z">
+<meta property="article:modified_time" content="2026-10-08T23:10:32.867Z">
+<meta property="article:author" content="Wang">
+<meta property="article:tag" content="OOP">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://begineri.github.io/Blog/images/oou1/com.drawio.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/Blog/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/Blog/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/Blog/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>buaa26-OO-u1</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/Blog/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 8.1.1"><link rel="alternate" href="/Blog/en/atom.xml" title="My Blog" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr is-post">
+    
+<nav class="lang-switch" aria-label="Language">
+  <a href="/Blog/zh-CN/2026/03/27/buaa-oo-u1-blog/" class="">中</a>
+  <span class="lang-switch__sep" aria-hidden="true">|</span>
+  <a href="/Blog/en/2026/03/27/buaa-oo-u1-blog/" class="is-active">EN</a>
+</nav>
+
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top"
+    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i
+      class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       -->
+          <li><a href="/Blog/en/">
+              Home
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/en/about/">
+              About
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/en/archives/">
+              Articles
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/en/tags/">
+              Tags
+            </a></li><!--
+     -->
+          <!--
+       -->
+          <li><a href="/Blog/en/changelog/">
+              Logs
+            </a></li><!--
+     -->
+          
+      </ul>
+      
+<nav class="lang-switch lang-switch--inline" aria-label="Language">
+  <a href="/Blog/zh-CN/2026/03/27/buaa-oo-u1-blog/" class="">中</a>
+  <span class="lang-switch__sep" aria-hidden="true">|</span>
+  <a href="/Blog/en/2026/03/27/buaa-oo-u1-blog/" class="is-active">EN</a>
+</nav>
+
+    </span>
+    <br />
+    <span id="actions">
+      <ul>
+        
+        
+          <li><a class="icon" aria-label="Previous post" href="/Blog/en/2026/04/10/wakapi-wakatime-setup/"><i
+                class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();"
+                onmouseout="$('#i-prev').toggle();"></i></a></li>
+          
+            
+              <li><a class="icon" aria-label="Next post" href="/Blog/en/2026/02/16/phone-flashing-notes/"><i
+                    class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();"
+                    onmouseout="$('#i-next').toggle();"></i></a></li>
+              
+                <li><a class="icon" aria-label="Back to top" href="#"
+                    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up"
+                      aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a>
+                </li>
+                <li><a class="icon" aria-label="Share post" href="#"><i
+                      class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();"
+                      onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">
+        Previous post
+      </span>
+      <span id="i-next" class="info" style="display:none;">
+        Next post
+      </span>
+      <span id="i-top" class="info" style="display:none;">
+        Back to top
+      </span>
+      <span id="i-share" class="info" style="display:none;">
+        Share post
+      </span>
+    </span>
+    <br />
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://begineri.github.io/Blog/en/2026/03/27/buaa-oo-u1-blog/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://begineri.github.io/Blog/en/2026/03/27/buaa-oo-u1-blog/&text=buaa26-OO-u1"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://begineri.github.io/Blog/en/2026/03/27/buaa-oo-u1-blog/&title=buaa26-OO-u1"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://begineri.github.io/Blog/en/2026/03/27/buaa-oo-u1-blog/&is_video=false&description=buaa26-OO-u1"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=buaa26-OO-u1&body=Check out this article: https://begineri.github.io/Blog/en/2026/03/27/buaa-oo-u1-blog/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://begineri.github.io/Blog/en/2026/03/27/buaa-oo-u1-blog/&title=buaa26-OO-u1"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://begineri.github.io/Blog/en/2026/03/27/buaa-oo-u1-blog/&title=buaa26-OO-u1"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://begineri.github.io/Blog/en/2026/03/27/buaa-oo-u1-blog/&title=buaa26-OO-u1"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://begineri.github.io/Blog/en/2026/03/27/buaa-oo-u1-blog/&title=buaa26-OO-u1"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://begineri.github.io/Blog/en/2026/03/27/buaa-oo-u1-blog/&name=buaa26-OO-u1&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://begineri.github.io/Blog/en/2026/03/27/buaa-oo-u1-blog/&t=buaa26-OO-u1"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <!-- 
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Table-of-Contents"><span class="toc-number">1.</span> <span class="toc-text">Table of Contents:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Program-Structure"><span class="toc-number">2.</span> <span class="toc-text">Program Structure</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Analysis-of-Basic-Program-Structure-Metrics"><span class="toc-number">2.1.</span> <span class="toc-text">Analysis of Basic Program Structure Metrics</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Classic-OO-Metrics-Cohesion-and-Coupling-Analysis"><span class="toc-number">2.2.</span> <span class="toc-text">Classic OO Metrics (Cohesion and Coupling Analysis)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Analysis-Based-on-Class-Diagrams"><span class="toc-number">2.3.</span> <span class="toc-text">Analysis Based on Class Diagrams</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Experiences-in-Architecture-Design"><span class="toc-number">3.</span> <span class="toc-text">Experiences in Architecture Design</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#The-Iteration-Process"><span class="toc-number">3.1.</span> <span class="toc-text">The Iteration Process</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Analysis-of-Custom-Iteration-Scenarios-and-Scalability"><span class="toc-number">3.1.1.</span> <span class="toc-text">Analysis of Custom Iteration Scenarios and Scalability</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Design-Patterns-Used"><span class="toc-number">3.2.</span> <span class="toc-text">Design Patterns Used</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Suggestions-for-improvement-and-additions-provided-by-AI"><span class="toc-number">3.2.1.</span> <span class="toc-text">Suggestions for improvement and additions (provided by AI):</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Analyzing-Bugs-in-My-Own-Programs"><span class="toc-number">4.</span> <span class="toc-text">Analyzing Bugs in My Own Programs</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#An-analysis-of-the-strategies-I-use-when-finding-bugs-in-other-people%E2%80%99s-code"><span class="toc-number">4.1.</span> <span class="toc-text">An analysis of the strategies I use when finding bugs in other people’s code</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Analysis-of-the-optimizations-I%E2%80%99ve-made"><span class="toc-number">4.2.</span> <span class="toc-text">Analysis of the optimizations I’ve made</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Using-Large-Language-Models"><span class="toc-number">5.</span> <span class="toc-text">Using Large Language Models</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Code-Generation-Usage"><span class="toc-number">5.1.</span> <span class="toc-text">Code Generation Usage</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Practical-Applications-and-Insights-on-Large-Language-Models"><span class="toc-number">5.2.</span> <span class="toc-text">Practical Applications and Insights on Large Language Models</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Evaluation-of-Large-Language-Models"><span class="toc-number">5.3.</span> <span class="toc-text">Evaluation of Large Language Models</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Future-Directions"><span class="toc-number">6.</span> <span class="toc-text">Future Directions</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-Questions"><span class="toc-number">7.</span> <span class="toc-text">Thinking Questions</span></a></li></ol>
+      </div>
+     -->
+    
+        <div id="toc">
+          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Table-of-Contents"><span class="toc-number">1.</span> <span class="toc-text">Table of Contents:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Program-Structure"><span class="toc-number">2.</span> <span class="toc-text">Program Structure</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Analysis-of-Basic-Program-Structure-Metrics"><span class="toc-number">2.1.</span> <span class="toc-text">Analysis of Basic Program Structure Metrics</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Classic-OO-Metrics-Cohesion-and-Coupling-Analysis"><span class="toc-number">2.2.</span> <span class="toc-text">Classic OO Metrics (Cohesion and Coupling Analysis)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Analysis-Based-on-Class-Diagrams"><span class="toc-number">2.3.</span> <span class="toc-text">Analysis Based on Class Diagrams</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Experiences-in-Architecture-Design"><span class="toc-number">3.</span> <span class="toc-text">Experiences in Architecture Design</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#The-Iteration-Process"><span class="toc-number">3.1.</span> <span class="toc-text">The Iteration Process</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Analysis-of-Custom-Iteration-Scenarios-and-Scalability"><span class="toc-number">3.1.1.</span> <span class="toc-text">Analysis of Custom Iteration Scenarios and Scalability</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Design-Patterns-Used"><span class="toc-number">3.2.</span> <span class="toc-text">Design Patterns Used</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Suggestions-for-improvement-and-additions-provided-by-AI"><span class="toc-number">3.2.1.</span> <span class="toc-text">Suggestions for improvement and additions (provided by AI):</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Analyzing-Bugs-in-My-Own-Programs"><span class="toc-number">4.</span> <span class="toc-text">Analyzing Bugs in My Own Programs</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#An-analysis-of-the-strategies-I-use-when-finding-bugs-in-other-people%E2%80%99s-code"><span class="toc-number">4.1.</span> <span class="toc-text">An analysis of the strategies I use when finding bugs in other people’s code</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Analysis-of-the-optimizations-I%E2%80%99ve-made"><span class="toc-number">4.2.</span> <span class="toc-text">Analysis of the optimizations I’ve made</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Using-Large-Language-Models"><span class="toc-number">5.</span> <span class="toc-text">Using Large Language Models</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Code-Generation-Usage"><span class="toc-number">5.1.</span> <span class="toc-text">Code Generation Usage</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Practical-Applications-and-Insights-on-Large-Language-Models"><span class="toc-number">5.2.</span> <span class="toc-text">Practical Applications and Insights on Large Language Models</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Evaluation-of-Large-Language-Models"><span class="toc-number">5.3.</span> <span class="toc-text">Evaluation of Large Language Models</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Future-Directions"><span class="toc-number">6.</span> <span class="toc-text">Future Directions</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-Questions"><span class="toc-number">7.</span> <span class="toc-text">Thinking Questions</span></a></li></ol>
+        </div>
+        
+  </span>
+</div>
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        buaa26-OO-u1
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Wang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2026-03-27T18:01:31.000Z" class="dt-published" itemprop="datePublished">2026-03-27</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        
+          <a class="p-category" href="/Blog/en/tags/OOP/">OOP</a>
+        
+          <a class="p-category" href="/Blog/en/tags/java/">java</a>
+        
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p>This post is a summary of the iterative assignments from Unit 1 of the 2026 Object-Oriented Programming course.</p>
+<h2 id="Table-of-Contents"><a href="#Table-of-Contents" class="headerlink" title="Table of Contents:"></a>Table of Contents:</h2><ul>
+<li><a href="#program-structure">Program Structure</a></li>
+<li><a href="#experiences-in-architecture-design">Experiences in Architecture Design</a></li>
+<li><a href="#design-patterns">Design Patterns Used</a></li>
+<li><a href="#analyzing-bugs-in-my-own-programs">Analyzing Bugs in My Own Programs</a></li>
+<li><a href="#using-large-language-models">Using Large Language Models</a></li>
+<li><a href="#future-directions">Future Directions</a></li>
+<li><a href="#thinking-questions">Thinking Questions</a></li>
+</ul>
+<hr>
+<p><span id="program-structure"></span></p>
+<h2 id="Program-Structure"><a href="#Program-Structure" class="headerlink" title="Program Structure"></a>Program Structure</h2><p>The following data is analyzed from the code in the final iteration. The entire project consists of 20 core business classes, with a total of approximately 1,080 lines of business code, including 126 methods.</p>
+<p>Complete class diagram for hw3:<br><img src="/Blog/images/oou1/com.drawio.png" alt="alt text"></p>
+<h3 id="Analysis-of-Basic-Program-Structure-Metrics"><a href="#Analysis-of-Basic-Program-Structure-Metrics" class="headerlink" title="Analysis of Basic Program Structure Metrics"></a>Analysis of Basic Program Structure Metrics</h3><p><img src="/Blog/images/oou1/image-2.png" alt="alt text"></p>
+<ol>
+<li><p>Total Lines of Code per Class (Class LOC)</p>
+<ul>
+<li>The two largest classes in terms of code size are the global syntax tree construction factory <code>Parser</code> (184 lines) and the low-level algebraic operations <code>Poly</code> (180 lines); naturally, these two handle the most intensive logic scheduling and computational tasks in the system.</li>
+<li>The code size of the vast majority of AST node classes (such as <code>ConFactor</code> and <code>FunctionFactor</code>) is strictly limited to between 20 and 40 lines. They sit between parsing and evaluation, existing solely as pure data structures, and are lightweight.</li>
+</ul>
+</li>
+<li><p>Number of Methods (NOM) and Number of Fields (NOF)</p>
+<ul>
+<li>The class with the most methods has <code>Poly</code> (17), followed by the class with <code>Parser</code> (12).</li>
+<li>AST nodes typically have only 1 or 2 basic properties</li>
+</ul>
+</li>
+<li><p>Method Lines of Code (Method LOC)</p>
+<ul>
+<li>In the whole project, there are 126 methods, with an average of just 8.16 lines of code per method.</li>
+<li>The longest method, <code>Mono.toString()</code>, is 47 lines long, while the core logic for differentiation (the <code>derive</code> method for various node types) typically ranges from 2 to 5 lines.</li>
+</ul>
+</li>
+<li><p>Controlling the Number of Branches (cyclomatic complexity v(G))</p>
+<ul>
+<li>The average cyclomatic complexity (v(G)) for the entire project is only 1.93.</li>
+<li>Extremely low cyclomatic complexity is a direct benefit of the polymorphism (dynamic dispatch) mechanism. This architecture completely eliminates the verbose <code>if-else / switch</code>-type checks found in traditional procedural programming, delegating common operations to their respective subclasses and achieving true O(1) logical addressing.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="Classic-OO-Metrics-Cohesion-and-Coupling-Analysis"><a href="#Classic-OO-Metrics-Cohesion-and-Coupling-Analysis" class="headerlink" title="Classic OO Metrics (Cohesion and Coupling Analysis)"></a>Classic OO Metrics (Cohesion and Coupling Analysis)</h3><p><img src="/Blog/images/oou1/image-1.png" alt="alt text"></p>
+<ol>
+<li><p>Coupling Between Object Classes (CBO)</p>
+<ul>
+<li>The top three classes with the highest system coupling are, in order, <code>Expr</code> (CBO&#x3D;18), <code>Parser</code> (CBO&#x3D;15), and <code>Poly</code> (CBO&#x3D;14).</li>
+<li>Meanwhile, the CBO for the underlying atomic nodes (such as <code>PowerFactor</code> and <code>ConFactor</code>) is extremely low (typically between 2 and 4).</li>
+</ul>
+</li>
+<li><p>Class Cohesion (LCOM - Lack of Cohesion of Methods)</p>
+<ul>
+<li>Across the entire project, the highest LCOM value is only 4, and the vast majority of classes remain between 0 and 3.</li>
+<li><code>Poly</code>-class LCOM is as low as 1.0; it is a highly cohesive module with internal methods that share core state extensively and have extremely focused responsibilities.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="Analysis-Based-on-Class-Diagrams"><a href="#Analysis-Based-on-Class-Diagrams" class="headerlink" title="Analysis Based on Class Diagrams"></a>Analysis Based on Class Diagrams</h3><p>Overall Approach: <strong><code>Input</code></strong> <strong>→ <code>Parser</code> → <code>toPoly</code> → <code>toString</code></strong></p>
+<p><code>Input</code>: Input Handling and Preprocessing<br><code>Parser</code>: Parsing a String into Instances of Different Classes<br><code>toPoly</code>: Convert all nodes on the AST to <code>Poly</code> to facilitate merging, simplification, and output.<br><code>toString</code>: Unified recursive output for mono and poly classes.</p>
+<ul>
+<li><p>Pros:</p>
+<ol>
+<li>The “Dumb AST, Smart Engine” Layered Architecture**:<br>The AST remains completely pure during the parsing and differentiation phases; all computations are deferred and concentrated in the underlying <code>Poly</code>. This unidirectional dependency ensures extremely low coupling between classes.</li>
+<li>Implementation of Polymorphism:<br>Through a dynamic dispatch mechanism, the verbose <code>switch/if-else</code>-type checks commonly found in procedural programming have been completely eliminated. The differentiation logic has been seamlessly delegated to the respective Factor subclasses, resulting in excellent code extensibility and readability.</li>
+<li>Immutability and Avoiding Thread Safety Issues:<br>For low-level polynomial operations (such as <code>mulP</code>) and substitution operations (<code>substitute</code>), the system extensively uses deep copies and the creation of new objects to return results. This eliminates the risk of data corruption caused by reference passing and ensures absolute robustness during higher-order differentiation and complex nested substitutions.</li>
+</ol>
+</li>
+<li><p>Cons:</p>
+<ol>
+<li>Memory Overhead Caused by HashMap:<br>To achieve $O(1)$ performance for merging like terms, the underlying code instantiates a large number of <code>MonoKey</code> and <code>Mono</code> objects. When handling extremely nested power-of-n test cases (such as the expansion of <code>expP(8)</code> to very high powers), this generates a large number of short-lived objects, placing significant memory pressure on the JVM’s garbage collection (GC).In the future, I may consider introducing <strong>the Flyweight Pattern</strong> to cache certain monomial characteristics.</li>
+<li>Extensibility Limitations of the Interpreter Pattern:<br>The current architecture hard-codes the <code>derive</code> and <code>toPoly</code> methods directly into each AST node class. If future requirements increase (for example, if support for integration operations is needed), it will be necessary to open the source code of each class to make modifications, which to some extent violates the “Open-Closed Principle (OCP).”<br>In subsequent refactoring, <strong>the Visitor Pattern</strong> can be introduced. The AST can be completely reduced to a pure data structure, and operations such as “derivative calculation” and “simplification” can be abstracted into independent Visitor classes, thereby achieving complete decoupling of data and algorithms.</li>
+</ol>
+</li>
+</ul>
+<hr>
+<p><span id="experiences-in-architecture-design"></span></p>
+<h2 id="Experiences-in-Architecture-Design"><a href="#Experiences-in-Architecture-Design" class="headerlink" title="Experiences in Architecture Design"></a>Experiences in Architecture Design</h2><p>This assignment went through three iterations, and during that process, the architecture</p>
+<h3 id="The-Iteration-Process"><a href="#The-Iteration-Process" class="headerlink" title="The Iteration Process"></a>The Iteration Process</h3><ul>
+<li>hw1<br>The program entry point is as follows:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Scanner</span> <span class="variable">scanner</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">        <span class="type">String</span> <span class="variable">input</span> <span class="operator">=</span> scanner.nextLine();</span><br><span class="line"></span><br><span class="line">        <span class="type">Lexer</span> <span class="variable">lexer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Lexer</span>(input);</span><br><span class="line">        <span class="type">Parser</span> <span class="variable">parser</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Parser</span>(lexer);</span><br><span class="line"></span><br><span class="line">        <span class="type">Expr</span> <span class="variable">expr</span> <span class="operator">=</span> parser.parseExpr();</span><br><span class="line">        System.out.println(expr.toPoly().toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>As can be seen, the overall approach based on <strong>the Recursive Descent algorithm</strong> was established from the very beginning, and the basic abstract syntax tree (AST) for <code>Expr -&gt; Term -&gt; Factor</code> was constructed.<code>Lexer-Parser</code><br>At this point, I only need to handle simple polynomial merging and simplification.</p>
+<ul>
+<li><p>hw2<br>With the introduction of nested parentheses (expression factors) and exponential functions (<code>exp</code>), simple AST traversal is insufficient to handle extremely complex algebraic expansions.<br>To handle the merging and output of the final expressions, I ultimately separated the computation responsibilities from the AST and abstracted out the underlying algebraic engine—<code>Poly</code> (polynomials) and <code>Mono</code> (monomials). By implementing <code>HashMap&lt;MonoKey, BigInteger&gt;</code>, I transformed complex algebraic merging into $O(1)$ hash table aggregation.<br>At the same time, architectural decoupling was achieved: the parsing, expansion (function substitution, selective evaluation), merging, and output (simplification, formatting) of expressions were designed as relatively independent modules, which helps reduce the system’s complexity and makes the code easier to maintain and debug.</p>
+</li>
+<li><p>hw3<br>This assignment incorporates custom recursive function calls and nested differentiation operators (<code>dx</code>). During the input processing phase, the string representing the function definition is parsed into an AST, allowing for direct substitution of tree nodes when calling the function, which improves efficiency.<br>To expand recursive functions, I use the concept of memoization. By caching the results of previously computed <code>f{i}</code> (for real arguments), I can effectively avoid redundant calculations and improve program performance.</p>
+</li>
+</ul>
+<hr>
+<h4 id="Analysis-of-Custom-Iteration-Scenarios-and-Scalability"><a href="#Analysis-of-Custom-Iteration-Scenarios-and-Scalability" class="headerlink" title="Analysis of Custom Iteration Scenarios and Scalability"></a>Analysis of Custom Iteration Scenarios and Scalability</h4><p>Suppose the next time I need to introduce trigonometric functions (sin, cos) and support nested complex expressions and chain rule differentiation within them.</p>
+<p>Here are the scalability solutions for the current design:</p>
+<ol>
+<li>AST-level extensions:<ul>
+<li>Added the <code>SinFactor</code> and <code>CosFactor</code> classes and implemented <code>Factor</code> interfaces.</li>
+<li>Contains an internal <code>Factor inner</code> property (used to store nested expressions).</li>
+</ul>
+</li>
+<li>Logic of Differentiation by Polymorphism:<br>Implementing Method <code>derive()</code> within <code>SinFactor</code>: Go directly to <code>return new Term(CosFactor(inner), inner.derive())</code>—this fits perfectly with the existing chain rule for differentiation. The existing iteration-based differentiation logic in <code>Expr</code> and <code>Term</code> does not need to be modified.</li>
+<li>Parsing-layer handling:<br>In the<code>Parser.parseFactor()</code>-branch, simply add support for recognizing the strings “sin” and “cos” and instantiate the corresponding Factors.</li>
+<li>Underlying Engine (No Refactoring Required):<ul>
+<li>If trigonometric functions do not need to be expanded or simplified, they can simply be wrapped in <code>Poly</code> and <code>MonoKey</code> and treated as immutable features. The same applies to existing addition and multiplication merging engines.</li>
+</ul>
+</li>
+</ol>
+<p>Thanks to the high autonomy of AST nodes and the polymorphic dispatch mechanism, this architecture demonstrates exceptional horizontal scalability when iterating to accommodate “new mathematical rules.”</p>
+<hr>
+<p><span id="design-patterns"></span></p>
+<h3 id="Design-Patterns-Used"><a href="#Design-Patterns-Used" class="headerlink" title="Design Patterns Used"></a>Design Patterns Used</h3><ol>
+<li><p><strong>Composite Pattern</strong><br>Throughout the entire AST structure, whether dealing with standalone objects (such as the variable $x$ or the constant $5$) or containers containing complex sub-objects (such as the expression $x + 5$), they must all be handled in a completely consistent manner.<br>By using Interface <code>Factor</code>, when Object <code>Term</code> calls Method <code>derive()</code> on the List <code>Factor</code> it holds, it does not need to concern itself with whether <code>Factor</code> is a simple variable or a complex, deeply nested function. It simply trusts and relies on the interface.</p>
+</li>
+<li><p><strong>Static Factory Method</strong><br>Methods <code>public static Expr zero()</code> and <code>public static Expr of(Factor... factors)</code>, written in the <code>Expr</code> class, provide clear and semantically meaningful names for the object creation process.In future development, if you decide that method <code>Expr.zero()</code> should no longer create a new object via <code>new Expr()</code> every time, but instead return a cached, immutable singleton object, you can easily implement this change without modifying any existing code that calls this method.</p>
+</li>
+<li><p><strong>Singleton Pattern</strong><br>Since there is only one function template in the entire program, I implement the singleton pattern for it:</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">FuncDefinition</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">FuncDefinition</span> <span class="variable">INSTANCE</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FuncDefinition</span>();</span><br><span class="line">    <span class="keyword">private</span> String definition;</span><br><span class="line">    <span class="keyword">private</span> Expr exprDefinition;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="title function_">FuncDefinition</span><span class="params">()</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> FuncDefinition <span class="title function_">getInstance</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> INSTANCE;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Expr <span class="title function_">getExprDefinition</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> exprDefinition;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setDefinition</span><span class="params">(String definition)</span> &#123;</span><br><span class="line">        <span class="comment">// Turn the incoming string into an expression tree</span></span><br><span class="line">        <span class="built_in">this</span>.definition = definition;</span><br><span class="line">        <span class="built_in">this</span>.exprDefinition = parseExpr();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="Suggestions-for-improvement-and-additions-provided-by-AI"><a href="#Suggestions-for-improvement-and-additions-provided-by-AI" class="headerlink" title="Suggestions for improvement and additions (provided by AI):"></a>Suggestions for improvement and additions (provided by AI):</h4><p><strong>Visitor Pattern</strong><br>The current architecture uses <strong>the Interpreter pattern</strong>. Each node knows how to evaluate or differentiate itself (for example, the <code>PowerFactor</code> class has its own <code>derive()</code> and <code>toPoly()</code> methods).<br>This design has a fatal flaw: <em>what if you want to add a new operation?</em> Suppose you want to add a <code>printToXML()</code> method, a <code>calculateIntegral()</code> method, or a <code>formatToLaTeX()</code> method. You would have to open the <code>Expr</code>, <code>Term</code>, <code>ConstantFactor</code>, and <code>VarFactor</code> class files one by one and add the method to <em>each</em> class. Under this model, the mathematical operation logic is no longer embedded within each node; instead, the nodes are only responsible for “accepting” a “visitor”:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// The Node just says &quot;Welcome, Visitor! Here I am.&quot;</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PowerFactor</span> <span class="keyword">implements</span> <span class="title class_">Factor</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">accept</span><span class="params">(ASTVisitor visitor)</span> &#123;</span><br><span class="line">        visitor.visitPowerFactor(<span class="built_in">this</span>); <span class="comment">// Passes itself to the visitor</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// The Visitor contains ALL the logic for a specific action</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DerivativeVisitor</span> <span class="keyword">implements</span> <span class="title class_">ASTVisitor</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">visitPowerFactor</span><span class="params">(PowerFactor p)</span> &#123;</span><br><span class="line">        <span class="comment">// The logic for n * x^(n-1) lives here now!</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">visitConstantFactor</span><span class="params">(ConstantFactor c)</span> &#123;</span><br><span class="line">        <span class="comment">// Return 0</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><span id="analyzing-bugs-in-my-own-programs"></span></p>
+<h2 id="Analyzing-Bugs-in-My-Own-Programs"><a href="#Analyzing-Bugs-in-My-Own-Programs" class="headerlink" title="Analyzing Bugs in My Own Programs"></a>Analyzing Bugs in My Own Programs</h2><p><img src="/Blog/images/oou1/image-3.png" alt="alt text"></p>
+<p>There’s not much to write about this section, since I achieved <strong>zero bugs</strong> in all three rounds of mandatory and peer testing—thanks in part to the principle emphasized by Professor RWG:</p>
+<blockquote>
+<p><strong>Don’t sacrifice correctness for performance</strong></p>
+</blockquote>
+<p>In the second and third iterations, I first ensured the correctness of polynomial merging without focusing on extracting and simplifying coefficients inside <code>exp</code> expressions. As a result, my optimization score may not be very high, but this was indeed the method I used to ensure the program was bug-free.</p>
+<p>At the same time, to avoid bugs, I assign the value <code>final</code> to properties in the program that I do not want to change, perform deep copying when assigning values to elements, and pay special attention to potential issues that may arise when removing elements from containers, in order to prevent unexpected problems.</p>
+<p>Long lines of code and high cyclomatic complexity are also contributing factors to bugs; by reducing the complexity of these methods, you can significantly lower the likelihood of bugs occurring.</p>
+<p>Actually, there’s one more thing I want to vent about HW3: I didn’t do much final length optimization for this assignment, which caused me to end up in Room B during the peer review (full marks for correctness but low performance scores). Everyone in Room B was in the same situation, so hacking didn’t really get us anywhere. In contrast, in Room A, people were able to hack out a lot of points because of their optimization efforts.This resulted in Room A having both high strong-test scores and high hack scores—doesn’t this encourage everyone to sacrifice correctness for performance?</p>
+<h3 id="An-analysis-of-the-strategies-I-use-when-finding-bugs-in-other-people’s-code"><a href="#An-analysis-of-the-strategies-I-use-when-finding-bugs-in-other-people’s-code" class="headerlink" title="An analysis of the strategies I use when finding bugs in other people’s code"></a>An analysis of the strategies I use when finding bugs in other people’s code</h3><ul>
+<li>Main focus: Building a test machine that is efficient and capable of detecting a small number of bugs; effectiveness depends on the quality of the test machine.</li>
+<li>Constructing extreme test cases: effective, but difficult to create.</li>
+<li>Review the other party’s code (white-box testing) and construct test cases targeting design flaws.</li>
+</ul>
+<h3 id="Analysis-of-the-optimizations-I’ve-made"><a href="#Analysis-of-the-optimizations-I’ve-made" class="headerlink" title="Analysis of the optimizations I’ve made"></a>Analysis of the optimizations I’ve made</h3><ol>
+<li><p>$O(1)$ Merging of Like Terms Based on Hashing and Canonicalization<br>In polynomial multiplication and higher-order expansions (such as <code>(x+1)^8</code>), if I use the traditional two-layer, <code>List</code>-pass method to compare like terms, the time complexity will reach a catastrophic $O(N^2)$.<br>By extracting the immutable mathematical characteristics of monomials (the exponent of x, the exponent of y, and the contents of nested expressions), encapsulate them into Class <code>MonoKey</code>, and override methods <code>equals</code> and <code>hashCode</code>.<br>Implemented fast coefficient merging using <code>HashMap&lt;MonoKey, BigInteger&gt;</code>.</p>
+</li>
+<li><p>Fast Differentiation and Polynomial Transformation Based on Polymorphism<br>All classes inherit from <code>interface AstNode&lt;T&gt;</code> to ensure consistency in logic.</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">AstNode</span>&lt;T&gt; <span class="keyword">extends</span></span><br><span class="line">   <span class="title class_">PolyConvertible</span>,</span><br><span class="line">   Substitutable&lt;T&gt;,</span><br><span class="line">   Instantiatable&lt;T&gt;,</span><br><span class="line">   Derivable &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>The correctness of this architecture is guaranteed by <strong>absolute immutability</strong> and <strong>deep copying</strong>.When performing operations such as <code>Poly.mulP</code> (polynomial multiplication) or <code>expP</code> (exponentiation), each calculation returns <code>new</code> brand-new <code>Poly</code> and <code>Mono</code> objects. Although this comes at the cost of some memory, it completely eliminates the various risks associated with pass-by-reference.</li>
+</ol>
+<hr>
+<p><span id="using-large-language-models"></span></p>
+<h2 id="Using-Large-Language-Models"><a href="#Using-Large-Language-Models" class="headerlink" title="Using Large Language Models"></a>Using Large Language Models</h2><h3 id="Code-Generation-Usage"><a href="#Code-Generation-Usage" class="headerlink" title="Code Generation Usage"></a>Code Generation Usage</h3><ul>
+<li>Percentage of AI-generated code: 0%</li>
+<li>——All the code in my assignments was written by me. Although AI is very powerful, it’s only by writing every line of code myself that I can truly master the skill of coding.</li>
+</ul>
+<h3 id="Practical-Applications-and-Insights-on-Large-Language-Models"><a href="#Practical-Applications-and-Insights-on-Large-Language-Models" class="headerlink" title="Practical Applications and Insights on Large Language Models"></a>Practical Applications and Insights on Large Language Models</h3><p>Although I don’t have large language models generate code directly, they actually play a significant role in my coding process:</p>
+<p>Unlike when I was learning C, where I started with every single syntax rule and every detail, in the OO course I were immediately faced with problem statements of over a thousand characters and hundreds of lines of code to write. This meant that I had to teach myself all the Java syntax and the details of implementing these tasks.</p>
+<p>There are many ways to teach yourself: reading JDK documentation, checking out online resources like Runoob (菜鸟教程), taking online courses, or simply asking an AI.It’s easy to imagine that in the past, when people were learning Java, they would scour various documentation and tutorials (I did the same when I was learning C last year), but such searches were often time-consuming and lacked depth. Today, AI can essentially replace that entire process.<br>For example, if I want to learn about <em>the singleton pattern</em>, I can simply ask the AI, and it will provide different ways to implement it. Furthermore, you can ask it which one is best suited for my specific task, or what the underlying principles of the singleton pattern are.<br>Compared to copying and pasting a chunk of code from some webpage—code you don’t even fully understand—and then tinkering with it, the advantages of this approach are obvious: <strong>it’s specific, targeted, and in-depth</strong>.</p>
+<p>Aside from theoretical guidance—which you can probably find online—the most valuable thing AI offers is engineering insights and code optimization strategies that go beyond my own understanding.Now, instead of having to read through an entire copy of <em>The Art of Computer Programming</em> myself, I can simply send my ideas to the AI and ask, “Assuming you’re a senior Java engineer, what suggestions do you have for this code?” I can then receive effective feedback that helps me improve my skills and expand my understanding.</p>
+<h3 id="Evaluation-of-Large-Language-Models"><a href="#Evaluation-of-Large-Language-Models" class="headerlink" title="Evaluation of Large Language Models"></a>Evaluation of Large Language Models</h3><p>The quality of a large language model’s responses depends on the prompt provided by the user. To use AI as a learning aid, it’s clearly not advisable to have it generate code directly (especially since the code it generates often contains many issues); instead, it should either guide you or offer suggestions.<br>So I started the conversation with this prompt:</p>
+<blockquote>
+<p>You are now a senior Java engineer here to guide me through writing the code. Always remember: you must not provide the code solution unless I ask for it. Your role is simply to help me complete the task, answer my questions, and think through the problem alongside me—you must never reveal the answer to me before I arrive at it myself.<br>Please don’t point out any potential bugs—let me discover them on my own.<br>Do not provide any information beyond what I have asked for.</p>
+</blockquote>
+<p>It worked pretty well at first, but as the context grew, the LLM would sometimes just write out the entire code.</p>
+<p>All in all, using AI has definitely improved my Java skills, cultivated my object-oriented mindset, and given me a deeper understanding of some underlying principles (by asking LLMs questions whenever I needed to). I also believe that I’ll learn more by using AI technology than I would without it—the key is using it correctly.</p>
+<hr>
+<p><span id="future-directions"></span></p>
+<h2 id="Future-Directions"><a href="#Future-Directions" class="headerlink" title="Future Directions"></a>Future Directions</h2><p>How do you think I could modify the lessons in Unit 1 to help everyone learn the material more effectively?</p>
+<p>You could provide more tutorials or tips on the design patterns or specific syntax used in the assignments. The WeChat Official Account article from the first iteration was very helpful for my design, so I hope there will be similar guidance for each assignment.</p>
+<hr>
+<p><span id="thinking-questions"></span></p>
+<h2 id="Thinking-Questions"><a href="#Thinking-Questions" class="headerlink" title="Thinking Questions"></a>Thinking Questions</h2><ol>
+<li><p>How do you check if input meets the requirements? This includes spaces, consecutive symbols, and more.</p>
+<ol>
+<li>Blocking Invalid Combinations</li>
+</ol>
+</li>
+</ol>
+<p>The Lexer in the test machine must be very sensitive to whitespace characters.<br>      * <strong>Spaces within numbers</strong>: When reading a number, if it is immediately followed by a space, the lexer must recognize the subsequent number as a new token. For example, <code>12 34</code> would be parsed as <code>[NUM(12), NUM(34)]</code>.<br>      * <strong>Consecutive Character Aggregation</strong>: For <code>+++</code> or <code>---</code>, the lexer can output them as consecutive single-character tokens, which are then passed to the parser for evaluation.<br>      * <strong>Legal-character whitelist</strong>: Any character not in the set <code>[0-9x\+\-\*\(\)\s\^sincosp]</code> (such as full-width spaces or tab variants) is immediately intercepted during the lexical phase.<br>      * <strong>Length assertion</strong>: After removing all whitespace characters, check whether the string length exceeds the specified limit.</p>
+<ol start="2">
+<li><p><strong>Formal Syntax Layer (Parser): Intercepting Invalid Structures</strong></p>
+<ul>
+<li><strong>Recursive Descent Assertion</strong>: Use the recursive descent algorithm to construct a “virtual validation tree.” If the <code>12 34</code> from earlier is passed to the parser, and the parser reads a second <code>NUM</code> where it expects to read an operator, it immediately throws a SyntaxError (WF).</li>
+</ul>
+</li>
+<li><p>How can you accurately calculate the cost of a valid input?</p>
+<ol>
+<li>Implemented as-is. Uses Parser to parse the input string into an AST without performing any mathematical simplifications.</li>
+<li>Calculate the cost from the bottom up.</li>
+</ol>
+</li>
+</ol>
+<hr>
+<blockquote>
+<p><strong>This post is also published at</strong>: <a target="_blank" rel="noopener" href="https://blog.csdn.net/Gooden_job/article/details/159551046">https://blog.csdn.net/Gooden_job&#x2F;article&#x2F;details&#x2F;159551046</a></p>
+</blockquote>
+
+  </div>
+</article>
+
+
+    <div class="blog-post-comments">
+        <div id="utterances_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/Blog/en/">Home</a></li>
+        
+          <li><a href="/Blog/en/about/">About</a></li>
+        
+          <li><a href="/Blog/en/archives/">Articles</a></li>
+        
+          <li><a href="/Blog/en/tags/">Tags</a></li>
+        
+          <li><a href="/Blog/en/changelog/">Logs</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Table-of-Contents"><span class="toc-number">1.</span> <span class="toc-text">Table of Contents:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Program-Structure"><span class="toc-number">2.</span> <span class="toc-text">Program Structure</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Analysis-of-Basic-Program-Structure-Metrics"><span class="toc-number">2.1.</span> <span class="toc-text">Analysis of Basic Program Structure Metrics</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Classic-OO-Metrics-Cohesion-and-Coupling-Analysis"><span class="toc-number">2.2.</span> <span class="toc-text">Classic OO Metrics (Cohesion and Coupling Analysis)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Analysis-Based-on-Class-Diagrams"><span class="toc-number">2.3.</span> <span class="toc-text">Analysis Based on Class Diagrams</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Experiences-in-Architecture-Design"><span class="toc-number">3.</span> <span class="toc-text">Experiences in Architecture Design</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#The-Iteration-Process"><span class="toc-number">3.1.</span> <span class="toc-text">The Iteration Process</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Analysis-of-Custom-Iteration-Scenarios-and-Scalability"><span class="toc-number">3.1.1.</span> <span class="toc-text">Analysis of Custom Iteration Scenarios and Scalability</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Design-Patterns-Used"><span class="toc-number">3.2.</span> <span class="toc-text">Design Patterns Used</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Suggestions-for-improvement-and-additions-provided-by-AI"><span class="toc-number">3.2.1.</span> <span class="toc-text">Suggestions for improvement and additions (provided by AI):</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Analyzing-Bugs-in-My-Own-Programs"><span class="toc-number">4.</span> <span class="toc-text">Analyzing Bugs in My Own Programs</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#An-analysis-of-the-strategies-I-use-when-finding-bugs-in-other-people%E2%80%99s-code"><span class="toc-number">4.1.</span> <span class="toc-text">An analysis of the strategies I use when finding bugs in other people’s code</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Analysis-of-the-optimizations-I%E2%80%99ve-made"><span class="toc-number">4.2.</span> <span class="toc-text">Analysis of the optimizations I’ve made</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Using-Large-Language-Models"><span class="toc-number">5.</span> <span class="toc-text">Using Large Language Models</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Code-Generation-Usage"><span class="toc-number">5.1.</span> <span class="toc-text">Code Generation Usage</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Practical-Applications-and-Insights-on-Large-Language-Models"><span class="toc-number">5.2.</span> <span class="toc-text">Practical Applications and Insights on Large Language Models</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Evaluation-of-Large-Language-Models"><span class="toc-number">5.3.</span> <span class="toc-text">Evaluation of Large Language Models</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Future-Directions"><span class="toc-number">6.</span> <span class="toc-text">Future Directions</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-Questions"><span class="toc-number">7.</span> <span class="toc-text">Thinking Questions</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://begineri.github.io/Blog/en/2026/03/27/buaa-oo-u1-blog/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://begineri.github.io/Blog/en/2026/03/27/buaa-oo-u1-blog/&text=buaa26-OO-u1"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://begineri.github.io/Blog/en/2026/03/27/buaa-oo-u1-blog/&title=buaa26-OO-u1"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://begineri.github.io/Blog/en/2026/03/27/buaa-oo-u1-blog/&is_video=false&description=buaa26-OO-u1"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=buaa26-OO-u1&body=Check out this article: https://begineri.github.io/Blog/en/2026/03/27/buaa-oo-u1-blog/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://begineri.github.io/Blog/en/2026/03/27/buaa-oo-u1-blog/&title=buaa26-OO-u1"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://begineri.github.io/Blog/en/2026/03/27/buaa-oo-u1-blog/&title=buaa26-OO-u1"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://begineri.github.io/Blog/en/2026/03/27/buaa-oo-u1-blog/&title=buaa26-OO-u1"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://begineri.github.io/Blog/en/2026/03/27/buaa-oo-u1-blog/&title=buaa26-OO-u1"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://begineri.github.io/Blog/en/2026/03/27/buaa-oo-u1-blog/&name=buaa26-OO-u1&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://begineri.github.io/Blog/en/2026/03/27/buaa-oo-u1-blog/&t=buaa26-OO-u1"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025-2026
+    Wang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/Blog/en/">Home</a></li><!--
+     --><!--
+       --><li><a href="/Blog/en/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/Blog/en/archives/">Articles</a></li><!--
+     --><!--
+       --><li><a href="/Blog/en/tags/">Tags</a></li><!--
+     --><!--
+       --><li><a href="/Blog/en/changelog/">Logs</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/Blog/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "57783916a7b349829732031e51219ad6"}'></script>
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+    <script type="text/javascript">
+      var utterances_repo = 'begineri/Blog';
+      var utterances_issue_term = 'pathname';
+      var utterances_label = 'Comment';
+      var utterances_theme = 'github-dark';
+
+      (function(){
+          var script = document.createElement('script');
+
+          script.src = 'https://utteranc.es/client.js';
+          script.setAttribute('repo', utterances_repo);
+          script.setAttribute('issue-term', 'pathname');
+          script.setAttribute('label', utterances_label);
+          script.setAttribute('theme', utterances_theme);
+          script.setAttribute('crossorigin', 'anonymous');
+          script.async = true;
+          (document.getElementById('utterances_thread')).appendChild(script);
+      }());
+  </script>
+
+</body>
+</html>

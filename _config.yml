@@ -112,11 +112,8 @@ i18n:
   type:
     - page
     # 不要加 post（文章用文件夹分语言）
-  generator:
-    - archive
-    - category
-    - tag
-    - index
+  # 首页、归档、标签、分类由 scripts/i18n-lists.js 按 lang 分开生成。
+  # 不要放回 generator，否则英文列表会再复制一份未过滤的文章。
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment

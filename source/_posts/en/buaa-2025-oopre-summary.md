@@ -28,9 +28,9 @@ tags:
 3.  `add equipment`: Adding a piece of equipment to an adventurer
 4.  `learn spell`: Teaching a Spell to an Adventurer
 5.  `remove item`: Deleting an item from an adventurer
-6.  `take item`: The adventurer attempts to carry an item he owns.
+6.  `take item`: The adventurer attempts to carry an item he owns
 7.  `use`: The adventurer uses an available item on a target
-8.  `buy item`: The adventurer goes to the store to make a purchase.
+8.  `buy item`: The adventurer goes to the store to purchase item
 9.  `fight`: An Adventurer Fights a Battle
 10. `add relation`: Add an employment relationship
 11. `remove relation`: Deleting an Employment Relationship
@@ -141,11 +141,11 @@ public class LearnSpell implements CommandUtil {
 
 ![Item](/images/Item.png)
 
-After analysis, it was found that the items possessed by adventurers (equipment, potions, spells) can be abstracted into a unified Class `Item` for easier centralized management. Therefore, **the** following **inheritance hierarchy** can be designed:
+After analysis, it was found that the items possessed by adventurers (equipment, potions, spells) can be abstracted into a unified Class `Item` for easier centralized management. Therefore, the following **inheritance hierarchy** can be designed:
 
  * **Top-level abstraction (Root): `Item`**
 
-      * Define **the** common **characteristics** of all “items.” For example, the `id` and `use` methods.
+      * Define the common **characteristics** of all “items.” For example, the `id` and `use` methods.
 
   * **Top-level categories (Branches): `Equipment`, `Spell`, `Bottle`**
 
@@ -158,7 +158,7 @@ After analysis, it was found that the items possessed by adventurers (equipment,
   
 ---
 
-#### 3.`Adventurer`-Class and Feature Implementation
+#### 3.`Adventurer` Class and Feature Implementation
 
 ##### State Management
 * **Stores core attributes:** Contains all of the adventurer’s base attributes, such as `id`, `hitPoint`, `atk`, `def`, `mana`, and `money`.
@@ -174,23 +174,23 @@ After analysis, it was found that the items possessed by adventurers (equipment,
 
 
 ``` java
-    // 拥有的物品（包括瓶子和武器）
+    // Items owned (including bottles and weapons)
     private final HashMap<String, Item> items = new HashMap<>();
 
-    // 包里的物品（瓶子）
+    // Items in the bag (bottles)
     private final HashMap<String, Item> usables = new HashMap<>();
 
-    // 学会的 Spell
+    // Learned spells
     private final HashMap<String, Spell> spells = new HashMap<>();
 
-    // 携带的瓶子列表
+    // List of carried bottles
     private final Queue<String> usablesQueue = new LinkedList<>();
 ```
 
 * **Decoupling from the Factory:** Methods `addBottle`, `addEquipment`, `learnSpell`, and `buyItem` do not create objects directly; instead, they call method `Factory` to create them, thereby separating creation from management.
 
 ```java
-    // 简单工厂模式
+    // Simple factory
     public static Equipment createEquipment(String type, String equId, int ce) {
         Equipment newEquipment;
         switch (type) {
@@ -226,10 +226,10 @@ After analysis, it was found that the items possessed by adventurers (equipment,
 
 ``` java
 public class Adventurer implements Employee, Employer {
-    // 直接的上级
+    // Direct superior
     private Employer employer;
 
-    // 直接雇佣的冒险者列表
+    // List of directly hired adventurers
     private final HashMap<String, Employee> hired = new HashMap<>();
 
     // ...
@@ -246,7 +246,7 @@ public class Adventurer implements Employee, Employer {
   
 ```java
     @Override
-    // 通知雇佣者
+    // Notify employees
     public void notifyEmployees() {
         ArrayList<Employee> allEmployees = getAllEmployees();
         

@@ -161,7 +161,7 @@ public class FuncDefinition {
     }
 
     public void setDefinition(String definition) {
-        // 负责把传入的字符串转为表达式树
+        // Turn the incoming string into an expression tree
         this.definition = definition;
         this.exprDefinition = parseExpr();
     }

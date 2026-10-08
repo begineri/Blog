@@ -28,11 +28,11 @@ To compile a program on A that runs on B, we need to use **a cross-compilation t
 The top-level Makefile specifies how the source files in each subdirectory are assembled, step by step, into the final system image, `mos.elf`.
 
 ``` c
-all: $(mos_elf)     # “最终目标”
-$(mos_elf): $(modules) # 调用链接器 $(LD) 链接所有目标文件
+all: $(mos_elf)     # the final target
+$(mos_elf): $(modules) # Call the linker $(LD) to link all object files
     $(LD) $(LDFLAGS) -o $(mos_elf) -N -T $(link_script) $(objects)
 
-$(modules): # 进入各个子目录进行 make
+$(modules): # Run make in each subdirectory
     $(MAKE) --directory=$@
 ```
 
@@ -55,10 +55,10 @@ An ELF file can be viewed from two perspectives:
 
 ELF files can be accessed in code as structures:
 ``` c
-// binary 是指向那堆 01 内存块空间首地址的指针
+// binary points to the start of that block of raw bytes
 Elf32_Ehdr *elf_header = (Elf32_Ehdr *)binary; 
 
-// 直接通过结构体字段读取，编译器会自动计算所有底层的字节偏移，我们可以访问到并修改内存块中的数据
+// Read through the struct fields; the compiler computes the byte offsets, so the data in the block can be accessed and modified
 unsigned int entry_address = elf_header->e_entry;
 ```
 

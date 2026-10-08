@@ -18,7 +18,7 @@
 <meta property="og:image" content="https://begineri.github.io/Blog/images/lab1/1.png">
 <meta property="og:image" content="https://begineri.github.io/Blog/images/lab1/2.png">
 <meta property="article:published_time" content="2026-04-15T22:23:00.000Z">
-<meta property="article:modified_time" content="2026-10-08T23:08:40.396Z">
+<meta property="article:modified_time" content="2026-10-08T23:14:34.022Z">
 <meta property="article:author" content="Wang">
 <meta property="article:tag" content="OS">
 <meta name="twitter:card" content="summary">
@@ -229,15 +229,15 @@
 
   <div class="content e-content" itemprop="articleBody">
     <h2 id="Basic-Concepts"><a href="#Basic-Concepts" class="headerlink" title="Basic Concepts"></a>Basic Concepts</h2><p>To complete this experiment, you’ll first need to familiarize yourself with the following concepts:</p>
-<h4 id="QEMU-Emulator"><a href="#QEMU-Emulator" class="headerlink" title="QEMU Emulator"></a>QEMU Emulator</h4><p>Operating systems run on hardware, and to better manage the hardware resources of a computer system, an operating system is required.<br>QEMU provides a simulated hardware environment—such as a CPU—that runs the executable files we ultimately <a href="#cross-compilation">cross-compile</a>.</p>
+<h4 id="QEMU-Emulator"><a href="#QEMU-Emulator" class="headerlink" title="QEMU Emulator"></a>QEMU Emulator</h4><p>Operating systems run on hardware, and to better manage the hardware resources of a computer system, an operating system is required.<br>QEMU provides a simulated hardware environment—such as a CPU—that runs the executable files I ultimately <a href="#cross-compilation">cross-compile</a>.</p>
 <hr>
 <p><span id="cross-compilation"></span></p>
 <h4 id="Cross-Compilation"><a href="#Cross-Compilation" class="headerlink" title="Cross-Compilation"></a>Cross-Compilation</h4><p>There are two environments in the experiment</p>
 <ul>
-<li>Platform A (Host): A jump server provided by the school; this is where we write code and run <code>make</code> commands.</li>
+<li>Platform A (Host): A jump server provided by the school; this is where I write code and run <code>make</code> commands.</li>
 <li>Platform B (Target): The environment in which the MOS kernel currently under development is to run. In this experiment, this is a hardware environment emulated by QEMU, with a MIPS CPU architecture.</li>
 </ul>
-<p>To compile a program on A that runs on B, we need to use <strong>a cross-compilation toolchain</strong>—such as the <code>mips-linux-gnu-gcc</code> tool in the <a href="#Makefile">Makefile</a>—which translates C code into low-level binary instructions for the MIPS architecture.</p>
+<p>To compile a program on A that runs on B, I need to use <strong>a cross-compilation toolchain</strong>—such as the <code>mips-linux-gnu-gcc</code> tool in the <a href="#Makefile">Makefile</a>—which translates C code into low-level binary instructions for the MIPS architecture.</p>
 <hr>
 <h4 id="Makefile"><a href="#Makefile" class="headerlink" title="Makefile"></a>Makefile</h4><p>The top-level Makefile specifies how the source files in each subdirectory are assembled, step by step, into the final system image, <code>mos.elf</code>.</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">all: $(mos_elf)     <span class="meta"># the final target</span></span><br><span class="line">$(mos_elf): $(modules) # Call the linker $(LD) to link all object files</span><br><span class="line">    $(LD) $(LDFLAGS) -o $(mos_elf) -N -T $(link_script) $(objects)</span><br><span class="line"></span><br><span class="line">$(modules): # Run make in each subdirectory</span><br><span class="line">    $(MAKE) --directory=$@</span><br></pre></td></tr></table></figure>
@@ -302,7 +302,7 @@
 <h3 id="Operating-System-Boot-Process"><a href="#Operating-System-Boot-Process" class="headerlink" title="Operating System Boot Process"></a>Operating System Boot Process</h3><blockquote>
 <p>pull oneself up by one’s bootstraps</p>
 </blockquote>
-<p>Faced with a blank memory, how does a complex operating system boot up?On actual bare-metal hardware, when the power is first turned on, a small piece of basic code (the bootloader) is needed to load the massive operating system from the hard drive into memory. In our experiment, however, QEMU comes with built-in boot functionality that can directly recognize and load the ELF-format kernel we’ve compiled,so we don’t have to worry about the complex boot process.</p>
+<p>Faced with a blank memory, how does a complex operating system boot up?On actual bare-metal hardware, when the power is first turned on, a small piece of basic code (the bootloader) is needed to load the massive operating system from the hard drive into memory. In my experiment, however, QEMU comes with built-in boot functionality that can directly recognize and load the ELF-format kernel I’ve compiled, so I don’t have to worry about the complex boot process.</p>
 <p>So, after the emulator (QEMU) loads the kernel, it first jumps to the assembly entry point at <code>_start</code>:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">.text</span><br><span class="line">EXPORT(_start)</span><br><span class="line">.set at</span><br><span class="line">.set reorder</span><br><span class="line">	/* clear .bss segment */</span><br><span class="line">	la      v0, bss_start</span><br><span class="line">	la      v1, bss_end</span><br><span class="line">clear_bss_loop:</span><br><span class="line">	beq     v0, v1, clear_bss_done</span><br><span class="line">	sb      zero, 0(v0)</span><br><span class="line">	addiu   v0, v0, 1</span><br><span class="line">	j       clear_bss_loop</span><br><span class="line"></span><br><span class="line">clear_bss_done:</span><br><span class="line">	/* disable interrupts */</span><br><span class="line">	mtc0    zero, CP0_STATUS</span><br><span class="line"></span><br><span class="line">	/* set up the kernel stack */</span><br><span class="line">	li 		sp, 0x80400000</span><br><span class="line">	/* jump to mips_init */</span><br><span class="line">	j mips_init</span><br></pre></td></tr></table></figure>
 <p>The following preparations are made here:</p>

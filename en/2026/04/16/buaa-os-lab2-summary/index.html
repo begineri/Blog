@@ -18,7 +18,7 @@
 <meta property="og:image" content="https://begineri.github.io/Blog/images/lab2/%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2.png">
 <meta property="og:image" content="https://begineri.github.io/Blog/images/lab2/image-1.png">
 <meta property="article:published_time" content="2026-04-16T21:21:04.000Z">
-<meta property="article:modified_time" content="2026-10-08T22:56:04.079Z">
+<meta property="article:modified_time" content="2026-10-08T23:23:32.668Z">
 <meta property="article:author" content="Wang">
 <meta property="article:tag" content="OS">
 <meta name="twitter:card" content="summary">
@@ -233,7 +233,7 @@
 <ol>
 <li>When the operating system starts up: it determines the size of physical memory, then creates a massive array (pages), divides the physical memory into 4KB chunks, and allocates a <code>struct Page</code> to each chunk.</li>
 <li>Physical Memory Paging: 4 KB per page</li>
-<li>Free Memory Pool: Build a free list pool. The point is that you don’t have to go through the hassle of allocating memory from the main memory every time—instead, you can simply retrieve a block from the head of the free list you’ve built. When freeing the memory, you can similarly just reinsert the block back into the head of the list.</li>
+<li>Free Memory Pool: Build a free list pool. The point is that you don’t have to go through the hassle of allocating memory from the main memory every time—instead, I can simply retrieve a block from the head of the free list I’ve built. When freeing the memory, I can similarly just reinsert the block back into the head of the list.</li>
 <li>Double-linked list: It achieves O(1) complexity for insertion, deletion, modification, and lookup, making it convenient and efficient. The key to understanding it is the secondary pointer: it always points to the arrow pointing back at you (which makes it easier to directly modify the content pointed to by the previous node).</li>
 </ol>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Page</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">Page</span> *<span class="title">le_next</span>;</span>  </span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">Page</span> **<span class="title">le_prev</span>;</span>  </span><br><span class="line">    &#125; pp_link; </span><br><span class="line"></span><br><span class="line">    u_short pp_ref;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
@@ -260,12 +260,12 @@
 <li>Level 1 Page Table: Page Directory (which might as well be called the “Page Table”—a table), refers to the table that stores all page tables.</li>
 <li>Level-1 page table base address: i.e., the parameter <code>pgdir</code>, which is the starting address of the large page directory table</li>
 <li>Two-level page table structure: This refers to the structure consisting of a first-level page table and a second-level page table (duh).</li>
-<li>Virtual Address (VA): Key point—the data we pass in is used to perform lookups through it.</li>
+<li>Virtual Address (VA): Key point—the data I pass in is used to perform lookups through it.</li>
 <li>Second-Level Page Table: Page Table—the location where all page table entries are actually stored</li>
 <li>Pointer to a secondary page table entry: a pointer to a page table</li>
 <li>In the space pointed to by ppte: What is ppte? It is a pointer that points to the secondary page table found as described above, and returns it as the result.</li>
 </ol>
-<p>To put it simply, the <code>pgdir_walk</code> function works as follows: Given a virtual address <code>va</code>, the CPU traverses the <code>pgdir</code> downward until it finds the page table that contains the physical page corresponding to <code>va</code>, and then returns a pointer to that page table so that we can modify it.</p>
+<p>To put it simply, the <code>pgdir_walk</code> function works as follows: Given a virtual address <code>va</code>, the CPU traverses the <code>pgdir</code> downward until it finds the page table that contains the physical page corresponding to <code>va</code>, and then returns a pointer to that page table so that I can modify it.</p>
 <hr>
 <p>Similarly, for <code>page_insert</code>:</p>
 <blockquote>
@@ -299,7 +299,7 @@
 <li>(pgdir | va[31:22] | 00) -&gt; PDX* type, assuming it is named a</li>
 <li>Dereference a (*a) → Obtain the base address of the PTB (this is a physical address; it must be converted to a virtual address so the CPU can access it)</li>
 <li>PTBbase | va[21:12] | 00 -&gt; PTB* type, assuming it is named b</li>
-<li>b is the page table entry we’re ultimately looking for; returning it allows us to add to or modify the page table entry later.</li>
+<li>b is the page table entry I’m ultimately looking for; returning it allows me to add to or modify the page table entry later.</li>
 </ol>
 <p>This is what the diagram illustrates, and the so-called “self-mapping” provides a convenience for the CPU: the CPU only uses this process to locate data, but this method can only find page table entries.To enable direct modification of page tables and even the page table directory (pgdir), the CPU employs a clever mechanism: it inserts the page table directory itself as one of the many page tables. This way, when accessing it, the following can be used: pgdir[a] → pgdir, and padir[b] → a specific page table (rather than a page table entry).</p>
 <p>Through the same process, the CPU can access and modify the entire page table.</p>

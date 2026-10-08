@@ -37,7 +37,7 @@
 <meta property="og:image" content="https://begineri.github.io/Blog/images/MCU.png">
 <meta property="og:image" content="https://begineri.github.io/Blog/images/ACU.png">
 <meta property="article:published_time" content="2025-11-10T22:02:51.000Z">
-<meta property="article:modified_time" content="2026-10-08T23:10:32.867Z">
+<meta property="article:modified_time" content="2026-10-08T23:14:37.541Z">
 <meta property="article:author" content="Wang">
 <meta property="article:tag" content="CO">
 <meta name="twitter:card" content="summary">
@@ -1339,7 +1339,7 @@
 </ul>
 </li>
 <li><strong>Outputs:</strong><ul>
-<li><code>ALUCtrl[3:0]</code>: The 4-bit final operation code sent to the ALU (we previously agreed that <code>0000</code> &#x3D; ADD, <code>0001</code> &#x3D; SUB, <code>0010</code> &#x3D; AND, <code>0011</code> &#x3D; OR, <code>0100</code> &#x3D; SLT, and <code>0101</code> &#x3D; SLL).</li>
+<li><code>ALUCtrl[3:0]</code>: The 4-bit final operation code sent to the ALU (I previously agreed that <code>0000</code> &#x3D; ADD, <code>0001</code> &#x3D; SUB, <code>0010</code> &#x3D; AND, <code>0011</code> &#x3D; OR, <code>0100</code> &#x3D; SLT, and <code>0101</code> &#x3D; SLL).</li>
 <li><code>JR[0]</code>: <strong>(New output)</strong> Used for command <code>jr</code>. This signal is 1 when <code>ALUOp=100</code> and <code>Func=001000</code> are true.</li>
 </ul>
 </li>
@@ -1438,7 +1438,7 @@
 <hr>
 <p>Thinking Questions</p>
 <ol>
-<li>Currently, in our modules, IM uses ROM, DM uses RAM, and GRF uses registers. Is this approach reasonable? Please provide an analysis, and if you have any suggestions for improvement, please include them as well.<br>A: That makes sense. ROM is read-only memory, so it can be used to store instructions; RAM is both readable and writable, so it meets the DM’s read-write requirements; GRF is a register file, which requires high read-write speeds, so it is suitable for implementation using registers.</li>
+<li>Currently, in my modules, IM uses ROM, DM uses RAM, and GRF uses registers. Is this approach reasonable? Please provide an analysis, and if you have any suggestions for improvement, please include them as well.<br>A: That makes sense. ROM is read-only memory, so it can be used to store instructions; RAM is both readable and writable, so it meets the DM’s read-write requirements; GRF is a register file, which requires high read-write speeds, so it is suitable for implementation using registers.</li>
 <li>In fact, to implement the NOP (no-op) instruction, we don’t need to add it to the control signal truth table. Why? Please explain your reasoning.<br>A: The NOP instruction has the code 0x00000000, which is equivalent to <code>sll $0, $0, 0</code>. This shifts the value in the $0 register 0 bits to the left and writes it back to the $0 register. Since the value of $0 is always 0, it remains unchanged; therefore, executing this instruction has no effect.Even if the CPU does not support the SLL instruction, the NOP instruction will not perform any operations on any circuit components and will have no effect on the circuit.</li>
 </ol>
 

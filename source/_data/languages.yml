@@ -1,2 +1,6 @@
-zh-CN: 中
-en: EN
+zh-CN:
+  label: 中
+  description: 博客写给别人看的，笔记是写给自己看的  -- So this is a Blog, not a Note.
+en:
+  label: EN
+  description: Blogs are for others, notes are for oneself.  -- So this is a blog, not a note.

@@ -19,6 +19,8 @@ This post is a summary of the iterative assignments from Unit 1 of the 2026 Obje
 - [Future Directions](#未来方向)
 - [Food for thought](#思考题)
 
+---
+
 ## Program Structure
 The following data is analyzed from the code in the final iteration. The entire project consists of 20 core business classes, with a total of approximately 1,080 lines of business code, including 126 methods.
 
@@ -43,6 +45,8 @@ Complete class diagram for hw3:
 4. Controlling the Number of Branches (Circle Complexity v(G))
    - The average cycle complexity (v(G)) for the entire project is only 1.93.
    - Extremely low circle complexity is a direct benefit of the polymorphism (dynamic dispatch) mechanism. This architecture completely eliminates the verbose `if-else / switch`-type checks found in traditional procedural programming, delegating common operations to their respective subclasses and achieving true O(1) logical addressing.
+
+---
 
 ### Classic OO Metrics (Cohesion and Coupling Analysis)
 ![alt text](/images/oou1/image-1.png)

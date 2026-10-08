@@ -238,7 +238,7 @@ public class Adventurer implements Employee, Employer {
 
 ##### Assistance System (Observer Pattern)
 * **Subject:**
-    1.  When `Adventurer``takeDamage()` is called and the reduced HP meets the conditions for issuing a rescue,
+    1.  When `Adventurer` `takeDamage()` is called and the reduced HP meets the conditions for issuing a rescue,
     2.  Call `notifyEmployees()` to “send a notification.”
 * **Observer:**
     1.  In ``notifyEmployees()``, iterate through all child objects (observers) and call their ``aidEmployer()`` method.
@@ -265,9 +265,7 @@ public class Adventurer implements Employee, Employer {
 
 ## Thoughts on Using JUnit
 
-
- `import org.junit.Test;`
-
+`import org.junit.Test;`
 `import static org.junit.Assert.*;`
 
 |Methods|Introduction|
@@ -293,24 +291,22 @@ Based on my experience using JUnit in the OOPro course, I’ve found that:
 
 > The transition from **Procedure-Oriented Programming (POP)*** to **Object-Oriented Programming *(*OOP*)***.
 
-
-
-- **POP**: **Process**- or function-oriented, emphasizing the execution flow and steps of a program.
+- **POP**: **Process** or **function-oriented**, emphasizing the execution flow and steps of a program.
 - **OOP**: A programming paradigm in which things are broken down into individual **objects**, which then divide tasks and collaborate with one another.
-  - **Encapsulation `Encapsulation`**: Hide internal implementation details and expose only the necessary interfaces.
-  - **Inheritance `Inheritance`**: A subclass inherits the properties and methods of its parent class to achieve code reuse.
-  - **Polymorphism `Polymorphism`**: A single interface can be implemented by different objects to exhibit different behaviors.
-  - **Abstraction `Abstraction`**: Extract common characteristics and define abstract classes or interfaces.
+  - **Encapsulation**: Hide internal implementation details and expose only the necessary interfaces.
+  - **Inheritance**: A subclass inherits the properties and methods of its parent class to achieve code reuse.
+  - **Polymorphism**: A single interface can be implemented by different objects to exhibit different behaviors.
+  - **Abstraction**: Extract common characteristics and define abstract classes or interfaces.
 
   - Through these mechanisms, OOP languages offer a high degree of flexibility, maintainability, and scalability when dealing with similar types of problems, providing us with new approaches to problem-solving.
-- After completing the OOPre course, we gained a basic understanding of the most critical concepts in object-oriented languages, laying the groundwork for the main course ahead.
+- After completing the OOPre course, I gained a basic understanding of the most critical concepts in object-oriented languages, laying the groundwork for the main course ahead.
 - At the same time, introducing the concept of `CheckStyle` can help students develop good coding practices right from the start.
 
 ---
 
 ## Course Recommendations
 
-#### 1. The lecture was too brief.
+#### 1. The lecture class was too brief.
 - The material covered in class accounts for only 40% of the knowledge needed to complete assignments and design programs. To complete assignments and design a relatively optimal program structure, students need to study a significant amount of supplementary material outside of class.Some of this material is derived from the in-class PowerPoint presentations (often, the presentations and lectures merely list concepts and touch on them superficially, which is insufficient for students to write the code required for their assignments), while other material is not covered in the presentations at all.
 - If there is limited time for instruction during class, I recommend that the course team provide more optional reference materials for out-of-class assignments. For example, regarding the Command Pattern, they could provide concrete examples of its implementation in real-world projects (such as design concepts or code examples) to help students gain a concrete understanding of it, rather than just a few lines of text on a PowerPoint slide.
 

@@ -10,7 +10,7 @@ tags:
 
 * *During summer break, aside from downloading a few software programs, I barely looked at the prep material, figuring I’d have plenty of time to go over it once school started. As a result, I managed to solve 0 problems in the pre-contest round, and just a couple of days before the P0 round, I rushed through Logisim.*
 
-* *For P3, I tried building it from scratch on my own, without looking at past blog posts, and collaborated with Gemini. In the end, I didn’t finish it before the P3 submission deadline, so I ended up taking a week off right after P3.*
+* *For P3, I tried building it from scratch on my own, without looking at past blog posts, and collaborated with Gemini. In the end, I didn’t finish it before the P3 submission deadline, so I ended up taking a week gap at that P3 week.*
 
 * *I used to dismiss the recommended problems outside of class, doing nothing but submitting the code files without any preparation, foolishly hoping to solve the in-class problems on the spot and pass the exam solely on my own wits. As a result, I got stuck on P4 for two weeks. Finally, before my third attempt at P4, I thoroughly worked through the recommended problems, which allowed me to breeze through it in just one hour.*
 

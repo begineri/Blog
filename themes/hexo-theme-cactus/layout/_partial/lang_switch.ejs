@@ -17,7 +17,7 @@
     return url_for(target + '/' + rest);
   }
 %>
-<nav class="lang-switch" aria-label="Language">
+<nav class="lang-switch<%= (typeof inline !== 'undefined' && inline) ? ' lang-switch--inline' : '' %>" aria-label="Language">
   <a href="<%= langHref('zh-CN') %>" class="<%= curLang === 'zh-CN' ? 'is-active' : '' %>">中</a>
   <span class="lang-switch__sep" aria-hidden="true">|</span>
   <a href="<%= langHref('en') %>" class="<%= curLang === 'en' ? 'is-active' : '' %>">EN</a>

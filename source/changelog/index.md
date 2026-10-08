@@ -1,5 +1,6 @@
 ---
 title: Changelog
+lang: zh-CN
 date: 2025-11-06 21:04:09
 ---
 ### 2026-10-8

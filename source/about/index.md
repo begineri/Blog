@@ -1,5 +1,6 @@
 ---
 title: about
+lang: zh-CN
 date: 2026-02-07 12:27:28
 ---
 

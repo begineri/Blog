@@ -1,0 +1,9 @@
+<% if (page.categories && page.categories.length) { %>
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <% page.categories.each(function(cat, i) { %>
+          <% if (i) { %> › <% } %>
+          <a href="<%- url_for_lang(cat.path) %>"><%= cat.name %></a>
+        <% }) %>
+    </div>
+<% } %>

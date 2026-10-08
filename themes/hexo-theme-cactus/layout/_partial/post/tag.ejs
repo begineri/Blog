@@ -1,0 +1,8 @@
+<% if (page.tags && page.tags.length) { %>
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <% page.tags.each(function(tag) { %>
+          <a class="p-category" href="<%- url_for_lang(tag.path) %>"><%= tag.name %></a>
+        <% }) %>
+    </div>
+<% } %>

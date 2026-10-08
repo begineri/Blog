@@ -1,0 +1,71 @@
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <%- partial('_partial/post/gallery') %>
+  <div class="content" itemprop="articleBody">
+      <% if (page.search || page.type === "search") { %>
+        <%- partial('_partial/search') %>
+      <% } else if (page.type === "tags") { %>
+          <%
+            var curLang = page.lang || (Array.isArray(config.language) ? config.language[0] : config.language) || 'zh-CN';
+            var langTags = [];
+            site.tags.each(function(tag) {
+              var count = 0;
+              tag.posts.each(function(post) {
+                if ((post.lang || 'zh-CN') === curLang) count += 1;
+              });
+              if (count) langTags.push({ tag: tag, count: count });
+            });
+            langTags.sort(function(a, b) { return a.tag.name < b.tag.name ? -1 : a.tag.name > b.tag.name ? 1 : 0; });
+            var minCount = langTags.reduce(function(min, item) { return Math.min(min, item.count); }, Infinity);
+            var maxCount = langTags.reduce(function(max, item) { return Math.max(max, item.count); }, 0);
+          %>
+          <div id="tag-cloud">
+            <div class="tag-cloud-title">
+                <%- _p('counter.tag_cloud', langTags.length) %>
+            </div>
+            <div class="tag-cloud-tags">
+              <% langTags.forEach(function(item) { %>
+                <% var size = maxCount === minCount ? 12 : 12 + (30 - 12) * (item.count - minCount) / (maxCount - minCount) %>
+                <a href="<%- url_for_lang(item.tag.path) %>" style="font-size: <%= size %>px;"><%= item.tag.name %></a>
+              <% }) %>
+            </div>
+          </div>
+        <% } else if (page.type === 'categories') { %>
+          <div id="categories">
+            <%
+              var catLang = page.lang || (Array.isArray(config.language) ? config.language[0] : config.language) || 'zh-CN';
+              var visibleCategories = 0;
+              site.categories.each(function(cat) {
+                var counted = 0;
+                cat.posts.each(function(post) {
+                  if ((post.lang || 'zh-CN') === catLang) counted += 1;
+                });
+                if (counted) visibleCategories += 1;
+              });
+            %>
+            <div class="category-list-title">
+                <%- _p('counter.categories', visibleCategories) %>
+            </div>
+            <div class="category-list">
+              <ul class="category-list">
+                <% site.categories.each(function(cat) { %>
+                  <%
+                    var catCount = 0;
+                    cat.posts.each(function(post) {
+                      if ((post.lang || 'zh-CN') === catLang) catCount += 1;
+                    });
+                  %>
+                  <% if (catCount) { %>
+                    <li class="category-list-item">
+                      <a class="category-list-link" href="<%- url_for_lang(cat.path) %>"><%= cat.name %></a>
+                      <span class="category-list-count"><%= catCount %></span>
+                    </li>
+                  <% } %>
+                <% }) %>
+              </ul>
+            </div>
+          </div>
+        <% } else { %>
+          <%- page.content %>
+        <% } %>
+  </div>
+</article>

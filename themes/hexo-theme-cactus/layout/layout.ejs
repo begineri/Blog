@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<%
+  var __lang = page.lang || (Array.isArray(config.language) ? config.language[0] : config.language) || '';
+  if (__lang) __lang = String(__lang).substring(0, 2);
+%>
+<html<%= __lang ? ' lang="' + __lang + '"' : '' %>>
+<%- partial('_partial/head') %>
+<body class="max-width mx-auto px3 <%- theme.direction -%> <%= is_post() ? 'is-post' : '' %>">
+    <%- partial('_partial/lang_switch') %>
+    <% if (is_post()) { %>
+      <%- partial('_partial/post/actions_desktop') %>
+    <% } %>
+    <div class="content index py4 <%= is_home() ? 'h-card' : '' %>">
+        <% if (!is_post()) { %>
+          <%- partial('_partial/header') %>
+        <% } %>
+        <%- body %>
+        <% if (is_post()) { %>
+          <%- partial('_partial/post/actions_mobile') %>
+        <% } %>
+        <%- partial('_partial/footer') %>
+    </div>
+    <%- partial('_partial/styles') %>
+    <%- partial('_partial/scripts') %>
+</body>
+</html>

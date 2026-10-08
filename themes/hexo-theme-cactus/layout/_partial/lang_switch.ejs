@@ -1,0 +1,24 @@
+<%
+  var curLang = page.lang || (Array.isArray(config.language) ? config.language[0] : config.language) || 'zh-CN';
+  var siteLangs = Array.isArray(config.language) ? config.language : [config.language];
+  function langHref(target) {
+    if (!is_post()) return switch_lang(target);
+    var path = String(page.path || '');
+    var prefix = '';
+    for (var li = 0; li < siteLangs.length; li++) {
+      if (path.indexOf(siteLangs[li] + '/') === 0) {
+        prefix = siteLangs[li] + '/';
+        break;
+      }
+    }
+    var rest = prefix ? path.slice(prefix.length) : path;
+    rest = rest.replace(/index\.html$/, '');
+    if (rest && rest.charAt(rest.length - 1) !== '/') rest += '/';
+    return url_for(target + '/' + rest);
+  }
+%>
+<nav class="lang-switch" aria-label="Language">
+  <a href="<%= langHref('zh-CN') %>" class="<%= curLang === 'zh-CN' ? 'is-active' : '' %>">中</a>
+  <span class="lang-switch__sep" aria-hidden="true">|</span>
+  <a href="<%= langHref('en') %>" class="<%= curLang === 'en' ? 'is-active' : '' %>">EN</a>
+</nav>

@@ -254,7 +254,7 @@ public interface AstNode<T> extends
 ### Practical Applications and Insights on Large Language Models
 Although I don’t have large language models generate code directly, they actually play a significant role in my coding process:
 
-Unlike when I was learning C, where I started with every single syntax rule and every detail, in the OO course I were immediately faced with problem statements of over a thousand characters and hundreds of lines of code to write. This meant that I had to teach myself all the Java syntax and the details of implementing these tasks.
+Unlike when I was learning C, where I started with every single syntax rule and every detail, in the OO course I was immediately faced with problem statements of over a thousand characters and hundreds of lines of code to write. This meant that I had to teach myself all the Java syntax and the details of implementing these tasks.
 
 There are many ways to teach yourself: reading JDK documentation, checking out online resources like Runoob (菜鸟教程), taking online courses, or simply asking an AI.It’s easy to imagine that in the past, when people were learning Java, they would scour various documentation and tutorials (I did the same when I was learning C last year), but such searches were often time-consuming and lacked depth. Today, AI can essentially replace that entire process.
 For example, if I want to learn about *the singleton pattern*, I can simply ask the AI, and it will provide different ways to implement it. Furthermore, you can ask it which one is best suited for my specific task, or what the underlying principles of the singleton pattern are.

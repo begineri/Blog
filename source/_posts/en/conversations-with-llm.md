@@ -131,7 +131,7 @@ So how does human logical reasoning differ from that of an LLM?
 
 
 **Me：**
-However, as we know from discrete mathematics, if a is true and b is true, then it follows that a and b must be true. So, can an LLM determine the “absolute” truth value of a proposition? Is it possible to reason in this way?
+However, as I know from discrete mathematics, if a is true and b is true, then it follows that a and b must be true. So, can an LLM determine the “absolute” truth value of a proposition? Is it possible to reason in this way?
 
 **Ge：**
 > This is a very critical issue that touches on the limits of LLM (Large Language Model) capabilities.

@@ -14,7 +14,7 @@ Just keep the following points in mind:
 
 1. When the operating system starts up: it determines the size of physical memory, then creates a massive array (pages), divides the physical memory into 4KB chunks, and allocates a `struct Page` to each chunk.
 2. Physical Memory Paging: 4 KB per page
-3. Free Memory Pool: Build a free list pool. The point is that you don’t have to go through the hassle of allocating memory from the main memory every time—instead, you can simply retrieve a block from the head of the free list you’ve built. When freeing the memory, you can similarly just reinsert the block back into the head of the list.
+3. Free Memory Pool: Build a free list pool. The point is that you don’t have to go through the hassle of allocating memory from the main memory every time—instead, I can simply retrieve a block from the head of the free list I’ve built. When freeing the memory, I can similarly just reinsert the block back into the head of the list.
 4. Double-linked list: It achieves O(1) complexity for insertion, deletion, modification, and lookup, making it convenient and efficient. The key to understanding it is the secondary pointer: it always points to the arrow pointing back at you (which makes it easier to directly modify the content pointed to by the previous node).
 
 ``` c
@@ -53,12 +53,12 @@ That single sentence touches on countless concepts:
 1. Level 1 Page Table: Page Directory (which might as well be called the "Page Table"—a table), refers to the table that stores all page tables.
 2. Level-1 page table base address: i.e., the parameter `pgdir`, which is the starting address of the large page directory table
 3. Two-level page table structure: This refers to the structure consisting of a first-level page table and a second-level page table (duh).
-4. Virtual Address (VA): Key point—the data we pass in is used to perform lookups through it.
+4. Virtual Address (VA): Key point—the data I pass in is used to perform lookups through it.
 5. Second-Level Page Table: Page Table—the location where all page table entries are actually stored
 6. Pointer to a secondary page table entry: a pointer to a page table
 7. In the space pointed to by ppte: What is ppte? It is a pointer that points to the secondary page table found as described above, and returns it as the result.
 
-To put it simply, the `pgdir_walk` function works as follows: Given a virtual address `va`, the CPU traverses the `pgdir` downward until it finds the page table that contains the physical page corresponding to `va`, and then returns a pointer to that page table so that we can modify it.
+To put it simply, the `pgdir_walk` function works as follows: Given a virtual address `va`, the CPU traverses the `pgdir` downward until it finds the page table that contains the physical page corresponding to `va`, and then returns a pointer to that page table so that I can modify it.
 
 ---
 Similarly, for `page_insert`:
@@ -97,7 +97,7 @@ In short, the process is as follows (va → page table entry, i.e., the pgdir_wa
 1. (pgdir | va[31:22] | 00) -> PDX* type, assuming it is named a
 2. Dereference a (*a) → Obtain the base address of the PTB (this is a physical address; it must be converted to a virtual address so the CPU can access it)
 3. PTBbase | va[21:12] | 00 -> PTB* type, assuming it is named b
-4. b is the page table entry we’re ultimately looking for; returning it allows us to add to or modify the page table entry later.
+4. b is the page table entry I’m ultimately looking for; returning it allows me to add to or modify the page table entry later.
 
 This is what the diagram illustrates, and the so-called “self-mapping” provides a convenience for the CPU: the CPU only uses this process to locate data, but this method can only find page table entries.To enable direct modification of page tables and even the page table directory (pgdir), the CPU employs a clever mechanism: it inserts the page table directory itself as one of the many page tables. This way, when accessing it, the following can be used: pgdir[a] → pgdir, and padir[b] → a specific page table (rather than a page table entry).
 

@@ -140,7 +140,7 @@ If I can’t recover these photos, I’m prepared to console myself with the tho
 
 In short, I was trying to imagine the worst-case scenario and prepare myself mentally. Even so, that night, I lay in bed tossing and turning, my mind a tangled mess. I wanted to die along with my data.
 
-Faced with such precious yet fragile data, we are helpless in this situation.
+Faced with such precious yet fragile data, I was helpless in this situation.
 Recovering that data in the end was the result of my last-ditch effort.
 
 To be honest, both times I managed to fix things by sheer luck. Why doesn’t this approach work? Why does that one work?

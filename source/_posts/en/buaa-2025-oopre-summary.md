@@ -298,7 +298,7 @@ Based on my experience using JUnit in the OOPro course, I’ve found that:
   - **Polymorphism**: A single interface can be implemented by different objects to exhibit different behaviors.
   - **Abstraction**: Extract common characteristics and define abstract classes or interfaces.
 
-  - Through these mechanisms, OOP languages offer a high degree of flexibility, maintainability, and scalability when dealing with similar types of problems, providing us with new approaches to problem-solving.
+  - Through these mechanisms, OOP languages offer a high degree of flexibility, maintainability, and scalability when dealing with similar types of problems, providing me with new approaches to problem-solving.
 - After completing the OOPre course, I gained a basic understanding of the most critical concepts in object-oriented languages, laying the groundwork for the main course ahead.
 - At the same time, introducing the concept of `CheckStyle` can help students develop good coding practices right from the start.
 

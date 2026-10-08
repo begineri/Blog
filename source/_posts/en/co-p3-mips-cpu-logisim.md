@@ -439,7 +439,7 @@ Sign-extend the 16-bit immediate to 32 bits. To improve extensibility, the ``OPE
     * `ALUOp[2:0]`: A 3-bit opcode from the Main Control Unit.
     * `Func[5:0]`: The `[5:0]`-bit (function code) from the instruction.
 * **Outputs:**
-    * `ALUCtrl[3:0]`: The 4-bit final operation code sent to the ALU (we previously agreed that `0000` = ADD, `0001` = SUB, `0010` = AND, `0011` = OR, `0100` = SLT, and `0101` = SLL).
+    * `ALUCtrl[3:0]`: The 4-bit final operation code sent to the ALU (I previously agreed that `0000` = ADD, `0001` = SUB, `0010` = AND, `0011` = OR, `0100` = SLT, and `0101` = SLL).
     * `JR[0]`: **(New output)** Used for command `jr`. This signal is 1 when `ALUOp=100` and `Func=001000` are true.
 
 ##### 1.3 Truth Tables
@@ -472,7 +472,7 @@ The reason there can’t be any extra ROMs is that during testing, the system us
 ---
 
 Thinking Questions
-1. Currently, in our modules, IM uses ROM, DM uses RAM, and GRF uses registers. Is this approach reasonable? Please provide an analysis, and if you have any suggestions for improvement, please include them as well.
+1. Currently, in my modules, IM uses ROM, DM uses RAM, and GRF uses registers. Is this approach reasonable? Please provide an analysis, and if you have any suggestions for improvement, please include them as well.
 A: That makes sense. ROM is read-only memory, so it can be used to store instructions; RAM is both readable and writable, so it meets the DM’s read-write requirements; GRF is a register file, which requires high read-write speeds, so it is suitable for implementation using registers.
 2. In fact, to implement the NOP (no-op) instruction, we don’t need to add it to the control signal truth table. Why? Please explain your reasoning.
 A: The NOP instruction has the code 0x00000000, which is equivalent to `sll $0, $0, 0`. This shifts the value in the $0 register 0 bits to the left and writes it back to the $0 register. Since the value of $0 is always 0, it remains unchanged; therefore, executing this instruction has no effect.Even if the CPU does not support the SLL instruction, the NOP instruction will not perform any operations on any circuit components and will have no effect on the circuit.

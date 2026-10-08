@@ -39,7 +39,7 @@ You need to select a folder on your physical hard drive to store your WeChat cha
 ### 2.3 Setting Up Sandbox Rules
 
 1. Right-click the sandbox you just created, then click **Sandbox Options** \-\> **Resource Access** \-\> Files
-2. Click “Add File/Folder,” then set all files in the user directory on Drive C and all other unrelated drives to “Block” (I didn’t block the entire D: drive here because that might prevent WeChat from finding the D:\Tencent\Wechat folder we need; so I manually blocked all folders except this one individually).
+2. Click “Add File/Folder,” then set all files in the user directory on Drive C and all other unrelated drives to “Block” (I didn’t block the entire D: drive here because that might prevent WeChat from finding the D:\Tencent\Wechat folder I need; so I manually blocked all folders except this one individually).
 Optional examples include
    * C:\\Users\\YourUsername\\Desktop\* (Desktop)
    * C:\Users\YourUsername\Documents\* (Documents)

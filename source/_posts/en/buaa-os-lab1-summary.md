@@ -11,17 +11,17 @@ To complete this experiment, you’ll first need to familiarize yourself with th
 
 #### QEMU Emulator
 Operating systems run on hardware, and to better manage the hardware resources of a computer system, an operating system is required.
-QEMU provides a simulated hardware environment—such as a CPU—that runs the executable files we ultimately [cross-compile](#cross-compilation).
+QEMU provides a simulated hardware environment—such as a CPU—that runs the executable files I ultimately [cross-compile](#cross-compilation).
 
 ---
 
 <span id="cross-compilation"></span>
 #### Cross-Compilation
 There are two environments in the experiment
-- Platform A (Host): A jump server provided by the school; this is where we write code and run `make` commands.
+- Platform A (Host): A jump server provided by the school; this is where I write code and run `make` commands.
 - Platform B (Target): The environment in which the MOS kernel currently under development is to run. In this experiment, this is a hardware environment emulated by QEMU, with a MIPS CPU architecture.
 
-To compile a program on A that runs on B, we need to use **a cross-compilation toolchain**—such as the ``mips-linux-gnu-gcc`` tool in the [Makefile](#Makefile)—which translates C code into low-level binary instructions for the MIPS architecture.
+To compile a program on A that runs on B, I need to use **a cross-compilation toolchain**—such as the ``mips-linux-gnu-gcc`` tool in the [Makefile](#Makefile)—which translates C code into low-level binary instructions for the MIPS architecture.
 
 ---
 
@@ -130,7 +130,7 @@ Based on the Makefile mentioned earlier, the following steps were taken from run
 ### Operating System Boot Process
 > pull oneself up by one’s bootstraps
 
-Faced with a blank memory, how does a complex operating system boot up?On actual bare-metal hardware, when the power is first turned on, a small piece of basic code (the bootloader) is needed to load the massive operating system from the hard drive into memory. In our experiment, however, QEMU comes with built-in boot functionality that can directly recognize and load the ELF-format kernel we’ve compiled,so we don’t have to worry about the complex boot process.
+Faced with a blank memory, how does a complex operating system boot up?On actual bare-metal hardware, when the power is first turned on, a small piece of basic code (the bootloader) is needed to load the massive operating system from the hard drive into memory. In my experiment, however, QEMU comes with built-in boot functionality that can directly recognize and load the ELF-format kernel I’ve compiled, so I don’t have to worry about the complex boot process.
 
 So, after the emulator (QEMU) loads the kernel, it first jumps to the assembly entry point at `_start`:
 ``` 

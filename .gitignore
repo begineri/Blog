@@ -7,3 +7,7 @@ public/
 .deploy*/
 _multiconfig.yml
 *.local.md
+translations/
+tools/translate-posts.mjs
+.env
+.env.*

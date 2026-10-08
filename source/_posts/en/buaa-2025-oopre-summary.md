@@ -13,11 +13,11 @@ tags:
 - Adventurer
 - Items (Bottle, Equipment)
 - Spell
-- Backpack System (Bag)
-- Using Items (Potions and Spells) (UseItem)
-- Combat System and Adventurer Attributes (Fight)
-- The Money System
-- Employment Relationships and Assistance (Employer, Employee)
+- Bag (Backpack System)
+- UseItem (Potions and Spells)
+- Fight (Combat System and Adventurer Attributes)
+- Money System
+- Employer, Employee (Employment Relationships and Assistance)
 
 ---
 

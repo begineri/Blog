@@ -3,7 +3,7 @@ lang: en
 title: "Flashing and Brick Recovery Logs"
 date: 2026-02-16 16:03:52
 tags:
-    - 刷机
+    - flashing
 ---
 
 > The Truth About Flashing ROMs:

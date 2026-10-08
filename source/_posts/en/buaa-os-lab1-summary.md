@@ -71,7 +71,7 @@ The compiler (gcc) is responsible for converting each `.c` source file into a se
 The linker is responsible for the following tasks:
 - Merging Sections: Merge all code segments (`.text`) from the input files together, merge all data segments (`.data`) together, and do the same for the other segments.
 - Relocation: Assigning an absolute memory address to every line of code and every variable so that the CPU can access them.
-- Symbol Resolution: The linker is responsible for finding the exact address of the called function and directing the call instruction to that location. For example, when a function in `main.c` is called from `fibo.c`.
+- Symbol Resolution: The linker is responsible for finding the exact address of the called function and directing the call instruction to that location. For example, when `main.c` calls a function in `fibo.c`.
 
 ##### Linker Script
 A linker script is a plain text file (`kernel.lds`) that instructs the linker on how to organize memory.
@@ -95,7 +95,7 @@ SECTIONS
 ```
 
 As shown in the code above, the script defines the following:
-- By setting the position counter to `.`, we force the kernel's `.text` to start from a specific point.
+- Using the location counter (`.`), the kernel's `.text` is forced to start at a specific address.
 - The rules state that memory must first contain a `.text`, then a `.data`, and finally a `.bss`.
 - Handling CPU Alignment Requirements
 - Specifies the entry point for the first instruction after the system powers on (`_start`)
@@ -154,11 +154,11 @@ clear_bss_done:
 	/* jump to mips_init */
 	j mips_init
 ```
-I’ve made the following preparations here:
+The following preparations are made here:
 1. Iterate through the virtual address range of Section `.bss` (from `bss_start` to `bss_end`) and set the memory of uninitialized global/static variables to zero.
 2. Interrupt Masking: `mtc0 zero, CP0_STATUS` Masks external interrupts to ensure that subsequent boot logic is not interrupted.
 3. Building the stack: Stack pointer register (`sp`) <- kernel stack top address (`KSTACKTOP`), providing the necessary space for the function call stack and local variables.
-4. When the value reaches `j mips_init`, the program counter (PC) points to the initialization main function defined in C. At this point, the kernel’s low-level boot phase is complete, and system control is handed over to the C portion of the kernel.
+4. Via `j mips_init`, the program counter (PC) points to the initialization main function defined in C. At this point, the kernel’s low-level boot phase is complete, and system control is handed over to the C portion of the kernel.
 
 And with that, the work on Lab 1 is complete.
 
@@ -173,7 +173,7 @@ It feels good to be writing C again after such a long time—including working w
 Writing source code has truly deepened my understanding of theoretical concepts, particularly giving me a more in-depth understanding of the ELF file structure, linker scripts, and the MIPS architecture.
 
 ---
-Appendix: `include/mmu.h`. Memory Layout Diagram of the Middle Kernel):
+Appendix: kernel memory layout diagram in `include/mmu.h`):
 
 ``` c
 /*

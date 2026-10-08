@@ -19,7 +19,7 @@ tags:
 
 ---
 
-### 1.1 Assembled Components
+### 1.1 Combinational Components
 
 #### 1.1.1 ALU (Arithmetic Logic Unit)
 
@@ -35,14 +35,14 @@ tags:
 
 * **Port Definitions**
 
-|Signal Name|Focus|Bit width|Description|
+|Signal Name|Direction|Bit width|Description|
 | :-------- | :---: | :---: | :------------------------- |
 | `SrcA`    |   I   |  32   |32-bit Operand A|
 | `SrcB`    |   I   |  32   |32-bit Operand B|
 | `ALUCtrl` |   I   |   4   |4-bit Operand Control Signal|
 | `Shift`   |   I   |   5   |5 Shift Amount (`shamt`)|
 | `Result`  |   O   |  32   |Calculation Results|
-| `Zero`    |   O   |   1   |1 with leading zero `Equal(zero)`|
+| `Zero`    |   O   |   1   |1-bit zero flag `Equal(zero)`|
 
   * **Functional Definition**
 
@@ -58,7 +58,7 @@ tags:
   * `0001`: `Result = SrcA - SrcB` (Subtraction)
   * `0010`: `Result = SrcA & SrcB` (bitwise AND)
   * `0011`: `Result = SrcA | SrcB` (bitwise OR)
-  * `0100`: `Result = (SrcA < SrcB) ? 1 : 0` (`slt` posts)
+  * `0100`: `Result = (SrcA < SrcB) ? 1 : 0` (signed `slt`)
   * `0101`: `Result = SrcB << Shift` (Logical Shift Left)
 
 ![ALU](/images/ALU.png)
@@ -81,7 +81,7 @@ tags:
 
 * **Port Definitions**
 
-|Signal Name|Focus|Bit width|Description|
+|Signal Name|Direction|Bit width|Description|
 | :---------- | :---: | :---: | :-------------------- |
 | `ReadAddr1` |   I   |   5   |Read address `RA1` from port 1|
 | `ReadAddr2` |   I   |   5   |Read the address at port 2: `RA2`|
@@ -121,9 +121,9 @@ tags:
 
  * **Port Definitions**
 
-|Signal Name|Focus|Bit width|Description|
+|Signal Name|Direction|Bit width|Description|
 | :---------- | :---: | :---: | :----------------------------------- |
-| `Address`   |   I   |  32   |32-bit **byte address** (starting at `ALUResult`)|
+| `Address`   |   I   |  32   |32-bit **byte address** (from `ALUResult`)|
 | `WriteData` |   I   |  32   |32 bits of data to be written (`WA`)|
 | `MemRead`   |   I   |   1   |Reading Enable Signals (`RE`)|
 | `MemWrite`  |   I   |   1   |Writing Enable Signals (`WE`)|
@@ -161,7 +161,7 @@ tags:
 
 * **Port Definitions**
 
-|Signal Name|Focus|Bit width|Description|
+|Signal Name|Direction|Bit width|Description|
 | :----------- | :---: | :---: | :------------------------------------------------------------- |
 | `PC_in`  |   I   |  32   |The Value of `PC` (from Module `IFU`)|
 | `Offset_Ext` |   I   |  32   |32-bit **Signed-Extended** Immediate (from the ``EXT`` module)|
@@ -199,7 +199,7 @@ tags:
 
   * **Port Definitions**
 
-|Signal Name|Focus|Bit width|Description|
+|Signal Name|Direction|Bit width|Description|
 | :----- | :---: | :---: | :----------------------------------------- |
 | `A`    |   I   |  32   |32-bit **byte address** (`PC` from module `IFU`)|
 | `RD`   |   O   |  32   |A 32-bit **instruction code** read from memory|
@@ -217,14 +217,14 @@ tags:
 
   * **Port Definitions**
 
-|Signal Name|Focus|Bit width|Description|
+|Signal Name|Direction|Bit width|Description|
 | :-------- | :---: | :---: | :----------------------------------------------------- |
 | `Next_PC` |   I   |  32   |The PC value to be loaded in the next clock cycle (from module `NPC`)|
 | `clk`     |   I   |   1   |System Clock Signal|
 | `reset`   |   I   |   1   |System Asynchronous Reset Signal|
 | `stop`    |   I   |   1   |Clock Enable signal (active-low, used to pause the PC)|
 | `PC`      |   O   |  32   |Address values stored in the **current** PC register (set to `IM` and `NPC`)|
-| `Instr`   |   O   |  32   |`PC`: Corresponding **current script** (from Module `IM`)|                |
+| `Instr`   |   O   |  32   |`PC`: Corresponding **current instruction** (from Module `IM`)|                |
 
   * **Functional Definition**
 
@@ -242,11 +242,11 @@ tags:
 
 #### 1.1.6 EXT (Extension Module)
 
-Extend the 16-bit immediate number sign to 32 bits. To improve extensibility, the ``OPExt`` interface has been added here.
+Sign-extend the 16-bit immediate to 32 bits. To improve extensibility, the ``OPExt`` interface has been added here.
 
   * **Port Definitions**
 
-|Signal Name|Focus|Bit width|Description|
+|Signal Name|Direction|Bit width|Description|
 | :------ | :--- | :--- | :-------------------------------------------------------- |
 | Imm\_16 | I    | 16   |16-bit immediate number input signal|
 | OPExt   | I    | 1    |Sign Extension Signal <br> 0: Unsigned extension (0 extension) <br> 1: Signed extension|
@@ -256,7 +256,7 @@ Extend the 16-bit immediate number sign to 32 bits. To improve extensibility, th
 
 |Number|Feature Name|Feature Description|
 | :--- | :------- | :----------------------- |
-| 1    |Symbol Expansion|Sign extension of a 16-bit immediate number|
+| 1    |Sign Extension|Sign extension of a 16-bit immediate number|
 
 ![EXT](/images/EXT.png)
 
@@ -266,9 +266,9 @@ Extend the 16-bit immediate number sign to 32 bits. To improve extensibility, th
 
   * **Port Definitions**
 
-|Signal Name|Focus|Bit width|Description|
+|Signal Name|Direction|Bit width|Description|
 | :------- | :---: | :---: | :------------------------------------------------------------- |
-| `Instr`  |   I   |  32   |A complete 32-bit instruction set from the IFU (Instruction Fetch Unit)|
+| `Instr`  |   I   |  32   |A complete 32-bit instruction from the IFU (Instruction Fetch Unit)|
 | `Opcode` |   O   |   6   |Opcode (`[31:26]`), sent to `Main Control Unit`|
 | `rs`     |   O   |   5   |Source register 1 (`[25:21]`), sent to `GRF[RA1]` and `NPC[Ra]`|
 | `rt`     |   O   |   5   |Source register 2 / Destination (`[20:16]`), sent to `GRF[RA2]` and `RegDst MUX`|
@@ -276,7 +276,7 @@ Extend the 16-bit immediate number sign to 32 bits. To improve extensibility, th
 | `shamt`  |   O   |   5   |Shift amount (`[10:6]`), sent to `ALU[Shamt]`|
 | `funct`  |   O   |   6   |Function code (`[5:0]`), sent to `ALU Control Unit`|
 | `imm16`  |   O   |  16   |16-bit immediate value (`[15:0]`), sent to `EXT` and `LUI Shifter`|
-| `imm26`  |   O   |  26   |26 jump addresses (`[25:0]`), forwarded to `NPC`|
+| `imm26`  |   O   |  26   |26-bit jump address (`[25:0]`), forwarded to `NPC`|
 
   * **Functional Definition**
 
@@ -288,9 +288,9 @@ Extend the 16-bit immediate number sign to 32 bits. To improve extensibility, th
 
 ---
 
-### Command Format
+### Instruction Format
 
-#### R Command Syntax
+#### R-type Instruction Format
 
 ![R型指令格式](/images/R型指令格式.png)
 
@@ -307,7 +307,7 @@ Extend the 16-bit immediate number sign to 32 bits. To improve extensibility, th
 | :---: | :---: | :---: | :---: | :---: |
 |Bit width|   6   |   5   |   5   |  16   |
 
-#### Branch Command Format
+#### Branch Instruction Format
 ![分支指令格式](/images/分支指令格式.png)
 
 ##### `beq rs,  rt,  imm16`
@@ -315,7 +315,7 @@ Extend the 16-bit immediate number sign to 32 bits. To improve extensibility, th
 | :---: | :---: | :---: | :---: | :---: |
 |Bit width|   6   |   5   |   5   |  16   |
 
-#### Format for navigation links
+#### Jump Instruction Format
 ![跳转指令格式](/images/跳转指令格式.png)
 ##### `j add26 `
 |Operations|  Op   | JAdd  |
@@ -360,31 +360,31 @@ Extend the 16-bit immediate number sign to 32 bits. To improve extensibility, th
 ##### 2.1 Design Approach
 
 
-1.  **`MemtoReg` (2 people):**
+1.  **`MemtoReg` (2 bits):**
     * `00`: `ALUResult` (for R-type, `ori`)
     * `01`: `DM[ReadData]` (for `lw`)
     * `10`: `LUI_Value` (for `lui`)
 2.  **`ExtOp` (1):** Used to control expansion units.
     * `0`: Zero Extensions (for `ori`)
-    * `1`: Symbol Expansion (for `lw`, `sw`, `beq`)
-3.  **`Jump` (1 person):** (`PCJump` in the figure) used for `j` commands.
+    * `1`: Sign Extension (for `lw`, `sw`, `beq`)
+3.  **`Jump` (1 bit):** (`PCJump` in the figure) used for `j` commands.
 4.  **`JR` Signal:** Moved to `ALU Control Unit`.
 
 ##### 2.2 Port Definitions
 
 * **Inputs:**
-    * `Opcode[5:0]`: The `[31:26]`-bit (opcode) from the script.
+    * `Opcode[5:0]`: The `[31:26]`-bit (opcode) from the instruction.
 * **Outputs:**
     * `RegDst[0]`: (1: R-type writes `rd`, 0: I-type writes `rt`)
     * `ALUSrc[0]`: (1: Immediate count, 0: `GRF[ReadData2]`)
-    * `MemtoReg[1:0]`: (2 characters) (Choosing a data source to write back to GRF)
+    * `MemtoReg[1:0]`: (2 bits) (Choosing a data source to write back to GRF)
     * `RegWrite[0]`: (1: Allows writing to GRF)
     * `MemRead[0]`: (1: Allows reading DMs)
     * `MemWrite[0]`: (1: Allows DMs)
     * `Branch[0]`: (1:`beq` command)
     * `Jump[0]`: (1:`j` command)
-    * `ExtOp[0]`: (1: symbol expansion, 0: zero expansion)
-    * `ALUOp[2:0]`: (3 people) (Sent to `ALU Control Unit`)
+    * `ExtOp[0]`: (1: sign extension, 0: zero expansion)
+    * `ALUOp[2:0]`: (3 bits) (Sent to `ALU Control Unit`)
 
 ##### 2.3 Truth Tables
 
@@ -412,9 +412,9 @@ Extend the 16-bit immediate number sign to 32 bits. To improve extensibility, th
 
 **Explanation of `nop` (0x00000000):**
 `nop`: Command `Opcode` is `000000`, and `Funct` is `000000`.
-1.  `Main Control` would consider it an **R-type** game.
+1.  `Main Control` would consider it an **R-type**.
 2.  `ALU Control` is treated as **`sll`**.
-3.  It ultimately returns `sll $zero, $zero, 0`.
+3.  It ultimately executes `sll $zero, $zero, 0`.
 4.  The controller will attempt to write the result `0` to register `$zero`.
 
 ---
@@ -437,7 +437,7 @@ Extend the 16-bit immediate number sign to 32 bits. To improve extensibility, th
 
 * **Inputs:**
     * `ALUOp[2:0]`: A 3-bit opcode from the Main Control Unit.
-    * `Func[5:0]`: The `[5:0]`-bit (function code) from the script.
+    * `Func[5:0]`: The `[5:0]`-bit (function code) from the instruction.
 * **Outputs:**
     * `ALUCtrl[3:0]`: The 4-bit final operation code sent to the ALU (we previously agreed that `0000` = ADD, `0001` = SUB, `0010` = AND, `0011` = OR, `0100` = SLT, and `0101` = SLL).
     * `JR[0]`: **(New output)** Used for command `jr`. This signal is 1 when `ALUOp=100` and `Func=001000` are true.
@@ -464,8 +464,8 @@ Extend the 16-bit immediate number sign to 32 bits. To improve extensibility, th
 
 After-Class Summary:
 I managed to solve two problems for P3, so I guess I passed. During the first week, I didn’t estimate the time needed to complete the tasks properly, so I didn’t finish by Sunday and ended up falling a week behind schedule.
-So on Monday, I was happy to get the chance to work on it during my time off, but it ended up taking me a day and a half to finish the final version.
-But the final version didn’t even pass the limited beta testing. Skipping over the lengthy debugging phase, I eventually asked a teaching assistant for help and discovered that the cause of the bug was actually **an extra ROM**!!
+So on Monday I got the lab test off, and it still took more than a day and a half to finish the final version.
+But the final version didn’t even pass the weak test. Skipping over the lengthy debugging phase, I eventually asked a teaching assistant for help and discovered that the cause of the bug was actually **an extra ROM**!!
 After converting this ROM into logic elements, it passed the test.
 The reason there can’t be any extra ROMs is that during testing, the system uses regular expressions to match the ROMs and then reads the data from them, so adding a ROM would cause the test to fail.
 

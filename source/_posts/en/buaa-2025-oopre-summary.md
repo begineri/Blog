@@ -147,7 +147,7 @@ After analysis, it was found that the items possessed by adventurers (equipment,
 
       * Define the common **characteristics** of all “items.” For example, the `id` and `use` methods.
 
-  * **Top-level categories (Branches): `Equipment`, `Spell`, `Bottle`**
+  * **First-level categories (Branches): `Equipment`, `Spell`, `Bottle`**
 
       * These three classes extend ``Item``.
       * They are **abstract classes** themselves, used to define the common characteristics of their respective categories.
@@ -213,12 +213,12 @@ After analysis, it was found that the items possessed by adventurers (equipment,
 
 ##### Action Execution and Polymorphism
 * **`fight(targets)`:** Encapsulated the combat logic.
-* **`useItem(target)`:** Encapsulates the logic for using items and spells. It delegates execution to the object’s own methods `Item`, `checkUse()`, and `useSuccessfully()`, thereby implementing polymorphism.
+* **`useItem(target)`:** Encapsulates the logic for using items and spells. It delegates execution to the `Item` object’s own `checkUse()` and `useSuccessfully()` methods, thereby implementing polymorphism.
 * **`takeItem(itemId)` / `removeItem(itemId)`:** Methods `equip()` and `unequip()` are both delegated to object `Item`; class `Adventurer` is not concerned with the logic of specific equipment and is only responsible for making the calls.
 
 ##### Implementing an Employment Relationship
 * Implement both **the Employee and Employer interfaces**:
-    * As `Employer`: It has methods `hire()` and `fire()`, and maintains a **list of children**.
+    * As `Employer`: It has methods `hire()` and `fire()`, and maintains a **list of subordinates**.
     * As `Employee`: It has a **direct superior**.
 * **Relationship Graph Traversal:** Provides the `getAllEmployers()`  and `getAllEmployees()`  methods.
 * **Definition of an ally:** `getAllAllies()`-iteration.
@@ -241,7 +241,7 @@ public class Adventurer implements Employee, Employer {
     1.  When `Adventurer` `takeDamage()` is called and the reduced HP meets the conditions for issuing a rescue,
     2.  Call `notifyEmployees()` to “send a notification.”
 * **Observer:**
-    1.  In ``notifyEmployees()``, iterate through all child objects (observers) and call their ``aidEmployer()`` method.
+    1.  In ``notifyEmployees()``, iterate through all subordinates (observers) and call their ``aidEmployer()`` method.
     2.  **The observer** reviews the assistance logic and attempts to assist the supervisor (Employer).
   
 ```java
@@ -275,14 +275,14 @@ public class Adventurer implements Employee, Employer {
 | `assertFalse(condition)`                |Check whether the condition is false|
 | `assertNotNull(object)`                |Check if it is not empty|
 | `assertNull(object)`                   |Check if it is empty|
-| `assertNotSame(expected, actual)`      |Check whether two related objects point to the same object|
+| `assertNotSame(expected, actual)`      |Check whether two related objects do not point to the same object|
 | `assertSame(expected, actual)`          |Checking whether two related objects point to the same object|
 | `assertArrayEquals(expectedArray, resultArray)` |Checking if two arrays are equal|
 
 
 Based on my experience using JUnit in the OOPro course, I’ve found that:
  - **What JUnit can do**: detect logical issues within methods caused by oversight. By ensuring a coverage rate of `Run with Coverage`, you can test nearly all the code you write, making it easy to spot even minor errors in your code when constructing and testing test cases.
- - **What JUnit Can’t Do**: Detect Certain Logical Flaws.Since I’ve been writing all my JUnit tests myself at this stage, if I didn’t consider a particular scenario while writing the code, I naturally wouldn’t construct such a test case when writing the JUnit tests. Consequently, I couldn’t detect errors in the program, which led to new, undetected bugs appearing in subsequent assignments. To find these bugs, I had to reexamine the program’s logic.
+ - **What JUnit Can’t Do**: Detect Certain Logical Flaws.Since I’ve been writing all my JUnit tests myself at this stage, if I didn’t consider a particular scenario while writing the code, I naturally wouldn’t construct such a test case when writing the JUnit tests. Consequently, I couldn’t detect errors in the program, which led to new, undetected bugs appearing on the strong tests of later assignments. To find these bugs, I had to reexamine the program’s logic.
 
 ---
 
@@ -312,7 +312,7 @@ Based on my experience using JUnit in the OOPro course, I’ve found that:
 
 #### 2. The Gradual Introduction of Engineering Architecture Concepts
 - I recommend incorporating a bit of architectural thinking into each assignment, rather than just briefly mentioning it at the end, so that students can adjust and improve their frameworks in a timely manner—rather than letting them become increasingly cluttered, which severely impacts readability and makes it difficult to add new features later on.
-- It also introduces the concept of package management, which makes it easier to manage multiple classes within a project.
+- The course could also introduce package management, which would make it easier to manage multiple classes within a project.
 
 - I suggest the course team provide an introduction to some of IDEA’s features (such as keyboard shortcuts, quick methods, etc.).
 

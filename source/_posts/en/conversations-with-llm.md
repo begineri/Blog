@@ -173,7 +173,7 @@ However, as we know from discrete mathematics, if a is true and b is true, then 
 
 
 **Me：**
-So, why can’t LLMs be given the ability to directly determine absolute truth or falsehood? (They could draw on more than just this paper; they could incorporate other knowledge as well.)
+So, why can’t LLMs be given the ability to directly determine absolute truth or falsehood? (You don’t have to stick to this paper; you can bring in other knowledge as well.)
 
 **Ge：**
 > This is currently the most central issue in artificial intelligence research, and it is also a “Holy Grail”-like challenge.
@@ -182,7 +182,7 @@ So, why can’t LLMs be given the ability to directly determine absolute truth o
 > 
 > An LLM is **a probabilistic model**, not a **logical model**. It aims for **“plausibility”** rather than **“absolute correctness” (factuality or soundness)**.
 > 
-> ### 1. A Fundamental Mismatch in Architecture: It Was Trained to Be a “Player,” Not a “Referee”
+> ### 1. A Fundamental Mismatch in Architecture: It Was Trained to Be an “Actor,” Not a “Referee”
 > 
 > * **LLM (Probabilistic Performer):** The fundamental task of an LLM (such as the GPT series) is to* *predict the next most likely word**. It is trained on a massive dataset (the internet, books) and has learned countless statistical patterns of human language.When it responds, “If A is true and B is true, then A and B are true,” it is not “reasoning”; it is “reproducing” logical text it has encountered before. It knows this sentence structure is highly probable and “sounds correct.”
 > * **Logic Engine (Truth Evaluator):** The system you learned about in discrete mathematics is* *a symbolic logic engine**. It doesn’t concern itself with probability; it’s solely concerned with rules. It operates on “absolute” symbols such as `True` and `False`.

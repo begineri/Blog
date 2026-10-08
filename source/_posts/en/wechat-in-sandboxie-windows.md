@@ -39,13 +39,13 @@ You need to select a folder on your physical hard drive to store your WeChat cha
 ### 2.3 Setting Up Sandbox Rules
 
 1. Right-click the sandbox you just created, then click **Sandbox Options** \-\> **Resource Access** \-\> Files
-2. Click “Add File/Folder,” then set all files in the user directory on Drive C and all other unrelated drives to “Block” (I didn’t block the entire D: drive here because that might prevent WeChat from finding the D:\Tencent\WeChat folder we need; so I manually blocked all folders except this one individually).
+2. Click “Add File/Folder,” then set all files in the user directory on Drive C and all other unrelated drives to “Block” (I didn’t block the entire D: drive here because that might prevent WeChat from finding the D:\Tencent\Wechat folder we need; so I manually blocked all folders except this one individually).
 Optional examples include
    * C:\\Users\\YourUsername\\Desktop\* (Desktop)
    * C:\Users\YourUsername\Documents\* (Documents)
    * C:\\Users\\Your Username\\Pictures\* (Pictures)
    * E:\\\* (Completely block access to other drives that aren't needed)
-3. Add **"Full Access"** permissions to the accessible folder separately. Enter the following path: **D:\\Tencent\\WeChat** (Selecting "Open" here will prevent chat history from syncing.)
+3. Add **"Full Access"** permissions to the accessible folder separately. Enter the following path: **D:\\Tencent\\Wechat** (Selecting "Open" here will prevent chat history from syncing.)
 
 ![alt text](/images/沙盒/选项.png)
 
@@ -76,7 +76,7 @@ To make it as convenient to use as if it were installed on your local machine, y
 
 1. If this isn't displaying properly here, you can click *to browse the folder* and then create a new one.
    - Then change the target address to: `D:\DevTools\Sandboxie-Plus\SandMan.exe /box:WeChatBox "C:\Program Files\Tencent\Weixin\Weixin.exe"` (example)
-   - Change the icon to `%SystemDrive%\Sandbox\WANG\WeChatBox\drive\C\Program Files\Tencent\Weixin\Weixin.exe` (click to view, then type it in and press Enter)
+   - Change the icon to `%SystemDrive%\Sandbox\WANG\WeChatBox\drive\C\Program Files\Tencent\Weixin\Weixin.exe` (click Browse, then type it in and press Enter)
 
 Configuration is now complete, as shown in the figure:
 ![alt text](/images/沙盒/3.png)

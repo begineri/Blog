@@ -23,7 +23,7 @@ tags:
 
 My old phone was with me throughout my three years of high school and the first half of my college years. After three years of (relatively) heavy use, it ran out of storage space and its battery life became poor, so it was finally time for an upgrade.
 
-My old phone was a Honor, which couldn’t install the Google framework, let alone be rooted. Back then, being young and naive, I had no choice but to put up with all sorts of ads I couldn’t delete, extremely low privacy, and terrible ad experiences.
+My old phone was a Honor, which couldn’t install the Google framework, let alone be flashed. Back then, being young and naive, I had no choice but to put up with all sorts of ads I couldn’t delete, extremely low privacy, and terrible ad experiences.
 
 Finally, I saw a content creator I really like recommend the OnePlus 13, and that’s *when* I *first* learned about the concept of flashing a ROM—it felt like a whole new world had opened up to me.
 
@@ -80,7 +80,7 @@ Looking back, the main cause was probably a **charging module** I installed that
 
 ### The Process of Rescuing a Bricked Device
 Here’s how I went about it:
-- Since this is a module issue, I tried using a case to disable all KernelSU modules at startup: it failed, and I couldn't disable them.
+- Since this is a module issue, I tried using key presses to disable all KernelSU modules at startup: it failed, and I couldn't disable them.
 - Unroot the device, and the module will naturally stop working: Specifically, I reflashed the stock init_boot partition, and the device did indeed boot up successfully in the end.
  
 It looks simple, but it was actually the result of quite a bit of searching and trial and error. It seems natural and easy to understand now, but at the time, I spent a long time searching all over the web before I could confirm this method. I even went to customer service at one point, but just as I was about to demonstrate my reboot loop to them, my phone *miraculously* restarted right then and there(I hadn’t been able to do it before—even though I’d flashed `init_boot`, once I regained root access and flashed the patched `init_boot` partition back, the phone got stuck in a boot loop again).If I hadn’t succeeded here, I would have had to wipe all my data, but I don’t know what prerequisite was met at that moment—everything returned to normal, and the crisis was over.
@@ -92,7 +92,7 @@ I chose version 864 because it’s the latest version of OOS15. Any newer versio
 
 Before updating, I saw that this tutorial on OTA updates looked so simple that I was in a hurry to update. As a result, I didn’t back up my data at all, nor did I turn off the local module; I just started the process right away. After executing:
 1. Launch the local installation
-2. Download the installation package from the REPO on your computer
+2. Download the installation package on the computer (REPO)
 3. Install on Your Phone
 4. KSU Install to inactive slot (After OTA)
 5. Select "Restart" in the software update section
@@ -100,7 +100,7 @@ Before updating, I saw that this tutorial on OTA updates looked so simple that I
 Based entirely on the following tutorial:
 ![参考](/images/刷机/image.png)
 
-After a series of issues, it won't turn on again.
+After that sequence of steps, it wouldn't turn on again.
 
 ### Brick Rescue
 Current Status: This OnePlus model uses an A/B partition design with seamless updates. Currently, the new version is on the B partition, the old version is on the A partition, and the data partition is shared.
@@ -116,13 +116,13 @@ It’s already past midnight (yes, yet another problem caused by flashing the RO
 When I woke up this morning, I tried the following again:
 - I started searching major forums (KuAn, XDA...), but didn't find much information.
 - Desperate, I tried to find a professional to save my bricked phone: I asked everyone I could find on forums, QQ groups, and Xianyu, but only two people, after hearing my description, said there was a small chance *the data could still be recovered;* the rest all said the only option was to wipe the device and flash the firmware.
-- *Struggling* with *lost data that wasn’t backed up*, I’m cautiously trying out the methods suggested by AI.
-- Key Points and Turning Points: Using the previous full backup, I completely reinstalled the new system from scratch.
+- *Struggling to save* the *data that wasn’t backed up*, I’m cautiously trying out the methods suggested by AI.
+- Key Points and Turning Points: Using the earlier full firmware package, I flashed the new system in full once more.
 - Disable vbmeta validation as follows:
 ![alt text](/images/刷机/image-6.png)
 
 And with that, it’s successfully booted up!
-Even though I rooted it, the data is still intact, and the update was successful!
+Even though root was lost, the data is still intact, and the update was successful!
 
 ---
 

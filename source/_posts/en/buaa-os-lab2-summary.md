@@ -14,7 +14,7 @@ Just keep the following points in mind:
 
 1. When the operating system starts up: it determines the size of physical memory, then creates a massive array (pages), divides the physical memory into 4KB chunks, and allocates a `struct Page` to each chunk.
 2. Physical Memory Paging: 4 KB per page
-3. Free Memory Pool: Build a free list pool so that, during peak load, you don’t have to go through the hassle of allocating memory from the main memory every time—instead, you can simply retrieve a block from the head of the free list you’ve built. When freeing the memory, you can similarly just reinsert the block back into the head of the list.
+3. Free Memory Pool: Build a free list pool. The point is that you don’t have to go through the hassle of allocating memory from the main memory every time—instead, you can simply retrieve a block from the head of the free list you’ve built. When freeing the memory, you can similarly just reinsert the block back into the head of the list.
 4. Double-linked list: It achieves O(1) complexity for insertion, deletion, modification, and lookup, making it convenient and efficient. The key to understanding it is the secondary pointer: it always points to the arrow pointing back at you (which makes it easier to directly modify the content pointed to by the previous node).
 
 ``` c
@@ -43,7 +43,7 @@ struct Page {
 ---
 
 ## Analysis of Challenges:
-That description sounds simple enough, but in reality, even by relying on reading PowerPoint slides, textbooks, watching online courses, and even asking AI, I still encountered significant difficulties in understanding the material during my studies.Ultimately, I believe the main reasons were the obscure translations and the completely incomprehensible phrasing in the PowerPoint slides and textbooks: they were not at all intuitive, offered no explanation of “why this is needed” or “why it’s structured this way,” and simply presented all the concepts right from the start, leaving students to figure out the reading comprehension on their own.
+That description sounds simple enough, but in reality, even by relying on reading PowerPoint slides, the lab guide, watching online courses, and even asking AI, I still encountered significant difficulties in understanding the material during my studies.Ultimately, I believe the main reasons were the obscure translations and the completely incomprehensible phrasing in the PowerPoint slides and the lab guide: they were not at all intuitive, offered no explanation of “why this is needed” or “why it’s structured this way,” and simply presented all the concepts right from the start, leaving students to figure out the reading comprehension on their own.
 
 
 Take an example from a guidebook—it starts right off with a long, complex sentence:
@@ -66,7 +66,7 @@ Similarly, for `page_insert`:
 
 Key Concepts:
 1. Page control block (pp): A pointer to a structure, `struct Page *`, which directly corresponds to a physical page
-2. Page table entry permissions: Specify whether the page table entry (PP) corresponding to this memory region is “read-only,” “read-write,” or “kernel-visible only.”
+2. Page table entry permissions: Specify whether the memory corresponding to `pp` is “read-only,” “read-write,” or “kernel-visible only.”
 3. This uses page2pa: converting a page pointer to a physical address
 
 In other words: Given a VA and a page table, locate the corresponding page table, then fill in the page table entry (using the VA, PP, and perm).
@@ -103,7 +103,7 @@ This is what the diagram illustrates, and the so-called “self-mapping” provi
 
 Through the same process, the CPU can access and modify the entire page table.
 
-The “why” and “how” here, as well as the guides and PowerPoint presentations, aren’t explicitly explained—readers will just have to figure it out for themselves.
+The lab guide and the slides never spell out the “why” and the “how” here—readers will just have to figure it out for themselves.
 
 ---
 

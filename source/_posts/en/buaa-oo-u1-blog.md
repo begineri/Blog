@@ -34,12 +34,12 @@ Complete class diagram for hw3:
    - The two largest classes in terms of code size are the global syntax tree construction factory `Parser` (184 lines) and the low-level algebraic operations `Poly` (180 lines); naturally, these two handle the most intensive logic scheduling and computational tasks in the system.
    - The code size of the vast majority of AST node classes (such as `ConFactor` and `FunctionFactor`) is strictly limited to between 20 and 40 lines. They sit between parsing and evaluation, existing solely as pure data structures, and are lightweight.
     
-2. Number of Methods (NOM) and Number of Features (NOF)
+2. Number of Methods (NOM) and Number of Fields (NOF)
    - The class with the most methods has `Poly` (17), followed by the class with `Parser` (12).
    - AST nodes typically have only 1 or 2 basic properties
 
 3. Method Lines of Code (Method LOC)
-   - Across all projects, there are 126 methods, with an average of just 8.16 lines of code per method.
+   - In the whole project, there are 126 methods, with an average of just 8.16 lines of code per method.
    - The longest method, ``Mono.toString()``, is 47 lines long, while the core logic for differentiation (the ``derive`` method for various node types) typically ranges from 2 to 5 lines.
 
 4. Controlling the Number of Branches (Circle Complexity v(G))
@@ -72,7 +72,7 @@ Overall Approach: **`Input`** **→ `Parser` → `toPoly` → `toString`**
   1. The "Dumb AST, Smart Engine" Layered Architecture**:
 The AST remains completely pure during the parsing and differentiation phases; all computations are deferred and concentrated in the underlying ``Poly``. This unidirectional dependency ensures extremely low coupling between classes.
   2. Implementation of Polymorphism:
-Through a dynamic assignment mechanism, the verbose `switch/if-else`-type checks commonly found in procedural programming have been completely eliminated. The differentiation logic has been seamlessly delegated to the respective Factor subclasses, resulting in excellent code extensibility and readability.
+Through a dynamic dispatch mechanism, the verbose `switch/if-else`-type checks commonly found in procedural programming have been completely eliminated. The differentiation logic has been seamlessly delegated to the respective Factor subclasses, resulting in excellent code extensibility and readability.
   3. Immutability and Avoiding Thread Safety Issues:
 For low-level polynomial operations (such as `mulP`) and substitution operations (`substitute`), the system extensively uses deep copies and the creation of new objects to return results. This eliminates the risk of data corruption caused by reference passing and ensures absolute robustness during higher-order differentiation and complex nested substitutions.
 
@@ -110,7 +110,7 @@ At this point, we only need to handle simple polynomial merging and simplificati
 * hw2
 With the introduction of nested parentheses (expression factors) and exponential functions (`exp`), simple AST traversal is insufficient to handle extremely complex algebraic expansions.
 To handle the merging and output of the final expressions, I ultimately separated the computation responsibilities from the AST and abstracted out the underlying algebraic engine—`Poly` (polynomials) and `Mono` (monomials). By implementing `HashMap<MonoKey, BigInteger>`, I transformed complex algebraic merging into $O(1)$ hash table aggregation.
-At the same time, architectural decoupling was achieved: the parsing, expansion (function substitution, evaluation of expressions), merging, and output (simplification, formatting) of expressions were designed as relatively independent modules, which helps reduce the system’s complexity and makes the code easier to maintain and debug.
+At the same time, architectural decoupling was achieved: the parsing, expansion (function substitution, selective evaluation), merging, and output (simplification, formatting) of expressions were designed as relatively independent modules, which helps reduce the system’s complexity and makes the code easier to maintain and debug.
 
 * hw3
 This assignment incorporates custom recursive function calls and nested differentiation operators (`dx`). During the input processing phase, the string representing the function definition is parsed into an AST, allowing for direct substitution of tree nodes when calling the function, which improves efficiency.
@@ -129,7 +129,7 @@ Here are the scalability solutions for the current design:
    * Contains an internal `Factor inner` property (used to store nested expressions).
 2. Logic of Differentiation by Polymorphism:
 Implementing Method `derive()` within `SinFactor`: Go directly to `return new Term(CosFactor(inner), inner.derive())`—this fits perfectly with the existing chain rule for differentiation. The existing iteration-based differentiation logic in `Expr` and `Term` does not need to be modified.
-3. Analysis layer processing:
+3. Parsing-layer handling:
 In the`Parser.parseFactor()`-branch, simply add support for recognizing the strings "sin" and "cos" and instantiate the corresponding Factors.
 4. Underlying Engine (No Refactoring Required):
    * If trigonometric functions do not need to be expanded or simplified, they can simply be wrapped in `Poly` and `MonoKey` and treated as immutable features. The same applies to existing addition and multiplication merging engines.
@@ -206,13 +206,13 @@ public class DerivativeVisitor implements ASTVisitor {
 There’s not much to write about this section, since we achieved **zero bugs** in all three rounds of mandatory and peer testing—thanks in part to the principle emphasized by Professor RWG:
 > **Don’t sacrifice correctness for performance**
 
-In the second and third iterations, I first ensured the correctness of polynomial merging without focusing on coefficient extraction and simplification for terms with coefficient `exp`. As a result, my optimization score may not be very high, but this was indeed the method I used to ensure the program was bug-free.
+In the second and third iterations, I first ensured the correctness of polynomial merging without focusing on extracting and simplifying coefficients inside `exp` expressions. As a result, my optimization score may not be very high, but this was indeed the method I used to ensure the program was bug-free.
 
 At the same time, to avoid bugs, I assign the value `final` to properties in the program that I do not want to change, perform deep copying when assigning values to elements, and pay special attention to potential issues that may arise when removing elements from containers, in order to prevent unexpected problems.
 
 Long lines of code and high cyclomatic complexity are also contributing factors to bugs; by reducing the complexity of these methods, you can significantly lower the likelihood of bugs occurring.
 
-Actually, there’s one more thing I want to vent about HW3: I didn’t do much final length optimization for this assignment, which caused me to end up in Room B during the peer review (full marks for correctness but low performance scores). Everyone in Room B was in the same situation, so hacking didn’t really get us anywhere. In contrast, in Room A, people were able to hack out a lot of points because of their optimization efforts.This resulted in Room A having both high scores on the strength side and high hack scores—doesn’t this encourage everyone to sacrifice correctness for performance?
+Actually, there’s one more thing I want to vent about HW3: I didn’t do much final length optimization for this assignment, which caused me to end up in Room B during the peer review (full marks for correctness but low performance scores). Everyone in Room B was in the same situation, so hacking didn’t really get us anywhere. In contrast, in Room A, people were able to hack out a lot of points because of their optimization efforts.This resulted in Room A having both high strong-test scores and high hack scores—doesn’t this encourage everyone to sacrifice correctness for performance?
 
 ### An analysis of the strategies I use when finding bugs in other people’s code
 * Main focus: Building a test machine that is efficient and capable of detecting a small number of bugs; effectiveness depends on the quality of the test machine.
@@ -252,7 +252,7 @@ Although I don’t have large language models generate code directly, they actua
 
 Unlike when I was learning C, where we started with every single syntax rule and every detail, in the OO course we were immediately faced with problem statements of over a thousand characters and hundreds of lines of code to write. This meant that we had to teach ourselves all the Java syntax and the details of implementing these tasks.
 
-There are many ways to teach yourself: reading JDK documentation, checking out online resources like the "Newbie Tutorial," taking online courses, or simply asking an AI.It’s easy to imagine that in the past, when people were learning Java, they would scour various documentation and tutorials (I did the same when I was learning C last year), but such searches were often time-consuming and lacked depth. Today, AI can essentially replace that entire process.
+There are many ways to teach yourself: reading JDK documentation, checking out online resources like Runoob (菜鸟教程), taking online courses, or simply asking an AI.It’s easy to imagine that in the past, when people were learning Java, they would scour various documentation and tutorials (I did the same when I was learning C last year), but such searches were often time-consuming and lacked depth. Today, AI can essentially replace that entire process.
 For example, if I want to learn about *the singleton pattern*, I can simply ask the AI, and it will provide different ways to implement it. Furthermore, you can ask it which one is best suited for my specific task, or what the underlying principles of the singleton pattern are.
 Compared to copying and pasting a chunk of code from some webpage—code you don’t even fully understand—and then tinkering with it, the advantages of this approach are obvious: **it’s specific, targeted, and in-depth**.
 
@@ -285,7 +285,7 @@ You could provide more tutorials or tips on the design patterns or specific synt
 The Lexer in the test machine must be very sensitive to whitespace characters.
       * **Spaces within numbers**: When reading a number, if it is immediately followed by a space, the lexer must recognize the subsequent number as a new token. For example, `12 34` would be parsed as `[NUM(12), NUM(34)]`.
       * **Consecutive Character Aggregation**: For `+++` or `---`, the lexer can output them as consecutive single-character tokens, which are then passed to the parser for evaluation.
-      * **Whitelist of invalid characters**: Any character not in the set `[0-9x\+\-\*\(\)\s\^sincosp]` (such as full-width spaces or tab variants) is immediately intercepted during the lexical phase.
+      * **Legal-character whitelist**: Any character not in the set `[0-9x\+\-\*\(\)\s\^sincosp]` (such as full-width spaces or tab variants) is immediately intercepted during the lexical phase.
       * **Length assertion**: After removing all whitespace characters, check whether the string length exceeds the specified limit.
 
    2. **Formal Syntax Layer (Parser): Intercepting Invalid Structures**

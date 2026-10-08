@@ -1,4 +1,5 @@
 ---
+lang: zh-CN
 title: 为什么创建这个博客
 #password: "0121"
 date: 2025-11-06 19:49:53

@@ -1,4 +1,5 @@
 ---
+lang: zh-CN
 title: 计组全踩坑记录
 date: 2025-12-25 12:50:19
 tags:

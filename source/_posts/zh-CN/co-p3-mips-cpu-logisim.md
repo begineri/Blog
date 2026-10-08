@@ -1,4 +1,5 @@
 ---
+lang: zh-CN
 title: buaa26-CO-P3-设计文档-Logisim
 date: 2025-11-10 22:02:51
 tags:

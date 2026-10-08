@@ -1,4 +1,5 @@
 ---
+lang: zh-CN
 title: 与LLM的一些对话记录
 date: 2025-11-13 18:46:17
 tags:

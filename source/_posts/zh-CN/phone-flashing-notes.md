@@ -1,4 +1,5 @@
 ---
+lang: zh-CN
 title: 刷机与救砖记录
 date: 2026-02-16 16:03:52
 tags:

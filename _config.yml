@@ -8,15 +8,18 @@ subtitle: ''
 description: '博客写给别人看的，笔记是写给自己看的  -- So this is a Blog, not a Note.'
 keywords:
 author: Wang
-language: en
+language:
+  - zh-CN
+  - en
 timezone: ''
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
 url: https://begineri.github.io/Blog
 root: /Blog/
-permalink: :year/:month/:day/:title/
+permalink: :lang/:year/:month/:day/:title/
 permalink_defaults:
+  lang: zh-CN
 pretty_urls:
   trailing_index: true # Set to false to remove trailing 'index.html' from permalinks
   trailing_html: true # Set to false to remove trailing '.html' from permalinks
@@ -32,7 +35,7 @@ i18n_dir: :lang
 skip_render:
 
 # Writing
-new_post_name: :title.md # File name of new posts
+new_post_name: :lang/:title.md # File name of new posts
 default_layout: post
 titlecase: false # Transform title into titlecase
 external_link:
@@ -101,6 +104,19 @@ theme: hexo-theme-cactus
 #next
 
 #landscape
+
+# -----------------------------------------------------------------
+# hexo-generator-i18n
+# -----------------------------------------------------------------
+i18n:
+  type:
+    - page
+    # 不要加 post（文章用文件夹分语言）
+  generator:
+    - archive
+    - category
+    - tag
+    - index
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment

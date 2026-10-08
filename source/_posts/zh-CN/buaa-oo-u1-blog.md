@@ -1,4 +1,5 @@
 ---
+lang: zh-CN
 title: buaa26-OO-u1
 date: 2026-03-27 18:01:31
 tags:

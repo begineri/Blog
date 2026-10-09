@@ -3,6 +3,11 @@ title: Changelog
 lang: en
 date: 2025-11-06 21:04:09
 ---
+
+### 2026-10-9
+* Launched the English version, which supports switching between Cn/En on pages and in articles.
+* Added English translations of all existing articles (translated using DeepL and manually edited).
+
 ### 2026-10-8
 * Planning multilingual support (English). For now, “Right-click” → “Google Translate” works reasonably well.
 

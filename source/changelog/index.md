@@ -3,6 +3,11 @@ title: Changelog
 lang: zh-CN
 date: 2025-11-06 21:04:09
 ---
+
+### 2026-10-9
+* 上线英文版，支持页面与文章的中英文切换。
+* 添加所有已有文章的英文翻译稿（deepL翻译，并润色）
+
 ### 2026-10-8
 * 准备尝试适配多语言（英语），目前可以使用“右键”->“谷歌翻译”来阅读英文版本，目前尝试起来，效果还不错能接受。
 * I'm planning to add multilingual support (English). For now, you can use “Right-click” -> “Google Translate” to read the English version. Based on my initial testing, the results are quite good and acceptable.

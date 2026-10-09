@@ -26,8 +26,8 @@ tags:
   - in:
     - SrcA, SrcB
     - ALUCtrl [3:0]
-    - Shift count: 5
-    - whether to check for overflow
+    - Shift: 5-bit shift amount
+    - FlowJudge: whether to check for overflow
   - out:
     - Equal(zero)
     - Result
@@ -40,7 +40,7 @@ tags:
 | `SrcA`    |   I   |  32   |32-bit Operand A|
 | `SrcB`    |   I   |  32   |32-bit Operand B|
 | `ALUCtrl` |   I   |   4   |4-bit operation control signal|
-| `Shift`   |   I   |   5   |5 Shift Amount (`shamt`)|
+| `Shift`   |   I   |   5   |5-bit shift amount (`shamt`)|
 | `Result`  |   O   |  32   |Calculation Results|
 | `Zero`    |   O   |   1   |1-bit zero flag `Equal(zero)`|
 
@@ -99,7 +99,7 @@ tags:
 | :---: | :------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |   1   |Concurrent Asynchronous Read <br> (Concurrent Read)|Read 32-bit data asynchronously (i.e., immediately) from addresses specified as `ReadAddr1` and `ReadAddr2`, and output it to ports `ReadData1` and `ReadData2`, respectively. (i.e., `RD1=RF[RA1]`, `RD2=RF[RA2]`)|
 |   2   |<br> (Synchronous Write)|When `RegWrite = 1`, on the rising edge of the `clk` signal, write the 32-bit data from port `WriteData` to the register specified by `WriteAddr`. (That is, `RF[WA] = WD`)|
-|   3   |`$zero` Register Logic|Port `ReadData` **must** output `0x00000000`. <br> `Reg0` must never be modified.|
+|   3   |`$zero` Register Logic|The corresponding `ReadData` port **must** output `0x00000000`. <br> `Reg0` must never be modified.|
 |   4   |Asynchronous Reset|                                                                                                                                                          |
 
 ![寄存器堆内部结构](/images/寄存器堆内部结构.png)
@@ -349,7 +349,7 @@ Sign-extend the 16-bit immediate to 32 bits. To improve extensibility, the ``OPE
 | MemRead  |None|DM Reading (Output)|
 | MemWrite |None|DM write (input)|
 | MemtoReg |Reg write <-- ALU|Reg <-- DM|
-|  Branch  |None|For the Beq command|
+|  Branch  |None|For the `beq` instruction|
 
 ----
 ### 2.2 Controller Design
@@ -364,8 +364,8 @@ Sign-extend the 16-bit immediate to 32 bits. To improve extensibility, the ``OPE
     * `00`: `ALUResult` (for R-type, `ori`)
     * `01`: `DM[ReadData]` (for `lw`)
     * `10`: `LUI_Value` (for `lui`)
-2.  **`ExtOp` (1):** Used to control expansion units.
-    * `0`: Zero Extensions (for `ori`)
+2.  **`ExtOp` (1 bit):** Used to control the extension unit.
+    * `0`: Zero Extension (for `ori`)
     * `1`: Sign Extension (for `lw`, `sw`, `beq`)
 3.  **`Jump` (1 bit):** (`PCJump` in the figure) used for the `j` instruction.
 4.  **`JR` Signal:** Moved to `ALU Control Unit`.
@@ -383,7 +383,7 @@ Sign-extend the 16-bit immediate to 32 bits. To improve extensibility, the ``OPE
     * `MemWrite[0]`: (1: allows writing to the DM)
     * `Branch[0]`: (1: `beq` instruction)
     * `Jump[0]`: (1: `j` instruction)
-    * `ExtOp[0]`: (1: sign extension, 0: zero expansion)
+    * `ExtOp[0]`: (1: sign extension, 0: zero extension)
     * `ALUOp[2:0]`: (3 bits) (Sent to `ALU Control Unit`)
 
 ##### 2.3 Truth Tables
@@ -411,7 +411,7 @@ Sign-extend the 16-bit immediate to 32 bits. To improve extensibility, the ``OPE
 * `111`: (Reserved)
 
 **Explanation of `nop` (0x00000000):**
-`nop`: Command `Opcode` is `000000`, and `Funct` is `000000`.
+`nop`: The instruction's `Opcode` is `000000`, and `Funct` is `000000`.
 1.  `Main Control` would consider it an **R-type**.
 2.  `ALU Control` is treated as **`sll`**.
 3.  It ultimately executes `sll $zero, $zero, 0`.
@@ -439,8 +439,8 @@ Sign-extend the 16-bit immediate to 32 bits. To improve extensibility, the ``OPE
     * `ALUOp[2:0]`: A 3-bit opcode from the Main Control Unit.
     * `Func[5:0]`: The `[5:0]`-bit (function code) from the instruction.
 * **Outputs:**
-    * `ALUCtrl[3:0]`: The 4-bit final operation code sent to the ALU (I previously agreed that `0000` = ADD, `0001` = SUB, `0010` = AND, `0011` = OR, `0100` = SLT, and `0101` = SLL).
-    * `JR[0]`: **(New output)** Used for command `jr`. This signal is 1 when `ALUOp=100` and `Func=001000` are true.
+    * `ALUCtrl[3:0]`: The 4-bit final operation code sent to the ALU (I previously defined `0000` = ADD, `0001` = SUB, `0010` = AND, `0011` = OR, `0100` = SLT, and `0101` = SLL).
+    * `JR[0]`: **(New output)** Used for the `jr` instruction. This signal is 1 when `ALUOp=100` and `Func=001000` are true.
 
 ##### 1.3 Truth Tables
 
@@ -464,7 +464,7 @@ Sign-extend the 16-bit immediate to 32 bits. To improve extensibility, the ``OPE
 
 After-Class Summary:
 I managed to solve two problems for P3, so I guess I passed. During the first week, I didn’t estimate the time needed to complete the tasks properly, so I didn’t finish by Sunday and ended up falling a week behind schedule.
-So on Monday I got the lab test off, and it still took more than a day and a half to finish the final version.
+So that earned me Monday off from the lab test, and it still took more than a day and a half to finish the final version.
 But the final version didn’t even pass the weak test. Skipping over the lengthy debugging phase, I eventually asked a teaching assistant for help and discovered that the cause of the bug was actually **an extra ROM**!!
 After converting this ROM into logic elements, it passed the test.
 The reason there can’t be any extra ROMs is that during testing, the system uses regular expressions to match the ROMs and then reads the data from them, so adding a ROM would cause the test to fail.
@@ -475,6 +475,6 @@ Thinking Questions
 1. Currently, in my modules, IM uses ROM, DM uses RAM, and GRF uses registers. Is this approach reasonable? Please provide an analysis, and if you have any suggestions for improvement, please include them as well.
 A: That makes sense. ROM is read-only memory, so it can be used to store instructions; RAM is both readable and writable, so it meets the DM’s read-write requirements; GRF is a register file, which requires high read-write speeds, so it is suitable for implementation using registers.
 2. In fact, to implement the NOP (no-op) instruction, we don’t need to add it to the control signal truth table. Why? Please explain your reasoning.
-A: The NOP instruction has the code 0x00000000, which is equivalent to `sll $0, $0, 0`. This shifts the value in the $0 register 0 bits to the left and writes it back to the $0 register. Since the value of $0 is always 0, it remains unchanged; therefore, executing this instruction has no effect.Even if the CPU does not support the SLL instruction, the NOP instruction will not perform any operations on any circuit components and will have no effect on the circuit.
+A: The NOP instruction has the code 0x00000000, which is equivalent to `sll $0, $0, 0`. This shifts the value in the $0 register 0 bits to the left and writes it back to the $0 register. Since the value of $0 is always 0, it remains unchanged; therefore, executing this instruction has no effect. Even if the CPU does not support the SLL instruction, the NOP instruction will not perform any operations on any circuit components and will have no effect on the circuit.
 
 

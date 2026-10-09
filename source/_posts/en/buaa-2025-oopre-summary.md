@@ -137,7 +137,7 @@ public class LearnSpell implements CommandUtil {
 
 ---
 
-#### 2.`Item` Inheritance from Abstract Classes
+#### 2. Inheritance Hierarchy of the `Item` Abstract Class
 
 ![Item](/images/Item.png)
 
@@ -273,23 +273,23 @@ public class Adventurer implements Employee, Employer {
 | `assertEquals(expected, actual)`       |Checking if two values are equal|
 | `assertTrue(condition)`                |Check if the condition is true|
 | `assertFalse(condition)`                |Check whether the condition is false|
-| `assertNotNull(object)`                |Check if it is not empty|
-| `assertNull(object)`                   |Check if it is empty|
+| `assertNotNull(object)`                |Check if it is not null|
+| `assertNull(object)`                   |Check if it is null|
 | `assertNotSame(expected, actual)`      |Check whether two related objects do not point to the same object|
 | `assertSame(expected, actual)`          |Checking whether two related objects point to the same object|
 | `assertArrayEquals(expectedArray, resultArray)` |Checking if two arrays are equal|
 
 
 Based on my experience using JUnit in the OOPro course, I’ve found that:
- - **What JUnit can do**: detect logical issues within methods caused by oversight. By ensuring a coverage rate of `Run with Coverage`, you can test nearly all the code you write, making it easy to spot even minor errors in your code when constructing and testing test cases.
- - **What JUnit Can’t Do**: Detect Certain Logical Flaws.Since I’ve been writing all my JUnit tests myself at this stage, if I didn’t consider a particular scenario while writing the code, I naturally wouldn’t construct such a test case when writing the JUnit tests. Consequently, I couldn’t detect errors in the program, which led to new, undetected bugs appearing on the strong tests of later assignments. To find these bugs, I had to reexamine the program’s logic.
+ - **What JUnit can do**: detect logical issues within methods caused by oversight. By checking coverage with `Run with Coverage`, you can test nearly all the code you write, making it easy to spot even minor errors in your code when constructing and testing test cases.
+ - **What JUnit Can’t Do**: Detect Certain Logical Flaws. Since I’ve been writing all my JUnit tests myself at this stage, if I didn’t consider a particular scenario while writing the code, I naturally wouldn’t construct such a test case when writing the JUnit tests. Consequently, I couldn’t detect errors in the program, which led to new, undetected bugs appearing in strong testing of later assignments. To find these bugs, I had to reexamine the program’s logic.
 
 ---
 
 ## My Experience Learning OOPre
 
 
-> The transition from **Procedure-Oriented Programming (POP)*** to **Object-Oriented Programming *(*OOP*)***.
+> The transition from **Procedure-Oriented Programming (POP)** to **Object-Oriented Programming (OOP)**.
 
 - **POP**: **Process** or **function-oriented**, emphasizing the execution flow and steps of a program.
 - **OOP**: A programming paradigm in which things are broken down into individual **objects**, which then divide tasks and collaborate with one another.
@@ -307,12 +307,12 @@ Based on my experience using JUnit in the OOPro course, I’ve found that:
 ## Course Recommendations
 
 #### 1. The lecture class was too brief.
-- The material covered in class accounts for only 40% of the knowledge needed to complete assignments and design programs. To complete assignments and design a relatively optimal program structure, students need to study a significant amount of supplementary material outside of class.Some of this material is derived from the in-class PowerPoint presentations (often, the presentations and lectures merely list concepts and touch on them superficially, which is insufficient for students to write the code required for their assignments), while other material is not covered in the presentations at all.
+- The material covered in class accounts for only 40% of the knowledge needed to complete assignments and design programs. To complete assignments and design a relatively optimal program structure, students need to study a significant amount of supplementary material outside of class. Some of this material is derived from the in-class PowerPoint presentations (often, the presentations and lectures merely list concepts and touch on them superficially, which is insufficient for students to write the code required for their assignments), while other material is not covered in the presentations at all.
 - If there is limited time for instruction during class, I recommend that the course team provide more optional reference materials for out-of-class assignments. For example, regarding the Command Pattern, they could provide concrete examples of its implementation in real-world projects (such as design concepts or code examples) to help students gain a concrete understanding of it, rather than just a few lines of text on a PowerPoint slide.
 
 #### 2. The Gradual Introduction of Engineering Architecture Concepts
 - I recommend incorporating a bit of architectural thinking into each assignment, rather than just briefly mentioning it at the end, so that students can adjust and improve their frameworks in a timely manner—rather than letting them become increasingly cluttered, which severely impacts readability and makes it difficult to add new features later on.
-- The course could also introduce package management, which would make it easier to manage multiple classes within a project.
+- The course could also introduce organizing classes into Java packages, which would make it easier to manage multiple classes within a project.
 
 - I suggest the course team provide an introduction to some of IDEA’s features (such as keyboard shortcuts, quick methods, etc.).
 

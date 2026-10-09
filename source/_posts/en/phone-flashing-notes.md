@@ -21,7 +21,7 @@ tags:
 
 # Motivation
 
-My old phone was with me throughout my three years of high school and the first half of my college years. After three years of (relatively) heavy use, it ran out of storage space and its battery life became poor, so it was finally time for an upgrade.
+My old phone was with me throughout my three years of high school and a little over half a year at university. After three years of (relatively) heavy use, it ran out of storage space and its battery life became poor, so it was finally time for an upgrade.
 
 My old phone was a Honor, which couldn’t install the Google framework, let alone be flashed. Back then, being young and naive, I had no choice but to put up with all sorts of ads I couldn’t delete, extremely low privacy, and terrible ad experiences.
 
@@ -83,7 +83,7 @@ Here’s how I went about it:
 - Since this is a module issue, I tried using key presses to disable all KernelSU modules at startup: it failed, and I couldn't disable them.
 - Unroot the device, and the module will naturally stop working: Specifically, I reflashed the stock init_boot partition, and the device did indeed boot up successfully in the end.
  
-It looks simple, but it was actually the result of quite a bit of searching and trial and error. It seems natural and easy to understand now, but at the time, I spent a long time searching all over the web before I could confirm this method. I even went to customer service at one point, but just as I was about to demonstrate my reboot loop to them, my phone *miraculously* restarted right then and there(I hadn’t been able to do it before—even though I’d flashed `init_boot`, once I regained root access and flashed the patched `init_boot` partition back, the phone got stuck in a boot loop again).If I hadn’t succeeded here, I would have had to wipe all my data, but I don’t know what prerequisite was met at that moment—everything returned to normal, and the crisis was over.
+It looks simple, but it was actually the result of quite a bit of searching and trial and error. It seems natural and easy to understand now, but at the time, I spent a long time searching all over the web before I could confirm this method. I even went to customer service at one point, but just as I was about to demonstrate my reboot loop to them, my phone *miraculously* restarted right then and there(I hadn’t been able to do it before—even though I’d flashed `init_boot`, once I regained root access and flashed the patched `init_boot` partition back, the phone got stuck in a boot loop again). If this hadn’t worked, my next prize would have been a full data wipe, but I don’t know what prerequisite was met at that moment—everything returned to normal, and the crisis was over.
 
 ## I was too confident, so I didn't back it up.
 ### Background
@@ -128,7 +128,7 @@ Even though root was lost, the data is still intact, and the update was successf
 
 # Post-Flash Notes
 ## The Despair and Helplessness Faced with Data That May Be Lost Forever
-The world of data, unlike the real world, is intangible and cannot be touched. So it’s possible that one second your photos and data are perfectly intact, and the next, you can no longer access them.To put it more positively, if the device hasn’t been completely formatted, your data still lies in that ocean of 0s and 1s—or, one might even say, within those transistors—though I’m simply unable to decipher it.
+The world of data, unlike the real world, is intangible and cannot be touched. So it’s possible that one second your photos and data are perfectly intact, and the next, you can no longer access them. To put it more positively, if the device hasn’t been completely formatted, your data still lies in that ocean of 0s and 1s—or, one might even say, within those transistors—though I’m simply unable to decipher it.
 
 On that night when my phone wouldn’t turn on—and I faced the possibility of losing all the data on it—I thought about a lot of things.
 Let me start by considering the worst-case scenario: What do I have on my phone that’s one-of-a-kind and would be lost forever if I formatted it?
@@ -143,11 +143,11 @@ In short, I was trying to imagine the worst-case scenario and prepare myself men
 Faced with such precious yet fragile data, I was helpless in this situation.
 Recovering that data in the end was the result of my last-ditch effort.
 
-To be honest, both times I managed to fix things by sheer luck. Why doesn’t this approach work? Why does that one work?
+To be honest, both times I managed to fix things without really understanding why the fixes worked. Why doesn’t this approach work? Why does that one work?
 I still haven’t figured out exactly what went wrong (feel free to discuss in the comments), but I tried this one that looked promising, then that one that seemed reliable, and after one step, it magically booted up—my data was back, and I was saved from the brink of disaster.
 
 ## The Same Old AI Issues
-In 99% of cases, when AI encounters something it’s unsure about or simply doesn’t know, it will just make up an answer. If we blindly accept or carelessly copy and paste those instructions without critical thinking, we’re likely to make an already bad situation even worse—to the point where it becomes unsolvable.We fall into this trap time and time again, and it’s only after we’ve fallen in that we remind ourselves to be more cautious next time.
+In 99% of cases, when AI encounters something it’s unsure about or simply doesn’t know, it will just make up an answer. If we blindly accept or carelessly copy and paste those instructions without critical thinking, we’re likely to make an already bad situation even worse—to the point where it becomes unsolvable. We fall into this trap time and time again, and it’s only after we’ve fallen in that we remind ourselves to be more cautious next time.
 
 (Screenshot of despair) Cut your losses while you can
 ![alt text](/images/刷机/1.png)
@@ -157,7 +157,7 @@ There’s no denying that, in the end, we managed to preserve the data thanks to
 ## Goal-Oriented Learning
 I flash my phone’s firmware not because I’m particularly interested in the process or want to study the underlying principles (though, of course, as I’ve delved deeper, I’ve gradually discovered the fun in it), but purely for practical reasons: I want my new phone to have the Google framework, a clean international version of the OS, and the freedom to customize it however I like after flashing.
 
-With this goal in mind, I started researching from scratch how to achieve it. As mentioned earlier, when I first downloaded Coolapk, I had no idea what any of the terms meant. All I could do was bookmark a post and then close the app, hoping to find a reliable guide I could follow exactly. At the same time, I checked out some educational articles and videos to brush up on the theory.Eventually, I found this tailor-made tutorial on XDA, and all that was left was to take action.
+With this goal in mind, I started researching from scratch how to achieve it. As mentioned earlier, when I first downloaded Coolapk, I had no idea what any of the terms meant. All I could do was bookmark a post and then close the app, hoping to find a reliable guide I could follow exactly. At the same time, I checked out some educational articles and videos to brush up on the theory. Eventually, I found this tailor-made tutorial on XDA, and all that was left was to take action.
 
 Of course, taking action requires **determination**, and with less than a week until school starts and the loss of the comforts of home just around the corner, these are great motivators.
 

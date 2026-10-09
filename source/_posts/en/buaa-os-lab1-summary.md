@@ -46,13 +46,13 @@ Key takeaways:
 
 #### ELF files
 ELF is a file format.
-`.c` The file was compiled by the compiler (gcc), generating an object file (.o), which is a relocatable file in the ELF format.
+A `.c` file is compiled by the compiler (gcc) into an object file (`.o`), which is an ELF relocatable file.
 ![alt text](/images/lab1/1.png)
 
 An ELF file can be viewed from two perspectives:
 - Section Header Table: This is for the linker. It organizes the program into “sections”—such as “code (.text)” and “data (.data)”—to facilitate the linker’s assembly of the program.
 - Program Header Table: This is intended for the operating system loader (in this experiment, QEMU). It groups sections with the same attributes into larger “segments,” recording the address in virtual memory where the segment should be loaded (`VirtAddr`), the amount of memory space required (`MemSiz`), and the read and write permissions.
-- `readelf`. Tools can easily parse the contents of ELF files.
+- The `readelf` tool can easily parse the contents of ELF files.
 
 ELF files can be accessed in code as structures:
 ``` c
@@ -130,7 +130,7 @@ Based on the Makefile mentioned earlier, the following steps were taken from run
 ### Operating System Boot Process
 > pull oneself up by one’s bootstraps
 
-Faced with a blank memory, how does a complex operating system boot up?On actual bare-metal hardware, when the power is first turned on, a small piece of basic code (the bootloader) is needed to load the massive operating system from the hard drive into memory. In my experiment, however, QEMU comes with built-in boot functionality that can directly recognize and load the ELF-format kernel I’ve compiled, so I don’t have to worry about the complex boot process.
+Faced with a blank memory, how does a complex operating system boot up? On actual bare-metal hardware, when the power is first turned on, a small piece of basic code (the bootloader) is needed to load the massive operating system from the hard drive into memory. In my experiment, however, QEMU comes with built-in boot functionality that can directly recognize and load the ELF-format kernel I’ve compiled, so I don’t have to worry about the complex boot process.
 
 So, after the emulator (QEMU) loads the kernel, it first jumps to the assembly entry point at `_start`:
 ``` 
@@ -166,9 +166,9 @@ And with that, the work on Lab 1 is complete.
 
 ---
 ## Experiment Reflections
-This experiment was generally fairly easy, and even the hands-on exercises provided plenty of hints—it was very user-friendly. (I almost forgot about the function for comparing string equality—strcmp—but there happened to be a hint right below it.)
+This experiment was generally fairly easy, and even the lab-test problems provided plenty of hints—it was very user-friendly. (I almost forgot about the function for comparing string equality—strcmp—but there happened to be a hint right below it.)
 
-Aside from the many issues with my new main computer during the lab session, the process of solving the problems went quite smoothly—I just had to follow the instructions step by step.
+Aside from the many issues with my new main computer during the lab test, the process of solving the problems went quite smoothly—I just had to follow the instructions step by step.
 
 It feels good to be writing C again after such a long time—including working with variable-length arrays, assigning and passing pointers, and using callback functions.
 

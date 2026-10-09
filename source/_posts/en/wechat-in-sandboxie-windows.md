@@ -6,7 +6,7 @@ tags:
     - tools
 ---
 
-WeChat is an indispensable part of my daily life and studies—I can’t do without it for sharing files or checking messages. However, installing it on my personal computer could potentially compromise my privacy.To strike a balance between security and convenience, I took advantage of a clean computer after reinstalling the operating system and** installed WeChat within Sandboxie-Plus**, thereby enabling normal use of WeChat while isolating my privacy.
+WeChat is an indispensable part of my daily life and studies—I can’t do without it for sharing files or checking messages. However, installing it on my personal computer could potentially compromise my privacy. To strike a balance between security and convenience, I took advantage of a clean computer after reinstalling the operating system and **installed WeChat within Sandboxie-Plus**, thereby enabling normal use of WeChat while isolating my privacy.
 
 Here is my installation log
 

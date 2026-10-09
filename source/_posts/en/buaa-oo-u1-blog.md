@@ -43,7 +43,7 @@ Complete class diagram for hw3:
    - In the whole project, there are 126 methods, with an average of just 8.16 lines of code per method.
    - The longest method, ``Mono.toString()``, is 47 lines long, while the core logic for differentiation (the ``derive`` method for various node types) typically ranges from 2 to 5 lines.
 
-4. Controlling the Number of Branches (cyclomatic complexity v(G))
+4. Number of Control-Flow Branches (cyclomatic complexity v(G))
    - The average cyclomatic complexity (v(G)) for the entire project is only 1.93.
    - Extremely low cyclomatic complexity is a direct benefit of the polymorphism (dynamic dispatch) mechanism. This architecture completely eliminates the verbose `if-else / switch`-type checks found in traditional procedural programming, delegating common operations to their respective subclasses and achieving true O(1) logical addressing.
 
@@ -70,7 +70,7 @@ Overall Approach: **`Input`** **→ `Parser` → `toPoly` → `toString`**
 `toString`: Unified recursive output for mono and poly classes.
 
 - Pros:
-  1. The "Dumb AST, Smart Engine" Layered Architecture**:
+  1. **The "Dumb AST, Smart Engine" Layered Architecture**:
 The AST remains completely pure during the parsing and differentiation phases; all computations are deferred and concentrated in the underlying ``Poly``. This unidirectional dependency ensures extremely low coupling between classes.
   2. Implementation of Polymorphism:
 Through a dynamic dispatch mechanism, the verbose `switch/if-else`-type checks commonly found in procedural programming have been completely eliminated. The differentiation logic has been seamlessly delegated to the respective Factor subclasses, resulting in excellent code extensibility and readability.
@@ -79,7 +79,7 @@ For low-level polynomial operations (such as `mulP`) and substitution operations
 
 - Cons:
   1. Memory Overhead Caused by HashMap:
-To achieve $O(1)$ performance for merging like terms, the underlying code instantiates a large number of `MonoKey` and `Mono` objects. When handling extremely nested power-of-n test cases (such as the expansion of `expP(8)` to very high powers), this generates a large number of short-lived objects, placing significant memory pressure on the JVM’s garbage collection (GC).In the future, I may consider introducing **the Flyweight Pattern** to cache certain monomial characteristics.
+To achieve $O(1)$ performance for merging like terms, the underlying code instantiates a large number of `MonoKey` and `Mono` objects. When handling extremely nested power-of-n test cases (such as the expansion of `expP(8)` to very high powers), this generates a large number of short-lived objects, placing significant memory pressure on the JVM’s garbage collection (GC). In the future, I may consider introducing **the Flyweight Pattern** to cache certain monomial characteristics.
   2. Extensibility Limitations of the Interpreter Pattern:
 The current architecture hard-codes the `derive` and `toPoly` methods directly into each AST node class. If future requirements increase (for example, if support for integration operations is needed), it will be necessary to open the source code of each class to make modifications, which to some extent violates the “Open-Closed Principle (OCP).”
 In subsequent refactoring, **the Visitor Pattern** can be introduced. The AST can be completely reduced to a pure data structure, and operations such as “derivative calculation” and “simplification” can be abstracted into independent Visitor classes, thereby achieving complete decoupling of data and algorithms.
@@ -116,27 +116,27 @@ At the same time, architectural decoupling was achieved: the parsing, expansion 
 
 * hw3
 This assignment incorporates custom recursive function calls and nested differentiation operators (`dx`). During the input processing phase, the string representing the function definition is parsed into an AST, allowing for direct substitution of tree nodes when calling the function, which improves efficiency.
-To expand recursive functions, I use the concept of memoization. By caching the results of previously computed `f{i}` (for real arguments), I can effectively avoid redundant calculations and improve program performance.
+To expand recursive functions, I use the concept of memoization. By caching the results of previously computed `f{i}` (for actual arguments), I can effectively avoid redundant calculations and improve program performance.
 
 --- 
 
-#### Analysis of Custom Iteration Scenarios and Scalability
+#### Analysis of Custom Iteration Scenarios and Extensibility
 
 Suppose the next time I need to introduce trigonometric functions (sin, cos) and support nested complex expressions and chain rule differentiation within them.
 
-Here are the scalability solutions for the current design:
+Here is how the current design can be extended:
 
 1. AST-level extensions:
-   * Added the `SinFactor` and `CosFactor` classes and implemented `Factor` interfaces.
+   * Add the `SinFactor` and `CosFactor` classes and implement the `Factor` interface.
    * Contains an internal `Factor inner` property (used to store nested expressions).
 2. Logic of Differentiation by Polymorphism:
 Implementing Method `derive()` within `SinFactor`: Go directly to `return new Term(CosFactor(inner), inner.derive())`—this fits perfectly with the existing chain rule for differentiation. The existing iteration-based differentiation logic in `Expr` and `Term` does not need to be modified.
 3. Parsing-layer handling:
 In the`Parser.parseFactor()`-branch, simply add support for recognizing the strings "sin" and "cos" and instantiate the corresponding Factors.
 4. Underlying Engine (No Refactoring Required):
-   * If trigonometric functions do not need to be expanded or simplified, they can simply be wrapped in `Poly` and `MonoKey` and treated as immutable features. The same applies to existing addition and multiplication merging engines.
+   * If trigonometric functions do not need to be expanded or simplified, they can simply be wrapped in `Poly`'s `MonoKey` and treated as immutable features. The same applies to existing addition and multiplication merging engines.
 
-Thanks to the high autonomy of AST nodes and the polymorphic dispatch mechanism, this architecture demonstrates exceptional horizontal scalability when iterating to accommodate “new mathematical rules.”
+Thanks to the high autonomy of AST nodes and the polymorphic dispatch mechanism, this architecture demonstrates exceptional extensibility when adding “new mathematical rules.”
 
 ---
 <span id="design-patterns"></span>
@@ -146,7 +146,7 @@ Throughout the entire AST structure, whether dealing with standalone objects (su
 By using Interface `Factor`, when Object `Term` calls Method `derive()` on the List `Factor` it holds, it does not need to concern itself with whether `Factor` is a simple variable or a complex, deeply nested function. It simply trusts and relies on the interface.
 
 2. **Static Factory Method**
-Methods `public static Expr zero()` and `public static Expr of(Factor... factors)`, written in the ``Expr`` class, provide clear and semantically meaningful names for the object creation process.In future development, if you decide that method ``Expr.zero()`` should no longer create a new object via ``new Expr()`` every time, but instead return a cached, immutable singleton object, you can easily implement this change without modifying any existing code that calls this method.
+Methods `public static Expr zero()` and `public static Expr of(Factor... factors)`, written in the ``Expr`` class, provide clear and semantically meaningful names for the object creation process. In future development, if you decide that method ``Expr.zero()`` should no longer create a new object via ``new Expr()`` every time, but instead return a cached, immutable singleton object, you can easily implement this change without modifying any existing code that calls this method.
 
 3. **Singleton Pattern**
 Since there is only one function template in the entire program, I implement the singleton pattern for it:
@@ -206,19 +206,19 @@ public class DerivativeVisitor implements ASTVisitor {
 
 ![alt text](/images/oou1/image-3.png)
 
-There’s not much to write about this section, since I achieved **zero bugs** in all three rounds of mandatory and peer testing—thanks in part to the principle emphasized by Professor RWG:
+There’s not much to write about this section, since I achieved **zero bugs** in all three rounds of strong testing and peer testing—thanks in part to the principle emphasized by Professor RWG:
 > **Don’t sacrifice correctness for performance**
 
 In the second and third iterations, I first ensured the correctness of polynomial merging without focusing on extracting and simplifying coefficients inside `exp` expressions. As a result, my optimization score may not be very high, but this was indeed the method I used to ensure the program was bug-free.
 
-At the same time, to avoid bugs, I assign the value `final` to properties in the program that I do not want to change, perform deep copying when assigning values to elements, and pay special attention to potential issues that may arise when removing elements from containers, in order to prevent unexpected problems.
+At the same time, to avoid bugs, I mark properties in the program that I do not want to change as `final`, perform deep copying when assigning values to elements, and pay special attention to potential issues that may arise when removing elements from containers, in order to prevent unexpected problems.
 
 Long lines of code and high cyclomatic complexity are also contributing factors to bugs; by reducing the complexity of these methods, you can significantly lower the likelihood of bugs occurring.
 
-Actually, there’s one more thing I want to vent about HW3: I didn’t do much final length optimization for this assignment, which caused me to end up in Room B during the peer review (full marks for correctness but low performance scores). Everyone in Room B was in the same situation, so hacking didn’t really get us anywhere. In contrast, in Room A, people were able to hack out a lot of points because of their optimization efforts.This resulted in Room A having both high strong-test scores and high hack scores—doesn’t this encourage everyone to sacrifice correctness for performance?
+Actually, there’s one more thing I want to vent about HW3: I didn’t do much final length optimization for this assignment, which caused me to end up in Room B during the peer testing (full marks for correctness but low performance scores). Everyone in Room B was in the same situation, so hacking didn’t really get us anywhere. In contrast, in Room A, people were able to hack out a lot of points because of their optimization efforts. This resulted in Room A having both high strong-testing scores and high hack scores—doesn’t this encourage everyone to sacrifice correctness for performance?
 
 ### An analysis of the strategies I use when finding bugs in other people’s code
-* Main focus: Building a test machine that is efficient and capable of detecting a small number of bugs; effectiveness depends on the quality of the test machine.
+* Main focus: Building a test harness that is efficient and capable of detecting a small number of bugs; effectiveness depends on the quality of the test harness.
 * Constructing extreme test cases: effective, but difficult to create.
 * Review the other party’s code (white-box testing) and construct test cases targeting design flaws.
 
@@ -240,7 +240,7 @@ public interface AstNode<T> extends
 }
 ```
 
-3. The correctness of this architecture is guaranteed by **absolute immutability** and **deep copying**.When performing operations such as `Poly.mulP` (polynomial multiplication) or `expP` (exponentiation), each calculation returns `new` brand-new `Poly` and `Mono` objects. Although this comes at the cost of some memory, it completely eliminates the various risks associated with pass-by-reference.
+3. The correctness of this architecture is guaranteed by **absolute immutability** and **deep copying**. When performing operations such as `Poly.mulP` (polynomial multiplication) or `expP` (exponentiation), each calculation returns `new` brand-new `Poly` and `Mono` objects. Although this comes at the cost of some memory, it completely eliminates the various risks associated with pass-by-reference.
 
 
 ----
@@ -256,11 +256,11 @@ Although I don’t have large language models generate code directly, they actua
 
 Unlike when I was learning C, where I started with every single syntax rule and every detail, in the OO course I was immediately faced with problem statements of over a thousand characters and hundreds of lines of code to write. This meant that I had to teach myself all the Java syntax and the details of implementing these tasks.
 
-There are many ways to teach yourself: reading JDK documentation, checking out online resources like Runoob (菜鸟教程), taking online courses, or simply asking an AI.It’s easy to imagine that in the past, when people were learning Java, they would scour various documentation and tutorials (I did the same when I was learning C last year), but such searches were often time-consuming and lacked depth. Today, AI can essentially replace that entire process.
+There are many ways to teach yourself: reading JDK documentation, checking out online resources like Runoob (菜鸟教程), taking online courses, or simply asking an AI. It’s easy to imagine that in the past, when people were learning Java, they would scour various documentation and tutorials (I did the same when I was learning C last year), but such searches were often time-consuming and lacked depth. Today, AI can essentially replace that entire process.
 For example, if I want to learn about *the singleton pattern*, I can simply ask the AI, and it will provide different ways to implement it. Furthermore, you can ask it which one is best suited for my specific task, or what the underlying principles of the singleton pattern are.
 Compared to copying and pasting a chunk of code from some webpage—code you don’t even fully understand—and then tinkering with it, the advantages of this approach are obvious: **it’s specific, targeted, and in-depth**.
 
-Aside from theoretical guidance—which you can probably find online—the most valuable thing AI offers is engineering insights and code optimization strategies that go beyond my own understanding.Now, instead of having to read through an entire copy of *The Art of Computer Programming* myself, I can simply send my ideas to the AI and ask, “Assuming you’re a senior Java engineer, what suggestions do you have for this code?” I can then receive effective feedback that helps me improve my skills and expand my understanding.
+Aside from theoretical guidance—which you can probably find online—the most valuable thing AI offers is engineering insights and code optimization strategies that go beyond my own understanding. Now, instead of having to read through an entire copy of *The Art of Computer Programming* myself, I can simply send my ideas to the AI and ask, “Assuming you’re a senior Java engineer, what suggestions do you have for this code?” I can then receive effective feedback that helps me improve my skills and expand my understanding.
 
 
 ### Evaluation of Large Language Models
@@ -277,7 +277,7 @@ All in all, using AI has definitely improved my Java skills, cultivated my objec
 ---
 <span id="future-directions"></span>
 ## Future Directions
-How do you think I could modify the lessons in Unit 1 to help everyone learn the material more effectively?
+How could the Unit 1 course be improved to help everyone learn the material more effectively?
 
 You could provide more tutorials or tips on the design patterns or specific syntax used in the assignments. The WeChat Official Account article from the first iteration was very helpful for my design, so I hope there will be similar guidance for each assignment.
 
@@ -288,7 +288,8 @@ You could provide more tutorials or tips on the design patterns or specific synt
 1. How do you check if input meets the requirements? This includes spaces, consecutive symbols, and more.
 
    1. Blocking Invalid Combinations
-The Lexer in the test machine must be very sensitive to whitespace characters.
+      The Lexer in the test harness must be very sensitive to whitespace characters.
+
       * **Spaces within numbers**: When reading a number, if it is immediately followed by a space, the lexer must recognize the subsequent number as a new token. For example, `12 34` would be parsed as `[NUM(12), NUM(34)]`.
       * **Consecutive Character Aggregation**: For `+++` or `---`, the lexer can output them as consecutive single-character tokens, which are then passed to the parser for evaluation.
       * **Legal-character whitelist**: Any character not in the set `[0-9x\+\-\*\(\)\s\^sincosp]` (such as full-width spaces or tab variants) is immediately intercepted during the lexical phase.
@@ -299,7 +300,7 @@ The Lexer in the test machine must be very sensitive to whitespace characters.
 
 2. How can you accurately calculate the cost of a valid input?
 
-   1. Implemented as-is. Uses Parser to parse the input string into an AST without performing any mathematical simplifications.
+   1. Build the AST from the input as-is. Use the Parser to parse the input string into an AST without performing any mathematical simplifications.
    2. Calculate the cost from the bottom up.
 
 ---
